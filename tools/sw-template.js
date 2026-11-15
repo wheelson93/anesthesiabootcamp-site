@@ -30,7 +30,8 @@ const isFont = (url) => url.hostname === "fonts.googleapis.com" || url.hostname 
 async function networkFirst(request) {
   const cache = await caches.open(CACHE);
   try {
-    const res = await fetch(request);
+    // "no-cache" revalidates with the server instead of trusting the browser's 10-minute copy.
+    const res = await fetch(request, { cache: "no-cache" });
     if (res.ok) cache.put(request, res.clone());
     return res;
   } catch (e) {
@@ -58,5 +59,7 @@ self.addEventListener("fetch", (event) => {
   if (isFont(url)) return event.respondWith(cacheFirst(request));
   if (url.origin !== location.origin) return; // other sites (claude.ai, journals) go straight to the network
   if (/\.(pdf|png|svg|ico|webp|jpg)$/i.test(url.pathname)) return event.respondWith(cacheFirst(request));
+  // Versioned CSS/JS (?v=…) never change, so serve them from the saved copy.
+  if (url.pathname.startsWith("/assets/") && url.searchParams.has("v")) return event.respondWith(cacheFirst(request));
   event.respondWith(networkFirst(request));
 });

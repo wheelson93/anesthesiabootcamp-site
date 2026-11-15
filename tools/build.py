@@ -82,7 +82,11 @@ for i, s in enumerate(sections):
             err(where, f"no pages.json in site/{url.strip('/') or '.'}/ — create one (copy another section's)")
 
 # ---------- each section's cards ----------
+# Version stamp for the shared CSS/JS so browsers never pair a new page with an old script.
+asset_v = hashlib.sha256(b"".join((SITE / "assets" / f).read_bytes() for f in ("app.css", "app.js"))).hexdigest()[:10]
 template = (TOOLS / "page-template.html").read_text(encoding="utf-8")
+template = (template.replace('href="/assets/app.css"', f'href="/assets/app.css?v={asset_v}"')
+                    .replace('src="/assets/app.js"', f'src="/assets/app.js?v={asset_v}"'))
 for s in sections:
     url = s.get("url", "")
     folder = SITE / url.strip("/")
@@ -139,7 +143,7 @@ for s in sections:
 
 # ---------- offline list + service worker ----------
 if not errors:
-    keep = ["/", "/sections.json", "/manifest.webmanifest", "/assets/app.css", "/assets/app.js"]
+    keep = ["/", "/sections.json", "/manifest.webmanifest", f"/assets/app.css?v={asset_v}", f"/assets/app.js?v={asset_v}"]
     for s in sections:
         u = s["url"]
         keep += [u, u + "pages.json"]

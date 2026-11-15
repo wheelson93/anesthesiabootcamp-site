@@ -3,14 +3,14 @@
 // fresh whenever there's a connection (so new cards show up right away) and fall back
 // to the saved copy offline. PDFs and icons are served from the saved copy and refreshed
 // in the background.
-const VERSION = "fafc0ccd966a";
+const VERSION = "249b449b34cb";
 const CACHE = "bootcamp-" + VERSION;
 const PRECACHE = [
   "/",
   "/sections.json",
   "/manifest.webmanifest",
-  "/assets/app.css",
-  "/assets/app.js",
+  "/assets/app.css?v=daf9785a0c",
+  "/assets/app.js?v=daf9785a0c",
   "/pages.json",
   "/icu/",
   "/icu/pages.json",
@@ -57,7 +57,8 @@ const isFont = (url) => url.hostname === "fonts.googleapis.com" || url.hostname 
 async function networkFirst(request) {
   const cache = await caches.open(CACHE);
   try {
-    const res = await fetch(request);
+    // "no-cache" revalidates with the server instead of trusting the browser's 10-minute copy.
+    const res = await fetch(request, { cache: "no-cache" });
     if (res.ok) cache.put(request, res.clone());
     return res;
   } catch (e) {
@@ -85,5 +86,7 @@ self.addEventListener("fetch", (event) => {
   if (isFont(url)) return event.respondWith(cacheFirst(request));
   if (url.origin !== location.origin) return; // other sites (claude.ai, journals) go straight to the network
   if (/\.(pdf|png|svg|ico|webp|jpg)$/i.test(url.pathname)) return event.respondWith(cacheFirst(request));
+  // Versioned CSS/JS (?v=…) never change, so serve them from the saved copy.
+  if (url.pathname.startsWith("/assets/") && url.searchParams.has("v")) return event.respondWith(cacheFirst(request));
   event.respondWith(networkFirst(request));
 });
