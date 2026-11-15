@@ -136,6 +136,22 @@
 .bc-talk svg [stroke="#2e7d4f"] { stroke: var(--bc-ok); }
 .bc-talk svg [stroke="#a86400"] { stroke: var(--bc-warn); }
 
+/* Pastel panels drawn straight into talk diagrams → the soft theme colors
+   (same look in light mode, dark panels in dark mode). */
+.bc-talk svg [fill="#fbe9e7" i] { fill: var(--bc-bad-soft); }
+.bc-talk svg [fill="#fdf3e1" i] { fill: var(--bc-warn-soft); }
+.bc-talk svg [fill="#e7f0fa" i] { fill: var(--bc-info-soft); }
+.bc-talk svg [fill="#e6f4ec" i] { fill: var(--bc-ok-soft); }
+.bc-talk svg [fill="#f6f5f1" i], .bc-talk svg [fill="#f3f1ec" i] { fill: var(--bc-soft); }
+
+/* Diagram parts with no color set default to black; make that default the theme's ink. */
+.bc-talk svg:not([fill]) { fill: var(--bc-ink); }
+
+/* Safety net for new talks: in dark mode, any near-white shape (fill starting #f)
+   becomes a dark panel so the theme's light text stays readable on it.
+   Text keeps its own color. tools/build.py warns about light colors it finds. */
+:root[data-theme="dark"] .bc-talk svg :not(text, tspan)[fill^="#f" i]:not([fill="#fff" i], [fill="#ffffff" i]) { fill: var(--bc-soft); }
+
 /* General Anesthetic Case Flow: numbers on accent-colored dots */
 .talk-general-anesthetic-case-flow .dot-t { fill: var(--bc-paper) !important; }
 

@@ -49,7 +49,10 @@ A Claude artifact appears on the site only when **it is shared publicly** and is
 6. If anything changed: run `python3 tools/build.py` and fix anything it reports, commit to `main`
    with a message listing what was added, refreshed, unhidden or hidden, and push. The site redeploys
    in about a minute.
-7. Report a short summary. If nothing changed, say so in one line.
+7. Report a short summary. If nothing changed, say so in one line. If `build.py` printed a
+   "light diagram colors" warning for a talk, include it in the summary: that talk has a graphic
+   that may be hard to read in dark mode, and a rule needs adding to `site/assets/theme.css`
+   (which this task does not edit).
 
 Only edit `site/pages.json`, `site/talks/`, and `site/handouts/`. Do not edit `site/sections.json`,
 generated files (section `index.html` files, `sw.js`), or the other section folders (`icu/`,

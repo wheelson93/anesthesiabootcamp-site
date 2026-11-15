@@ -167,6 +167,32 @@ for s in sections:
     if not errors:
         (folder / "index.html").write_text(page, encoding="utf-8")
 
+# ---------- dark mode check for the copied talks ----------
+# Diagrams with colors written straight in can vanish in dark mode (light text on a light
+# shape). theme.css maps the colors listed in its ".bc-talk svg [fill=...]" rules; any other
+# light fill in a talk's diagrams gets a warning so it can be added there.
+theme_css = (SITE / "assets" / "theme.css").read_text(encoding="utf-8").lower()
+def _lum(hexv):
+    h = hexv.lstrip("#")
+    if len(h) == 3: h = "".join(c * 2 for c in h)
+    r, g, b = (int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+for talk in sorted((SITE / "talks").glob("*/index.html")):
+    text = talk.read_text(encoding="utf-8")
+    found = set()
+    for svg in re.findall(r"<svg\b.*?</svg>", text, flags=re.S | re.I):
+        for tag, attrs in re.findall(r"<(\w+)([^>]*)>", svg):
+            if tag.lower() in ("text", "tspan", "svg"):
+                continue
+            for m in re.finditer(r'(?:fill|stop-color)\s*[=:]\s*"?\s*(#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3})\b', attrs):
+                c = m.group(1).lower()
+                if _lum(c) > 0.8 and c not in ("#fff", "#ffffff") and f'"{c}"' not in theme_css:
+                    found.add(c)
+    if found:
+        warn(talk.relative_to(ROOT), "light diagram colors " + ", ".join(sorted(found)) +
+             " aren't in theme.css; they may show as light shapes in dark mode. "
+             "Add a rule like .bc-talk svg [fill=\"#xxxxxx\" i] { fill: var(--bc-soft); }")
+
 # ---------- offline list + service worker ----------
 if not errors:
     keep = ["/", "/sections.json", "/manifest.webmanifest"] + [f"/assets/{f}?v={asset_v}" for f in SHARED]

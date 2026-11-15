@@ -113,6 +113,11 @@ Change a `--bc-*` color there (it has a light and a dark value) and it changes e
 The switch in the header (and beside "← Bootcamp" on talks) cycles Auto → Light/Dark;
 Auto follows the phone or computer setting. The choice is saved on that device.
 
+Diagrams in the talks are checked for dark mode too: shapes with no color follow the theme, the
+pastel panel colors used so far are mapped to the soft theme colors, and in dark mode any other
+near-white shape becomes a dark panel. If a new talk draws with a light color theme.css doesn't
+know, the build prints a "light diagram colors" warning naming the talk and the color.
+
 ## Your chalk talks
 
 Talks live as copies in `site/talks/`, so they open on the site and in the app, and work offline.
