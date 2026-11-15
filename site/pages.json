@@ -1,0 +1,272 @@
+{
+  "site": {
+    "title": "Teaching pages for the OR.",
+    "lead": "Chalk talks, handouts and interactive explainers for residents, students and anyone learning anesthesia."
+  },
+  "pages": [
+    {
+      "title": "General Anesthetic Case Flow",
+      "url": "https://claude.ai/artifact/67vzMaFL4B2KNQuBtzHSqo",
+      "emoji": "🩺",
+      "category": "Foundations",
+      "blurb": "A framework for your first OR rotation: what to do, in what order, and where to look, from roll-in to wake-up.",
+      "tags": [
+        "new residents",
+        "framework"
+      ],
+      "updated": "2026-11-15",
+      "featured": true
+    },
+    {
+      "title": "Trauma Anesthesia: A Phase-Based Approach",
+      "url": "https://claude.ai/artifact/SAMUnBNphAT6t523rbLGpW",
+      "emoji": "🚑",
+      "category": "Trauma & Acute Care",
+      "blurb": "Anesthetic management of the trauma patient, organized phase by phase.",
+      "tags": [
+        "chalk talk"
+      ],
+      "updated": "2026-11-05",
+      "featured": true
+    },
+    {
+      "title": "Severe TBI in the OR",
+      "url": "https://claude.ai/artifact/FNMVMZm1uNumZ4f2BZzHwt",
+      "emoji": "🧠",
+      "category": "Trauma & Acute Care",
+      "blurb": "Intraoperative management of severe traumatic brain injury.",
+      "tags": [
+        "chalk talk"
+      ],
+      "updated": "2026-09-25"
+    },
+    {
+      "title": "The Intoxicated Patient in the OR",
+      "url": "https://claude.ai/artifact/J2BMBd1KbS7WPSz4xqD51b",
+      "emoji": "🍸",
+      "category": "Trauma & Acute Care",
+      "blurb": "Anesthesia for the acutely intoxicated patient, with a detection-window explorer.",
+      "tags": [
+        "chalk talk",
+        "interactive",
+        "board questions"
+      ],
+      "links": [
+        {
+          "label": "Handout",
+          "url": "https://claude.ai/artifact/6YjJ42ZuPhNqPnfJ1nrC3E"
+        },
+        {
+          "label": "PDF",
+          "url": "handouts/intoxicated-patient.pdf"
+        }
+      ],
+      "updated": "2026-09-25"
+    },
+    {
+      "title": "Local Anesthetics: Selection and Dosing",
+      "url": "https://claude.ai/artifact/JrjFbeEhjJosZTCkCXdpQp",
+      "emoji": "💉",
+      "category": "Regional & Local Anesthetics",
+      "blurb": "Choosing a local anesthetic and dosing it safely.",
+      "tags": [
+        "chalk talk"
+      ],
+      "updated": "2026-11-03",
+      "featured": true
+    },
+    {
+      "title": "Nerve Block Additives",
+      "url": "https://claude.ai/artifact/2bXhWLy1AAvwqVzCscdQNa",
+      "emoji": "🧪",
+      "category": "Regional & Local Anesthetics",
+      "blurb": "Adjuncts added to peripheral nerve blocks and what each one does.",
+      "tags": [
+        "chalk talk"
+      ],
+      "links": [
+        {
+          "label": "Handout",
+          "url": "https://claude.ai/artifact/3cLYv1rByR71tqHPEFAJLZ"
+        },
+        {
+          "label": "PDF",
+          "url": "handouts/nerve-block-additives.pdf"
+        }
+      ],
+      "updated": "2026-11-03"
+    },
+    {
+      "title": "Spinal Anesthesia One-Pager",
+      "url": "https://claude.ai/artifact/RnnyZPHmyLT9GEqcgYuXQn",
+      "emoji": "🦴",
+      "category": "Regional & Local Anesthetics",
+      "blurb": "One-page quick reference on spinal anesthesia.",
+      "tags": [
+        "handout"
+      ],
+      "updated": "2026-10-13",
+      "links": [
+        {
+          "label": "PDF",
+          "url": "handouts/spinal-anesthesia-one-pager.pdf"
+        }
+      ]
+    },
+    {
+      "title": "Stress Dose Steroids",
+      "url": "https://claude.ai/artifact/4H9LEXBrs14m8dNeDwSg3X",
+      "emoji": "💊",
+      "category": "Pharmacology",
+      "blurb": "Perioperative stress dosing: history, dosing, refractory hypotension, trauma, and chronic use vs true adrenal insufficiency.",
+      "tags": [
+        "chalk talk",
+        "board questions"
+      ],
+      "links": [
+        {
+          "label": "Handout",
+          "url": "https://claude.ai/artifact/8zC9x42dpWrxeipNrpdBYc"
+        },
+        {
+          "label": "PDF",
+          "url": "handouts/stress-dose-steroids.pdf"
+        }
+      ],
+      "updated": "2026-10-13"
+    },
+    {
+      "title": "PONV: 5th Consensus Guidelines",
+      "url": "https://claude.ai/artifact/LMfS4QoiPdskdF5Qe9QhXE",
+      "emoji": "🤢",
+      "category": "Pharmacology",
+      "blurb": "The 5th PONV consensus guidelines, with an Apfel score explorer.",
+      "tags": [
+        "chalk talk",
+        "interactive",
+        "board questions"
+      ],
+      "links": [
+        {
+          "label": "Handout",
+          "url": "https://claude.ai/artifact/M9h6e77FWeqERTMZpYjDFm"
+        },
+        {
+          "label": "PDF",
+          "url": "handouts/ponv.pdf"
+        }
+      ],
+      "updated": "2026-09-25"
+    },
+    {
+      "title": "MAC and Its Subtypes",
+      "url": "https://claude.ai/artifact/9s8ZqEEjh8f4FQAK3VupkG",
+      "emoji": "📉",
+      "category": "Inhaled Agents & the Machine",
+      "blurb": "MAC-aware, MAC-awake, MAC and MAC-BAR, with a population explorer.",
+      "tags": [
+        "chalk talk",
+        "interactive",
+        "board questions"
+      ],
+      "links": [
+        {
+          "label": "Handout",
+          "url": "https://claude.ai/artifact/T46DM7w3EVTuLBPztNNxev"
+        },
+        {
+          "label": "PDF",
+          "url": "handouts/mac-subtypes.pdf"
+        }
+      ],
+      "updated": "2026-09-25"
+    },
+    {
+      "title": "Fresh Gas Flow",
+      "url": "https://claude.ai/artifact/YKNLPkvYYNnjJZ77pTBrPn",
+      "emoji": "💨",
+      "category": "Inhaled Agents & the Machine",
+      "blurb": "Fresh gas flow and low-flow practice, with a time-constant explorer.",
+      "tags": [
+        "chalk talk",
+        "interactive",
+        "board questions"
+      ],
+      "links": [
+        {
+          "label": "Handout",
+          "url": "https://claude.ai/artifact/UKbe3BggF7EEFqCzWgfkyR"
+        },
+        {
+          "label": "PDF",
+          "url": "handouts/fresh-gas-flow.pdf"
+        }
+      ],
+      "updated": "2026-09-25"
+    },
+    {
+      "title": "Strong Ion Difference in the OR",
+      "url": "https://claude.ai/artifact/RprG2ZR99jxBCCbFwJJ6cW",
+      "emoji": "⚗️",
+      "category": "Acid–Base",
+      "blurb": "Stewart acid-base and strong ion difference, with a fluid simulator.",
+      "tags": [
+        "chalk talk",
+        "interactive",
+        "board questions"
+      ],
+      "links": [
+        {
+          "label": "Handout",
+          "url": "https://claude.ai/artifact/Qwusi3eHsopgYMLTuV7Jqg"
+        },
+        {
+          "label": "PDF",
+          "url": "handouts/strong-ion-difference.pdf"
+        }
+      ],
+      "updated": "2026-09-25"
+    },
+    {
+      "title": "SID in Hepatic Resection",
+      "url": "https://claude.ai/artifact/RceYnezshpJSCJ7jDTdpVi",
+      "emoji": "🔬",
+      "category": "Acid–Base",
+      "blurb": "Acid-base physiology traced through a hepatic resection, with a phase explorer.",
+      "tags": [
+        "chalk talk",
+        "interactive",
+        "board questions"
+      ],
+      "links": [
+        {
+          "label": "Handout",
+          "url": "https://claude.ai/artifact/DUKY4k6S8vHBULU83bTb6n"
+        },
+        {
+          "label": "PDF",
+          "url": "handouts/sid-hepatic-resection.pdf"
+        }
+      ],
+      "updated": "2026-09-25"
+    }
+  ],
+  "ignore": [
+    {
+      "url": "https://claude.ai/artifact/HBdV5n7BjGMJd32px6apxR",
+      "why": "Climbing Tick Dashboard (personal)"
+    },
+    {
+      "url": "https://claude.ai/artifact/BcY5hq7Apt9PhA5iaTJw38",
+      "why": "Homepage preview"
+    },
+    {
+      "url": "https://claude.ai/artifact/P7UfBktxmFJrXdHLGBxAGR",
+      "why": "Older copy of Local Anesthetics"
+    },
+    {
+      "url": "https://claude.ai/artifact/Us8s8a2Hg2A8DiJx4LLZ9A",
+      "why": "Earlier PONV draft doc"
+    }
+  ]
+}
