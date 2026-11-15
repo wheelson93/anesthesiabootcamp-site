@@ -3,9 +3,83 @@
     "title": "Teaching pages for the ICU.",
     "lead": "Critical care talks and teaching pages by Elijah, hosted on his own site.",
     "links": [
-      { "label": "Back to OR talks", "kicker": "Anesthesia Bootcamp", "url": "../" },
-      { "label": "artifacts.elijahc.net", "kicker": "Elijah's site", "url": "https://artifacts.elijahc.net" }
+      {
+        "label": "Back to OR talks",
+        "kicker": "Anesthesia Bootcamp",
+        "url": "../"
+      },
+      {
+        "label": "artifacts.elijahc.net",
+        "kicker": "Elijah's site",
+        "url": "https://artifacts.elijahc.net"
+      }
     ]
   },
-  "pages": []
+  "pages": [
+    {
+      "title": "Ventilator Modes",
+      "url": "https://artifacts.elijahc.net/a/rby2s2E2Uj5f",
+      "emoji": "🫁",
+      "category": "Ventilation",
+      "blurb": "Mode names compared across manufacturers: what you set, what the vent adjusts on its own, with airway-pressure tracings.",
+      "tags": [
+        "interactive",
+        "reference"
+      ],
+      "featured": true
+    },
+    {
+      "title": "Ventilator Management",
+      "url": "https://artifacts.elijahc.net/a/885UYAE8eePP",
+      "emoji": "🎚️",
+      "category": "Ventilation",
+      "blurb": "Which vent change fixes low oxygen and which fixes high CO₂, with oxygenation targets in ARDS on ECMO.",
+      "tags": [
+        "ARDS",
+        "ECMO"
+      ]
+    },
+    {
+      "title": "Lung-Protective Tidal Volume",
+      "url": "https://artifacts.elijahc.net/a/WhLuUAoueouE",
+      "emoji": "🧮",
+      "category": "Ventilation",
+      "blurb": "Calculator for predicted body weight, tidal volume and driving pressure.",
+      "tags": [
+        "calculator",
+        "interactive"
+      ]
+    },
+    {
+      "title": "Pulmonary Hypertension: WHO Groups",
+      "url": "https://artifacts.elijahc.net/a/XLwNtFTQPwvg",
+      "emoji": "🫀",
+      "category": "Cardiopulmonary",
+      "blurb": "Beginner primer on pulmonary hypertension and its five WHO groups.",
+      "tags": [
+        "primer"
+      ]
+    },
+    {
+      "title": "RV Diastolic Function (ASE 2025)",
+      "url": "https://artifacts.elijahc.net/a/3cE5R9B8Tu4w",
+      "emoji": "📡",
+      "category": "Cardiopulmonary",
+      "blurb": "Study guide to RV diastolic function from the 2025 ASE right heart guideline: tricuspid inflow, grading, pitfalls.",
+      "tags": [
+        "echo",
+        "study guide"
+      ]
+    },
+    {
+      "title": "Antipsychotics for ICU Agitation",
+      "url": "https://artifacts.elijahc.net/a/g7D1XE6iKgx2",
+      "emoji": "💊",
+      "category": "Sedation & Delirium",
+      "blurb": "Agents compared by route, QTc effect and sedation, with the trial evidence and guidelines.",
+      "tags": [
+        "evidence review"
+      ]
+    }
+  ]
 }
