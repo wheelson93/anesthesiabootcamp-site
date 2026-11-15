@@ -1,7 +1,14 @@
 {
   "site": {
     "title": "Teaching pages for the OR.",
-    "lead": "Chalk talks, handouts and interactive explainers for residents, students and anyone learning anesthesia."
+    "lead": "Chalk talks, handouts and interactive explainers for residents, students and anyone learning anesthesia.",
+    "links": [
+      {
+        "label": "ICU talks by Elijah",
+        "kicker": "Also",
+        "url": "icu/"
+      }
+    ]
   },
   "pages": [
     {

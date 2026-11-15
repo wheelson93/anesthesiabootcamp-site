@@ -41,4 +41,4 @@ A Claude artifact appears on the site only when **it is shared publicly** and is
    was added, unhidden or hidden, and push. The site redeploys in about a minute.
 6. Report a short summary. If nothing changed, say so in one line.
 
-Do not edit `site/index.html`, remove cards, or change an existing blurb, category or tags.
+Do not edit `site/index.html` or anything under `site/icu/` (Elijah's ICU talks, maintained by hand), remove cards, or change an existing blurb, category or tags.

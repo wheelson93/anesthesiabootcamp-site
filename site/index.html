@@ -69,6 +69,16 @@
     font-size: 1.075rem; text-wrap: pretty;
   }
 
+  .related { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .related a {
+    display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    font: 500 14px/1 var(--sans); padding: 9px 14px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    transition: border-color .15s;
+  }
+  .related a:hover { border-color: var(--accent); }
+  .related a .k { font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
   /* Capnography trace motif */
   .trace { display: block; width: 100%; height: 64px; margin: 34px 0 0; overflow: visible; }
   .trace path {
@@ -177,13 +187,14 @@
 
 <header class="site">
   <div class="wrap">
-    <a class="brand" href="/">
+    <a class="brand" href="/" id="brand">
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor" opacity=".12"/><path d="M4 22h5l2-12h9l2 12h6" fill="none" stroke="var(--trace)" stroke-width="2.6" stroke-linejoin="round"/></svg>
       <span id="site-name">Anesthesia Bootcamp</span>
     </a>
     <section class="hero">
       <h1 id="hero-title">Teaching pages for the OR.</h1>
       <p id="hero-lead">Quick references, interactive tools and walkthroughs for residents, students and anyone learning anesthesia.</p>
+      <nav class="related" id="related" aria-label="More teaching" hidden></nav>
       <svg class="trace" viewBox="0 0 1040 64" preserveAspectRatio="none" aria-hidden="true">
         <line x1="0" y1="56" x2="1040" y2="56"/>
         <path d="M0 56 H40 C46 56 48 14 58 12 L150 8 C156 8 158 56 166 56 H230 C236 56 238 14 248 12 L340 8 C346 8 348 56 356 56 H420 C426 56 428 14 438 12 L530 8 C536 8 538 56 546 56 H610 C616 56 618 14 628 12 L720 8 C726 8 728 56 736 56 H800 C806 56 808 14 818 12 L910 8 C916 8 918 56 926 56 H1040"/>
@@ -295,6 +306,13 @@
       if (data.site) {
         if (data.site.title) { $("#hero-title").textContent = data.site.title; }
         if (data.site.lead) { $("#hero-lead").textContent = data.site.lead; }
+        if (data.site.brand) { $("#site-name").textContent = data.site.brand; }
+        if (data.site.links && data.site.links.length) {
+          const nav = $("#related");
+          nav.innerHTML = data.site.links.map((l) =>
+            `<a href="${esc(l.url)}">${l.kicker ? `<span class="k">${esc(l.kicker)}</span>` : ""}${esc(l.label)} <span aria-hidden="true">${/^https?:/.test(l.url) ? "↗" : "→"}</span></a>`).join("");
+          nav.hidden = false;
+        }
       }
       pages = (data.pages || []).filter((p) => !p.hidden)
         .sort((a, b) => (b.updated || "").localeCompare(a.updated || "") || a.title.localeCompare(b.title));
