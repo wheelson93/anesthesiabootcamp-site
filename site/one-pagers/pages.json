@@ -1,0 +1,196 @@
+{
+  "site": {
+    "title": "One-page case guides.",
+    "lead": "One Pagers by Kenji Tanabe: printable guides to common anesthesia cases, covering how to run them, pearls and pitfalls. Each opens as a PDF from anesthesiacognitiveaids.com.",
+    "links": [
+      {
+        "label": "Back to OR talks",
+        "kicker": "Anesthesia Bootcamp",
+        "url": "../"
+      },
+      {
+        "label": "ICU talks by Elijah",
+        "kicker": "Also",
+        "url": "../icu/"
+      },
+      {
+        "label": "anesthesiacognitiveaids.com",
+        "kicker": "Kenji's site",
+        "url": "https://anesthesiacognitiveaids.com"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "title": "Whipple",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/02/Whipple-Anesthesia-Cheat-Sheet-V3.pdf",
+      "emoji": "🩺",
+      "category": "Abdominal Surgery",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Robotic Surgery",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/06/Robotic-Surgery-Cheat-Sheet-V3.pdf",
+      "emoji": "🤖",
+      "category": "Abdominal Surgery",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Cardiac Bypass Cases",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2025/09/Cardiac-Bypass-Case-V2.pdf",
+      "emoji": "🫀",
+      "category": "Cardiothoracic",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "One-Lung Ventilation",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/02/One-Lung-Ventilation-V2.pdf",
+      "emoji": "🫁",
+      "category": "Cardiothoracic",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Atrial Fibrillation Ablation",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/05/Atrial-Fibrillation-Cheat-Sheet-V3.pdf",
+      "emoji": "⚡",
+      "category": "Electrophysiology",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Atrial Flutter Ablation",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/05/Atrial-Flutter-Ablation-Cheat-Sheet.pdf-.pdf",
+      "emoji": "⚡",
+      "category": "Electrophysiology",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "SVT Ablation",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/05/SVT-Ablation-Cheat-Sheet-V1.2.pdf",
+      "emoji": "⚡",
+      "category": "Electrophysiology",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Thyroid and Parathyroid",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/05/Thyroid-Parathyroid-Anesthesia-V4.pdf",
+      "emoji": "🦋",
+      "category": "Endocrine",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Neck Dissection",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/06/Neck-Dissection-Cognitive-Aid.pdf",
+      "emoji": "👂",
+      "category": "ENT",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Craniotomy",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/02/Craniotomy-Cheat-Sheet-V3.pdf",
+      "emoji": "🧠",
+      "category": "Neuro",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Prone Spine Surgery",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/05/Prone-Spine-Surgery-Cheat-Sheet-V3.pdf",
+      "emoji": "🦴",
+      "category": "Neuro",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Stroke Alert: Thrombectomy",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/06/Stroke-Thrombectomy-Cognitive-Aid-V2.pdf",
+      "emoji": "🚨",
+      "category": "Neuro",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Cesarean Section",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/02/Cesarean-Section-Cheat-Sheet-V3.pdf",
+      "emoji": "🤰",
+      "category": "Obstetrics",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Dilation and Evacuation",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/05/Dilation-and-Evacuation-Cheat-Sheet.pdf",
+      "emoji": "🩺",
+      "category": "Obstetrics",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Total Joint Arthroplasty",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/02/Total-Joint-Cheat-Sheet-V2.pdf",
+      "emoji": "🦵",
+      "category": "Orthopedics",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Kidney Transplant",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/02/Kidney-Transplant-Cheat-Sheet-V2.pdf",
+      "emoji": "🫘",
+      "category": "Transplant",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "Trauma",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/02/Trauma-Cheat-Sheet-V3.pdf",
+      "emoji": "🚑",
+      "category": "Trauma",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "TURBT",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/06/TURBT-Cheat-Sheet-V1.pdf",
+      "emoji": "💧",
+      "category": "Urology",
+      "tags": [
+        "PDF"
+      ]
+    },
+    {
+      "title": "EVAR",
+      "url": "https://anesthesiacognitiveaids.com/wp-content/uploads/2024/02/EVAR-Cheat-Sheet-V2.pdf",
+      "emoji": "🩸",
+      "category": "Vascular",
+      "tags": [
+        "PDF"
+      ]
+    }
+  ]
+}

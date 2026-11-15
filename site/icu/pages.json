@@ -9,6 +9,11 @@
         "url": "../"
       },
       {
+        "label": "One Pagers by Kenji Tanabe",
+        "kicker": "Also",
+        "url": "../one-pagers/"
+      },
+      {
         "label": "artifacts.elijahc.net",
         "kicker": "Elijah's site",
         "url": "https://artifacts.elijahc.net"

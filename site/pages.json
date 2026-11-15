@@ -7,6 +7,11 @@
         "label": "ICU talks by Elijah",
         "kicker": "Also",
         "url": "icu/"
+      },
+      {
+        "label": "One Pagers by Kenji Tanabe",
+        "kicker": "Also",
+        "url": "one-pagers/"
       }
     ]
   },
