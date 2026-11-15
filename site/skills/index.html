@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<!-- Skills tracker (beta). Hand-written page; the skill list itself is skills.json in this folder. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Skills tracker (beta) · Anesthesia Bootcamp</title>
+<meta name="description" content="Track the hands-on skills of anesthesiology through residency, from observing to teaching.">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#f5f3ee">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Bootcamp">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="/assets/theme.js?v=64084d628c"></script>
+<link rel="stylesheet" href="/assets/theme.css?v=64084d628c">
+<link rel="stylesheet" href="/assets/app.css?v=64084d628c">
+<style>
+:root{ --l0:var(--bc-line); --l1:color-mix(in srgb,var(--bc-muted) 60%,var(--bc-paper)); --l2:color-mix(in srgb,var(--bc-info) 55%,var(--bc-paper)); --l3:var(--bc-info); --l4:var(--bc-ok); --l5:var(--bc-trace); }
+.hero h1 .beta{display:inline-block;vertical-align:middle;font:600 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--bc-warn);background:var(--bc-warn-soft);border:1px solid color-mix(in srgb,var(--bc-warn) 40%,transparent);border-radius:999px;padding:6px 10px;margin-left:10px;transform:translateY(-.35em)}
+.tracker{max-width:820px}
+.betanote{font-size:14px;color:var(--muted);background:var(--bc-warn-soft);border-radius:12px;padding:10px 14px;margin:0 0 16px}
+.betanote b{color:var(--bc-warn)}
+.summary{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+.pct{font:600 34px/1 var(--serif)}
+.pctlabel{color:var(--muted);font-size:14px}
+.bigbar{height:10px;border-radius:6px;background:var(--l0);overflow:hidden;display:flex}
+.bigbar span,.minibar span{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-size:13px;color:var(--muted)}
+.legend b{color:var(--ink)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.tcontrols{position:sticky;top:0;z-index:5;background:var(--paper);padding:10px 0 12px}
+@media (display-mode: standalone){ .tcontrols{top:env(safe-area-inset-top)} }
+.tcontrols input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:15px}
+.tchips{display:flex;gap:6px;overflow-x:auto;margin-top:8px;scrollbar-width:none}
+.tchip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 13px;font:500 13px/1 var(--sans);cursor:pointer}
+.tchip.on{background:var(--accent);color:var(--bc-paper);border-color:var(--accent)}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden}
+.cathead{display:flex;align-items:center;gap:10px;padding:14px 16px 10px;cursor:pointer;user-select:none}
+.cathead h2{font:600 19px/1.2 var(--serif);margin:0;flex:1}
+.catcount{font:500 12px/1 var(--mono);color:var(--muted)}
+.minibar{height:5px;background:var(--l0);border-radius:3px;overflow:hidden;display:flex;margin:0 16px 12px}
+.chev{transition:transform .15s;color:var(--muted);font-size:11px}
+.cat.open .chev{transform:rotate(90deg)}
+.catbody{display:none;border-top:1px solid var(--line)}
+.cat.open .catbody{display:block}
+.group{padding:10px 16px 2px;font:600 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.skill{display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--bc-line-soft);cursor:pointer;font-size:15px}
+.group+.skill{border-top:none}
+.skill:hover{background:var(--accent-soft)}
+.skill .name{flex:1;min-width:0}
+.skill .pre{font-size:12.5px;color:var(--muted);margin-top:2px}
+.skill.locked .name>div:first-child{color:var(--muted)}
+.pill{flex:none;font:600 12px/1 var(--sans);border-radius:999px;padding:6px 10px;white-space:nowrap;color:var(--ink);background:color-mix(in srgb,var(--c) 22%,var(--card));border:1px solid var(--c)}
+.pill.l0{background:transparent;color:var(--muted);border:1px dashed var(--line)}
+.ready{font:600 10.5px/1 var(--mono);letter-spacing:.08em;color:var(--bc-ok);margin-left:8px}
+.empty{padding:30px;text-align:center;color:var(--muted)}
+.tfoot{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:9px 14px;font:500 14px/1.2 var(--sans);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bc-paper)}
+.btn.danger{color:var(--bc-bad)}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;z-index:40;align-items:flex-end;justify-content:center}
+.scrim.show{display:flex}
+.sheet{background:var(--card);color:var(--ink);width:100%;max-width:560px;border-radius:20px 20px 0 0;padding:20px 18px calc(24px + env(safe-area-inset-bottom));max-height:88vh;overflow:auto}
+@media(min-width:700px){.scrim{align-items:center}.sheet{border-radius:20px}}
+.sheet h3{margin:0 0 4px;font:600 22px/1.2 var(--serif)}
+.sheet .meta{color:var(--muted);font-size:13px;margin-bottom:12px}
+.levels{display:grid;gap:6px;margin:10px 0}
+.lvl{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:transparent;color:var(--ink);font:inherit;font-size:14px;text-align:left;cursor:pointer}
+.lvl.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
+.lvl .n{width:24px;height:24px;border-radius:50%;background:var(--c);color:var(--bc-paper);font:700 12px/1 var(--sans);display:grid;place-items:center;flex:none}
+.lvl small{display:block;color:var(--muted);font-size:12px}
+.lvl .when{margin-left:auto;font:500 11px/1 var(--mono);color:var(--muted)}
+textarea{width:100%;min-height:70px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:inherit;font-size:14px;padding:10px}
+label.lbl{font:600 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin:14px 0 6px}
+.prelist{display:flex;flex-wrap:wrap;gap:6px}
+.prelist span{font-size:12.5px;border-radius:8px;padding:4px 8px;background:var(--paper);border:1px solid var(--line)}
+.prelist span.met{border-color:var(--bc-ok);color:var(--bc-ok)}
+.row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:8px 14px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+
+<header class="site">
+  <div class="wrap">
+    <div class="topbar">
+    <a class="brand" href="/" id="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor" opacity=".12"/><path d="M4 22h5l2-12h9l2 12h6" fill="none" stroke="var(--trace)" stroke-width="2.6" stroke-linejoin="round"/></svg>
+      <span id="site-name">Anesthesia Bootcamp</span>
+    </a>
+    <button type="button" class="bc-theme-btn" data-theme-toggle aria-label="Theme"></button>
+    </div>
+    <section class="hero">
+      <h1 id="hero-title">Skills tracker <span class="beta">Beta</span></h1>
+      <p id="hero-lead">The hands-on skills of anesthesiology, from your first IV to teaching the junior resident. Tap a skill to log your level as you grow through residency.</p>
+      <nav class="related" id="related" aria-label="More teaching" hidden></nav>
+      <svg class="trace" viewBox="0 0 1040 64" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="0" y1="56" x2="1040" y2="56"/>
+        <path d="M0 56 H40 C46 56 48 14 58 12 L150 8 C156 8 158 56 166 56 H230 C236 56 238 14 248 12 L340 8 C346 8 348 56 356 56 H420 C426 56 428 14 438 12 L530 8 C536 8 538 56 546 56 H610 C616 56 618 14 628 12 L720 8 C726 8 728 56 736 56 H800 C806 56 808 14 818 12 L910 8 C916 8 918 56 926 56 H1040"/>
+      </svg>
+    </section>
+  </div>
+</header>
+
+<main>
+  <div class="wrap tracker">
+
+  <p class="betanote"><b>Beta.</b> The skill list and prerequisites are still being refined, and your progress is saved only on this device. Use “Back up / restore” now and then.</p>
+
+  <div class="summary">
+    <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px">
+      <span class="pct" id="pct">0%</span><span class="pctlabel" id="pctlabel">at Independent or above</span>
+    </div>
+    <div class="bigbar" id="bigbar"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <div class="tcontrols">
+    <input type="search" id="q" placeholder="Search skills (e.g. DLT, popliteal, Belmont)">
+    <div class="tchips" id="chips"></div>
+  </div>
+
+  <div id="tree"></div>
+
+  <div class="tfoot">
+    <button class="btn" id="expand">Expand all</button>
+    <button class="btn" id="backup">Back up / restore</button>
+    <button class="btn danger" id="reset">Reset progress</button>
+  </div>
+  <p class="note" id="storenote">Progress is saved in this browser on this device. Use “Back up / restore” to move it to another device.</p>
+</div>
+
+
+</main>
+
+<div class="scrim" id="scrim"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="year"></span> Anesthesia Bootcamp</span>
+    <span class="disclaimer">For education only. Not a substitute for clinical judgment, institutional protocols or current prescribing information.</span>
+  </div>
+</footer>
+
+<nav class="tabbar" id="tabbar" aria-label="Sections"></nav>
+<script>
+
+let DATA;
+const LEVELS = [
+  {n:"Not started", d:""},
+  {n:"Observe", d:"Watched it done, can explain the steps"},
+  {n:"Assist", d:"Set up, helped, or did parts of it"},
+  {n:"Perform supervised", d:"Did it start to finish with an attending present"},
+  {n:"Independent", d:"Do it reliably on my own, troubleshoot problems"},
+  {n:"Teach", d:"Can coach a junior through it"}
+];
+const COLORS = ["var(--l0)","var(--l1)","var(--l2)","var(--l3)","var(--l4)","var(--l5)"];
+let SK = {}, ORDER = [];
+const KEY = "anes-skill-tracker-v1";
+
+// index
+function indexData(){ SK={}; ORDER=[];
+DATA.categories.forEach(c=>c.groups.forEach(g=>g.skills.forEach(s=>{SK[s.id]={...s,cat:c.id,group:g.name};ORDER.push(s.id);})));
+}
+
+let state = {skills:{}, open:{}};
+let storageOK = true;
+try{ const raw = localStorage.getItem(KEY); if(raw){ const p = JSON.parse(raw); state.skills = p.skills||{}; state.open = p.open||{}; } }
+catch(e){ storageOK = false; }
+if(!storageOK) document.getElementById("storenote").textContent = "This browser isn't saving progress. Use “Back up / restore” to keep a copy.";
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+const lv = id => (state.skills[id] && state.skills[id].level) || 0;
+const prereqsMet = id => (SK[id].prereqs||[]).every(p => lv(p) >= 3);
+const isReady = id => lv(id) === 0 && (SK[id].prereqs||[]).length>0 && prereqsMet(id);
+
+let filter = "all", query = "";
+const FILTERS = [
+  ["all","All"],["ready","Ready next"],["progress","In progress"],["done","Independent+"],["new","Not started"]
+];
+function passes(id){
+  const L = lv(id);
+  if(query){ const t=(SK[id].name+" "+SK[id].group).toLowerCase(); if(!t.includes(query)) return false; }
+  if(filter==="ready") return isReady(id) || (L===0 && !(SK[id].prereqs||[]).length);
+  if(filter==="progress") return L>=1 && L<=3;
+  if(filter==="done") return L>=4;
+  if(filter==="new") return L===0;
+  return true;
+}
+
+function barHTML(ids){
+  const n = ids.length||1, counts=[0,0,0,0,0,0];
+  ids.forEach(id=>counts[lv(id)]++);
+  let h="";
+  for(let i=5;i>=1;i--) if(counts[i]) h+=`<span style="width:${counts[i]/n*100}%;background:${COLORS[i]}"></span>`;
+  return {h,counts};
+}
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function render(){
+  // summary
+  const {h,counts} = barHTML(ORDER);
+  document.getElementById("bigbar").innerHTML = h;
+  const done = counts[4]+counts[5];
+  document.getElementById("pct").textContent = Math.round(done/ORDER.length*100)+"%";
+  document.getElementById("pctlabel").textContent = `${done} of ${ORDER.length} skills at Independent or above`;
+  document.getElementById("legend").innerHTML = LEVELS.map((l,i)=>`<span><i class="dot" style="background:${COLORS[i]}"></i>${l.n} <b>${counts[i]}</b></span>`).join("");
+  // chips
+  document.getElementById("chips").innerHTML = FILTERS.map(([k,t])=>`<button class="tchip ${filter===k?"on":""}" data-f="${k}">${t}</button>`).join("");
+  // tree
+  const searching = query || filter!=="all";
+  let out="", any=false;
+  DATA.categories.forEach(c=>{
+    const ids=[]; c.groups.forEach(g=>g.skills.forEach(s=>ids.push(s.id)));
+    const vis = ids.filter(passes);
+    if(searching && !vis.length) return;
+    any=true;
+    const b = barHTML(ids);
+    const open = searching || state.open[c.id];
+    let body="";
+    c.groups.forEach(g=>{
+      const gs = g.skills.filter(s=>passes(s.id));
+      if(!gs.length) return;
+      if(g.name!==c.name || c.groups.length>1) body+=`<div class="group">${esc(g.name)}</div>`;
+      gs.forEach(s=>{
+        const L=lv(s.id), pre=s.prereqs||[], locked = pre.length && !prereqsMet(s.id) && L===0;
+        const preTxt = pre.length ? `<div class="pre">After: ${pre.map(p=>esc(SK[p].name)).join(" · ")}</div>`:"";
+        body+=`<div class="skill ${locked?"locked":""}" data-id="${s.id}">
+          <div class="name"><div>${esc(s.name)}${isReady(s.id)?'<span class="ready">READY</span>':""}</div>${preTxt}</div>
+          <span class="pill l${L}" style="--c:${COLORS[L]}">${L?LEVELS[L].n:"Log"}</span>
+        </div>`;
+      });
+    });
+    out+=`<section class="cat ${open?"open":""}" data-cat="${c.id}">
+      <div class="cathead"><span class="chev">▶</span><h2>${esc(c.name)}</h2><span class="catcount">${b.counts[4]+b.counts[5]}/${ids.length}</span></div>
+      <div class="minibar">${b.h}</div>
+      <div class="catbody">${body}</div></section>`;
+  });
+  document.getElementById("tree").innerHTML = any ? out : `<div class="empty">No skills match.</div>`;
+}
+
+// sheet
+const scrim = document.getElementById("scrim"), sheet = document.getElementById("sheet");
+function closeSheet(){ scrim.classList.remove("show"); render(); }
+scrim.addEventListener("click",e=>{ if(e.target===scrim) closeSheet(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && scrim.classList.contains("show")) closeSheet(); });
+
+function openSkill(id){
+  const s=SK[id], cat=DATA.categories.find(c=>c.id===s.cat);
+  const rec = state.skills[id] || {};
+  const pre = s.prereqs||[];
+  const unlocks = ORDER.filter(o=>(SK[o].prereqs||[]).includes(id));
+  const draw = ()=>{
+    const r = state.skills[id]||{}, L=r.level||0, dates=r.dates||{};
+    sheet.innerHTML = `
+      <h3>${esc(s.name)}</h3>
+      <div class="meta">${esc(cat.name)} · ${esc(s.group)}</div>
+      ${pre.length?`<label class="lbl">Prerequisites (supervised or above)</label><div class="prelist">${pre.map(p=>`<span class="${lv(p)>=3?"met":""}">${lv(p)>=3?"✓ ":""}${esc(SK[p].name)}</span>`).join("")}</div>`:""}
+      <label class="lbl">Your level</label>
+      <div class="levels">${LEVELS.map((l,i)=>i===0?"":`<button class="lvl ${L===i?"on":""}" style="--c:${COLORS[i]}" data-l="${i}">
+        <span class="n">${i}</span><span><b>${l.n}</b><small>${l.d}</small></span>${dates[i]?`<span class="when">${dates[i]}</span>`:""}</button>`).join("")}</div>
+      <label class="lbl">Notes (cases, attendings, pearls)</label>
+      <textarea id="notes" placeholder="e.g. 3 supervised in ortho block room; tip from Dr. X: hydrodissect first">${esc(r.notes||"")}</textarea>
+      ${unlocks.length?`<label class="lbl">Unlocks</label><div class="prelist">${unlocks.map(u=>`<span>${esc(SK[u].name)}</span>`).join("")}</div>`:""}
+      <div class="row">${L?`<button class="btn" id="clear">Clear level</button>`:""}<button class="btn primary" id="done">Done</button></div>`;
+    sheet.querySelectorAll(".lvl").forEach(b=>b.onclick=()=>{
+      const n=+b.dataset.l, r=state.skills[id]||(state.skills[id]={});
+      r.level=n; r.dates=r.dates||{}; if(!r.dates[n]) r.dates[n]=new Date().toISOString().slice(0,10);
+      save(); draw();
+    });
+    sheet.querySelector("#notes").oninput=e=>{ (state.skills[id]||(state.skills[id]={})).notes=e.target.value; save(); };
+    const c=sheet.querySelector("#clear"); if(c) c.onclick=()=>{ state.skills[id].level=0; save(); draw(); };
+    sheet.querySelector("#done").onclick=closeSheet;
+  };
+  draw(); scrim.classList.add("show");
+}
+
+// backup / reset
+function toast(t){ const el=document.getElementById("toast"); el.textContent=t; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),1800); }
+document.getElementById("backup").onclick=()=>{
+  const code = JSON.stringify({v:1,skills:state.skills});
+  sheet.innerHTML = `<h3>Back up / restore</h3>
+    <div class="meta">Copy this code and keep it somewhere safe (notes app, email to yourself). To restore, paste a code and tap Restore.</div>
+    <textarea id="code" style="min-height:140px;font-family:ui-monospace,monospace;font-size:12px">${esc(code)}</textarea>
+    <div class="row"><button class="btn" id="copy">Copy</button><button class="btn" id="restore">Restore</button><button class="btn primary" id="done">Done</button></div>`;
+  sheet.querySelector("#copy").onclick=async()=>{ try{ await navigator.clipboard.writeText(sheet.querySelector("#code").value); toast("Copied"); }catch(e){ sheet.querySelector("#code").select(); toast("Select all and copy manually"); } };
+  sheet.querySelector("#restore").onclick=()=>{ try{ const p=JSON.parse(sheet.querySelector("#code").value); if(!p.skills) throw 0; state.skills=p.skills; save(); toast("Progress restored"); closeSheet(); }catch(e){ toast("That code didn't work"); } };
+  sheet.querySelector("#done").onclick=closeSheet;
+  scrim.classList.add("show");
+};
+document.getElementById("reset").onclick=()=>{
+  sheet.innerHTML = `<h3>Reset all progress?</h3><div class="meta">This clears every level and note in this browser. Back up first if you might want it later.</div>
+    <div class="row"><button class="btn" id="cancel">Cancel</button><button class="btn primary" style="background:#c43c3c;border-color:#c43c3c" id="yes">Reset</button></div>`;
+  sheet.querySelector("#cancel").onclick=closeSheet;
+  sheet.querySelector("#yes").onclick=()=>{ state.skills={}; save(); closeSheet(); toast("Progress reset"); };
+  scrim.classList.add("show");
+};
+document.getElementById("expand").onclick=e=>{
+  const allOpen = DATA.categories.every(c=>state.open[c.id]);
+  DATA.categories.forEach(c=>state.open[c.id]=!allOpen); save(); render();
+  e.target.textContent = allOpen ? "Expand all" : "Collapse all";
+};
+
+// events
+document.getElementById("q").addEventListener("input",e=>{ query=e.target.value.trim().toLowerCase(); render(); });
+document.getElementById("chips").addEventListener("click",e=>{ const f=e.target.closest(".tchip")?.dataset.f; if(f){ filter=f; render(); } });
+document.getElementById("tree").addEventListener("click",e=>{
+  const sk=e.target.closest(".skill"); if(sk){ openSkill(sk.dataset.id); return; }
+  const h=e.target.closest(".cathead"); if(h){ const id=h.parentElement.dataset.cat; state.open[id]=!state.open[id]; save(); render(); }
+});
+
+// Section links + app tab bar from /sections.json (same as the other sections)
+const here = "/skills/";
+function renderNav(sections){
+  const e = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const others = sections.filter(s=>s.url!==here);
+  const nav = document.getElementById("related");
+  if(others.length){ nav.innerHTML = others.map(s=>`<a href="${e(s.url)}" data-int><span class="k">${s.url==="/"?"Anesthesia Bootcamp":"Also"}</span>${e(s.url==="/"?"Back to OR talks":s.label)} <span aria-hidden="true">→</span></a>`).join(""); nav.hidden=false; }
+  document.getElementById("tabbar").innerHTML = sections.map(s=>`<a href="${e(s.url)}"${s.url===here?' aria-current="page"':""}><span class="ti" aria-hidden="true">${e(s.emoji||"•")}</span><span>${e(s.short||s.label)}</span></a>`).join("");
+}
+const getJSON = u => fetch(u,{cache:"no-cache"}).then(r=>{ if(!r.ok) throw new Error(u); return r.json(); });
+getJSON("/sections.json").then(n=>renderNav(n.sections||[])).catch(()=>{});
+getJSON("skills.json").then(d=>{ DATA=d; indexData(); render(); })
+  .catch(()=>{ document.getElementById("tree").innerHTML='<div class="empty">Couldn\'t load the skill list. Check your connection and reload.</div>'; });
+document.getElementById("year").textContent = new Date().getFullYear();
+if("serviceWorker" in navigator) addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));
+
+</script>
+</body>
+</html>

@@ -1,0 +1,440 @@
+{
+  "title": "Anesthesiology Physical Skills Tree",
+  "version": "2026-11-15",
+  "levels": ["Observe", "Assist", "Perform supervised", "Independent", "Teach"],
+  "categories": [
+    {
+      "id": "access",
+      "name": "Access",
+      "groups": [
+        {
+          "name": "Peripheral IV",
+          "skills": [
+            { "id": "piv-landmark", "name": "Landmark PIV" },
+            { "id": "piv-us", "name": "Ultrasound-guided PIV", "prereqs": ["piv-landmark"] }
+          ]
+        },
+        {
+          "name": "Arterial",
+          "skills": [
+            { "id": "art-radial-landmark", "name": "Radial arterial line, landmark" },
+            { "id": "art-us", "name": "Ultrasound-guided arterial line", "prereqs": ["piv-us", "art-radial-landmark"] },
+            { "id": "art-sites", "name": "Alternate sites: brachial, femoral, DP", "prereqs": ["art-us"] },
+            { "id": "art-technique", "name": "Seldinger vs catheter-over-needle technique" }
+          ]
+        },
+        {
+          "name": "Central",
+          "skills": [
+            { "id": "cvc-ij", "name": "IJ central line", "prereqs": ["art-us", "sterile-setup"] },
+            { "id": "cvc-fem", "name": "Femoral central line", "prereqs": ["art-us", "sterile-setup"] },
+            { "id": "cvc-sc", "name": "Subclavian central line", "prereqs": ["cvc-ij"] },
+            { "id": "cvc-confirm", "name": "Confirm venous placement (US wire visualization, manometry)" },
+            { "id": "cvc-types", "name": "Introducer vs triple lumen vs dialysis catheter" },
+            { "id": "line-removal", "name": "Line removal" }
+          ]
+        },
+        {
+          "name": "Intraosseous",
+          "skills": [
+            { "id": "io", "name": "IO placement: tibia, humerus" }
+          ]
+        },
+        {
+          "name": "Setup",
+          "skills": [
+            { "id": "sterile-setup", "name": "Full sterile barrier setup" },
+            { "id": "kit-setup", "name": "Kit setup for PIV, arterial, central, IO" },
+            { "id": "transducer", "name": "Transducer setup: leveling, zeroing, flush test, damping" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "airway",
+      "name": "Airway",
+      "groups": [
+        {
+          "name": "Basic",
+          "skills": [
+            { "id": "positioning-airway", "name": "Airway positioning: sniff, ramp" },
+            { "id": "adjuncts", "name": "OPA / NPA placement" },
+            { "id": "mask", "name": "Mask ventilation, one- and two-hand", "prereqs": ["positioning-airway"] },
+            { "id": "sga", "name": "Supraglottic airway incl. intubating LMA", "prereqs": ["mask"] }
+          ]
+        },
+        {
+          "name": "Intubation",
+          "skills": [
+            { "id": "dl", "name": "Direct laryngoscopy", "prereqs": ["mask"] },
+            { "id": "vl", "name": "Video laryngoscopy", "prereqs": ["dl"] },
+            { "id": "bougie-stylet", "name": "Bougie use and stylet shaping" },
+            { "id": "nasal", "name": "Nasal intubation with Magill forceps", "prereqs": ["dl"] },
+            { "id": "tube-exchange", "name": "Tube exchange over exchange catheter" },
+            { "id": "extubation", "name": "Deep vs awake extubation" }
+          ]
+        },
+        {
+          "name": "Flexible bronchoscopy",
+          "skills": [
+            { "id": "bronch-tower", "name": "Setting up the bronch tower" },
+            { "id": "bronch-anatomy", "name": "Tracheobronchial anatomy on bronch (RUL takeoff, carina, LUL/LLL)" },
+            { "id": "foi-asleep", "name": "Asleep fiberoptic intubation", "prereqs": ["vl", "bronch-anatomy"] },
+            { "id": "topicalization", "name": "Airway topicalization and blocks (SLN, transtracheal)" },
+            { "id": "foi-awake", "name": "Awake fiberoptic intubation", "prereqs": ["foi-asleep", "topicalization"] }
+          ]
+        },
+        {
+          "name": "Lung isolation",
+          "skills": [
+            { "id": "bb", "name": "Bronchial blocker (Arndt / Cohen / Uniblocker)", "prereqs": ["bronch-anatomy"] },
+            { "id": "ez-blocker", "name": "EZ-Blocker", "prereqs": ["bronch-anatomy"] },
+            { "id": "fuji", "name": "Fuji tube (Univent / TCB)", "prereqs": ["bronch-anatomy"] },
+            { "id": "mainstem", "name": "Intentional mainstem intubation", "prereqs": ["bronch-anatomy"] },
+            { "id": "dlt-left", "name": "Left DLT: sizing, placement, bronch confirmation", "prereqs": ["bb"] },
+            { "id": "dlt-right", "name": "Right DLT incl. RUL slot alignment", "prereqs": ["dlt-left"] },
+            { "id": "iso-support", "name": "Lung isolation adapter, suctioning the deflated lung" },
+            { "id": "dlt-exchange", "name": "DLT to single-lumen exchange at end of case", "prereqs": ["dlt-left", "tube-exchange"] },
+            { "id": "iso-difficult", "name": "Lung isolation in the difficult airway", "prereqs": ["dlt-right", "foi-awake"] }
+          ]
+        },
+        {
+          "name": "Rescue",
+          "skills": [
+            { "id": "cric", "name": "Scalpel-bougie-tube cricothyrotomy" },
+            { "id": "trach", "name": "Fresh trach management" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventilator",
+      "name": "Ventilator",
+      "groups": [
+        {
+          "name": "Machine",
+          "skills": [
+            { "id": "machine-check", "name": "Anesthesia machine checkout" },
+            { "id": "modes", "name": "Modes: VC, PC, PRVC, PSV" },
+            { "id": "bag-vent", "name": "Hand-bagging for compliance; bag-to-vent transitions" },
+            { "id": "low-flow", "name": "Low-flow anesthesia" }
+          ]
+        },
+        {
+          "name": "Optimization",
+          "skills": [
+            { "id": "recruitment", "name": "Recruitment maneuvers" },
+            { "id": "peep-ladder", "name": "PEEP ladder" },
+            { "id": "capno", "name": "Capnography waveform interpretation" },
+            { "id": "auto-peep", "name": "Auto-PEEP detection" }
+          ]
+        },
+        {
+          "name": "Troubleshooting",
+          "skills": [
+            { "id": "peak-pressure", "name": "High peak pressure troubleshooting" },
+            { "id": "leaks", "name": "Leak troubleshooting" },
+            { "id": "olv", "name": "One-lung ventilation and hypoxemia algorithm", "prereqs": ["dlt-left"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drugs",
+      "name": "Drugs",
+      "groups": [
+        {
+          "name": "Preparation",
+          "skills": [
+            { "id": "dilution", "name": "Dilutions" },
+            { "id": "labeling", "name": "Labeling and syringe safety" },
+            { "id": "push-pressors", "name": "Push-dose pressors", "prereqs": ["dilution"] },
+            { "id": "dantrolene", "name": "Dantrolene / Ryanodex reconstitution" },
+            { "id": "controlled", "name": "Controlled substance waste and documentation" }
+          ]
+        },
+        {
+          "name": "Infusions",
+          "skills": [
+            { "id": "pumps", "name": "Pump programming and carrier lines" },
+            { "id": "pressor-drips", "name": "Pressor drip setup", "prereqs": ["pumps"] },
+            { "id": "tiva", "name": "TIVA setup", "prereqs": ["pumps"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "regional",
+      "name": "Regional",
+      "groups": [
+        {
+          "name": "Fundamentals",
+          "skills": [
+            { "id": "us-needle", "name": "In-plane needle visualization (hand-eye skill)" },
+            { "id": "nerve-stim", "name": "Nerve stimulator use" },
+            { "id": "la-selection", "name": "Local anesthetic selection" },
+            { "id": "la-dosing", "name": "Dosing and safety limits" },
+            { "id": "intralipid", "name": "Intralipid for LAST" },
+            { "id": "catheters", "name": "Catheter placement and tunneling", "prereqs": ["us-needle"] },
+            { "id": "test-dose", "name": "Test dose" }
+          ]
+        },
+        {
+          "name": "Neuraxial",
+          "skills": [
+            { "id": "spinal", "name": "Spinal: midline and paramedian" },
+            { "id": "epidural", "name": "Epidural: lumbar and thoracic", "prereqs": ["spinal"] },
+            { "id": "cse", "name": "Combined spinal-epidural", "prereqs": ["epidural"] },
+            { "id": "blood-patch", "name": "Epidural blood patch", "prereqs": ["epidural"] }
+          ]
+        },
+        {
+          "name": "Upper extremity",
+          "skills": [
+            { "id": "interscalene", "name": "Interscalene", "prereqs": ["us-needle"] },
+            { "id": "supraclav", "name": "Supraclavicular", "prereqs": ["us-needle"] },
+            { "id": "infraclav", "name": "Infraclavicular", "prereqs": ["supraclav"] },
+            { "id": "axillary", "name": "Axillary", "prereqs": ["us-needle"] },
+            { "id": "sup-cervical", "name": "Superficial cervical plexus", "prereqs": ["us-needle"] }
+          ]
+        },
+        {
+          "name": "Truncal",
+          "skills": [
+            { "id": "tap", "name": "TAP", "prereqs": ["us-needle"] },
+            { "id": "rectus", "name": "Rectus sheath", "prereqs": ["us-needle"] },
+            { "id": "pecs", "name": "PECS / serratus", "prereqs": ["us-needle"] },
+            { "id": "esp", "name": "Erector spinae plane", "prereqs": ["us-needle"] },
+            { "id": "ql", "name": "Quadratus lumborum", "prereqs": ["tap"] }
+          ]
+        },
+        {
+          "name": "Lower extremity",
+          "skills": [
+            { "id": "femoral", "name": "Femoral", "prereqs": ["us-needle"] },
+            { "id": "fascia-iliaca", "name": "Fascia iliaca", "prereqs": ["us-needle"] },
+            { "id": "peng", "name": "PENG", "prereqs": ["fascia-iliaca"] },
+            { "id": "adductor", "name": "Adductor canal", "prereqs": ["femoral"] },
+            { "id": "ipack", "name": "iPACK", "prereqs": ["adductor"] },
+            { "id": "genicular", "name": "Genicular nerve blocks", "prereqs": ["us-needle"] },
+            { "id": "popliteal", "name": "Popliteal sciatic", "prereqs": ["us-needle"] },
+            { "id": "ankle", "name": "Ankle block" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equipment",
+      "name": "Equipment & Monitoring",
+      "groups": [
+        {
+          "name": "Infusion & warming",
+          "skills": [
+            { "id": "pressure-bag", "name": "Pressure bag infusion" },
+            { "id": "level-one", "name": "Level 1 setup" },
+            { "id": "belmont", "name": "Belmont setup" },
+            { "id": "warming", "name": "Fluid warmer and forced-air warming" },
+            { "id": "cell-saver", "name": "Cell saver" }
+          ]
+        },
+        {
+          "name": "Monitors",
+          "skills": [
+            { "id": "bis", "name": "BIS / SedLine setup" },
+            { "id": "nirs", "name": "Cerebral oximetry (NIRS)" },
+            { "id": "tof", "name": "Quantitative TOF" },
+            { "id": "temp", "name": "Temperature probes" },
+            { "id": "foley", "name": "Foley placement" }
+          ]
+        },
+        {
+          "name": "Point-of-care labs",
+          "skills": [
+            { "id": "teg", "name": "Reading TEG" },
+            { "id": "rotem", "name": "Reading ROTEM" },
+            { "id": "istat", "name": "i-STAT / ABG" }
+          ]
+        },
+        {
+          "name": "Cardiac devices",
+          "skills": [
+            { "id": "pads", "name": "Defib / pacer pad placement" },
+            { "id": "tc-pacing", "name": "Transcutaneous pacing", "prereqs": ["pads"] },
+            { "id": "swan-box", "name": "Setting up a Swan box" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pocus",
+      "name": "POCUS & TEE",
+      "groups": [
+        {
+          "name": "POCUS",
+          "skills": [
+            { "id": "gastric-us", "name": "Gastric ultrasound" },
+            { "id": "lung-us", "name": "Lung ultrasound" },
+            { "id": "focused-cardiac", "name": "Focused cardiac ultrasound" },
+            { "id": "fast", "name": "FAST exam" },
+            { "id": "ivc", "name": "IVC assessment" }
+          ]
+        },
+        {
+          "name": "TEE",
+          "skills": [
+            { "id": "tee-insert", "name": "TEE probe insertion" },
+            { "id": "tee-basic", "name": "Basic TEE views", "prereqs": ["tee-insert", "focused-cardiac"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crisis",
+      "name": "Blood & Crisis",
+      "groups": [
+        {
+          "name": "Blood",
+          "skills": [
+            { "id": "blood-check", "name": "Blood product check and administration" },
+            { "id": "mtp", "name": "MTP activation", "prereqs": ["blood-check"] }
+          ]
+        },
+        {
+          "name": "Crises",
+          "skills": [
+            { "id": "mh", "name": "MH cart", "prereqs": ["dantrolene"] },
+            { "id": "last", "name": "LAST kit", "prereqs": ["intralipid"] },
+            { "id": "fire", "name": "Airway fire" },
+            { "id": "acls", "name": "Code cart and ACLS in the OR" },
+            { "id": "emerg-manual", "name": "Using the emergency manual" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gi",
+      "name": "GI",
+      "groups": [
+        {
+          "name": "Gastric tubes",
+          "skills": [
+            { "id": "ng-og", "name": "NG vs OG tube placement" },
+            { "id": "tube-confirm", "name": "Confirming gastric tube placement" },
+            { "id": "pre-induction-suction", "name": "Gastric suctioning before induction" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "neuro",
+      "name": "Neuro",
+      "groups": [
+        {
+          "name": "Neuro",
+          "skills": [
+            { "id": "evd", "name": "EVD management: leveling, clamping" },
+            { "id": "icp", "name": "ICP measurement" },
+            { "id": "lumbar-drain", "name": "Lumbar drain" },
+            { "id": "mayfield", "name": "Mayfield pins" },
+            { "id": "scalp-block", "name": "Scalp block" },
+            { "id": "tiva-neuromon", "name": "TIVA for neuromonitoring", "prereqs": ["tiva"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ob",
+      "name": "OB",
+      "groups": [
+        {
+          "name": "Neuraxial",
+          "skills": [
+            { "id": "labor-epidural", "name": "Labor epidural", "prereqs": ["epidural"] },
+            { "id": "epidural-troubleshoot", "name": "Troubleshooting a one-sided epidural", "prereqs": ["labor-epidural"] },
+            { "id": "epidural-cs", "name": "Converting a labor epidural for C-section", "prereqs": ["labor-epidural"] },
+            { "id": "cs-spinal", "name": "C-section spinal", "prereqs": ["spinal"] }
+          ]
+        },
+        {
+          "name": "Obstetric care",
+          "skills": [
+            { "id": "uterine-displacement", "name": "Left uterine displacement" },
+            { "id": "ga-cs", "name": "General anesthesia for C-section" },
+            { "id": "uterotonics", "name": "Uterotonics" },
+            { "id": "pph", "name": "PPH management (TXA, carboprost, methergine)", "prereqs": ["uterotonics", "mtp"] },
+            { "id": "fhr", "name": "Fetal heart tracings" },
+            { "id": "neonatal", "name": "Neonatal resuscitation basics" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiac-icu",
+      "name": "Cardiac / ICU",
+      "groups": [
+        {
+          "name": "PA catheter",
+          "skills": [
+            { "id": "swan-float", "name": "Floating a Swan", "prereqs": ["cvc-ij", "swan-box"] },
+            { "id": "swan-mgmt", "name": "Swan management", "prereqs": ["swan-float"] },
+            { "id": "thermodilution", "name": "Thermodilution CO and wedge", "prereqs": ["swan-float"] }
+          ]
+        },
+        {
+          "name": "Pacing & rhythm",
+          "skills": [
+            { "id": "tv-pacing", "name": "Transvenous pacing wires", "prereqs": ["cvc-ij"] },
+            { "id": "epicardial", "name": "Epicardial pacing box" },
+            { "id": "cardioversion", "name": "Cardioversion", "prereqs": ["pads"] }
+          ]
+        },
+        {
+          "name": "Bypass & support",
+          "skills": [
+            { "id": "act", "name": "ACT and heparin / protamine" },
+            { "id": "iabp-ecmo", "name": "IABP / ECMO awareness" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peds",
+      "name": "Peds",
+      "groups": [
+        {
+          "name": "Peds",
+          "skills": [
+            { "id": "peds-iv", "name": "Pediatric IV", "prereqs": ["piv-landmark"] },
+            { "id": "mask-induction", "name": "Mask induction", "prereqs": ["mask"] },
+            { "id": "caudal", "name": "Caudal block" },
+            { "id": "peds-airway", "name": "Pediatric airway sizing" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "general",
+      "name": "General & Positioning",
+      "groups": [
+        {
+          "name": "Transport",
+          "skills": [
+            { "id": "transport", "name": "Patient transport and transport monitor setup" },
+            { "id": "slide-board", "name": "Slide-board transfers" }
+          ]
+        },
+        {
+          "name": "Positioning",
+          "skills": [
+            { "id": "spin-bed", "name": "Spinning the bed" },
+            { "id": "lateral", "name": "Lateral positioning" },
+            { "id": "prone", "name": "Proning (Jackson / Wilson)" },
+            { "id": "beach-chair", "name": "Beach chair" },
+            { "id": "lithotomy", "name": "Lithotomy" },
+            { "id": "padding", "name": "Padding and eye protection" }
+          ]
+        }
+      ]
+    }
+  ]
+}

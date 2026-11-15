@@ -76,7 +76,11 @@ for i, s in enumerate(sections):
     if url and not (url.startswith("/") and url.endswith("/")):
         err(where, f"url should look like \"/folder/\" (got \"{url}\")")
     folder = SITE / url.strip("/") if url else None
-    if folder is not None:
+    if folder is not None and s.get("custom"):
+        # Hand-written section (e.g. /skills/): its own index.html, no card list.
+        if not (folder / "index.html").exists():
+            err(where, f"\"custom\": true, but site/{url.strip('/')}/index.html is missing")
+    elif folder is not None:
         generated.add((folder / "index.html").resolve())
         if not (folder / "pages.json").exists():
             err(where, f"no pages.json in site/{url.strip('/') or '.'}/ — create one (copy another section's)")
@@ -95,7 +99,21 @@ for talk in sorted((SITE / "talks").glob("*/index.html")):
     new = stamp(old)
     if new != old:
         talk.write_text(new, encoding="utf-8")
+# Hand-written sections load the shared CSS/JS too: version-stamp them, and check their JSON.
 for s in sections:
+    if not s.get("custom") or not s.get("url"):
+        continue
+    folder = SITE / s["url"].strip("/")
+    page = folder / "index.html"
+    if page.exists():
+        old = page.read_text(encoding="utf-8"); new = stamp(old)
+        if new != old:
+            page.write_text(new, encoding="utf-8")
+    for j in sorted(folder.glob("*.json")):
+        load(j)
+for s in sections:
+    if s.get("custom"):
+        continue
     url = s.get("url", "")
     folder = SITE / url.strip("/")
     rel = (folder / "pages.json").relative_to(ROOT)
@@ -154,7 +172,10 @@ if not errors:
     keep = ["/", "/sections.json", "/manifest.webmanifest"] + [f"/assets/{f}?v={asset_v}" for f in SHARED]
     for s in sections:
         u = s["url"]
-        keep += [u, u + "pages.json"]
+        if s.get("custom"):
+            keep += [u] + ["/" + j.relative_to(SITE).as_posix() for j in sorted((SITE / u.strip("/")).glob("*.json"))]
+        else:
+            keep += [u, u + "pages.json"]
     keep += ["/" + p.parent.relative_to(SITE).as_posix() + "/" for p in sorted((SITE / "talks").glob("*/index.html"))]
     keep += ["/" + p.relative_to(SITE).as_posix() for p in sorted((SITE / "assets" / "icons").glob("*"))]
     keep += ["/" + p.relative_to(SITE).as_posix() for p in sorted(SITE.rglob("*.pdf"))]
@@ -171,7 +192,7 @@ if not errors:
 # ---------- report ----------
 n_cards = 0
 for s in sections:
-    d = load(SITE / s.get("url", "/").strip("/") / "pages.json") if s.get("url") else None
+    d = load(SITE / s.get("url", "/").strip("/") / "pages.json") if s.get("url") and not s.get("custom") else None
     n_cards += len((d or {}).get("pages", []))
 if warnings:
     print("Warnings (site still builds):"); print("\n".join(warnings))

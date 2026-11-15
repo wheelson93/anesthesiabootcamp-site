@@ -12,6 +12,7 @@ site/
   icu/pages.json         ← ICU talks by Elijah
   one-pagers/pages.json  ← One Pagers by Kenji Tanabe
   papers/pages.json      ← Important papers
+  skills/                ← Skills tracker (beta): a hand-written page; the skill list is skills.json
   talks/<name>/          ← your chalk talks, copied from Claude so they open on the site (not the Claude app)
   talks/talks.json       ← which Claude artifact each copy came from; the nightly sync refreshes stale copies
   handouts/*.pdf         ← printable PDFs (saved for offline use automatically)
@@ -89,6 +90,21 @@ It's saved for offline use automatically.
    `short` and `emoji` are the app's bottom tab. Keep tabs to about five.
 3. Commit. The build creates the page, links it from every other section, adds the app tab
    and caches it offline.
+
+## Skills tracker (beta)
+
+`site/skills/` is a hand-written section (marked `"custom": true` in `sections.json`), so it has
+no `pages.json`: the build leaves its `index.html` alone apart from version-stamping the shared
+CSS/JS, and caches it offline. To change the skills, edit `site/skills/skills.json`:
+
+```json
+{ "id": "dlt-right", "name": "Right DLT incl. RUL slot alignment", "prereqs": ["dlt-left"] }
+```
+
+`id` must be unique and never renamed once people are using it (progress is saved by id, so a
+renamed id resets that skill). `prereqs` lists ids; a skill shows **READY** when every prereq is at
+"Perform supervised" or above. Progress is saved in each reader's browser on that device, with a
+Back up / restore code to move it to another device; there are no accounts.
 
 ## Colors, fonts, light/dark
 
