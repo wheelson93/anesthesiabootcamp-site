@@ -1,24 +1,7 @@
 {
   "site": {
     "title": "Important papers.",
-    "lead": "Landmark critical care, trauma and perioperative papers, rounded up by Kenji Tanabe. Each card has the takeaway, why it matters, the Wiki Journal Club summary where there is one, and a link to the full paper.",
-    "links": [
-      {
-        "label": "Back to OR talks",
-        "kicker": "Anesthesia Bootcamp",
-        "url": "../"
-      },
-      {
-        "label": "ICU talks by Elijah",
-        "kicker": "Also",
-        "url": "../icu/"
-      },
-      {
-        "label": "One Pagers by Kenji Tanabe",
-        "kicker": "Also",
-        "url": "../one-pagers/"
-      }
-    ]
+    "lead": "Landmark critical care, trauma and perioperative papers, rounded up by Kenji Tanabe. Each card has the takeaway, why it matters, the Wiki Journal Club summary where there is one, and a link to the full paper."
   },
   "pages": [
     {

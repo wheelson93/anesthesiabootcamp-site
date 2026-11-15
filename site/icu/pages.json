@@ -4,21 +4,6 @@
     "lead": "Critical care talks and teaching pages by Elijah, hosted on his own site.",
     "links": [
       {
-        "label": "Back to OR talks",
-        "kicker": "Anesthesia Bootcamp",
-        "url": "../"
-      },
-      {
-        "label": "One Pagers by Kenji Tanabe",
-        "kicker": "Also",
-        "url": "../one-pagers/"
-      },
-      {
-        "label": "Important papers",
-        "kicker": "Also",
-        "url": "../papers/"
-      },
-      {
         "label": "artifacts.elijahc.net",
         "kicker": "Elijah's site",
         "url": "https://artifacts.elijahc.net"

@@ -1,7 +1,7 @@
 # Artifact sync: how the homepage stays current
 
-anesthesiabootcamp.com is the static page in `site/`. GitHub Pages redeploys it on every
-push to `main` (`.github/workflows/pages.yml`). The card list is `site/pages.json`.
+anesthesiabootcamp.com is built from `site/`. Every push to `main` runs `tools/build.py` (which
+checks all card lists) and then deploys. The OR talks card list is `site/pages.json`.
 
 A daily scheduled task follows these steps. A person can run them by hand too.
 
@@ -37,8 +37,9 @@ A Claude artifact appears on the site only when **it is shared publicly** and is
      or opening text (never invent clinical content), `tags` (e.g. "chalk talk", "interactive",
      "board questions", "handout"), and `updated` as the artifact's last-update date (YYYY-MM-DD,
      America/Denver).
-5. If `pages.json` changed: validate it parses, commit to `main` with a message listing what
+5. If `pages.json` changed: run `python3 tools/build.py` and fix anything it reports, commit to `main` with a message listing what
    was added, unhidden or hidden, and push. The site redeploys in about a minute.
 6. Report a short summary. If nothing changed, say so in one line.
 
-Do not edit `site/index.html` or anything under `site/icu/` or `site/one-pagers/` (friends' pages, maintained by hand), remove cards, or change an existing blurb, category or tags.
+Only edit `site/pages.json`. Do not edit `site/sections.json`, generated files (`index.html`, `sw.js`), or the other
+section folders (`icu/`, `one-pagers/`, `papers/`; maintained by hand), remove cards, or change an existing blurb, category or tags.

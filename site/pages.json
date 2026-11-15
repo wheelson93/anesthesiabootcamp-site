@@ -1,24 +1,7 @@
 {
   "site": {
     "title": "Teaching pages for the OR.",
-    "lead": "Chalk talks, handouts and interactive explainers for residents, students and anyone learning anesthesia.",
-    "links": [
-      {
-        "label": "ICU talks by Elijah",
-        "kicker": "Also",
-        "url": "icu/"
-      },
-      {
-        "label": "One Pagers by Kenji Tanabe",
-        "kicker": "Also",
-        "url": "one-pagers/"
-      },
-      {
-        "label": "Important papers",
-        "kicker": "Also",
-        "url": "papers/"
-      }
-    ]
+    "lead": "Chalk talks, handouts and interactive explainers for residents, students and anyone learning anesthesia."
   },
   "pages": [
     {

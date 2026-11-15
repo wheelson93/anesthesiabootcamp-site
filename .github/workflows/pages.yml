@@ -2,7 +2,7 @@ name: Deploy homepage
 on:
   push:
     branches: [main]
-    paths: ["site/**", ".github/workflows/pages.yml"]
+    paths: ["site/**", "tools/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,8 +19,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v6
-      - name: Check pages.json
-        run: python3 -c "import json; json.load(open('site/pages.json'))"
+      # Checks every card list and builds the pages + offline cache.
+      # If anything is wrong this step fails, nothing deploys, and the
+      # live site stays on its last good version. Open the failed run to
+      # see which file and card to fix.
+      - name: Check content and build
+        run: python3 tools/build.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

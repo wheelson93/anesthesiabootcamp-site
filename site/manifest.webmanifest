@@ -1,0 +1,21 @@
+{
+  "name": "Anesthesia Bootcamp",
+  "short_name": "Bootcamp",
+  "description": "Chalk talks, handouts, case guides and important papers for anesthesia learners.",
+  "id": "/",
+  "start_url": "/?source=homescreen",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f3ee",
+  "theme_color": "#14201d",
+  "icons": [
+    { "src": "/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "ICU talks", "url": "/icu/" },
+    { "name": "One Pagers", "url": "/one-pagers/" },
+    { "name": "Important papers", "url": "/papers/" }
+  ]
+}

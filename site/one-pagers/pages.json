@@ -4,21 +4,6 @@
     "lead": "One Pagers by Kenji Tanabe: printable guides to common anesthesia cases, covering how to run them, pearls and pitfalls. Each opens as a PDF from anesthesiacognitiveaids.com.",
     "links": [
       {
-        "label": "Back to OR talks",
-        "kicker": "Anesthesia Bootcamp",
-        "url": "../"
-      },
-      {
-        "label": "ICU talks by Elijah",
-        "kicker": "Also",
-        "url": "../icu/"
-      },
-      {
-        "label": "Important papers",
-        "kicker": "Also",
-        "url": "../papers/"
-      },
-      {
         "label": "anesthesiacognitiveaids.com",
         "kicker": "Kenji's site",
         "url": "https://anesthesiacognitiveaids.com"
