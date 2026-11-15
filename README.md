@@ -12,6 +12,8 @@ site/
   icu/pages.json         ← ICU talks by Elijah
   one-pagers/pages.json  ← One Pagers by Kenji Tanabe
   papers/pages.json      ← Important papers
+  talks/<name>/          ← your chalk talks, copied from Claude so they open on the site (not the Claude app)
+  talks/talks.json       ← which Claude artifact each copy came from; the nightly sync refreshes stale copies
   handouts/*.pdf         ← printable PDFs (saved for offline use automatically)
   assets/                ← shared look and behavior (app.css, app.js, icons)
 tools/
@@ -87,6 +89,13 @@ It's saved for offline use automatically.
    `short` and `emoji` are the app's bottom tab. Keep tabs to about five.
 3. Commit. The build creates the page, links it from every other section, adds the app tab
    and caches it offline.
+
+## Your chalk talks
+
+Talks live as copies in `site/talks/`, so they open on the site and in the app, and work offline.
+When you edit a talk in Claude, the nightly sync notices the new version and refreshes the copy.
+To copy one by hand: download the artifact's HTML and run
+`python3 tools/mirror.py NAME FILE.html --slug … --short … --version …` (see the top of tools/mirror.py).
 
 ## Automatic additions
 

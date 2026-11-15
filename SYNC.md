@@ -1,7 +1,11 @@
-# Artifact sync: how the homepage stays current
+# Artifact sync: how the site stays current
 
 anesthesiabootcamp.com is built from `site/`. Every push to `main` runs `tools/build.py` (which
 checks all card lists) and then deploys. The OR talks card list is `site/pages.json`.
+
+Talks are **copied onto the site** (`site/talks/<name>/`) so they open on the site and in the
+home-screen app instead of jumping to the Claude app. `site/talks/talks.json` records, for each
+copy, the Claude artifact it came from (`slug`, `short` id) and the `version` last copied.
 
 A daily scheduled task follows these steps. A person can run them by hand too.
 
@@ -12,34 +16,42 @@ A Claude artifact appears on the site only when **it is shared publicly** and is
 
 ## Steps
 
-1. Read `site/pages.json`. Known URLs are every `pages[].url`, every `pages[].links[].url`,
-   and every `ignore[].url`.
+1. Read `site/pages.json` and `site/talks/talks.json`. Known artifacts are every `short` id in
+   talks.json, every key in its `redirects`, every claude.ai URL still on a card, and every
+   `ignore[].url` in pages.json.
 2. List the owner's artifacts (claude-artifacts `list_artifacts`).
-3. **Visibility pass:** for every known claude.ai URL on a card or link, check `read` with
-   `get_artifact`:
-   - Card with `"hidden": "private"` whose artifact is now `public` → remove `hidden`.
-   - Visible card whose artifact is no longer `public` → set `"hidden": "private"`.
-   - Link with `"private": true` that is now `public` → remove `private`; the reverse sets it.
-   - Never touch a card whose `hidden` is `true` (hidden on purpose by the owner).
-4. **New artifacts:** for each artifact whose URL is not known:
-   - Not `public` yet → skip it for now (no change, so it is checked again next run).
-   - Public but not teaching material (personal, wedding, climbing, finances, test pages) →
-     add it to `ignore` with a short `why`.
-   - A handout or one-pager companion to an existing card (same topic, title contains
-     "Handout", "One-Pager", "Quick Reference" or similar) → add
-     `{"label": "Handout", "url": ...}` to that card's `links`.
-   - A newer copy of an artifact already on a card (same title) → point the card's `url` at
-     the newer one and add the old URL to `ignore`.
-   - Otherwise add a card: `title` (drop suffixes like "— OR Chalk Talk"), `url`, one fitting
-     `emoji`, `category` (reuse an existing one: Trauma & Acute Care, Regional & Local
-     Anesthetics, Pharmacology, Inhaled Agents & the Machine, Acid–Base, Foundations; create a
-     new one only when none fits), a one-sentence `blurb` from the artifact's own description
-     or opening text (never invent clinical content), `tags` (e.g. "chalk talk", "interactive",
-     "board questions", "handout"), and `updated` as the artifact's last-update date (YYYY-MM-DD,
-     America/Denver).
-5. If `pages.json` changed: run `python3 tools/build.py` and fix anything it reports, commit to `main` with a message listing what
-   was added, unhidden or hidden, and push. The site redeploys in about a minute.
-6. Report a short summary. If nothing changed, say so in one line.
+3. **Refresh copies:** for each talk in talks.json, `get_artifact` its `slug`. If the version differs
+   from the recorded `version`, download it (`read_file` with `paths: ["index.html"]`, which saves it
+   to disk) and run `python3 tools/mirror.py NAME SAVED_FILE --version NEW_VERSION`.
+4. **Visibility pass:** a card whose artifact is no longer `public` gets `"hidden": "private"`; a card
+   with `"hidden": "private"` whose artifact is public again has `hidden` removed. Never touch
+   `"hidden": true` (hidden on purpose).
+5. **New artifacts:** for each artifact that is not known:
+   - Not `public` yet → skip it for now.
+   - Public but not teaching material (personal, wedding, climbing, finances, test pages) → add it
+     to `ignore` in pages.json with a short `why`.
+   - A plain HTML artifact (not `made_from_type`) → copy it onto the site:
+     download as in step 3, then
+     `python3 tools/mirror.py NAME SAVED_FILE --slug SLUG --short SHORT_ID --version VERSION`
+     (NAME: lowercase-with-dashes from the title; SHORT_ID: the last part of its claude.ai URL).
+     The card's `url` is `/talks/NAME/`.
+   - Made from a type (Docs, Design) → for Docs, export a PDF (Claude Docs `export`, format pdf) into
+     `site/handouts/NAME.pdf` and use that as the url; for other types use the claude.ai URL.
+   - A handout or one-pager companion to an existing card → add `{"label": "Handout PDF", "url": ...}`
+     to that card's `links` (a PDF if one exists, otherwise its URL), and add its short id to
+     talks.json `redirects` if it is a PDF on the site.
+   - A newer copy of an artifact already on a card (same title) → mirror the new one under the same
+     NAME and add the old short id to `redirects`.
+   - Otherwise the card gets: `title` (drop suffixes like "— OR Chalk Talk"), `url`, one fitting
+     `emoji`, `category` (reuse an existing one when it fits), a one-sentence `blurb` from the
+     artifact's own description or opening text (never invent clinical content), `tags`, and
+     `updated` as the artifact's last-update date (YYYY-MM-DD, America/Denver).
+6. If anything changed: run `python3 tools/build.py` and fix anything it reports, commit to `main`
+   with a message listing what was added, refreshed, unhidden or hidden, and push. The site redeploys
+   in about a minute.
+7. Report a short summary. If nothing changed, say so in one line.
 
-Only edit `site/pages.json`. Do not edit `site/sections.json`, generated files (`index.html`, `sw.js`), or the other
-section folders (`icu/`, `one-pagers/`, `papers/`; maintained by hand), remove cards, or change an existing blurb, category or tags.
+Only edit `site/pages.json`, `site/talks/`, and `site/handouts/`. Do not edit `site/sections.json`,
+generated files (section `index.html` files, `sw.js`), or the other section folders (`icu/`,
+`one-pagers/`, `papers/`; maintained by hand). Do not remove cards or change an existing blurb,
+category or tags.

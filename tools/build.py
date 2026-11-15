@@ -147,6 +147,7 @@ if not errors:
     for s in sections:
         u = s["url"]
         keep += [u, u + "pages.json"]
+    keep += ["/" + p.parent.relative_to(SITE).as_posix() + "/" for p in sorted((SITE / "talks").glob("*/index.html"))]
     keep += ["/" + p.relative_to(SITE).as_posix() for p in sorted((SITE / "assets" / "icons").glob("*"))]
     keep += ["/" + p.relative_to(SITE).as_posix() for p in sorted(SITE.rglob("*.pdf"))]
     keep = list(dict.fromkeys(keep))

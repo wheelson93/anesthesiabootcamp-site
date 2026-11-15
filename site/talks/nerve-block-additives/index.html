@@ -1,0 +1,415 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Nerve Block Additives</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>[hidden]{display:none!important}
+:root{
+  --bg:#f5f7f8; --panel:#ffffff; --ink:#17232b; --muted:#566872; --line:#d3dde2;
+  --accent:#0e6e7a; --accent-soft:#dcefef; --warn:#b4531a; --warn-soft:#fbe9dc; --bad:#a3293b; --bad-soft:#f7e1e4; --good:#2f7a3f; --good-soft:#e2f1e4;
+  --chalk:#eef3f4;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f171b; --panel:#162228; --ink:#e3ecef; --muted:#93a7b0; --line:#2b3b43;
+  --accent:#5cc3cc; --accent-soft:#16363b; --warn:#f0a066; --warn-soft:#3a2617; --bad:#f08a98; --bad-soft:#3b1d23; --good:#7fcf8c; --good-soft:#1b3322; --chalk:#1b2a31; color-scheme:dark}}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:20px 64px}
+header.top{display:grid;gap:6px;padding-block:8px 14px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--f-display);font-weight:750;font-size:clamp(28px,6vw,42px);line-height:1.05;margin:0;text-wrap:balance}
+.lede{color:var(--muted);max-width:64ch;margin:0}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:thin}
+nav.tabs button{font:600 14px var(--f-body);background:none;border:1px solid transparent;color:var(--muted);padding:7px 11px;border-radius:999px;white-space:nowrap;cursor:pointer}
+nav.tabs button:hover{color:var(--ink);border-color:var(--line)}
+nav.tabs button[aria-selected="true"]{background:var(--accent);color:var(--panel)}
+nav.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section.tab{padding-top:22px;display:grid;gap:18px}
+h2{font-family:var(--f-display);font-weight:750;font-size:26px;line-height:1.15;margin:0;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:600;font-size:19px;margin:6px 0 0;text-wrap:balance}
+p{margin:0;max-width:68ch}
+ul,ol{margin:0;padding-left:1.25em;display:grid;gap:5px;max-width:70ch}
+.board{background:var(--chalk);border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;margin:0}
+.board svg{display:block;width:100%;height:auto;min-width:540px}
+.board figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.say{border-left:3px solid var(--accent);padding:4px 0 4px 14px;font-size:17px;max-width:66ch}
+.say b{color:var(--accent)}
+.note{background:var(--warn-soft);border-radius:8px;padding:12px 14px;max-width:74ch}
+.note.bad{background:var(--bad-soft)}
+.note.good{background:var(--good-soft)}
+.note.acc{background:var(--accent-soft)}
+.note strong:first-child{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:600px}
+th,td{text-align:left;vertical-align:top;padding:9px 11px;border-bottom:1px solid var(--line)}
+th{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--chalk)}
+tr:last-child td{border-bottom:none}
+td.num,.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:13.5px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:8px;align-content:start;min-width:0}
+.card h3{margin:0}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--accent-soft);color:var(--accent);width:max-content}
+.tag.w{background:var(--warn-soft);color:var(--warn)}.tag.b{background:var(--bad-soft);color:var(--bad)}.tag.g{background:var(--good-soft);color:var(--good)}
+details.q{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+details.q summary{cursor:pointer;font-weight:700;list-style:none}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:" Show answer";font:600 12px var(--f-mono);color:var(--accent);letter-spacing:.04em}
+details.q[open] summary::after{content:" Hide"}
+details.q .opts{margin:8px 0;display:grid;gap:3px}
+details.q .ans{border-top:1px dashed var(--line);padding-top:8px;margin-top:6px;display:grid;gap:6px}
+.src li{font-size:14px}
+a{color:var(--accent)}
+.svg-ink{stroke:var(--ink);fill:none}
+.svg-txt{fill:var(--ink);font-family:var(--f-body);font-size:13px}
+.svg-mut{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
+.svg-acc{stroke:var(--accent);fill:none}
+.svg-warn{stroke:var(--warn);fill:none}
+.svg-bad{stroke:var(--bad);fill:none}
+.svg-good{stroke:var(--good);fill:none}
+.calc{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:12px}
+.calc .row{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.calc label{display:grid;gap:3px;font-size:13px;color:var(--muted);font-weight:700}
+.calc input,.calc select{font:15px var(--f-body);padding:7px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);min-width:0}
+.calc input[type=number]{width:90px}
+.calc button{font:600 14px var(--f-body);padding:7px 12px;border-radius:6px;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);cursor:pointer}
+.calc button.x{border-color:var(--line);background:none;color:var(--muted);padding:6px 9px}
+.out{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:14px;background:var(--chalk);border-radius:8px;padding:10px 12px;display:grid;gap:4px}
+.out b{font-size:16px}
+.meter{height:14px;border-radius:7px;background:var(--line);overflow:hidden}
+.meter span{display:block;height:100%;background:var(--good);transition:width .2s}
+.meter span.w{background:var(--warn)}.meter span.b{background:var(--bad)}
+.handlink{display:inline-block;font:600 14px var(--f-body);padding:6px 12px;border-radius:999px;border:1px solid var(--accent);text-decoration:none;width:max-content}
+@media (prefers-reduced-motion:no-preference){section.tab{animation:in .18s ease-out}@keyframes in{from{opacity:.4;transform:translateY(3px)}to{opacity:1;transform:none}}}
+</style></head><body>
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">OR chalk talk · Anesthesia &amp; Pharmacology · CA-1 → CA-3</div>
+  <h1>Block additives: what actually makes a block last longer</h1>
+  <p class="lede">Epinephrine, dexamethasone, clonidine, dexmedetomidine, buprenorphine, and the rest. How much each one buys you, what it costs, and whether it needs to be in the syringe or just in the IV. Part 2 of the local anesthetic series (<a href="/talks/local-anesthetics/">Part 1: local anesthetics</a>).</p>
+  <a class="handlink" href="/handouts/nerve-block-additives.pdf">Printable one-page handout →</a>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Talk sections">
+  <button role="tab" id="t-big" aria-controls="big" aria-selected="true">1 · Big picture</button>
+  <button role="tab" id="t-epi" aria-controls="epi" aria-selected="false">2 · Epinephrine</button>
+  <button role="tab" id="t-dex" aria-controls="dex" aria-selected="false">3 · Dexamethasone</button>
+  <button role="tab" id="t-a2" aria-controls="a2" aria-selected="false">4 · α2 agonists</button>
+  <button role="tab" id="t-oth" aria-controls="oth" aria-selected="false">5 · Others &amp; alternatives</button>
+  <button role="tab" id="t-cmp" aria-controls="cmp" aria-selected="false">Compare</button>
+  <button role="tab" id="t-draw" aria-controls="draw" aria-selected="false">Whiteboard</button>
+  <button role="tab" id="t-board" aria-controls="board" aria-selected="false">Board questions</button>
+  <button role="tab" id="t-src" aria-controls="src" aria-selected="false">Sources</button>
+</nav>
+
+<!-- ============ 1 BIG PICTURE ============ -->
+<section class="tab" id="big" role="tabpanel" aria-labelledby="t-big">
+  <h2>Why add anything?</h2>
+  <p class="say">"A single shot of bupivacaine gives you most of a night. Surgery pain lasts <b>2–3 days</b>. Additives are an attempt to stretch one injection across that gap, without a catheter."</p>
+
+  <figure class="board">
+    <svg viewBox="0 0 680 270" role="img" aria-label="Approximate extra hours of analgesia added by each adjuvant to a long-acting local anesthetic">
+      <line x1="190" y1="235" x2="650" y2="235" class="svg-ink" stroke-width="1.4"/>
+      <g class="svg-mut" text-anchor="middle"><text x="190" y="252">0</text><text x="290" y="252">+2 h</text><text x="390" y="252">+4 h</text><text x="490" y="252">+6 h</text><text x="590" y="252">+8 h</text></g>
+      <g stroke="var(--line)"><line x1="290" y1="15" x2="290" y2="235"/><line x1="390" y1="15" x2="390" y2="235"/><line x1="490" y1="15" x2="490" y2="235"/><line x1="590" y1="15" x2="590" y2="235"/></g>
+      <!-- 50px per hour -->
+      <g class="svg-txt" text-anchor="end" font-weight="700">
+        <text x="180" y="38">Epi (with bupi/ropi)</text>
+        <text x="180" y="78">Clonidine</text>
+        <text x="180" y="118">Dexmedetomidine</text>
+        <text x="180" y="158">Dexamethasone IV</text>
+        <text x="180" y="198">Dexamethasone PN</text>
+        <text x="180" y="230" font-weight="400" class="svg-mut">Buprenorphine: see tab 5</text>
+      </g>
+      <rect x="190" y="26" width="35" height="16" rx="3" fill="var(--muted)" opacity=".7"/>
+      <rect x="190" y="66" width="100" height="16" rx="3" fill="var(--warn)"/>
+      <rect x="190" y="106" width="243" height="16" rx="3" fill="var(--accent)"/>
+      <rect x="190" y="146" width="300" height="16" rx="3" fill="var(--good)" opacity=".6"/>
+      <rect x="190" y="186" width="400" height="16" rx="3" fill="var(--good)"/>
+      <text x="232" y="38" class="svg-mut">small</text>
+      <text x="298" y="78" class="svg-mut">~1.5–2 h</text>
+      <text x="441" y="118" class="svg-mut">~4–5 h</text>
+      <text x="498" y="158" class="svg-mut">~4–6 h</text>
+      <text x="598" y="198" class="svg-mut">~6–8 h</text>
+    </svg>
+    <figcaption>Drawing 1. Rough added analgesia over long-acting LA alone, pooled from meta-analyses. Trials are heterogeneous (different blocks, doses, definitions of "duration"), so treat these as orders of magnitude. Epinephrine meaningfully prolongs lidocaine and mepivacaine, much less so bupivacaine and ropivacaine.</figcaption>
+  </figure>
+
+  <h3>Four questions for any additive</h3>
+  <ol>
+    <li><b>How much does it add?</b> Hours of analgesia, not just "statistically longer."</li>
+    <li><b>Does it need to be perineural?</b> If IV gets you most of the benefit, IV avoids the off-label perineural question.</li>
+    <li><b>What does it cost the patient?</b> Hypotension, bradycardia, sedation, PONV, hyperglycemia.</li>
+    <li><b>Is it safe on the nerve?</b> Preservative-free, compatible with the LA, no neurotoxicity signal.</li>
+  </ol>
+
+  <div class="note"><strong>Off-label, and say so</strong>Only epinephrine is a labeled additive for peripheral nerve blocks in the US. Perineural dexamethasone, dexmedetomidine, clonidine and buprenorphine are all off-label. They're widely used and reasonably well studied, but it's worth knowing that when you're consenting a patient or when a nurse asks why there's dex in your block syringe.</div>
+
+  <div class="note acc"><strong>Longer isn't always better</strong>A 30-hour block after an ankle fracture is great. A 30-hour dense block after a shoulder scope in someone who lives alone, or a long femoral block in someone who needs to walk to the bathroom, is a fall risk. Match the duration to the surgery and the patient's day.</div>
+</section>
+
+<!-- ============ 2 EPI ============ -->
+<section class="tab" id="epi" role="tabpanel" aria-labelledby="t-epi" hidden>
+  <h2>Epinephrine: the original additive</h2>
+  <p class="say">"Epi does three jobs: it <b>keeps the drug at the nerve</b>, it <b>lowers the peak blood level</b>, and it <b>tells you</b> when you're in a vessel."</p>
+
+  <div class="two">
+    <div class="card">
+      <span class="tag g">What it does</span>
+      <ul>
+        <li><b>Vasoconstriction</b> (α1) → slower uptake → longer block and a lower peak plasma level (roughly 20–30% lower for lidocaine).</li>
+        <li><b>Prolongs</b> lidocaine and mepivacaine a lot (often 50–100%). Adds little to bupivacaine and ropivacaine, which are already long and highly protein-bound (ropivacaine also vasoconstricts on its own).</li>
+        <li>Mild α2-mediated analgesia, mainly relevant in neuraxial use.</li>
+        <li><b>Intravascular marker:</b> 10–15 mcg IV produces a quick rise in HR and BP.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">Numbers</span>
+      <p class="mono">1:200,000 = 5 mcg/mL (standard)<br>1:400,000 = 2.5 mcg/mL (enough as marker)<br>Test dose: 3 mL of 1:200,000 = 15 mcg</p>
+      <p><b>Positive test:</b> HR ↑ ≥10 bpm, or SBP ↑ ≥15 mmHg, within about 1 minute. In children under GA, T-wave amplitude ↑ ≥25% is the most sensitive sign.</p>
+      <p><b>β-blocked patients:</b> the HR rise may not happen. Watch the blood pressure instead.</p>
+    </div>
+  </div>
+
+  <h3>Where to be careful</h3>
+  <ul>
+    <li><b>End-artery myth:</b> lidocaine with epinephrine in fingers, toes, nose and penis has been studied extensively and appears safe in patients with normal circulation (the WALANT literature). Many surgeons now prefer it. Phentolamine reverses it if needed.</li>
+    <li><b>Nerve blood flow:</b> epi lowers perineural blood flow. In nerves that are already compromised (severe diabetic neuropathy, prior chemotherapy), many people leave it out or use 1:400,000.</li>
+    <li><b>Cardiac disease:</b> tachycardia, ischemia, arrhythmias in patients with severe CAD, AS, or tachyarrhythmias. A few mL of 1:200,000 is usually fine; 40 mL of it is 200 mcg.</li>
+    <li><b>Commercial premixed solutions</b> are acidic (pH ~4–5, with sodium metabisulfite) to keep epi stable, so onset is slower than adding fresh epi to plain solution.</li>
+    <li><b>Neuraxial:</b> epi 0.1–0.2 mg in a spinal prolongs tetracaine and lidocaine more than bupivacaine, and can delay voiding.</li>
+  </ul>
+</section>
+
+<!-- ============ 3 DEX ============ -->
+<section class="tab" id="dex" role="tabpanel" aria-labelledby="t-dex" hidden>
+  <h2>Dexamethasone: the most-used, most-argued additive</h2>
+  <p class="say">"Dex prolongs a long-acting block by most of a day. The argument is about <b>where</b> to put it. The answer: put it in the IV and you'll get most of it."</p>
+
+  <div class="two">
+    <div class="card">
+      <span class="tag g">The benefit</span>
+      <ul>
+        <li>With bupivacaine or ropivacaine, dex prolongs analgesia by roughly <b>6–8 hours</b> over LA alone. Also lowers pain scores, opioid use, and PONV, and seems to blunt rebound pain.</li>
+        <li><b>Perineural vs IV:</b> perineural wins, but only by about <b>2–3 hours</b> in 2024 meta-analyses (≈2 h for interscalene, ≈2.7 h for lower-extremity blocks). The authors called it unlikely to be clinically relevant.</li>
+        <li>That suggests much of the effect is <b>systemic</b> (anti-inflammatory), not something happening only at the nerve.</li>
+        <li><b>Ceiling dose:</b> perineural 2–4 mg seems to do about as much as 8 mg.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">Dosing</span>
+      <p class="mono">Perineural: 2–4 mg (preservative-free)<br>IV: 0.1–0.2 mg/kg (commonly 4–10 mg)</p>
+      <p>Mechanism isn't settled. Proposed: glucocorticoid receptor effects on C-fiber K⁺ channels, local vasoconstriction, and systemic anti-inflammatory action.</p>
+      <p>If you're already giving 4–8 mg IV for PONV, you're already getting most of the block benefit. Don't give a second dose in the block just by habit.</p>
+    </div>
+  </div>
+
+  <h3>The costs</h3>
+  <ul>
+    <li><b>Hyperglycemia:</b> a single 4–8 mg dose raises glucose modestly for ~24 h; more in diabetics. Usually not dangerous, but worth a check in brittle diabetics.</li>
+    <li><b>Infection:</b> the PADDI trial (NEJM 2021, ~8,700 patients) found 8 mg IV dex non-inferior to placebo for surgical site infection, including in diabetics.</li>
+    <li><b>Compatibility:</b> dex sodium phosphate is alkaline. Mixtures with ropivacaine have formed crystals in lab studies. Draw up fresh, use preservative-free dex, look at the syringe.</li>
+    <li><b>Perineural use is off-label.</b> Animal neurotoxicity data are reassuring, but the 2024 meta-analyses still recommended IV given the small difference.</li>
+    <li>Perineal burning or itching with fast IV push. Push slowly in awake patients.</li>
+  </ul>
+  <div class="note acc"><strong>What to say at the bedside</strong>"I'm giving dexamethasone through the IV. It'll help with nausea and should make your block last several hours longer."</div>
+</section>
+
+<!-- ============ 4 ALPHA-2 ============ -->
+<section class="tab" id="a2" role="tabpanel" aria-labelledby="t-a2" hidden>
+  <h2>α2 agonists: clonidine and dexmedetomidine</h2>
+  <p class="say">"Same idea, different strength. Dexmedetomidine is the <b>more selective, more potent</b> cousin of clonidine, so it adds more time and more side effects."</p>
+
+  <figure class="board">
+    <svg viewBox="0 0 660 230" role="img" aria-label="Alpha-2 agonist blocks the hyperpolarization-activated current, keeping the nerve hyperpolarized">
+      <rect x="40" y="90" width="580" height="44" fill="var(--accent-soft)" stroke="var(--line)"/>
+      <text x="610" y="117" text-anchor="end" class="svg-mut">C-fiber membrane</text>
+      <rect x="150" y="80" width="40" height="64" rx="6" fill="var(--panel)" stroke="var(--ink)" stroke-width="1.6"/>
+      <text x="170" y="164" text-anchor="middle" class="svg-mut">HCN channel</text>
+      <text x="170" y="178" text-anchor="middle" class="svg-mut">(Iₕ current)</text>
+      <circle cx="170" cy="60" r="13" fill="var(--warn)"/><text x="170" y="64" text-anchor="middle" font-size="10" fill="#fff" font-family="var(--f-mono)">α2</text>
+      <line x1="150" y1="92" x2="190" y2="132" stroke="var(--bad)" stroke-width="3"/><line x1="190" y1="92" x2="150" y2="132" stroke="var(--bad)" stroke-width="3"/>
+      <text x="230" y="58" class="svg-txt">Blocks the current that normally lets a nerve</text>
+      <text x="230" y="76" class="svg-txt">recover after firing → nerve stays hyperpolarized</text>
+      <text x="230" y="168" class="svg-txt">LA + α2 agonist: the LA block lasts longer</text>
+      <text x="230" y="186" class="svg-txt">because the fiber can't reset to fire again</text>
+      <text x="230" y="214" class="svg-mut">(local effect; systemic α2 action adds sedation)</text>
+    </svg>
+    <figcaption>Drawing 2. The leading peripheral mechanism (Brummett and colleagues). Neuraxially, α2 agonists also act on dorsal horn receptors.</figcaption>
+  </figure>
+
+  <div class="two">
+    <div class="card">
+      <span class="tag w">Clonidine</span>
+      <p class="mono">α2:α1 selectivity ≈ 200:1<br>Perineural 0.5–1 mcg/kg (≤150 mcg)<br>Adds ~1.5–2 h</p>
+      <ul>
+        <li>Works best with intermediate-acting LAs (mepivacaine, lidocaine); smaller effect with bupivacaine/ropivacaine (Pöpping 2009).</li>
+        <li>Dose-dependent hypotension, bradycardia, sedation.</li>
+        <li><b>Neuraxial:</b> intrathecal 15–75 mcg, caudal 1–2 mcg/kg in children (also lowers emergence agitation). Epidural clonidine's label carries a boxed warning against obstetric, postpartum, and perioperative use because of hemodynamic instability.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">Dexmedetomidine</span>
+      <p class="mono">α2:α1 selectivity ≈ 1600:1<br>Perineural 0.5–1 mcg/kg (often 30–100 mcg)<br>Adds ~4–5 h</p>
+      <ul>
+        <li>Schnabel 2018 meta-analysis: ~4.9 h added analgesia with perineural dexmed. Block onset is often faster too.</li>
+        <li>Bradycardia and hypotension risk ~3× higher, plus sedation. Lower doses (30–50 mcg) seem to keep most of the benefit with fewer side effects.</li>
+        <li>Perineural vs IV dexmed: the data are mixed. Schnabel found no significant difference; other meta-analyses favor perineural. Off-label either way.</li>
+        <li>Animal data suggest it may reduce perineural inflammation rather than harm the nerve.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note"><strong>Who shouldn't get them</strong>Bradycardic, heart block, hypovolemic, already on α2 agonists or high-dose β-blockers, elderly ambulatory patients who need to go home alert. The extra sedation is a feature in the OR and a problem in phase II recovery.</div>
+</section>
+
+<!-- ============ 5 OTHERS ============ -->
+<section class="tab" id="oth" role="tabpanel" aria-labelledby="t-oth" hidden>
+  <h2>Everything else, and the non-drug ways to make a block last</h2>
+
+  <div class="two">
+    <div class="card">
+      <span class="tag w">Buprenorphine</span>
+      <p class="mono">Perineural 150–300 mcg<br>Adds roughly 6–8 h (wide range)</p>
+      <p>Partial μ agonist that also blocks Na⁺ channels like a local anesthetic. Real prolongation, but PONV goes up several-fold unless you give prophylaxis. Off-label.</p>
+    </div>
+    <div class="card">
+      <span class="tag g">Sodium bicarbonate</span>
+      <p class="mono">1 mL 8.4% per 10 mL lidocaine/mepivacaine<br>0.3 mL per 10 mL chloroprocaine</p>
+      <p>Speeds onset and takes the sting out of infiltration. Doesn't prolong. Don't add to bupivacaine or ropivacaine beyond a tiny amount: they precipitate.</p>
+    </div>
+    <div class="card">
+      <span class="tag b">Opioids on a peripheral nerve</span>
+      <p>Fentanyl, morphine, sufentanil perineurally: no convincing benefit over the same dose IV. Opioids work great <b>neuraxially</b> (spinal/epidural) because that's where the receptors are.</p>
+    </div>
+    <div class="card">
+      <span class="tag b">Not recommended</span>
+      <p>Magnesium, midazolam, ketamine, tramadol, neostigmine perineurally: small or inconsistent benefit, side effects, and neurotoxicity concerns for some (midazolam, ketamine preservatives). Skip them.</p>
+    </div>
+  </div>
+
+  <h3>Other ways to get a longer block</h3>
+  <div class="tbl"><table>
+    <tr><th>Strategy</th><th>Duration</th><th>Trade-off</th></tr>
+    <tr><td><b>Continuous catheter</b></td><td class="num">As long as it's in (typically 2–5 days)</td><td>Most reliable way past 24 h. Needs follow-up, can dislodge, leak, or fall out; home pumps need a system</td></tr>
+    <tr><td><b>Liposomal bupivacaine</b> (Exparel)</td><td class="num">Label: up to 72–96 h</td><td>Expensive. Head-to-head with plain bupi + dex, benefit is often small or absent in independent trials</td></tr>
+    <tr><td><b>Higher dose/concentration</b></td><td class="num">Modest</td><td>More motor block, eats into the max-dose budget</td></tr>
+    <tr><td><b>Additive (dex IV ± perineural)</b></td><td class="num">+6–8 h</td><td>Cheap, simple, small systemic effects</td></tr>
+    <tr><td><b>Multimodal analgesia</b></td><td class="num">—</td><td>Acetaminophen, NSAID, scheduled before the block wears off. Doesn't prolong the block, but softens rebound pain</td></tr>
+  </table></div>
+</section>
+
+<!-- ============ COMPARE ============ -->
+<section class="tab" id="cmp" role="tabpanel" aria-labelledby="t-cmp" hidden>
+  <h2>Side by side</h2>
+  <div class="tbl"><table style="min-width:820px">
+    <tr><th>Additive</th><th>Typical perineural dose</th><th>Added analgesia*</th><th>IV works too?</th><th>Main downsides</th><th>Bottom line</th></tr>
+    <tr><td><b>Epinephrine</b></td><td class="num">2.5–5 mcg/mL</td><td class="num">Big for lido/mepi, small for bupi/ropi</td><td>No (local effect)</td><td>Tachycardia, ↓ nerve blood flow</td><td>Use as marker and to lower peak levels; prolongs short-acting LAs</td></tr>
+    <tr><td><b>Dexamethasone</b></td><td class="num">2–4 mg</td><td class="num">~6–8 h</td><td><b>Mostly</b> (perineural +2–3 h)</td><td>Hyperglycemia; crystals with ropi</td><td>First-line. IV is usually enough</td></tr>
+    <tr><td><b>Dexmedetomidine</b></td><td class="num">0.5–1 mcg/kg</td><td class="num">~4–5 h</td><td>Unclear</td><td>Bradycardia, hypotension, sedation</td><td>Useful in selected inpatients; low dose</td></tr>
+    <tr><td><b>Clonidine</b></td><td class="num">0.5–1 mcg/kg (≤150)</td><td class="num">~1.5–2 h</td><td>Less effective</td><td>Hypotension, bradycardia, sedation</td><td>Mostly superseded peripherally; useful neuraxially/caudally</td></tr>
+    <tr><td><b>Buprenorphine</b></td><td class="num">150–300 mcg</td><td class="num">~6–8 h</td><td>Less effective</td><td>PONV (several-fold)</td><td>Works; give antiemetics</td></tr>
+    <tr><td><b>Bicarbonate</b></td><td class="num">1 mL/10 mL lido</td><td class="num">None (faster onset)</td><td>—</td><td>Precipitates bupi/ropi</td><td>For lido/mepi/chloroprocaine only</td></tr>
+  </table></div>
+  <p style="font-size:14px;color:var(--muted)">*Approximate, over a long-acting LA alone, from pooled trial data. Individual blocks vary a lot.</p>
+  <div class="note good"><strong>A reasonable default</strong>Long-acting LA (± epi as a marker) + dexamethasone 4–8 mg IV for most patients. Add perineural dex or low-dose dexmed when you need every hour and the patient can tolerate the side effects. Use a catheter when you need more than ~24 h.</div>
+</section>
+
+<!-- ============ WHITEBOARD ============ -->
+<section class="tab" id="draw" role="tabpanel" aria-labelledby="t-draw" hidden>
+  <h2>Drawing it in 5 minutes</h2>
+  <ol>
+    <li><b>The gap.</b> Timeline: block lasts ~12 h, pain lasts ~48 h. Shade the gap. "Everything today is about that gap."</li>
+    <li><b>The bars.</b> Horizontal bars for added hours: epi tiny, clonidine 2, dexmed 4–5, dex 6–8. Draw dex twice (IV and perineural) a couple hours apart.</li>
+    <li><b>The vessel.</b> Nerve with a capillary next to it. Squeeze the capillary with epi: drug stays put, less gets into the blood, and a test dose makes the HR jump.</li>
+    <li><b>The α2 trick.</b> A nerve that can't reset (Iₕ blocked) stays quiet longer.</li>
+    <li><b>The price tags.</b> Under each bar, write the cost: HR, BP, sedation, sugar, nausea.</li>
+  </ol>
+  <h3>Questions that make it stick</h3>
+  <ul>
+    <li>You gave 8 mg dex IV for PONV at induction. Should you also put 4 mg in the interscalene? What would it add?</li>
+    <li>Why does epi make a big difference to a lidocaine block and a small one to a bupivacaine block?</li>
+    <li>Your patient is on metoprolol. How do you read your epi test dose?</li>
+    <li>Ambulatory 78-year-old, foot surgery, lives alone. Do you add dexmedetomidine to the popliteal?</li>
+    <li>When is a catheter better than any additive?</li>
+  </ul>
+</section>
+
+<!-- ============ BOARD QUESTIONS ============ -->
+<section class="tab" id="board" role="tabpanel" aria-labelledby="t-board" hidden>
+  <h2>Board-style questions</h2>
+  <p style="color:var(--muted)">Written for this talk in ABA/ITE style.</p>
+
+  <details class="q"><summary>1. How many micrograms of epinephrine are in 20 mL of lidocaine 1:200,000?</summary>
+    <div class="opts"><span>A. 10 mcg</span><span>B. 50 mcg</span><span>C. 100 mcg</span><span>D. 200 mcg</span></div>
+    <div class="ans"><p><b>C.</b> 1:200,000 = 1 g/200,000 mL = 5 mcg/mL × 20 mL = 100 mcg.</p></div>
+  </details>
+
+  <details class="q"><summary>2. Epinephrine added to a local anesthetic will most prolong the block produced by:</summary>
+    <div class="opts"><span>A. Bupivacaine</span><span>B. Ropivacaine</span><span>C. Lidocaine</span><span>D. Liposomal bupivacaine</span></div>
+    <div class="ans"><p><b>C.</b> Short- and intermediate-acting drugs that vasodilate gain the most. Bupivacaine and ropivacaine are already long-acting and highly protein-bound; ropivacaine vasoconstricts on its own.</p></div>
+  </details>
+
+  <details class="q"><summary>3. A patient on a β-blocker receives a 3 mL test dose of lidocaine 1.5% with epinephrine 1:200,000 through an epidural catheter. Which finding most reliably indicates intravascular placement?</summary>
+    <div class="opts"><span>A. HR ↑ by 5 bpm</span><span>B. SBP ↑ by ≥15 mmHg</span><span>C. Tinnitus at 5 minutes</span><span>D. Bilateral leg weakness</span></div>
+    <div class="ans"><p><b>B.</b> β-blockade blunts the heart-rate response, so the BP rise is the more reliable sign. Leg weakness suggests intrathecal placement.</p></div>
+  </details>
+
+  <details class="q"><summary>4. Compared with IV dexamethasone, perineural dexamethasone added to an interscalene block:</summary>
+    <div class="opts"><span>A. Doubles the duration of analgesia</span><span>B. Prolongs analgesia by about 2 hours</span><span>C. Has no effect on duration</span><span>D. Is FDA-approved for this use</span></div>
+    <div class="ans"><p><b>B.</b> 2024 BJA meta-analysis: about 2 h longer, low-quality evidence, of questionable clinical relevance. Perineural use is off-label.</p></div>
+  </details>
+
+  <details class="q"><summary>5. The most likely adverse effect of adding 100 mcg dexmedetomidine to a supraclavicular block is:</summary>
+    <div class="opts"><span>A. Hyperglycemia</span><span>B. Bradycardia</span><span>C. Methemoglobinemia</span><span>D. Pruritus</span></div>
+    <div class="ans"><p><b>B.</b> Bradycardia, hypotension and sedation are dose-dependent with perineural dexmedetomidine.</p></div>
+  </details>
+
+  <details class="q"><summary>6. Adding sodium bicarbonate to which local anesthetic is most likely to cause precipitation?</summary>
+    <div class="opts"><span>A. Lidocaine</span><span>B. Mepivacaine</span><span>C. Chloroprocaine</span><span>D. Bupivacaine</span></div>
+    <div class="ans"><p><b>D.</b> Bupivacaine and ropivacaine precipitate when alkalinized beyond a very small amount.</p></div>
+  </details>
+</section>
+
+<!-- ============ SOURCES ============ -->
+<section class="tab" id="src" role="tabpanel" aria-labelledby="t-src" hidden>
+  <h2>Sources and further reading</h2>
+  <ul class="src">
+    <li>Albrecht E, Renard Y, Desai N. Intravenous versus perineural dexamethasone to prolong analgesia after interscalene brachial plexus block: systematic review, meta-analysis and trial sequential analysis. <i>Br J Anaesth</i> 2024;133:135–145. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11213995">PMC</a></li>
+    <li>Comparison of intravenous versus perineural dexamethasone as a local anaesthetic adjunct for peripheral nerve blocks in the lower limb: meta-analysis. <i>Eur J Anaesthesiol</i> 2024.</li>
+    <li>Pehora C, et al. Dexamethasone as an adjuvant to peripheral nerve block. <i>Cochrane Database Syst Rev</i> 2017;11:CD011770.</li>
+    <li>PADDI Investigators. Dexamethasone and surgical-site infection. <i>N Engl J Med</i> 2021;384:1731–1741.</li>
+    <li>Schnabel A, et al. Efficacy and safety of dexmedetomidine in peripheral nerve blocks: meta-analysis and trial sequential analysis. <i>Eur J Anaesthesiol</i> 2018;35:745–758.</li>
+    <li>Pöpping DM, et al. Clonidine as an adjuvant to local anesthetics for peripheral nerve and plexus blocks: a meta-analysis. <i>Anesthesiology</i> 2009;111:406–415.</li>
+    <li>Brummett CM, et al. Perineural administration of dexmedetomidine in combination with bupivacaine enhances sensory and motor blockade (rat). <i>Anesthesiology</i> 2008;109:502–511.</li>
+    <li>Schnabel A, et al. Efficacy and safety of buprenorphine in peripheral nerve blocks: a meta-analysis of randomised controlled trials. <i>Eur J Anaesthesiol</i> 2017;34:576–586.</li>
+    <li>EXPAREL (bupivacaine liposome) prescribing information, 11/2023.</li>
+  </ul>
+</section>
+</div>
+
+<script>(function(){
+  const tabs=[...document.querySelectorAll('nav.tabs [role=tab]')];
+  function show(id,push){
+    tabs.forEach(t=>{const on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    if(push){try{history.replaceState(null,'','#'+id)}catch(e){location.hash=id}}
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>{show(t.getAttribute('aria-controls'),true);window.scrollTo({top:document.querySelector('nav.tabs').offsetTop-4})}));
+  function fromHash(){const h=location.hash.slice(1);if(h&&tabs.some(t=>t.getAttribute('aria-controls')===h))show(h,false);}
+  window.addEventListener('hashchange',fromHash);fromHash();
+})();
+</script>
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body></html>

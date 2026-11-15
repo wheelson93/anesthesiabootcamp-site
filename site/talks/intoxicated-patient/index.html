@@ -1,0 +1,503 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>The Intoxicated Patient in the OR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F5F8;--card:#FFFFFF;--ink:#151923;--ink-2:#3E4658;--ink-3:#6A7285;
+  --rule:#D6DAE3;--rule-2:#E8EBF1;--accent:#3A4FA3;--accent-soft:#E4E8F7;
+  --ok:#237A4E;--warn:#9A6200;--bad:#B3261E;--ok-bg:#E3F2EA;--warn-bg:#F7EDDA;--bad-bg:#F8E3E1;
+  --scope:#0E1220;--scope-rule:#2C3450;--scope-ink:#C7CEE0;--scope-dim:#7F89A6;
+  --act:#FF6B6B;--uds:#5FD4E8;--cur:#F2F4FA;
+  --display:"Archivo",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+    --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+    --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+  --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+  --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding-inline:20px;padding-block:0 72px}
+header.mast{padding-block:34px 20px}
+.kicker{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 12px;letter-spacing:.04em;text-transform:uppercase}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,8vw,52px);line-height:1;letter-spacing:-.03em;margin:0 0 12px;text-wrap:balance}
+.thesis{font-size:19.5px;line-height:1.5;color:var(--ink-2);margin:0 0 24px;max-width:58ch}
+
+/* detection-window scope */
+.scope{background:var(--scope);border:1px solid var(--scope-rule);border-radius:10px 10px 0 0;color:var(--scope-ink);overflow:hidden}
+.scope-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:16px 18px 8px;flex-wrap:wrap}
+.lbl{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);letter-spacing:.08em}
+.val{font-family:var(--mono);font-weight:700;font-size:clamp(26px,7.5vw,38px);line-height:1.05;color:var(--cur);font-variant-numeric:tabular-nums}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;color:var(--scope-dim)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.sw{display:inline-block;width:14px;height:8px;border-radius:2px}
+.sw.a{background:var(--act)} .sw.u{background:var(--uds);opacity:.55}
+.sw.x{background:repeating-linear-gradient(135deg,rgba(95,212,232,.55) 0 3px,transparent 3px 6px)}
+.chart{padding:4px 18px 8px}
+.row{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:center;min-height:30px}
+.rname{font-family:var(--mono);font-size:11.5px;color:var(--scope-ink);line-height:1.2}
+.track{position:relative;height:18px;border-radius:3px;background:rgba(255,255,255,.03)}
+.bar{position:absolute;top:0;bottom:0;border-radius:3px}
+.bar.u{background:var(--uds);opacity:.4}
+.bar.x{background:repeating-linear-gradient(135deg,rgba(95,212,232,.5) 0 3px,transparent 3px 6px)}
+.bar.a{background:var(--act);top:4px;bottom:4px}
+.axis{position:relative;height:22px;margin:0 18px 0 124px}
+.tick{position:absolute;top:4px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;color:var(--scope-dim);white-space:nowrap}
+.cursorlayer{position:absolute;top:0;bottom:0;left:124px;right:18px;pointer-events:none}
+.cursor{position:absolute;top:0;bottom:0;width:2px;background:var(--cur);opacity:.85;transform:translateX(-1px)}
+.chartbox{position:relative}
+.verdict{margin:0;padding:11px 18px 13px;border-top:1px solid var(--scope-rule);font-size:15px;line-height:1.5}
+.verdict b{font-weight:700}
+.v-a{color:#FF8A80} .v-u{color:#7FE3F2} .v-n{color:#9AA4BF} .v-w{color:#F4C66A}
+.ctl{background:var(--card);border:1px solid var(--rule);border-top:0;border-radius:0 0 10px 10px;padding:14px 18px 16px;margin-top:-1px}
+.fld label{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;margin-bottom:4px;gap:10px}
+.fld .v{font-family:var(--mono);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;cursor:pointer;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);border:3px solid var(--card);margin-top:-9.5px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid var(--card)}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--warn)}
+.note{font-size:14px;color:var(--ink-3);margin:6px 0 0;line-height:1.45}
+
+/* tabs */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--rule);margin:30px -20px 0;padding-inline:20px}
+.tabrow{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabrow::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;appearance:none;background:none;border:0;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink-3);padding:14px 12px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;min-height:46px}
+.tab:hover{color:var(--ink-2)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-4px;border-radius:3px}
+.panel{padding-top:28px}
+h2{font-family:var(--display);font-size:27px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px;line-height:1.15;text-wrap:balance}
+.lede{color:var(--ink-2);margin:0 0 22px;max-width:62ch}
+h3{font-family:var(--display);font-size:18px;font-weight:700;margin:30px 0 8px;letter-spacing:-.01em}
+p{margin:0 0 14px;max-width:66ch}
+ul{margin:0 0 16px;padding-left:0;list-style:none;max-width:66ch}
+ul li{position:relative;padding-left:19px;margin-bottom:8px}
+ul li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:1px;background:var(--accent);opacity:.55}
+strong{font-weight:700}
+.key{border-left:3px solid var(--accent);padding:3px 0 3px 16px;margin:22px 0;font-size:18.5px;line-height:1.5;max-width:60ch}
+.ask{background:var(--accent-soft);border-radius:8px;padding:12px 15px;margin:18px 0;font-size:16px;max-width:64ch}
+.ask b{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:3px}
+.flag{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:13px 15px;margin:20px 0;font-size:16px;max-width:64ch}
+.flag b.t{color:var(--bad)}
+.tblwrap{overflow-x:auto;margin:6px 0 20px}
+.tbl{width:100%;border-collapse:collapse;font-size:15.5px;min-width:440px}
+.tbl th{text-align:left;font-weight:700;font-size:12.5px;color:var(--ink-3);padding:0 10px 7px 0;border-bottom:1px solid var(--rule);text-transform:uppercase;letter-spacing:.05em}
+.tbl td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule-2);vertical-align:top}
+.tbl td:first-child{font-weight:700}
+.up{color:var(--bad);font-weight:700} .dn{color:var(--accent);font-weight:700}
+.q{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:14px 16px 12px;margin:0 0 16px}
+.qmeta{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--accent);margin:0 0 6px;text-transform:uppercase}
+.qstem{font-weight:600;margin:0 0 8px}
+ol.opts{margin:0 0 10px;padding-left:26px}
+ol.opts li{margin-bottom:4px;padding-left:4px}
+.q details summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:15px;padding:6px 0;min-height:32px}
+.q details summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.q details p{margin:6px 0 4px;font-size:16px}
+.q:has(details[open]) li.ans{color:var(--ok);font-weight:700}
+footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-3)}
+footer p{max-width:68ch;margin-bottom:10px}
+@media (max-width:480px){
+  body{font-size:16.5px}
+  .wrap{padding-inline:16px}
+  nav.tabs{margin-inline:-16px;padding-inline:16px}
+  .row{grid-template-columns:78px 1fr;gap:8px}
+  .chart{padding-inline:12px}
+  .axis{margin:0 12px 0 98px}
+  .cursorlayer{left:98px;right:12px}
+}
+</style>
+
+<div class="wrap">
+<header class="mast">
+  <p class="kicker">OR chalk talk · pharmacology · 10–15 minutes</p>
+  <h1>The Intoxicated Patient in the OR</h1>
+  <p class="thesis">Two questions for every intoxicated patient: what is this drug doing to them right now, and what will it do to my anesthetic? A positive tox screen answers neither.</p>
+
+  <div class="scope" aria-label="Clinical effect versus urine detection window">
+    <div class="scope-hd">
+      <div><div class="lbl">TIME SINCE LAST USE</div><div class="val" id="tOut">2 d</div></div>
+      <div class="legend">
+        <span><i class="sw a"></i>Acute effect</span>
+        <span><i class="sw u"></i>Urine screen +</span>
+        <span><i class="sw x"></i>Heavy use or EtG</span>
+      </div>
+    </div>
+    <div class="chartbox">
+      <div class="chart" id="chart"></div>
+      <div class="axis" id="axis"></div>
+      <div class="cursorlayer"><div class="cursor" id="cursor"></div></div>
+    </div>
+    <p class="verdict" id="verdict"></p>
+  </div>
+  <div class="ctl">
+    <div class="fld"><label for="t">Hours since last use <span class="v" id="tV">48 h</span></label><input type="range" id="t" min="0" max="12" step="1" value="7"></div>
+    <p class="note">Start at 2 days: the cocaine screen is still positive, but the drug stopped acting long ago. Ask the learner whether they would cancel. Windows are approximate and depend on dose, how often the person uses, and the assay cutoff (Moeller 2017).</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabrow" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">The one idea</button>
+    <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false">Alcohol</button>
+    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false">Cocaine</button>
+    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false">Amphetamines</button>
+    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false">Cannabis</button>
+    <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false">Opioids</button>
+    <button class="tab" role="tab" id="t7" aria-controls="p7" aria-selected="false">Board questions</button>
+  </div>
+</nav>
+
+<main>
+<!-- 1 -->
+<section class="panel" id="p1" role="tabpanel" aria-labelledby="t1">
+  <h2>Acute and chronic use push in opposite directions</h2>
+  <p class="lede">Whether a drug is on board right now, or has been used for months, changes your anesthetic dose. The direction depends on the drug class.</p>
+
+  <h3>Draw this: the MAC grid</h3>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Drug class</th><th>Acute intoxication</th><th>Chronic use</th></tr></thead>
+    <tbody>
+      <tr><td>CNS depressants (alcohol, opioids, benzos)</td><td><span class="dn">↓ MAC</span>, additive sedation and respiratory depression</td><td><span class="up">↑ requirements</span> (cross-tolerance)</td></tr>
+      <tr><td>Stimulants (cocaine, amphetamines)</td><td><span class="up">↑ MAC</span>, sympathetic surge</td><td><span class="dn">↓ MAC</span>, catecholamine depletion</td></tr>
+      <tr><td>Cannabis</td><td>Additive sedation, tachycardia</td><td><span class="up">↑ propofol</span> and analgesic needs</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Four rules for every case</h3>
+  <ul>
+    <li><strong>Full stomach.</strong> Delayed gastric emptying, vomiting, blunted airway reflexes. RSI for emergent cases.</li>
+    <li><strong>Treat the patient, not the urine screen.</strong> Metabolites outlast the drug by days to weeks (the chart above). Decide on vitals, ECG, temperature and mental status.</li>
+    <li><strong>Capacity.</strong> An intoxicated patient may not be able to consent. Emergencies go ahead on implied consent; elective cases wait.</li>
+    <li><strong>Plan for afterward.</strong> Withdrawal, emergence agitation, hyperthermia, rhabdomyolysis, and respiratory depression when intoxication stacks on post-op opioids.</li>
+  </ul>
+
+  <div class="key">A positive screen tells you the person used the drug at some point in the past few days. It doesn't tell you the drug is still acting.</div>
+
+  <div class="ask"><b>ASK THE LEARNER</b>Why can the same methamphetamine user need more volatile on Friday night and still crash on induction after a week-long binge? <em>(Acute use releases catecholamines; chronic use depletes them.)</em></div>
+</section>
+
+<!-- 2 -->
+<section class="panel" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+  <h2>Alcohol</h2>
+  <p class="lede">The most common intoxicant in the trauma bay. It makes the anesthetic easier to give and the patient harder to assess.</p>
+
+  <h3>Acutely intoxicated</h3>
+  <ul>
+    <li><strong>MAC goes down</strong>, and alcohol adds to the effect of opioids, benzos and induction agents. Wolfson and Freed showed the acute/chronic split in animals with halothane.</li>
+    <li><strong>Hypoglycemia</strong> (impaired gluconeogenesis), <strong>hypothermia</strong> (vasodilation), <strong>hypovolemia</strong> (diuresis), and <strong>aspiration</strong>.</li>
+    <li>Alcoholic ketoacidosis can show up in a patient who has been drinking and not eating.</li>
+    <li><strong>Trauma:</strong> don't blame a low GCS on alcohol. Image the head.</li>
+  </ul>
+
+  <h3>Chronic heavy use</h3>
+  <ul>
+    <li><strong>Higher requirements</strong> for volatiles, propofol and opioids (cross-tolerance, enzyme induction).</li>
+    <li>Look for cardiomyopathy, cirrhosis and coagulopathy, thrombocytopenia, and malnutrition.</li>
+    <li>Give <strong>thiamine before glucose</strong> to avoid precipitating Wernicke's.</li>
+  </ul>
+
+  <h3>Withdrawal: the post-op problem</h3>
+  <ul>
+    <li>Tremor and autonomic signs start about <strong>6–24 h</strong> after the last drink. Seizures can happen in the first 1–2 days. Delirium tremens typically peaks around <strong>48–96 h</strong>.</li>
+    <li>Unexplained post-op tachycardia, hypertension, agitation or fever on day 2–3: think withdrawal. Start a CIWA protocol early.</li>
+  </ul>
+
+  <div class="ask"><b>ASK THE LEARNER</b>BAL 250 mg/dL, motorcycle crash, needs a laparotomy. Walk me through your RSI dose and your maintenance plan. <em>(Less induction agent, expect less volatile, watch glucose and temperature, plan for withdrawal.)</em></div>
+</section>
+
+<!-- 3 -->
+<section class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+  <h2>Cocaine</h2>
+  <p class="lede">A local anesthetic that also floods the synapse with catecholamines. It acts for a short time, but its metabolite stays in urine for days.</p>
+
+  <h3>Mechanism</h3>
+  <p>Blocks reuptake of norepinephrine, dopamine and serotonin, and blocks sodium channels. Expect hypertension, tachycardia, coronary vasospasm, arrhythmias, a wide QRS, hyperthermia and seizures.</p>
+
+  <h3>The acutely toxic patient</h3>
+  <ul>
+    <li><strong>Benzodiazepines first.</strong> They treat the agitation, hypertension, tachycardia and hyperthermia at the source.</li>
+    <li>Hypertension: vasodilators (nitroglycerin, phentolamine, nicardipine).</li>
+    <li>Wide QRS: sodium bicarbonate.</li>
+  </ul>
+
+  <h3>The beta-blocker debate</h3>
+  <ul>
+    <li>Lange 1990: intracoronary propranolol made cocaine-induced coronary vasoconstriction worse. That's where "unopposed alpha" comes from, and why the 2008 AHA statement said to avoid beta-blockers.</li>
+    <li>Two 2018 meta-analyses (Pham; Lo) found no increase in MI or death with beta-blockers in cocaine-associated chest pain. Both were observational and low quality.</li>
+    <li><strong>Reasonable approach:</strong> not first-line in active toxicity. Labetalol or esmolol after a vasodilator is defensible.</li>
+  </ul>
+
+  <h3>Elective case, positive screen, patient looks fine</h3>
+  <p>If vitals and ECG are normal and QTc is under 500 ms, asymptomatic cocaine-positive patients have not had more intraoperative hemodynamic events (Hill 2006; Moon 2019 and 2021). A 2025 systematic review agrees but calls the evidence thin.</p>
+
+  <div class="flag"><b class="t">Pearls.</b> Cocaine and succinylcholine are both broken down by plasma cholinesterase, so either can prolong the other. Ketamine adds sympathetic load. Be careful with epinephrine-containing local anesthetic in active toxicity.</div>
+</section>
+
+<!-- 4 -->
+<section class="panel" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+  <h2>Amphetamines and methamphetamine</h2>
+  <p class="lede">Longer acting than cocaine, and the chronic user is the one who surprises you on induction.</p>
+
+  <h3>Acute use</h3>
+  <ul>
+    <li><strong>MAC goes up.</strong> Dextroamphetamine raised halothane MAC by up to about 75% in dogs (Johnston 1972, 1975).</li>
+    <li>Hypertension, tachycardia, hyperthermia, arrhythmias, agitation.</li>
+  </ul>
+
+  <h3>Chronic use</h3>
+  <ul>
+    <li>Catecholamine stores are depleted. The result is sudden <strong>post-induction hypotension that responds poorly to ephedrine</strong>, because ephedrine works partly by releasing norepinephrine the nerve terminals no longer have.</li>
+    <li>Use direct agents: phenylephrine, norepinephrine, vasopressin.</li>
+    <li>Look for cardiomyopathy and methamphetamine-associated pulmonary hypertension.</li>
+  </ul>
+
+  <h3>The data</h3>
+  <ul>
+    <li>Safdari 2022: patients with a positive screen within 48 h had <strong>31% hemodynamic instability vs 6% of controls</strong>, even though they got less anesthetic. Waiting up to 7 days lowered the risk but not to baseline.</li>
+    <li>Edwards 2020 (trauma): pressor use tracked how much resuscitation the patient needed more than the tox result.</li>
+    <li>Rizk 2024 (burns): waiting for a negative screen didn't change intraoperative pressor needs.</li>
+  </ul>
+
+  <div class="ask"><b>ASK THE LEARNER</b>MAP 45 after induction, ephedrine 10 mg twice, nothing. Why, and what's next? <em>(Indirect agent, empty stores. Go to phenylephrine or norepinephrine, consider vasopressin.)</em></div>
+</section>
+
+<!-- 5 -->
+<section class="panel" id="p5" role="tabpanel" aria-labelledby="t5" hidden>
+  <h2>Cannabis</h2>
+  <p class="lede">Legal here in Colorado and common in our patients. The acute and chronic problems are different.</p>
+
+  <h3>Acute use (especially smoked)</h3>
+  <ul>
+    <li>Tachycardia, orthostatic hypotension, and sedation that adds to your drugs.</li>
+    <li><strong>Airway hyperreactivity:</strong> laryngospasm and bronchospasm after recent smoking.</li>
+  </ul>
+
+  <h3>Chronic use</h3>
+  <ul>
+    <li><strong>More propofol needed:</strong> Flisberg 2009 found users needed 314 vs 263 mg to allow LMA insertion.</li>
+    <li>Higher post-op pain scores and opioid use. Plan multimodal analgesia.</li>
+    <li>Cannabinoid hyperemesis syndrome: cyclic vomiting, relieved by hot showers.</li>
+  </ul>
+
+  <h3>ASRA Pain Medicine consensus guidelines (2023)</h3>
+  <ul>
+    <li>Screen every patient for use.</li>
+    <li>Postpone elective cases if the patient is acutely impaired or lacks decision-making capacity.</li>
+    <li>Warn heavy users that they may need more anesthetic and analgesic.</li>
+    <li>Don't stop cannabis abruptly in patients with cannabis use disorder (withdrawal).</li>
+  </ul>
+  <p class="note">Pull the full guideline for the exact timing thresholds before quoting them.</p>
+</section>
+
+<!-- 6 -->
+<section class="panel" id="p6" role="tabpanel" aria-labelledby="t6" hidden>
+  <h2>Opioids</h2>
+  <p class="lede">The acute overdose and the chronic user on buprenorphine are two different problems.</p>
+
+  <h3>Acute overdose</h3>
+  <ul>
+    <li><strong>Titrate naloxone to breathing, not to full wakefulness.</strong> Full reversal triggers acute withdrawal, hypertension and pulmonary edema.</li>
+    <li>Watch for <strong>re-narcotization</strong>: naloxone lasts 30–90 min, and methadone, extended-release drugs and fentanyl analogs outlast it.</li>
+    <li>Hypoventilation alone can explain both hypercarbia and hypoxemia on room air. That's the backup board question.</li>
+  </ul>
+
+  <h3>Chronic users</h3>
+  <ul>
+    <li>Expect tolerance and higher requirements. Continue the patient's baseline opioid.</li>
+    <li>Build around multimodal analgesia and regional techniques.</li>
+    <li>Fentanyl is missed by the standard opiate immunoassay and needs its own test.</li>
+  </ul>
+</section>
+
+<!-- 7 -->
+<section class="panel" id="p7" role="tabpanel" aria-labelledby="t7" hidden>
+  <h2>Board questions</h2>
+  <p class="lede">Five questions from the anes qvault question bank, plus one backup, in the order the talk covers them. Ask the question, let them commit to an answer, then reveal.</p>
+
+  <div class="q">
+    <p class="qmeta">Q1 · Basic · ANESHUB pharm / general</p>
+    <p class="qstem">A 25-year-old man needs an exploratory laparotomy after a car crash. He is acutely intoxicated with alcohol. What is the most likely result of the alcohol ingestion?</p>
+    <ol class="opts" type="A">
+      <li>Hyperdynamic circulation</li>
+      <li>Hyperglycemia</li>
+      <li>Hyperthermia</li>
+      <li class="ans">Increased respiratory depression from opioids</li>
+      <li>Increased sensitivity to neuromuscular blocking drugs</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>D.</strong> Acute alcohol lowers MAC and adds to the effect of opioids and other sedatives. B and C are backwards: the risks are hypoglycemia and hypothermia. <em>Talk link: the MAC grid and the Alcohol tab.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q2 · Advanced · ANESHUB general</p>
+    <p class="qstem">Patients with acute alcohol intoxication are at increased risk for each of the following complications of general anesthesia EXCEPT:</p>
+    <ol class="opts" type="A">
+      <li>aspiration of gastric contents</li>
+      <li class="ans">hyperglycemia</li>
+      <li>hypothermia</li>
+      <li>ketoacidosis</li>
+      <li>respiratory depression</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>B.</strong> Alcohol impairs gluconeogenesis, so the risk is hypoglycemia. The trap is D: alcoholic ketoacidosis is real in a patient who has been drinking and not eating. <em>Talk link: Alcohol tab.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q3 · Basic · ANESHUB pharm</p>
+    <p class="qstem">A 24-year-old woman needs emergency repair of open tibia and fibula fractures. She used cocaine two hours ago. BP is 170/110. Each of the following is useful in managing the hypertension EXCEPT:</p>
+    <ol class="opts" type="A">
+      <li>hydralazine</li>
+      <li>labetalol</li>
+      <li>nitroprusside</li>
+      <li>phentolamine</li>
+      <li class="ans">propranolol</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>E.</strong> A pure beta-blocker leaves alpha stimulation unopposed and can worsen coronary vasospasm (Lange 1990). Note the key accepts labetalol, which has some alpha blockade. That's a good lead-in to the 2018 meta-analyses. <em>Talk link: Cocaine tab, the beta-blocker debate.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q4 · Clinical · PassMachine · cardiovascular</p>
+    <p class="qstem">A 25-year-old man comes to the ED with chest pain and palpitations after a party last night. Positive Levine's sign, alert and not agitated. BP 141/91, HR 109, RR 22, venous track marks. ECG shows minimal ST deviation in V1–V6; troponin T &lt;0.03, CK-MB 5.3. Which medication should be the first choice?</p>
+    <ol class="opts" type="A">
+      <li>Metoprolol</li>
+      <li class="ans">Diazepam</li>
+      <li>Nitroglycerin</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>B.</strong> Benzodiazepines come first in cocaine-associated chest pain. They reduce the central sympathetic drive behind the hypertension, tachycardia and vasospasm. Nitroglycerin is next. <em>Talk link: Cocaine tab.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q5 · Advanced · ANESHUB OB</p>
+    <p class="qstem">In pregnant patients, which of the following is an effect of the long-term use of cocaine?</p>
+    <ol class="opts" type="A">
+      <li>Decreased uterine tone</li>
+      <li>Decreased thiopental requirement</li>
+      <li class="ans">Increased isoflurane MAC</li>
+      <li>Increased sensitivity to ephedrine</li>
+      <li>Lower than expected level of block with tetracaine spinal analgesia</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>C</strong> per the answer key. This is an older bank item, and it conflicts with the grid on the first tab, where chronic stimulant use lowers MAC through catecholamine depletion. Ask the learner to argue it both ways. A patient with repeated recent use is effectively acutely intoxicated, which raises MAC. <em>Talk link: The one idea.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Backup · Basic · ANESHUB respiratory / critical care</p>
+    <p class="qstem">A previously healthy 28-year-old man arrives with a probable opioid overdose. On room air: PaO<sub>2</sub> 49, PaCO<sub>2</sub> 76, pH 7.12. Which statement is true?</p>
+    <ol class="opts" type="A">
+      <li>Aspiration of gastric contents must have occurred</li>
+      <li class="ans">Hypoventilation alone can explain the acidosis and hypoxemia</li>
+      <li>The hypoxemia is probably due to noncardiogenic pulmonary edema</li>
+      <li>Naloxone should be administered only if the patient is normothermic</li>
+      <li>Pure oxygen is contraindicated</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>B.</strong> Work the alveolar gas equation at sea level: PAO<sub>2</sub> ≈ 150 − 76/0.8 ≈ 55, so a PaO<sub>2</sub> of 49 means a near-normal A–a gradient. The CO<sub>2</sub> explains the hypoxemia. (In Denver, PAO<sub>2</sub> is lower still.) <em>Talk link: Opioids tab.</em></p>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Built for OR teaching. Detection windows are typical ranges and vary with dose, how often the person uses, the assay and its cutoff. Confirm doses against your institution's protocols.</p>
+  <p>Key sources: Wolfson &amp; Freed, Anesth Analg 1980;59:826–30; Lange et al., Ann Intern Med 1990;112:897–903; McCord et al. (AHA), Circulation 2008;117:1897–907; Pham et al., Emerg Med J 2018;35:559–63; Lo et al., Am J Med 2019;132:505–9; Hill et al., Br J Anaesth 2006;97:654–7; Moon et al., J Clin Anesth 2019;55:146–50 and Anesth Analg 2021;132:308–16; Cardozo-Panoff et al., J Clin Anesth 2025;108:112036; Johnston et al., Anesthesiology 1972;36:357–63; Safdari et al., Anesthesiol Res Pract 2022:7542311; Edwards et al., Trauma Surg Acute Care Open 2020;5:e000553; Rizk et al., J Burn Care Res 2024;45:17–24; Flisberg et al., Eur J Anaesthesiol 2009;26:192–5; Shah et al. (ASRA), Reg Anesth Pain Med 2023;48:97–117; Moeller et al., Mayo Clin Proc 2017;92:774–96.</p>
+  <p>Board questions from the anes qvault folder (ANESHUB and PassMachine exports).</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function select(tab){
+    tabs.forEach(function(t){var on=t===tab;t.setAttribute('aria-selected',on?'true':'false');document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    tab.scrollIntoView({block:'nearest',inline:'nearest'});
+    try{localStorage.setItem('intox-tab',tab.id)}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t)});
+    t.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();var n=tabs[(i+d+tabs.length)%tabs.length];n.focus();select(n);});
+  });
+  try{var s=localStorage.getItem('intox-tab');if(s&&document.getElementById(s))select(document.getElementById(s));}catch(e){}
+
+  var $=function(id){return document.getElementById(id)};
+  var LO=Math.log(0.5),HI=Math.log(720);
+  function x(h){return ((Math.log(Math.max(h,0.5))-LO)/(HI-LO))*100;}
+  var drugs=[
+    {n:'Alcohol',a:12,u:12,x:80,an:'ethanol',xn:'EtG/EtS'},
+    {n:'Cocaine',a:6,u:96,x:336,an:'benzoylecgonine'},
+    {n:'Meth / amphet.',a:24,u:96,x:0,tail:168},
+    {n:'Cannabis',a:4,u:72,x:720,an:'THC-COOH'},
+    {n:'Heroin / fentanyl',a:6,u:72,x:0}
+  ];
+  var chart=$('chart'),html='';
+  drugs.forEach(function(d){
+    html+='<div class="row"><div class="rname">'+d.n+'</div><div class="track">';
+    if(d.x)html+='<div class="bar x" style="left:'+x(d.u)+'%;width:'+(x(d.x)-x(d.u))+'%"></div>';
+    html+='<div class="bar u" style="left:0;width:'+x(d.u)+'%"></div>';
+    html+='<div class="bar a" style="left:0;width:'+x(d.a)+'%"></div></div></div>';
+  });
+  chart.innerHTML=html;
+  var ticks=[[1,'1 h'],[6,'6 h'],[24,'1 d'],[96,'4 d'],[720,'30 d']],ax='';
+  ticks.forEach(function(t,i){ax+='<span class="tick" style="left:'+x(t[0])+'%'+(i===ticks.length-1?';transform:translateX(-100%)':'')+'">'+t[1]+'</span>';});
+  $('axis').innerHTML=ax;
+
+  var stops=[0.5,1,2,4,6,12,24,48,72,120,168,336,720];
+  function fmt(h){if(h<1)return '30 min';if(h<48)return h+' h';var d=h/24;return (d===7?'1 wk':d===14?'2 wk':d===30?'30 d':d+' d');}
+  function update(){
+    var h=stops[+$('t').value];
+    $('tV').textContent=(h<1?'0.5':h)+' h';$('tOut').textContent=fmt(h);
+    $('cursor').style.left=x(h)+'%';
+    var act=[],uds=[],chr=[],neg=[];
+    drugs.forEach(function(d){
+      if(h<=d.a)act.push(d.n);
+      else if(h<=d.u)uds.push(d.n);
+      else if(d.x&&h<=d.x)chr.push(d.n);
+      else neg.push(d.n);
+    });
+    var m='';
+    if(act.length)m+='<span class="v-a"><b>Likely still acting:</b> '+act.join(', ')+'.</span> ';
+    if(uds.length)m+='<span class="v-u"><b>Screen positive, drug likely gone:</b> '+uds.join(', ')+'.</span> ';
+    if(chr.length)m+='<span class="v-u"><b>Positive only with heavy use (or EtG for alcohol):</b> '+chr.join(', ')+'.</span> ';
+    if(neg.length&&h>6)m+='<span class="v-n"><b>Usually negative:</b> '+neg.join(', ')+'.</span> ';
+    if(h>24&&h<=168)m+='<span class="v-w">Methamphetamine: hemodynamic instability has been reported up to 7 days after use (Safdari 2022).</span>';
+    $('verdict').innerHTML=m;
+  }
+  $('t').addEventListener('input',update);update();
+})();
+</script>
+
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body></html>

@@ -1,0 +1,496 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Stress Dose Steroids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: sticky tab rail over a single reading column; drawings sit full-width in bordered "whiteboard" panels */
+:root{
+  --bg:#f5f7f8; --panel:#ffffff; --ink:#17232b; --muted:#566872; --line:#d3dde2;
+  --accent:#0e6e7a; --accent-soft:#dcefef; --warn:#b4531a; --warn-soft:#fbe9dc; --bad:#a3293b; --bad-soft:#f7e1e4; --good:#2f7a3f; --good-soft:#e2f1e4;
+  --chalk:#eef3f4;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f171b; --panel:#162228; --ink:#e3ecef; --muted:#93a7b0; --line:#2b3b43;
+  --accent:#5cc3cc; --accent-soft:#16363b; --warn:#f0a066; --warn-soft:#3a2617; --bad:#f08a98; --bad-soft:#3b1d23; --good:#7fcf8c; --good-soft:#1b3322; --chalk:#1b2a31; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f171b; --panel:#162228; --ink:#e3ecef; --muted:#93a7b0; --line:#2b3b43;
+  --accent:#5cc3cc; --accent-soft:#16363b; --warn:#f0a066; --warn-soft:#3a2617; --bad:#f08a98; --bad-soft:#3b1d23; --good:#7fcf8c; --good-soft:#1b3322; --chalk:#1b2a31; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:20px 64px}
+header.top{display:grid;gap:6px;padding-block:8px 14px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--f-display);font-weight:750;font-size:clamp(28px,6vw,42px);line-height:1.05;margin:0;text-wrap:balance}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:thin}
+nav.tabs button{font:600 14px var(--f-body);background:none;border:1px solid transparent;color:var(--muted);padding:7px 11px;border-radius:999px;white-space:nowrap;cursor:pointer}
+nav.tabs button:hover{color:var(--ink);border-color:var(--line)}
+nav.tabs button[aria-selected="true"]{background:var(--accent);color:var(--panel)}
+nav.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section.tab{padding-top:22px;display:grid;gap:18px}
+h2{font-family:var(--f-display);font-weight:750;font-size:26px;line-height:1.15;margin:0;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:600;font-size:19px;margin:6px 0 0;text-wrap:balance}
+p{margin:0;max-width:68ch}
+ul,ol{margin:0;padding-left:1.25em;display:grid;gap:5px;max-width:68ch}
+.board{background:var(--chalk);border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto}
+.board svg{display:block;width:100%;height:auto;min-width:520px}
+.board figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.say{border-left:3px solid var(--accent);padding:4px 0 4px 14px;font-size:17px;max-width:66ch}
+.say b{color:var(--accent)}
+.note{background:var(--warn-soft);border-radius:8px;padding:12px 14px;max-width:72ch}
+.note.bad{background:var(--bad-soft)}
+.note.good{background:var(--good-soft)}
+.note strong:first-child{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:560px}
+th,td{text-align:left;vertical-align:top;padding:9px 11px;border-bottom:1px solid var(--line)}
+th{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--chalk)}
+tr:last-child td{border-bottom:none}
+td.num,.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:13.5px}
+.timeline{display:grid;gap:0;border-left:2px solid var(--line);margin-left:6px}
+.ev{display:grid;grid-template-columns:62px 1fr;gap:12px;padding:8px 0 12px 14px;position:relative}
+.ev::before{content:"";position:absolute;left:-7px;top:13px;width:12px;height:12px;border-radius:50%;background:var(--panel);border:2px solid var(--accent)}
+.ev.turn::before{background:var(--accent)}
+.ev .yr{font-family:var(--f-mono);font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.ev .tx{min-width:0}
+.ev .tx b{display:block}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:8px;align-content:start;min-width:0}
+.card h3{margin:0}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
+.tag.w{background:var(--warn-soft);color:var(--warn)}.tag.b{background:var(--bad-soft);color:var(--bad)}.tag.g{background:var(--good-soft);color:var(--good)}
+details.q{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+details.q summary{cursor:pointer;font-weight:700;list-style:none}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:" Show answer";font:600 12px var(--f-mono);color:var(--accent);letter-spacing:.04em}
+details.q[open] summary::after{content:" Hide"}
+details.q .opts{margin:8px 0;display:grid;gap:3px}
+details.q .ans{border-top:1px dashed var(--line);padding-top:8px;margin-top:6px;display:grid;gap:6px}
+.src li{font-size:14px}
+a{color:var(--accent)}
+.svg-ink{stroke:var(--ink);fill:none}
+.svg-txt{fill:var(--ink);font-family:var(--f-body);font-size:13px}
+.svg-mut{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
+.svg-acc{stroke:var(--accent);fill:none}
+.svg-warn{stroke:var(--warn);fill:none}
+.svg-bad{stroke:var(--bad);fill:none}
+@media (prefers-reduced-motion:no-preference){section.tab{animation:in .18s ease-out}@keyframes in{from{opacity:.4;transform:translateY(3px)}to{opacity:1;transform:none}}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">OR chalk talk · Anesthesia &amp; Pharmacology · MS3 → CA-3</div>
+  <h1>Stress dose steroids: where the 100 mg came from, and what the data actually say</h1>
+  <p class="lede">A dogma built on two case reports in the 1950s, tested in the 1990s and 2010s, and slowly rewritten. Tabs follow the order you'd teach it at the head of the bed.</p>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Talk sections">
+  <button role="tab" id="t-origin" aria-controls="origin" aria-selected="true">1 · Origin</button>
+  <button role="tab" id="t-phys" aria-controls="phys" aria-selected="false">2 · Physiology &amp; dosing</button>
+  <button role="tab" id="t-hypo" aria-controls="hypo" aria-selected="false">3 · Refractory hypotension</button>
+  <button role="tab" id="t-periop" aria-controls="periop" aria-selected="false">4 · Periop &amp; trauma</button>
+  <button role="tab" id="t-who" aria-controls="who" aria-selected="false">5 · Chronic steroids vs true AI</button>
+  <button role="tab" id="t-draw" aria-controls="draw" aria-selected="false">Whiteboard</button>
+  <button role="tab" id="t-board" aria-controls="board" aria-selected="false">Board questions</button>
+  <button role="tab" id="t-src" aria-controls="src" aria-selected="false">Sources</button>
+</nav>
+
+<!-- ============ 1 ORIGIN ============ -->
+<section class="tab" id="origin" role="tabpanel" aria-labelledby="t-origin">
+  <h2>Two deaths, one dose, sixty years of habit</h2>
+  <p class="say">"Every stress dose order you've ever seen traces back to <b>two case reports</b>. The dose was a guess. The guess was reasonable. Then nobody tested it for thirty years."</p>
+
+  <div class="timeline">
+    <div class="ev turn"><div class="yr">1949</div><div class="tx"><b>Cortisone arrives</b>Hench and Kendall treat rheumatoid arthritis with cortisone (Nobel 1950). Suddenly lots of people are on chronic supraphysiologic glucocorticoids, and nobody yet knows what that does to their adrenals.</div></div>
+    <div class="ev turn"><div class="yr">1952</div><div class="tx"><b>Fraser, Preuss &amp; Bigford (JAMA)</b>A 34-year-old man with RA on cortisone has it stopped 2 days before hip surgery. He becomes hypotensive intraop, never recovers, and dies hours later. Autopsy: bilaterally atrophic adrenals. First described perioperative adrenal crisis from exogenous steroids.</div></div>
+    <div class="ev turn"><div class="yr">1953</div><div class="tx"><b>Lewis et al. (Ann Intern Med)</b>A second, similar death: a patient on continuous cortisone, collapsed after surgery, adrenal atrophy at autopsy. Two cases are enough to change practice worldwide.</div></div>
+    <div class="ev"><div class="yr">1950s–80s</div><div class="tx"><b>The empiric era</b>Practice settles on roughly 200–300 mg/day of hydrocortisone, typically 100 mg IV q8h, for anyone who has "been on steroids." The number is chosen to match the maximum cortisol a healthy adrenal can make under extreme stress. It's a ceiling, given as a default.</div></div>
+    <div class="ev turn"><div class="yr">1986</div><div class="tx"><b>Udelsman et al. (J Clin Invest), the primate study</b>Adrenalectomized monkeys get 1/10×, 1×, or 10× normal cortisol replacement, then cholecystectomy. The 1/10× group is hypotensive with low SVR and contractility, and dies more often. <i>Physiologic replacement was indistinguishable from supraphysiologic.</i> Cortisol is necessary, but more than normal doesn't help.</div></div>
+    <div class="ev"><div class="yr">1994</div><div class="tx"><b>Salem et al. (Ann Surg)</b>Review proposes matching the dose to the size of the operation: ~25 mg minor, 50–75 mg moderate, 100–150 mg major, for 1–3 days. The tiered scheme most of us were taught.</div></div>
+    <div class="ev"><div class="yr">1997</div><div class="tx"><b>Glowniak &amp; Loriaux (Surgery)</b>Small double-blind RCT in patients on chronic steroids who took their usual dose: saline vs stress dose. No difference in hemodynamics.</div></div>
+    <div class="ev"><div class="yr">2008</div><div class="tx"><b>Marik &amp; Varon (Arch Surg)</b>Systematic review: patients who keep taking their usual daily dose don't appear to need supplemental stress dosing for surgery. Patients with primary HPA disease still do.</div></div>
+    <div class="ev turn"><div class="yr">2014</div><div class="tx"><b>Zaghiyan et al. (Ann Surg), RCT, n=92</b>Steroid-treated IBD patients having major colorectal surgery. HC 100 mg q8h vs IV equivalent of their usual dose. No postural hypotension on POD1 in 95% vs 96%: low dose was non-inferior.</div></div>
+    <div class="ev"><div class="yr">2017</div><div class="tx"><b>Liu, Reidy, Saatee &amp; Collard (Anesthesiology)</b>Risk-stratified approach: who is suppressed, who isn't, and graded supplementation for those in the middle. Most US anesthesia references now follow this.</div></div>
+    <div class="ev"><div class="yr">2020</div><div class="tx"><b>AAGBI / RCP / Society for Endocrinology (UK)</b>Keeps stress dosing for anyone with AI, including ≥5 mg prednisolone for ≥4 weeks: HC 100 mg at induction, then 200 mg/24 h for major surgery.</div></div>
+    <div class="ev"><div class="yr">2022</div><div class="tx"><b>ACR / AAHKS (arthroplasty)</b>For RA, SpA, SLE patients having hip or knee replacement: give the current daily dose, not a supraphysiologic stress dose.</div></div>
+    <div class="ev"><div class="yr">2024</div><div class="tx"><b>ESE / Endocrine Society joint guideline on glucocorticoid-induced AI</b>Anything above ~15–25 mg hydrocortisone/day equivalent (prednisone 4–6 mg) can suppress the axis. Untested current or recent users should get stress coverage when stressed.</div></div>
+  </div>
+
+  <div class="note"><strong>The tension to name out loud</strong>Endocrine and anesthesia guidelines still say "cover them." Rheumatology and the surgical RCTs say "usual dose is enough." Both are defensible. The difference is mostly about how much harm one hydrocortisone dose does (very little) versus how bad a missed adrenal crisis is (lethal).</div>
+</section>
+
+<!-- ============ 2 PHYSIOLOGY & DOSING ============ -->
+<section class="tab" id="phys" role="tabpanel" aria-labelledby="t-phys" hidden>
+  <h2>What cortisol does, and how much a stressed body makes</h2>
+  <p class="say">"Cortisol isn't a pressor. It's <b>permissive</b>. It's the reason your phenylephrine works."</p>
+
+  <figure class="board">
+    <svg viewBox="0 0 640 300" role="img" aria-label="HPA axis diagram with negative feedback and exogenous steroid suppression">
+      <rect x="40" y="20" width="170" height="48" rx="8" class="svg-ink" stroke-width="1.6"/>
+      <text x="125" y="40" text-anchor="middle" class="svg-txt" font-weight="700">Hypothalamus</text>
+      <text x="125" y="58" text-anchor="middle" class="svg-mut">CRH</text>
+      <rect x="40" y="118" width="170" height="48" rx="8" class="svg-ink" stroke-width="1.6"/>
+      <text x="125" y="138" text-anchor="middle" class="svg-txt" font-weight="700">Anterior pituitary</text>
+      <text x="125" y="156" text-anchor="middle" class="svg-mut">ACTH</text>
+      <rect x="40" y="216" width="170" height="58" rx="8" class="svg-ink" stroke-width="1.6"/>
+      <text x="125" y="236" text-anchor="middle" class="svg-txt" font-weight="700">Adrenal cortex</text>
+      <text x="125" y="252" text-anchor="middle" class="svg-mut">fasciculata → cortisol</text>
+      <text x="125" y="266" text-anchor="middle" class="svg-mut">glomerulosa → aldosterone</text>
+      <line x1="125" y1="68" x2="125" y2="112" class="svg-ink" stroke-width="1.6" marker-end="url(#ar)"/>
+      <line x1="125" y1="166" x2="125" y2="210" class="svg-ink" stroke-width="1.6" marker-end="url(#ar)"/>
+      <path d="M210 240 C 300 240, 300 50, 216 44" class="svg-acc" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arA)"/>
+      <path d="M210 250 C 270 250, 270 145, 216 142" class="svg-acc" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arA)"/>
+      <text x="290" y="150" class="svg-mut" fill="var(--accent)">− feedback</text>
+      <rect x="380" y="62" width="220" height="62" rx="8" class="svg-bad" stroke-width="1.8"/>
+      <text x="490" y="86" text-anchor="middle" class="svg-txt" font-weight="700">Exogenous steroid</text>
+      <text x="490" y="104" text-anchor="middle" class="svg-mut">pred · dex · MP · inhaled · joint inj.</text>
+      <path d="M380 92 L 222 52" class="svg-bad" stroke-width="2" marker-end="url(#arB)"/>
+      <path d="M380 100 L 222 136" class="svg-bad" stroke-width="2" marker-end="url(#arB)"/>
+      <text x="400" y="176" class="svg-txt">No CRH/ACTH for weeks →</text>
+      <text x="400" y="194" class="svg-txt">fasciculata atrophies</text>
+      <text x="400" y="222" class="svg-mut">Aldosterone runs on renin/K⁺,</text>
+      <text x="400" y="238" class="svg-mut">so it's spared in secondary/</text>
+      <text x="400" y="254" class="svg-mut">tertiary AI</text>
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker>
+        <marker id="arA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--accent)"/></marker>
+        <marker id="arB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--bad)"/></marker>
+      </defs>
+    </svg>
+    <figcaption>Drawing 1. The HPA axis. Exogenous glucocorticoid sits on the feedback loop; the adrenal gland itself is fine, it's just been unemployed.</figcaption>
+  </figure>
+
+  <h3>What cortisol does for blood pressure</h3>
+  <ul>
+    <li>Keeps α₁ and β receptors expressed and coupled, so catecholamines work.</li>
+    <li>Supports catecholamine synthesis (adrenal medulla PNMT needs high local cortisol).</li>
+    <li>Suppresses inducible NO synthase and vasodilatory prostaglandins.</li>
+    <li>Maintains cardiac contractility and capillary integrity.</li>
+  </ul>
+  <p>Take it away and you get the Udelsman monkeys: low SVR, low contractility, and pressors that don't seem to do anything. That's adrenal crisis.</p>
+
+  <figure class="board">
+    <svg viewBox="0 0 640 280" role="img" aria-label="Cortisol output over time with minor and major surgery">
+      <line x1="60" y1="235" x2="615" y2="235" class="svg-ink" stroke-width="1.4"/>
+      <line x1="60" y1="235" x2="60" y2="25" class="svg-ink" stroke-width="1.4"/>
+      <text x="22" y="130" class="svg-mut" transform="rotate(-90 22 130)" text-anchor="middle">cortisol output</text>
+      <!-- x: -6h at 60, 0 at 120, 24h at 290, 48h at 450, 72h at 610 ; ~6.67px/h -->
+      <g class="svg-mut" text-anchor="middle">
+        <text x="120" y="252">incision</text><text x="290" y="252">24 h</text><text x="450" y="252">48 h</text><text x="605" y="252">72 h</text>
+      </g>
+      <g stroke="var(--line)" stroke-width="1"><line x1="120" y1="40" x2="120" y2="235"/><line x1="290" y1="40" x2="290" y2="235"/><line x1="450" y1="40" x2="450" y2="235"/></g>
+      <line x1="60" y1="205" x2="615" y2="205" stroke="var(--muted)" stroke-dasharray="3 5"/>
+      <text x="612" y="198" text-anchor="end" class="svg-mut">baseline ≈ 10 mg/day</text>
+      <path d="M60 205 L120 205 C 140 150, 155 145, 170 150 C 200 165, 240 200, 290 205 L615 205" class="svg-warn" stroke-width="2.4"/>
+      <path d="M60 205 L120 205 C 145 90, 165 55, 185 60 C 230 75, 290 130, 360 175 C 420 200, 470 205, 615 205" class="svg-acc" stroke-width="2.8"/>
+      <circle cx="183" cy="59" r="4" fill="var(--accent)"/>
+      <text x="196" y="52" class="svg-txt">peak at emergence / first post-op hours</text>
+      <text x="300" y="120" class="svg-txt" fill="var(--accent)">major surgery: ~75–150 mg first 24 h,</text>
+      <text x="300" y="137" class="svg-txt" fill="var(--accent)">rarely &gt;200; baseline by 48–72 h</text>
+      <text x="196" y="184" class="svg-txt" fill="var(--warn)">minor: &lt;50 mg, back to baseline &lt;24 h</text>
+    </svg>
+    <figcaption>Drawing 2. Shape, not exact scale. A normal adrenal makes about 5–10 mg/m²/day at rest. Even a big operation rarely pushes output past 200 mg/day, which is why 300 mg/day was always more than anyone makes.</figcaption>
+  </figure>
+
+  <h3>Equivalency: the table you'll use weekly</h3>
+  <div class="tbl"><table>
+    <tr><th>Drug</th><th>Equiv. dose</th><th>Glucocorticoid potency</th><th>Mineralocorticoid</th><th>Biologic t½</th></tr>
+    <tr><td>Hydrocortisone</td><td class="num">20 mg</td><td class="num">1</td><td class="num">1</td><td class="num">8–12 h</td></tr>
+    <tr><td>Prednisone / prednisolone</td><td class="num">5 mg</td><td class="num">4</td><td class="num">0.8</td><td class="num">12–36 h</td></tr>
+    <tr><td>Methylprednisolone</td><td class="num">4 mg</td><td class="num">5</td><td class="num">0.5</td><td class="num">12–36 h</td></tr>
+    <tr><td>Dexamethasone</td><td class="num">0.75 mg</td><td class="num">25–30</td><td class="num">0</td><td class="num">36–72 h</td></tr>
+    <tr><td>Fludrocortisone</td><td class="num">—</td><td class="num">10</td><td class="num">125–150</td><td class="num">12–36 h</td></tr>
+  </table></div>
+  <div class="note good"><strong>Pearl</strong>Hydrocortisone ≥50 mg/day saturates renal 11β-HSD2, so it acts as a full mineralocorticoid. That's why primary AI patients on stress-dose HC don't need fludrocortisone until the dose comes back down. The 8 mg of PONV dexamethasone we give at induction has zero mineralocorticoid effect but is roughly 200 mg of hydrocortisone in glucocorticoid terms, with a 36–72 h biologic half-life. Many 'unsupplemented' patients in practice were quietly stress dosed by the PONV prophylaxis.</div>
+
+  <h3>Dosing schemes side by side</h3>
+  <div class="tbl"><table>
+    <tr><th>Surgical stress</th><th>Examples</th><th>Liu et al. 2017 (US anesthesia)</th><th>AAGBI / SfE 2020 (UK)</th></tr>
+    <tr><td><span class="tag g">Minor</span></td><td>Hernia, hand, cysto, cataract, colonoscopy</td><td>Usual AM dose. No extra.</td><td>HC 100 mg IV at induction, then double usual oral dose for 24–48 h</td></tr>
+    <tr><td><span class="tag w">Moderate</span></td><td>Lap chole, open hernia, hysterectomy, joint replacement</td><td>Usual dose + HC 50 mg IV before incision, then 25 mg q8h × 24 h, then usual</td><td>HC 100 mg at induction, then 200 mg/24 h while NPO; double oral dose for 48 h</td></tr>
+    <tr><td><span class="tag b">Major</span></td><td>Esophagectomy, Whipple, cardiac on CPB, major trauma</td><td>Usual dose + HC 100 mg IV before incision, then 50 mg q8h × 24 h, halve daily to usual</td><td>HC 100 mg at induction, then 200 mg/24 h infusion (or 50 mg q6h) until eating; double oral dose up to a week</td></tr>
+  </table></div>
+  <p>Common ground in every scheme: <b>never skip the usual daily dose</b>. The single most common cause of perioperative adrenal crisis is the home steroid that got held for NPO and never restarted.</p>
+</section>
+
+<!-- ============ 3 REFRACTORY HYPOTENSION ============ -->
+<section class="tab" id="hypo" role="tabpanel" aria-labelledby="t-hypo" hidden>
+  <h2>Refractory hypotension: floor vs ICU</h2>
+  <p class="say">"On the floor, steroids are for the patient whose adrenals <b>can't</b> answer. In the ICU, they're for the patient whose body <b>won't</b> listen to the answer."</p>
+
+  <figure class="board">
+    <svg viewBox="0 0 660 300" role="img" aria-label="Floor versus ICU decision paths for steroids in refractory hypotension">
+      <rect x="225" y="12" width="210" height="44" rx="8" class="svg-ink" stroke-width="1.6"/>
+      <text x="330" y="31" text-anchor="middle" class="svg-txt" font-weight="700">Hypotension not</text>
+      <text x="330" y="48" text-anchor="middle" class="svg-txt" font-weight="700">responding to fluids</text>
+      <path d="M260 56 L150 92" class="svg-ink" stroke-width="1.6" marker-end="url(#ar2)"/>
+      <path d="M400 56 L510 92" class="svg-ink" stroke-width="1.6" marker-end="url(#ar2)"/>
+      <rect x="20" y="96" width="270" height="190" rx="10" class="svg-warn" stroke-width="1.8"/>
+      <text x="155" y="120" text-anchor="middle" class="svg-txt" font-weight="700" fill="var(--warn)">FLOOR / PACU</text>
+      <text x="36" y="146" class="svg-txt">Q: Has this person been on steroids?</text>
+      <text x="36" y="166" class="svg-mut">pred, inhaled high-dose, joint inj, Addison's,</text>
+      <text x="36" y="181" class="svg-mut">pituitary surgery, "held for NPO"</text>
+      <text x="36" y="206" class="svg-txt">Yes → draw cortisol (+ACTH),</text>
+      <text x="36" y="224" class="svg-txt">give HC 100 mg IV now</text>
+      <text x="36" y="248" class="svg-mut">Look for: ↓Na, ↑K (primary), ↓glucose,</text>
+      <text x="36" y="263" class="svg-mut">abd pain, fever, confusion</text>
+      <rect x="370" y="96" width="270" height="190" rx="10" class="svg-acc" stroke-width="1.8"/>
+      <text x="505" y="120" text-anchor="middle" class="svg-txt" font-weight="700" fill="var(--accent)">ICU</text>
+      <text x="386" y="146" class="svg-txt">Q: Is this vasopressor-dependent</text>
+      <text x="386" y="164" class="svg-txt">septic shock?</text>
+      <text x="386" y="190" class="svg-txt">NE ≥ 0.25 mcg/kg/min ≥ 4 h →</text>
+      <text x="386" y="208" class="svg-txt">HC 200 mg/day ± fludro 50 mcg</text>
+      <text x="386" y="234" class="svg-mut">No ACTH stim needed to start.</text>
+      <text x="386" y="249" class="svg-mut">Expect faster shock reversal;</text>
+      <text x="386" y="264" class="svg-mut">mortality benefit is inconsistent.</text>
+      <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>
+    </svg>
+    <figcaption>Drawing 3. Two different questions. The floor question is about replacement; the ICU question is about pharmacologic modulation of shock.</figcaption>
+  </figure>
+
+  <div class="two">
+    <div class="card">
+      <span class="tag w">Floor / PACU</span>
+      <h3>Replacement for a broken axis</h3>
+      <p><b>Classic page:</b> POD1, home prednisone 10 mg held because NPO, now 78/40 after 2 L, confused, Na 129.</p>
+      <ol>
+        <li>Rule out the common things first and simultaneously: bleeding, sepsis, ischemia, PE, epidural, opioid excess.</li>
+        <li>If there's any steroid exposure: draw a random cortisol (and ACTH if possible), then <b>don't wait for it</b>. HC 100 mg IV/IM now.</li>
+        <li>Then 50 mg q6h or 200 mg/24 h infusion, plus isotonic fluid with dextrose.</li>
+        <li>Response usually within hours. Taper back to maintenance over 1–3 days once the trigger resolves.</li>
+      </ol>
+      <p class="mono">Any random cortisol &lt;~15–18 µg/dL in a shocked patient is inappropriately low.</p>
+      <p>If you want to do a cosyntropin test later, dexamethasone 4 mg doesn't cross-react with the cortisol assay, but it has no mineralocorticoid effect. In known primary AI, use hydrocortisone.</p>
+    </div>
+    <div class="card">
+      <span class="tag">ICU</span>
+      <h3>Modulating septic and other shock</h3>
+      <div class="tbl"><table style="min-width:420px">
+        <tr><th>Trial</th><th>Regimen</th><th>Mortality</th><th>Shock reversal</th></tr>
+        <tr><td>Annane 2002 (JAMA), n=300</td><td>HC 50 q6 + fludro × 7 d</td><td class="num">↓ in ACTH non-responders</td><td>Faster</td></tr>
+        <tr><td>CORTICUS 2008 (NEJM), n=499</td><td>HC 50 q6, no fludro</td><td class="num">No difference</td><td>Faster; more superinfection</td></tr>
+        <tr><td>ADRENAL 2018 (NEJM), n=3,800</td><td>HC 200 mg/24 h infusion</td><td class="num">27.9 vs 28.8% (NS)</td><td>Faster, fewer transfusions</td></tr>
+        <tr><td>APROCCHSS 2018 (NEJM), n=1,241</td><td>HC 50 q6 + fludro 50 mcg</td><td class="num">43.0 vs 49.1% ↓</td><td>Faster</td></tr>
+      </table></div>
+      <p><b>Surviving Sepsis 2021:</b> suggests IV hydrocortisone 200 mg/day for adults with septic shock and an ongoing vasopressor requirement (commonly NE ≥0.25 mcg/kg/min for ≥4 h). Weak recommendation.</p>
+      <p><b>CIRCI</b> (2017 SCCM/ESICM): random total cortisol &lt;10 µg/dL or rise &lt;9 µg/dL after 250 mcg cosyntropin. Total cortisol is unreliable when albumin is low, so most intensivists treat the clinical picture.</p>
+      <p><b>Non-septic vasoplegia:</b> weak data. Prophylactic steroids in cardiac surgery (DECS, SIRS trials) didn't improve outcomes.</p>
+    </div>
+  </div>
+
+  <div class="note"><strong>Intraop version</strong>Chronic steroid user, unexplained hypotension that isn't answering phenylephrine or vasopressin. Run the usual list (depth, volume, bleeding, anaphylaxis, tension, tamponade, auto-PEEP). Then HC 100 mg IV is a cheap, low-harm move. It's rarely the answer, but it's the one you'll regret not trying.</div>
+</section>
+
+<!-- ============ 4 PERIOP & TRAUMA ============ -->
+<section class="tab" id="periop" role="tabpanel" aria-labelledby="t-periop" hidden>
+  <h2>The perioperative period and trauma</h2>
+
+  <h3>Elective surgery: what the RCTs did and didn't show</h3>
+  <ul>
+    <li>Every positive-sounding RCT (Glowniak 1997, Zaghiyan 2014, and similar small trials) enrolled patients who <b>kept taking their usual dose</b>. They show that continuing baseline is enough for most chronically treated patients. They don't show that zero steroid is safe.</li>
+    <li>The trials are small (dozens to ~100 patients) and adrenal crisis is rare, so none is powered to rule out a rare catastrophe. That's why guidelines still diverge.</li>
+    <li>Harms of a short stress course are modest: hyperglycemia, possibly wound and infection risk with longer courses, delirium in the elderly. Infection risk is the main reason ACR/AAHKS moved away from stress dosing in arthroplasty.</li>
+  </ul>
+  <p class="say">"The question isn't 'stress dose or nothing.' It's '<b>usual dose</b>, or usual dose <b>plus a little</b>.' Everybody agrees on the usual dose."</p>
+
+  <h3>Trauma</h3>
+  <p>Trauma brings three separate steroid questions. Keep them apart, because the evidence points in different directions.</p>
+
+  <div class="two">
+    <div class="card">
+      <span class="tag b">Don't</span>
+      <h3>High-dose steroids for neuroprotection</h3>
+      <p><b>CRASH (Lancet 2004),</b> ~10,000 patients with TBI: 48 h of high-dose methylprednisolone <b>increased</b> 2-week mortality (21.1% vs 17.9%). Steroids for TBI are contraindicated.</p>
+      <p><b>Spinal cord injury (NASCIS II/III methylprednisolone):</b> benefits were in post-hoc subgroups; infections and GI bleeding were real. AANS/CNS 2013 recommends against routine use. Some 2017 AO Spine guidance left a 24 h option within 8 h of injury. Follow your trauma/neurosurgery team.</p>
+    </div>
+    <div class="card">
+      <span class="tag w">Maybe</span>
+      <h3>Low-dose HC for critical illness after trauma</h3>
+      <p><b>HYPOLYTE (JAMA 2011), n=149:</b> ventilated polytrauma patients. HC 200 mg/day × 5 d then taper reduced hospital-acquired pneumonia (35.6% vs 51.3%), added ~4 ventilator-free days, and reduced hyponatremia. No mortality difference.</p>
+      <p><b>Corti-TC (Lancet Respir Med 2014), n=336:</b> same idea plus fludro in severe TBI. HAP 45% vs 53%, not significant (HR 0.75). Underpowered.</p>
+      <p>Not standard of care. Consider in vasopressor-dependent shock that persists after hemorrhage control and adequate resuscitation.</p>
+    </div>
+    <div class="card">
+      <span class="tag g">Do</span>
+      <h3>The trauma patient on chronic steroids</h3>
+      <p>Unplanned surgery, often missed home doses, and maximal stress. Treat as major surgery: HC 100 mg IV early (at induction is fine), then 50 mg q6–8h or 200 mg/24 h.</p>
+      <p>Clues they're on steroids when nobody can tell you: medical alert bracelet, cushingoid habitus, transplant scar, COPD/asthma, inflammatory bowel or rheumatologic disease, outside med list.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Know it</span>
+      <h3>Etomidate in trauma</h3>
+      <p>Etomidate blocks 11β-hydroxylase. A single induction dose suppresses cortisol synthesis for roughly 24 h (reported up to 72 h).</p>
+      <p><b>RSI trial (NEJM 2025), n=2,365</b> critically ill adults: ketamine vs etomidate, 28-day in-hospital mortality 28.1% vs 29.1% (NS). More peri-intubation cardiovascular collapse with ketamine (22.1% vs 17.0%).</p>
+      <p>Practical read: one dose of etomidate is a defensible choice for the unstable patient. If that patient later has vasopressor-dependent shock, remember the adrenal is temporarily offline and lower your threshold for hydrocortisone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 WHO ============ -->
+<section class="tab" id="who" role="tabpanel" aria-labelledby="t-who" hidden>
+  <h2>Chronic steroid use vs true adrenal insufficiency</h2>
+  <p class="say">"There are two kinds of patients here: someone whose adrenal <b>is broken</b>, and someone whose adrenal <b>is asleep</b>. You always cover the first. You think about the second."</p>
+
+  <div class="tbl"><table>
+    <tr><th></th><th>Primary AI</th><th>Secondary / tertiary AI</th><th>Glucocorticoid-induced (suppressed)</th></tr>
+    <tr><td>Where it's broken</td><td>Adrenal gland (Addison's, adrenalectomy, hemorrhage, CAH)</td><td>Pituitary (ACTH) or hypothalamus (CRH)</td><td>Hypothalamus/pituitary, from exogenous steroid feedback</td></tr>
+    <tr><td>Cortisol</td><td>Absent</td><td>Low</td><td>Variable, unpredictable</td></tr>
+    <tr><td>Aldosterone</td><td><b>Absent</b> → ↑K, ↓Na, volume loss</td><td>Preserved</td><td>Preserved</td></tr>
+    <tr><td>Home meds</td><td>HC 15–25 mg/day + fludrocortisone</td><td>HC 15–25 mg/day</td><td>Whatever they take for their disease</td></tr>
+    <tr><td>Periop stress dose?</td><td><span class="tag b">Always</span></td><td><span class="tag b">Always</span></td><td><span class="tag w">Depends on dose, duration, testing</span></td></tr>
+    <tr><td>Fludrocortisone</td><td>Continue; can hold while HC ≥50 mg/day</td><td>Not needed</td><td>Not needed (ESE/ES recommends against)</td></tr>
+  </table></div>
+
+  <h3>Is the axis suppressed? A risk ladder</h3>
+  <figure class="board">
+    <svg viewBox="0 0 640 220" role="img" aria-label="Risk of HPA suppression by prednisone dose and duration">
+      <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="var(--good)"/><stop offset=".5" stop-color="var(--warn)"/><stop offset="1" stop-color="var(--bad)"/></linearGradient></defs>
+      <rect x="40" y="70" width="560" height="22" rx="11" fill="url(#g1)" opacity=".85"/>
+      <text x="40" y="58" class="svg-mut">prednisone-equivalent, daily, for ≥3 weeks →</text>
+      <g class="svg-mut" text-anchor="middle"><text x="110" y="112">&lt;5 mg</text><text x="320" y="112">5–20 mg</text><text x="535" y="112">&gt;20 mg</text></g>
+      <text x="110" y="142" text-anchor="middle" class="svg-txt" font-weight="700" fill="var(--good)">Unlikely</text>
+      <text x="110" y="160" text-anchor="middle" class="svg-mut">usual dose only</text>
+      <text x="110" y="175" text-anchor="middle" class="svg-mut">(also: any dose &lt;3 wk)</text>
+      <text x="320" y="142" text-anchor="middle" class="svg-txt" font-weight="700" fill="var(--warn)">Uncertain</text>
+      <text x="320" y="160" text-anchor="middle" class="svg-mut">test AM cortisol, or</text>
+      <text x="320" y="175" text-anchor="middle" class="svg-mut">cover empirically</text>
+      <text x="535" y="142" text-anchor="middle" class="svg-txt" font-weight="700" fill="var(--bad)">Assume suppressed</text>
+      <text x="535" y="160" text-anchor="middle" class="svg-mut">also: cushingoid</text>
+      <text x="535" y="175" text-anchor="middle" class="svg-mut">appearance</text>
+      <line x1="215" y1="64" x2="215" y2="98" stroke="var(--ink)" stroke-width="1.2"/>
+      <line x1="425" y1="64" x2="425" y2="98" stroke="var(--ink)" stroke-width="1.2"/>
+      <text x="320" y="205" text-anchor="middle" class="svg-mut">ESE/ES 2024 sets the bar lower: any dose &gt; physiologic (pred ~4–6 mg) carries some risk</text>
+    </svg>
+    <figcaption>Drawing 4. The classic tiers used in Liu et al. 2017. Recovery after stopping can take 6–12 months, so "recently stopped" counts.</figcaption>
+  </figure>
+
+  <h3>Easy-to-miss exposures</h3>
+  <ul>
+    <li>Intra-articular or epidural triamcinolone in the last ~3 months.</li>
+    <li>High-dose inhaled fluticasone, especially with ritonavir/cobicistat or azole antifungals (CYP3A4 inhibition turns an inhaler into systemic steroid).</li>
+    <li>Megestrol (has glucocorticoid activity), opioids at high chronic doses, checkpoint-inhibitor hypophysitis.</li>
+    <li>Recent pituitary surgery, or a post-op adrenalectomy for Cushing's (the contralateral gland is suppressed).</li>
+  </ul>
+
+  <h3>Testing, if there's time</h3>
+  <p>ESE/ES 2024 uses 8 AM cortisol, drawn ~24 h after the last dose: <span class="mono">&gt;10 µg/dL (300 nmol/L)</span> means the axis has likely recovered; <span class="mono">5–10</span> is indeterminate; <span class="mono">&lt;5 µg/dL (150 nmol/L)</span> means likely AI. These cutoffs only apply to unstressed outpatients. Don't use them on a sick inpatient.</p>
+  <div class="note bad"><strong>Bottom line for the OR</strong>True AI (primary or secondary): stress dose every time, give the usual dose too, and don't stop the fludro in primary AI unless HC is ≥50 mg/day. Chronic steroid users: never miss the usual dose; add supplementation by risk tier and size of surgery; treat unexplained shock with HC early.</div>
+</section>
+
+<!-- ============ WHITEBOARD ============ -->
+<section class="tab" id="draw" role="tabpanel" aria-labelledby="t-draw" hidden>
+  <h2>Drawing it in 5 minutes</h2>
+  <ol>
+    <li><b>The axis.</b> Three stacked boxes: hypothalamus, pituitary, adrenal. Arrow down, dotted feedback arrow back up. Add "pred" off to the side pressing on the top two boxes. Say: "the adrenal isn't broken, it's unemployed."</li>
+    <li><b>The curve.</b> Flat baseline, bump at incision that peaks around emergence, back down by day 2–3. Write 10 mg/day at baseline and ~100–150 at the peak. Ask: "So why did we give 300?"</li>
+    <li><b>The monkeys.</b> Three bars: 1/10×, 1×, 10× replacement. X out the first. Draw an equals sign between the other two. That's Udelsman, and that's the whole talk.</li>
+    <li><b>The fork.</b> One box "refractory hypotension," two arrows: floor (replace a missing hormone) and ICU (modulate shock). Write the ICU dose under it: 200 mg/day.</li>
+    <li><b>The ladder.</b> A line marked &lt;5, 5–20, &gt;20 mg pred. Green, yellow, red.</li>
+  </ol>
+  <h3>Questions that make it stick</h3>
+  <ul>
+    <li>Your patient on prednisone 20 mg got 8 mg dexamethasone for PONV at induction. How much hydrocortisone is that? Do they still need a stress dose today?</li>
+    <li>Why can a patient with secondary AI tolerate a missed dose better than one with Addison's? (Think aldosterone.)</li>
+    <li>ADRENAL showed no mortality benefit. Why do we still give hydrocortisone in septic shock?</li>
+    <li>You induced a trauma patient with etomidate. Twelve hours later they're on norepinephrine 0.3 after the bleeding is controlled. What's your next move?</li>
+  </ul>
+</section>
+
+<!-- ============ BOARD QUESTIONS ============ -->
+<section class="tab" id="board" role="tabpanel" aria-labelledby="t-board" hidden>
+  <h2>Board-style questions</h2>
+  <p>Original questions written for this talk in ABA style. Swap in qvault questions on the Notion page if you want the bank's versions.</p>
+
+  <details class="q"><summary>1. A 58-year-old with RA has taken prednisone 7.5 mg daily for 4 years and is scheduled for elective total knee arthroplasty. Per the 2022 ACR/AAHKS guideline, the most appropriate perioperative glucocorticoid plan is:</summary>
+    <div class="opts">A. Hold prednisone the morning of surgery<br>B. Continue the usual daily dose without supplementation<br>C. Hydrocortisone 100 mg IV q8h for 72 h<br>D. Dexamethasone 10 mg IV at induction in place of the prednisone<br>E. Obtain a cosyntropin stimulation test before proceeding</div>
+    <div class="ans"><b>B.</b> ACR/AAHKS recommends continuing the current daily dose rather than supraphysiologic stress dosing for RA, SpA and SLE patients having THA/TKA. Holding the usual dose (A) is the classic cause of crisis. Endocrine and UK guidelines would add hydrocortisone; know that the specialties differ.</div>
+  </details>
+
+  <details class="q"><summary>2. Which finding best distinguishes primary adrenal insufficiency from secondary adrenal insufficiency?</summary>
+    <div class="opts">A. Hypotension<br>B. Hyponatremia<br>C. Hyperkalemia<br>D. Hypoglycemia<br>E. Eosinophilia</div>
+    <div class="ans"><b>C.</b> Primary AI destroys the zona glomerulosa, so aldosterone is lost and potassium rises. In secondary/tertiary AI the renin-angiotensin system keeps aldosterone going. Hyponatremia occurs in both (in secondary AI via cortisol deficiency and ADH release).</div>
+  </details>
+
+  <details class="q"><summary>3. In adrenalectomized primates undergoing cholecystectomy (Udelsman 1986), compared with physiologic cortisol replacement, supraphysiologic (10×) replacement resulted in:</summary>
+    <div class="opts">A. Lower mortality<br>B. Higher systemic vascular resistance<br>C. Impaired wound healing<br>D. No measurable hemodynamic or survival difference<br>E. More postoperative hyperglycemia and sepsis</div>
+    <div class="ans"><b>D.</b> Physiologic and supraphysiologic groups were indistinguishable from sham controls. Only the subphysiologic (1/10×) group had hypotension, low SVR, low contractility and higher mortality.</div>
+  </details>
+
+  <details class="q"><summary>4. Etomidate causes adrenal suppression by inhibiting which enzyme?</summary>
+    <div class="opts">A. 21-hydroxylase<br>B. 11β-hydroxylase<br>C. 17α-hydroxylase<br>D. Aldosterone synthase only<br>E. 11β-hydroxysteroid dehydrogenase type 2</div>
+    <div class="ans"><b>B.</b> 11β-hydroxylase converts 11-deoxycortisol to cortisol. Inhibition after a single dose lasts roughly 24 h. (11β-HSD2, choice E, is the renal enzyme that keeps cortisol off the mineralocorticoid receptor; high-dose hydrocortisone saturates it.)</div>
+  </details>
+
+  <details class="q"><summary>5. A patient with Addison's disease on hydrocortisone 15 mg AM / 5 mg PM and fludrocortisone 0.1 mg daily is having a Whipple. Which plan is most appropriate?</summary>
+    <div class="opts">A. Usual oral doses only<br>B. Hydrocortisone 25 mg IV at induction only<br>C. Hydrocortisone 100 mg IV at induction, then 200 mg/24 h; fludrocortisone may be held while HC ≥50 mg/day<br>D. Dexamethasone 4 mg IV q6h alone<br>E. Double the fludrocortisone and omit hydrocortisone</div>
+    <div class="ans"><b>C.</b> True AI always gets stress dosing for major surgery. At ≥50 mg/day, hydrocortisone provides full mineralocorticoid activity. Dexamethasone (D) has no mineralocorticoid effect, which matters most in primary AI.</div>
+  </details>
+
+  <details class="q"><summary>6. Which septic shock trial showed a reduction in 90-day mortality with hydrocortisone plus fludrocortisone?</summary>
+    <div class="opts">A. CORTICUS<br>B. ADRENAL<br>C. APROCCHSS<br>D. HYPOLYTE<br>E. CRASH</div>
+    <div class="ans"><b>C.</b> APROCCHSS (2018): 43.0% vs 49.1%. ADRENAL (hydrocortisone alone, infusion) and CORTICUS showed faster shock reversal without mortality benefit. HYPOLYTE was trauma; CRASH was high-dose methylprednisolone in TBI and increased mortality.</div>
+  </details>
+</section>
+
+<!-- ============ SOURCES ============ -->
+<section class="tab" id="src" role="tabpanel" aria-labelledby="t-src" hidden>
+  <h2>Sources</h2>
+  <ul class="src">
+    <li>Fraser CG, Preuss FS, Bigford WD. Adrenal atrophy and irreversible shock associated with cortisone therapy. JAMA. 1952;149:1542–3.</li>
+    <li>Lewis L, et al. Fatal adrenal cortical insufficiency precipitated by surgery during prolonged continuous cortisone treatment. Ann Intern Med. 1953;39:116–26.</li>
+    <li>Udelsman R, et al. Adaptation during surgical stress: a reevaluation of the role of glucocorticoids. J Clin Invest. 1986;77:1377–81. <a href="https://doi.org/10.1172/JCI112443">doi:10.1172/JCI112443</a></li>
+    <li>Salem M, et al. Perioperative glucocorticoid coverage: a reassessment 42 years after emergence of a problem. Ann Surg. 1994;219:416–25.</li>
+    <li>Glowniak JV, Loriaux DL. A double-blind study of perioperative steroid requirements in secondary adrenal insufficiency. Surgery. 1997;121:123–9.</li>
+    <li>Marik PE, Varon J. Requirement of perioperative stress doses of corticosteroids: a systematic review. Arch Surg. 2008;143:1222–6.</li>
+    <li>Zaghiyan K, et al. A prospective, randomized, noninferiority trial of steroid dosing after major colorectal surgery. Ann Surg. 2014;259:32–7. <a href="https://doi.org/10.1097/SLA.0b013e318297adca">doi:10.1097/SLA.0b013e318297adca</a></li>
+    <li>Liu MM, Reidy AB, Saatee S, Collard CD. Perioperative steroid management: approaches based on current evidence. Anesthesiology. 2017;127:166–72.</li>
+    <li>Woodcock T, et al. Guidelines for the management of glucocorticoids during the peri-operative period for patients with adrenal insufficiency. Anaesthesia. 2020;75:654–63. <a href="https://doi.org/10.1111/anae.14963">doi:10.1111/anae.14963</a></li>
+    <li>Goodman SM, et al. 2022 ACR/AAHKS guideline for the perioperative management of antirheumatic medication in patients undergoing elective THA or TKA. J Arthroplasty. 2022;37:1676–83.</li>
+    <li>Beuschlein F, et al. ESE/Endocrine Society joint guideline: diagnosis and therapy of glucocorticoid-induced adrenal insufficiency. J Clin Endocrinol Metab. 2024;109:1657–83. <a href="https://doi.org/10.1210/clinem/dgae250">doi:10.1210/clinem/dgae250</a></li>
+    <li>Annane D, et al. Effect of treatment with low doses of hydrocortisone and fludrocortisone on mortality in septic shock. JAMA. 2002;288:862–71.</li>
+    <li>Sprung CL, et al. (CORTICUS). Hydrocortisone therapy for patients with septic shock. N Engl J Med. 2008;358:111–24.</li>
+    <li>Venkatesh B, et al. (ADRENAL). Adjunctive glucocorticoid therapy in patients with septic shock. N Engl J Med. 2018;378:797–808.</li>
+    <li>Annane D, et al. (APROCCHSS). Hydrocortisone plus fludrocortisone for adults with septic shock. N Engl J Med. 2018;378:809–18.</li>
+    <li>Evans L, et al. Surviving Sepsis Campaign: international guidelines 2021. Crit Care Med. 2021;49:e1063–143.</li>
+    <li>Annane D, Pastores SM, et al. Guidelines for the diagnosis and management of CIRCI. Crit Care Med. 2017;45:2078–88.</li>
+    <li>CRASH trial collaborators. Effect of intravenous corticosteroids on death within 14 days in 10,008 adults with clinically significant head injury. Lancet. 2004;364:1321–8.</li>
+    <li>Roquilly A, et al. Hydrocortisone therapy for patients with multiple trauma: the HYPOLYTE study. JAMA. 2011;305:1201–9. <a href="https://doi.org/10.1001/jama.2011.360">doi:10.1001/jama.2011.360</a></li>
+    <li>Asehnoune K, et al. Hydrocortisone and fludrocortisone for prevention of HAP in severe TBI (Corti-TC). Lancet Respir Med. 2014;2:706–16. <a href="https://doi.org/10.1016/S2213-2600(14)70144-4">doi:10.1016/S2213-2600(14)70144-4</a></li>
+    <li>Casey JD, et al. (RSI). Ketamine or etomidate for tracheal intubation of critically ill adults. N Engl J Med. 2025. <a href="https://doi.org/10.1056/NEJMoa2511420">doi:10.1056/NEJMoa2511420</a></li>
+  </ul>
+  <p style="color:var(--muted);font-size:14px">Trial details for Udelsman, Zaghiyan, Woodcock, Beuschlein, HYPOLYTE and Corti-TC were checked against PubMed abstracts on 2026-10-13. Others are from standard references; verify before quoting exact figures in a formal talk.</p>
+</section>
+</div>
+
+<script>
+(function(){
+  const tabs=[...document.querySelectorAll('nav.tabs button')];
+  function show(id,push){
+    tabs.forEach(b=>{const on=b.getAttribute('aria-controls')===id;b.setAttribute('aria-selected',on);document.getElementById(b.getAttribute('aria-controls')).hidden=!on;});
+    try{localStorage.setItem('sds-tab',id)}catch(e){}
+    if(push){try{history.replaceState(null,'','#'+id)}catch(e){}}
+  }
+  tabs.forEach(b=>b.addEventListener('click',()=>{show(b.getAttribute('aria-controls'),true);window.scrollTo({top:document.querySelector('nav.tabs').offsetTop,behavior:'auto'})}));
+  const ids=tabs.map(b=>b.getAttribute('aria-controls'));
+  let start=location.hash.slice(1);
+  if(!ids.includes(start)){try{start=localStorage.getItem('sds-tab')}catch(e){start=null}}
+  if(ids.includes(start)) show(start,false);
+})();
+</script>
+
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body></html>

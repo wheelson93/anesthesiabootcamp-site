@@ -1,0 +1,501 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Fresh Gas Flow — OR Chalk Talk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F5F8;--card:#FFFFFF;--ink:#151923;--ink-2:#3E4658;--ink-3:#6A7285;
+  --rule:#D6DAE3;--rule-2:#E8EBF1;--accent:#3A4FA3;--accent-soft:#E4E8F7;
+  --ok:#237A4E;--warn:#9A6200;--bad:#B3261E;--ok-bg:#E3F2EA;--warn-bg:#F7EDDA;--bad-bg:#F8E3E1;
+  --scope:#0E1220;--scope-rule:#2C3450;--scope-ink:#C7CEE0;--scope-dim:#7F89A6;
+  --s1:#FF6B6B;--s2:#5FD4E8;--s3:#F2F4FA;--s4:#F4C66A;--s5:#7EE2A8;--s6:#B89CFF;
+  --display:"Archivo",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+    --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+    --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+  --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+  --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding-inline:20px;padding-block:0 72px}
+header.mast{padding-block:34px 20px}
+.kicker{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 12px;letter-spacing:.04em;text-transform:uppercase}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,8vw,52px);line-height:1;letter-spacing:-.03em;margin:0 0 12px;text-wrap:balance}
+.thesis{font-size:19.5px;line-height:1.5;color:var(--ink-2);margin:0 0 24px;max-width:58ch}
+
+/* scope (dark instrument panel) */
+.scope{background:var(--scope);border:1px solid var(--scope-rule);border-radius:10px 10px 0 0;color:var(--scope-ink);overflow:hidden}
+.scope.solo{border-radius:10px}
+.scope-top{display:grid;grid-template-columns:repeat(var(--cols,3),1fr);gap:10px;padding:16px 18px 8px}
+.rd{border-left:1px solid var(--scope-rule);padding-left:12px;min-width:0}
+.rd:first-child{border-left:0;padding-left:0}
+.lbl{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);letter-spacing:.08em;text-transform:uppercase}
+.val{font-family:var(--mono);font-weight:700;font-size:clamp(24px,7vw,36px);line-height:1.05;font-variant-numeric:tabular-nums;color:var(--s3)}
+.val.c1{color:var(--s1)} .val.c2{color:var(--s2)} .val.c3{color:var(--s3)} .val.c4{color:var(--s4)} .val.c5{color:var(--s5)} .val.c6{color:var(--s6)}
+.val.sm{font-size:clamp(17px,4.6vw,22px);padding-top:6px}
+.sub{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);margin-top:3px}
+.plot{display:block;width:100%;height:auto;padding:0 12px 4px}
+.plot text{font-family:var(--mono);font-size:10px;fill:var(--scope-dim)}
+.verdict{margin:0;padding:11px 18px 13px;border-top:1px solid var(--scope-rule);font-size:15px;line-height:1.5}
+.verdict b{font-weight:700}
+.v-bad{color:#FF8A80} .v-ok{color:#7EE2A8} .v-warn{color:#F4C66A} .v-info{color:#7FE3F2} .v-n{color:#9AA4BF}
+.ctl{background:var(--card);border:1px solid var(--rule);border-top:0;border-radius:0 0 10px 10px;padding:14px 18px 16px;margin-top:-1px}
+.fld{margin-bottom:10px}
+.fld label{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;margin-bottom:4px;gap:10px}
+.fld .v{font-family:var(--mono);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;cursor:pointer;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);border:3px solid var(--card);margin-top:-9.5px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid var(--card)}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--warn)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px}
+.chip{appearance:none;font-family:var(--sans);font-size:15px;font-weight:600;border:1px solid var(--rule);background:var(--paper);color:var(--ink-2);border-radius:999px;padding:8px 14px;min-height:40px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.chip:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+.chip.act{border-style:dashed}
+.note{font-size:14px;color:var(--ink-3);margin:6px 0 0;line-height:1.45}
+.calc{margin:20px 0 24px}
+
+/* tabs */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--rule);margin:30px -20px 0;padding-inline:20px}
+.tabrow{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabrow::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;appearance:none;background:none;border:0;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink-3);padding:14px 12px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;min-height:46px}
+.tab:hover{color:var(--ink-2)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-4px;border-radius:3px}
+.panel{padding-top:28px}
+h2{font-family:var(--display);font-size:27px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px;line-height:1.15;text-wrap:balance}
+.lede{color:var(--ink-2);margin:0 0 22px;max-width:62ch}
+h3{font-family:var(--display);font-size:18px;font-weight:700;margin:30px 0 8px;letter-spacing:-.01em}
+p{margin:0 0 14px;max-width:66ch}
+ul{margin:0 0 16px;padding-left:0;list-style:none;max-width:66ch}
+ul li{position:relative;padding-left:19px;margin-bottom:8px}
+ul li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:1px;background:var(--accent);opacity:.55}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 18px;max-width:66ch}
+ol.steps li{counter-increment:s;position:relative;padding-left:36px;margin-bottom:14px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:25px;height:25px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:var(--mono);font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+ol.steps li b{display:block}
+strong{font-weight:700}
+.key{border-left:3px solid var(--accent);padding:3px 0 3px 16px;margin:22px 0;font-size:18.5px;line-height:1.5;max-width:60ch}
+.ask{background:var(--accent-soft);border-radius:8px;padding:12px 15px;margin:18px 0;font-size:16px;max-width:64ch}
+.ask b{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:3px}
+.flag{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:13px 15px;margin:20px 0;font-size:16px;max-width:64ch}
+.flag b.t{color:var(--bad)}
+.flag b.w{color:var(--warn)}
+.tblwrap{overflow-x:auto;margin:6px 0 20px}
+.tbl{width:100%;border-collapse:collapse;font-size:15.5px;min-width:440px}
+.tbl th{text-align:left;font-weight:700;font-size:12.5px;color:var(--ink-3);padding:0 10px 7px 0;border-bottom:1px solid var(--rule);text-transform:uppercase;letter-spacing:.05em}
+.tbl td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule-2);vertical-align:top}
+.tbl td:first-child{font-weight:700}
+.num{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.up{color:var(--bad);font-weight:700} .dn{color:var(--accent);font-weight:700} .good{color:var(--ok);font-weight:700}
+.dont{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 20px;padding:0;list-style:none}
+.dont li{background:var(--bad-bg);color:var(--bad);border-radius:5px;padding:4px 10px;font-size:14.5px;font-weight:600;margin:0}
+.dont li::before{display:none}
+.quote{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:14px 0 20px;font-style:italic;max-width:64ch;font-size:16.5px}
+figure{margin:18px 0 22px}
+figure svg{display:block;width:100%;height:auto;max-width:600px}
+figcaption{font-size:14px;color:var(--ink-3);margin-top:6px;max-width:62ch}
+.q{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:14px 16px 12px;margin:0 0 16px}
+.qmeta{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--accent);margin:0 0 6px;text-transform:uppercase}
+.qstem{font-weight:600;margin:0 0 8px}
+ol.opts{margin:0 0 10px;padding-left:26px}
+ol.opts li{margin-bottom:4px;padding-left:4px}
+.q details summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:15px;padding:6px 0;min-height:32px}
+.q details summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.q details p{margin:6px 0 4px;font-size:16px}
+.q:has(details[open]) li.ans{color:var(--ok);font-weight:700}
+footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-3)}
+footer p{max-width:68ch;margin-bottom:10px}
+@media (max-width:480px){
+  body{font-size:16.5px}
+  .wrap{padding-inline:16px}
+  nav.tabs{margin-inline:-16px;padding-inline:16px}
+  .scope-top{padding:14px 14px 6px;gap:8px}
+  .rd{padding-left:8px}
+  .plot{padding:0 6px 4px}
+}
+@media print{
+  nav.tabs{display:none}
+  .panel[hidden]{display:block!important}
+  .scope,.ctl{break-inside:avoid}
+}
+</style>
+<!--TITLE: Fresh Gas Flow — OR Chalk Talk-->
+<div class="wrap">
+<header class="mast">
+  <p class="kicker">OR chalk talk · equipment · 10 minutes at the machine</p>
+  <h1>Fresh gas flow</h1>
+  <p class="thesis">You set it on every case and discuss it on almost none. It decides how fast the circuit answers you, what the patient actually breathes, and what leaves the room.</p>
+
+  <div class="scope" aria-label="Circuit time constant explorer">
+    <div class="scope-top">
+      <div class="rd"><div class="lbl">Time constant</div><div class="val c5" id="tcVal">5.4</div><div class="sub">min · τ = vol ÷ flow</div></div>
+      <div class="rd"><div class="lbl">Steady state</div><div class="val c3" id="ssVal">22</div><div class="sub">min · 4τ</div></div>
+      <div class="rd"><div class="lbl">Mode</div><div class="val sm c4" id="modeVal">MINIMAL</div><div class="sub" id="modeSub">near metabolic</div></div>
+    </div>
+    <svg class="plot" id="tcPlot" viewBox="0 0 400 120" role="img" aria-label="Circuit wash-in curve over 30 minutes"></svg>
+    <p class="verdict" id="tcVerdict"></p>
+  </div>
+  <div class="ctl">
+    <div class="fld"><label for="fg">Fresh gas flow <span class="v"><span id="fgV">0.50</span> L/min</span></label><input type="range" id="fg" min="0.25" max="8" step="0.25" value="0.5"></div>
+    <div class="fld"><label for="cv">Circuit volume <span class="v"><span id="cvV">2.7</span> L</span></label><input type="range" id="cv" min="1.2" max="4.5" step="0.1" value="2.7"></div>
+    <p class="note">Start at 0.5 L/min. Turn the vaporizer up now and the circuit takes about 20 minutes to finish answering. Ask the learner how they'd deepen the patient in the next two minutes. 2.7 L is a reasonable figure for a GE Datex-Ohmeda circle; the curve ignores patient uptake, so real wash-in is slower still.</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabrow" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">The one idea</button>
+    <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false">The circuit</button>
+    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false">Maintenance</button>
+    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false">Induction &amp; emergence</button>
+    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false">Traps</button>
+    <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false">TIVA</button>
+    <button class="tab" role="tab" id="t7" aria-controls="p7" aria-selected="false">Board questions</button>
+  </div>
+</nav>
+
+<main>
+<!-- 1 -->
+<section class="panel" id="p1" role="tabpanel" aria-labelledby="t1">
+  <h2>The dial is not the dose</h2>
+  <p class="lede">Most of us set flows once at induction and never touch them again. That one number is doing four jobs at the same time.</p>
+
+  <h3>Draw this: three numbers on the monitor</h3>
+  <div class="scope solo" style="--cols:3;margin:8px 0 18px">
+    <div class="scope-top">
+      <div class="rd"><div class="lbl">Vaporizer</div><div class="val c4">2.5</div><div class="sub">% dialed</div></div>
+      <div class="rd"><div class="lbl">Inspired</div><div class="val c3">1.8</div><div class="sub">% Fi sevo</div></div>
+      <div class="rd"><div class="lbl">End-tidal</div><div class="val c4">1.4</div><div class="sub">% Et sevo</div></div>
+    </div>
+    <p class="verdict v-n">One patient, one moment, at 0.75 L/min. At 8 L/min these three numbers sit close together, which is why high flow feels forgiving. Lower the flow and they separate.</p>
+  </div>
+
+  <h3>Four jobs, one knob</h3>
+  <ul>
+    <li><strong>Response speed.</strong> How long the circuit takes to do what you just asked: change FiO<sub>2</sub>, deepen, wake up.</li>
+    <li><strong>What the patient breathes.</strong> At low flow the vaporizer setting and the inspired concentration stop agreeing.</li>
+    <li><strong>Cost.</strong> Agent consumption scales almost directly with flow. Roughly <strong>3% of total operating cost</strong> is on the table with ideal use.</li>
+    <li><strong>Footprint.</strong> Volatiles are potent greenhouse gases, and fresh gas flow is the tap.</li>
+  </ul>
+
+  <div class="key">Treat fresh gas flow as a setting you revisit at each phase of the case (induction, maintenance, emergence), not one you choose once.</div>
+
+  <div class="ask"><b>ASK THE LEARNER</b>The vaporizer says 2.5% and the end-tidal says 1.4%. Is the machine broken? <em>(No. Uptake pulls agent out of the gas and rebreathed gas dilutes what you add. The gap widens as flow falls.)</em></div>
+</section>
+
+<!-- 2 -->
+<section class="panel" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+  <h2>The circuit has memory</h2>
+  <p class="lede">A circle system is not an open system. It has volume, valves and absorbent, and a lag between what you set and what arrives.</p>
+
+  <h3>Where the lines are</h3>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Mode</th><th>Fresh gas flow</th><th>Rebreathing</th></tr></thead>
+    <tbody>
+      <tr><td>High flow</td><td>50% of MV up to MV</td><td class="num">&lt; 50%</td></tr>
+      <tr><td>Low flow</td><td>Below 50% of MV</td><td class="num">&gt; 50%</td></tr>
+      <tr><td>Minimal / metabolic</td><td>Matched to what the patient consumes</td><td class="num">Maximal</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The time constant</h3>
+  <p>The circuit's time constant is its volume divided by the fresh gas flow, and it takes about four of them to approach steady state. Despite the name, it isn't constant: it moves every time you change the flow. That's the chart at the top of the page.</p>
+
+  <h3>Wash-in and wash-out</h3>
+  <p>Raising the flow speeds up concentration changes, but only up to about minute ventilation. Past that you're mostly buying waste, not speed. Circuit volume and machine design set how much speed you can buy at all.</p>
+
+  <div class="key">Low flow doesn't make the circuit less controllable. It makes it slower to answer. Plan changes further ahead, or open the flow for the moment you need speed.</div>
+
+  <div class="ask"><b>ASK THE LEARNER</b>You're at 0.5 L/min and the patient moves. Do you turn up the vaporizer, the flow, or push propofol? <em>(Propofol now; if you want the gas to follow, open the flow too. The vaporizer alone takes 20 minutes to matter.)</em></div>
+</section>
+
+<!-- 3 -->
+<section class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+  <h2>Maintenance: start here</h2>
+  <p class="lede">Of the three phases, maintenance is the easiest place to begin and the hardest to get into trouble: stable patient, sealed circuit, working gas analysis.</p>
+
+  <h3>Find your floor</h3>
+  <p>The true metabolic requirement is lower than most people expect. What sets the practical floor is everything you have to add on top of it.</p>
+  <div class="calc">
+    <div class="scope">
+      <div class="scope-top">
+        <div class="rd"><div class="lbl">O₂ consumed</div><div class="val c5" id="o2Val">245</div><div class="sub" id="o2Sub">mL/min · 70 kg</div></div>
+        <div class="rd"><div class="lbl">+ Sampler + leak</div><div class="val c3" id="addVal">170</div><div class="sub">mL/min</div></div>
+        <div class="rd"><div class="lbl">Floor</div><div class="val c4" id="floorVal">0.42</div><div class="sub">L/min</div></div>
+      </div>
+    </div>
+    <div class="ctl">
+      <div class="fld"><label for="wt">Weight <span class="v"><span id="wtV">70</span> kg</span></label><input type="range" id="wt" min="10" max="150" step="5" value="70"></div>
+      <div class="fld"><label for="mlkg">O<sub>2</sub> consumption <span class="v"><span id="mlkgV">3.5</span> mL/kg/min</span></label><input type="range" id="mlkg" min="3" max="5" step="0.5" value="3.5"></div>
+      <div class="fld"><label for="lk">Circuit leak <span class="v"><span id="lkV">50</span> mL/min</span></label><input type="range" id="lk" min="0" max="150" step="10" value="50"></div>
+      <p class="note">The gas sampler draws a fixed 120 mL/min. A leak of 0–150 mL/min still passes the machine check. That's why <strong>~0.5 L/min is a sensible conservative floor</strong> on a Datex-Ohmeda, not 0.3.</p>
+    </div>
+  </div>
+
+  <h3>Mixing your oxygen</h3>
+  <p>Some machines let you dial the fraction directly. On the ones that don't, you set two flows and live with the result: FDO<sub>2</sub> = (O<sub>2</sub> flow + 0.21 × air flow) ÷ total flow.</p>
+  <div class="calc">
+    <div class="scope">
+      <div class="scope-top">
+        <div class="rd"><div class="lbl">Delivered O₂</div><div class="val c5" id="fio2Val">60</div><div class="sub">% FDO₂</div></div>
+        <div class="rd"><div class="lbl">Total flow</div><div class="val c3" id="totVal">2.00</div><div class="sub">L/min</div></div>
+        <div class="rd"><div class="lbl">O₂ : air</div><div class="val sm c4" id="ratVal">1 : 1</div><div class="sub">ratio</div></div>
+      </div>
+    </div>
+    <div class="ctl">
+      <div class="fld"><label for="o2f">Oxygen flow <span class="v"><span id="o2fV">1.00</span> L/min</span></label><input type="range" id="o2f" min="0" max="5" step="0.05" value="1"></div>
+      <div class="fld"><label for="airf">Air flow <span class="v"><span id="airfV">1.00</span> L/min</span></label><input type="range" id="airf" min="0" max="8" step="0.05" value="1"></div>
+      <p class="note">Equal flows land near 60%. Pull the oxygen down to about 1 : 5.5 and you're near 33%. At low total flows, small changes move the fraction a long way.</p>
+    </div>
+  </div>
+
+  <h3>The dial goes up as the flow comes down</h3>
+  <p>With less fresh gas arriving and ongoing uptake, the inspired concentration sits below the vaporizer setting, so you dial above the number you're targeting. A worked example from a single-lung case, healthy 34-year-old, target 0.7 MAC and FiO<sub>2</sub> around 30%: <strong>sevoflurane 2.5% at 0.75 L/min</strong> held an end-tidal of 1.4–1.5%.</p>
+
+  <h3>Training wheels: move your alarms first</h3>
+  <p>Before you drop the flow, set the low FiO<sub>2</sub> and low end-tidal agent alarms <em>above</em> your true minimum acceptable values. You want to be told you're drifting, not that you've arrived. Early on, check the trends every five to ten minutes.</p>
+</section>
+
+<!-- 4 -->
+<section class="panel" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+  <h2>Induction and emergence</h2>
+  <p class="lede">The bookends are where low flow is most demanding, and where the largest single waste happens.</p>
+
+  <h3>Induction, in order</h3>
+  <ol class="steps">
+    <li><b>Cap the flow at minute ventilation.</b> Above MV there's no clinical benefit; 5–6 L/min is plenty for most adults. The exception is a large mask leak.</li>
+    <li><b>Prime the circuit properly.</b> High-flow priming against an occluded circuit wastes agent and doesn't work: occlusion closes the valves, so the circuit never fills. Empty the reservoir bag before turning the vaporizer on.</li>
+    <li><b>Pause the flow for intubation.</b> High flow with the vaporizer off washes anesthetic into the room. Turn the fresh gas off and leave the vaporizer on instead.</li>
+    <li><b>Use overpressure deliberately.</b> Dial above your target. As a rough equivalence: 2% sevoflurane at 8 L/min behaves something like 8% at 2 L/min.</li>
+  </ol>
+
+  <div class="flag"><b class="t">The back half of overpressure.</b> Uptake falls as the case goes on, so inspired concentration climbs toward whatever is still dialed in. The move that got you there quickly will overdose the patient if you forget to come back down.</div>
+
+  <h3>Emergence</h3>
+  <p>Vaporizer off, 100% oxygen, and <em>keep the flows low</em>. Elimination proceeds through uptake and rebreathing, and with no nitrous there's no added environmental cost to running it out slowly. Open the flow when you want a faster wake-up. Have IV agents drawn up either way.</p>
+
+  <div class="ask"><b>ASK THE LEARNER</b>Why does leaving 8 L/min running during intubation, vaporizer off, set you back? <em>(It flushes the agent you just loaded out of the circuit, so you start maintenance from scratch.)</em></div>
+</section>
+
+<!-- 5 -->
+<section class="panel" id="p5" role="tabpanel" aria-labelledby="t5" hidden>
+  <h2>What actually goes wrong</h2>
+  <p class="lede">Low flow is safe. It isn't forgiving of inattention, and the failures are specific.</p>
+  <ul>
+    <li><strong>Hypoxic mixture.</strong> The margin between delivered and inspired oxygen narrows as flow falls, and nitrogen accumulates from the patient. Reliable gas analysis and a low-FiO<sub>2</sub> alarm you actually set.</li>
+    <li><strong>Compound A.</strong> Minimal risk with modern machines and absorbents, but read the ASA statement on low flows with sevoflurane. The package insert and accepted practice don't say the same thing, and you should be able to explain that gap.</li>
+    <li><strong>"Set equals delivered."</strong> Early in a case the patient gets less than you dialed; later, more. Awareness and overdose both live in that gap.</li>
+    <li><strong>The handoff.</strong> Handing off at 0.5 L/min to someone who reflexively runs 2 L/min? Say so, including your alarm settings and end-tidal target. Entirely preventable with one sentence.</li>
+    <li><strong>The machine in front of you.</strong> Bigger circuits, slower gas cycling, no fresh gas compensation and weaker analysis all push the floor up. On an older workstation, a higher flow is the right answer.</li>
+  </ul>
+  <div class="key">Every number in this talk is a property of the workstation in front of you, not of anesthesia in general.</div>
+</section>
+
+<!-- 6 -->
+<section class="panel" id="p6" role="tabpanel" aria-labelledby="t6" hidden>
+  <h2>Flow during TIVA</h2>
+  <p class="lede">Propofol wins the volatile argument outright. It doesn't make fresh gas flow stop mattering; it changes what you're spending.</p>
+  <ul>
+    <li><strong>Oxygen still has to be produced</strong>, and the energy cost scales with how much you run.</li>
+    <li><strong>Absorbent is still consumed</strong>, and absorbent use moves opposite to flow.</li>
+    <li><strong>Minute ventilation is still the ceiling worth using.</strong></li>
+  </ul>
+  <p>Zhong and colleagues did the primary work here. The gains are mainly in operating cost and CO<sub>2</sub> emissions, and around 4 L/min the environmental benefit is real but marginal. It stops being marginal in insufflation cases, where higher flow with a low oxygen fraction cuts absorbent use.</p>
+  <h3>Takeaways</h3>
+  <ul>
+    <li>Avoid reflexive high flow. Use minute ventilation as the guide.</li>
+    <li>Heat and humidity are non-inferior with an HME in place, unless either is a specific concern for this patient.</li>
+    <li>Institutional and machine differences dominate. The right number at Denver Health isn't necessarily the right number elsewhere.</li>
+  </ul>
+</section>
+
+<!-- 7 -->
+<section class="panel" id="p7" role="tabpanel" aria-labelledby="t7" hidden>
+  <h2>Board questions</h2>
+  <p class="lede">Five questions from the anes qvault question bank, in the order the talk covers them. Ask the question, let them commit to an answer, then reveal.</p>
+
+  <div class="q">
+    <p class="qmeta">Q1 · Basic · ANESHUB equipment &amp; physics</p>
+    <p class="qstem">During induction, a patient is breathing isoflurane from a semiclosed circle absorber system. The temperature-compensated vaporizer is set to deliver 1.5%. Which of the following will result in the lowest inspired concentration of isoflurane?</p>
+    <ol class="opts" type="A">
+      <li>Doubling the length of circle system hoses</li>
+      <li>Decreasing the barometric pressure</li>
+      <li>Changing from rubber to plastic breathing hoses</li>
+      <li class="ans">Decreasing fresh gas flow</li>
+      <li>Exhaustion of the soda lime</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>D.</strong> During induction, uptake is high. Less fresh gas means less agent arriving and more rebreathed, agent-depleted gas, so the inspired concentration falls further below the dial. <em>Talk link: the three numbers on the first tab.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q2 · Basic · ANESHUB pharm</p>
+    <p class="qstem">For 30 minutes a patient has received oxygen 2 L, nitrous oxide 2 L, and halothane from a vaporizer set at 1%. End-tidal halothane is 0.7%. The most likely explanation for the difference is:</p>
+    <ol class="opts" type="A">
+      <li>hyperventilation</li>
+      <li>low cardiac output</li>
+      <li>the second-gas effect</li>
+      <li class="ans">tissue solubility of halothane</li>
+      <li>vaporizer temperature less than 19°C</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>D.</strong> Ongoing uptake into blood and tissue keeps end-tidal below the dial; the more soluble the agent, the bigger the gap. Low cardiac output would do the opposite (end-tidal rises toward inspired faster). <em>Talk link: "the dial is not the dose."</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q3 · Basic · ANESHUB equipment &amp; physics</p>
+    <p class="qstem">Compared with a semiclosed circle system, a closed system:</p>
+    <ol class="opts" type="A">
+      <li>decreases the risk for anesthetic overdose</li>
+      <li>decreases the risk for rebreathing carbon dioxide</li>
+      <li>has lower resistance to gas flow</li>
+      <li class="ans">permits calculation of oxygen consumption</li>
+      <li>permits more rapid changes in anesthetic depth</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>D.</strong> In a truly closed, leak-free circuit, the oxygen you add to keep volume steady equals what the patient consumes. That's the metabolic floor from the Maintenance tab. E is backwards: closed means the slowest possible time constant. <em>Talk link: Maintenance, "find your floor."</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q4 · Basic · ANESHUB equipment &amp; physics</p>
+    <p class="qstem">During general anesthesia through a circle system, the soda lime is exhausted and no fresh absorbent is available. Which is the most appropriate next step to prevent hypercapnia?</p>
+    <ol class="opts" type="A">
+      <li>Decreasing the dead space of the circle system</li>
+      <li>Discontinuing nitrous oxide</li>
+      <li class="ans">Increasing the fresh gas flow</li>
+      <li>Increasing tidal volume</li>
+      <li>Switching to spontaneous ventilation</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>C.</strong> Raise fresh gas flow to at least minute ventilation and the circle behaves like an open system: exhaled CO<sub>2</sub> goes out the scavenger instead of back to the patient. This is the flip side of low flow: the lower you run, the more you depend on the absorbent. <em>Talk link: The circuit, rebreathing table.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q5 · Clinical · PassMachine · special techniques</p>
+    <p class="qstem">An anesthesiologist starts work at a hospital 1,800 m above sea level. What change in gas flow through the rotameter should he keep in mind?</p>
+    <ol class="opts" type="A">
+      <li>More than expected</li>
+      <li>Less than expected</li>
+      <li class="ans">More than expected at high flows, but accurate at low flows</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>C.</strong> At high flows the flow through the rotameter is turbulent and depends on gas density, which is lower at altitude, so actual flow exceeds the reading. At low flows it's laminar and depends on viscosity, which altitude barely changes, so the reading holds. Denver sits at about 1,600 m, so this one is ours. <em>Talk link: Traps, "the machine in front of you."</em></p>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Condensed from a departmental grand rounds on fresh gas flow for use at the machine. Every value here is machine-specific; confirm against the workstation you're standing at.</p>
+  <p>Primary sources: ASA Fresh Gas Flow Management and the ASA statement on low gas flows with sevoflurane; APSF on patient safety, technology and rebreathing in low-flow anesthesia; Zhong et al., <em>Br J Anaesth</em> 2020;125:773–778 and 2022;129:e165–e166; Hönemann et al., <em>Indian J Anaesth</em> 2013;57:345–350; Upadya &amp; Saneesh, <em>Indian J Anaesth</em> 2018;62:166–172; Jouwena et al., <em>Best Pract Res Clin Anaesthesiol</em> 2024;38:400–410.</p>
+  <p>Board questions from the anes qvault folder (ANESHUB and PassMachine exports).</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var fx=function(n,d){return n.toFixed(d)};
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  var W=400,H=120,L=30,R=390,T=10,B=98,TMAX=30;
+  function X(t){return L+(t/TMAX)*(R-L)} function Y(f){return B-f*(B-T)}
+  function tc(){
+    var v=+$('cv').value,f=+$('fg').value,t=v/f;
+    $('cvV').textContent=fx(v,1);$('fgV').textContent=fx(f,2);
+    $('tcVal').textContent=t<10?fx(t,1):Math.round(t);$('ssVal').textContent=Math.round(t*4);
+    var mode,sub,mv=5;
+    if(f>=mv*0.5){mode='HIGH';sub=f>=mv?'at or above MV':'50% of MV to MV';}
+    else if(f<=0.55){mode='MINIMAL';sub='near metabolic';}
+    else{mode='LOW';sub='below 50% of MV';}
+    $('modeVal').textContent=mode;$('modeSub').textContent=sub;
+    var s=$('tcPlot');s.innerHTML='';
+    s.appendChild(el('line',{x1:L,y1:B,x2:R,y2:B,stroke:'#2C3450'}));
+    s.appendChild(el('line',{x1:L,y1:T,x2:R,y2:T,stroke:'#2C3450','stroke-dasharray':'3 4'}));
+    [0,5,10,15,20,25,30].forEach(function(m){var tx=el('text',{x:X(m),y:B+14,'text-anchor':m===30?'end':'middle'});tx.textContent=m+(m===30?' min':'');s.appendChild(tx);});
+    var t1=el('text',{x:L-4,y:T+4,'text-anchor':'end'});t1.textContent='100%';s.appendChild(t1);
+    var d='';for(var i=0;i<=120;i++){var tm=i/120*TMAX;d+=(i?'L':'M')+fx(X(tm),1)+','+fx(Y(1-Math.exp(-tm/t)),1);}
+    s.appendChild(el('path',{d:d,fill:'none',stroke:'#7EE2A8','stroke-width':2.5}));
+    [[t,'τ 63%','#F2F4FA'],[4*t,'4τ 98%','#F4C66A']].forEach(function(m){if(m[0]<=TMAX){var x=X(m[0]);s.appendChild(el('line',{x1:x,y1:T,x2:x,y2:B,stroke:m[2],'stroke-width':1.2,'stroke-dasharray':'4 3'}));var lb=el('text',{x:x+4,y:T+12,fill:m[2]});lb.style.fill=m[2];lb.textContent=m[1];s.appendChild(lb);}});
+    var v2=$('tcVerdict'),m;
+    if(t*4>15){m='<span class="v-bad"><b>Slow circuit.</b> A vaporizer change takes about '+Math.round(t*4)+' min to finish arriving. Plan ahead, or open the flow when you need speed.</span>';}
+    else if(t*4>6){m='<span class="v-warn"><b>Moderate.</b> About '+Math.round(t*4)+' min to steady state. Fine for maintenance; open up if you need to change depth quickly.</span>';}
+    else if(f>mv){m='<span class="v-info"><b>Fast, and wasteful.</b> Above minute ventilation you buy very little extra speed. Most of this flow goes to the scavenger.</span>';}
+    else{m='<span class="v-ok"><b>Fast.</b> About '+Math.max(1,Math.round(t*4))+' min to steady state. Good for induction and emergence.</span>';}
+    v2.innerHTML=m;
+  }
+  $('cv').addEventListener('input',tc);$('fg').addEventListener('input',tc);
+  function msf(){
+    var w=+$('wt').value,r=+$('mlkg').value,l=+$('lk').value,o2=w*r,add=120+l;
+    $('wtV').textContent=w;$('mlkgV').textContent=fx(r,1);$('lkV').textContent=l;
+    $('o2Val').textContent=Math.round(o2);$('o2Sub').textContent='mL/min · '+w+' kg';
+    $('addVal').textContent=Math.round(add);$('floorVal').textContent=fx((o2+add)/1000,2);
+  }
+  ['wt','mlkg','lk'].forEach(function(id){$(id).addEventListener('input',msf)});
+  function ratio(a,b){a=Math.round(a*20);b=Math.round(b*20);if(!a)return '0 : 1';if(!b)return '1 : 0';var x=a,y=b,t;while(y){t=y;y=x%y;x=t;}var p=a/x,q=b/x;if(p>20||q>20){return (q>=p?'1 : '+fx(q/p,1):fx(p/q,1)+' : 1');}return p+' : '+q;}
+  function mix(){
+    var o=+$('o2f').value,a=+$('airf').value,tot=o+a;
+    $('o2fV').textContent=fx(o,2);$('airfV').textContent=fx(a,2);$('totVal').textContent=fx(tot,2);
+    if(tot<=0){$('fio2Val').textContent='--';$('ratVal').textContent='—';return;}
+    $('fio2Val').textContent=Math.round((o+0.21*a)/tot*100);$('ratVal').textContent=ratio(o,a);
+  }
+  ['o2f','airf'].forEach(function(id){$(id).addEventListener('input',mix)});
+  tc();msf();mix();
+})();
+</script>
+
+<script>
+(function(){
+  var KEY='fgf-tab';
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function select(tab,focus){
+    tabs.forEach(function(t){var on=t===tab;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    tab.scrollIntoView({block:'nearest',inline:'nearest'});
+    if(focus)tab.focus();
+    try{localStorage.setItem(KEY,tab.id)}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t)});
+    t.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();select(tabs[(i+d+tabs.length)%tabs.length],true);});
+  });
+  var start=tabs[0];
+  try{var s=localStorage.getItem(KEY);if(s&&document.getElementById(s))start=document.getElementById(s);}catch(e){}
+  select(start);
+  [].slice.call(document.querySelectorAll('[data-goto]')).forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();select(document.getElementById(a.getAttribute('data-goto')),true);window.scrollTo({top:document.querySelector('nav.tabs').offsetTop-4});});});
+})();
+</script>
+
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body></html>

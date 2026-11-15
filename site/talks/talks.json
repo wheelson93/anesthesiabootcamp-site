@@ -1,0 +1,95 @@
+{
+  "_about": "Talks copied from Claude onto the site (tools/mirror.py). version = the Claude artifact version last copied; the nightly sync refreshes a copy when it changes. redirects = claude.ai links rewritten to local files.",
+  "talks": [
+    {
+      "name": "fresh-gas-flow",
+      "slug": "fd9bd586-5045-44c8-a7e1-9498d250b91d",
+      "short": "YKNLPkvYYNnjJZ77pTBrPn",
+      "version": "1790376525-f6eb"
+    },
+    {
+      "name": "general-anesthetic-case-flow",
+      "slug": "29756d80-c1a4-48dc-a933-aba0f5fcb702",
+      "short": "67vzMaFL4B2KNQuBtzHSqo",
+      "version": "1794759283-fd67",
+      "replace": [
+        [
+          "The printable PDF version of this sheet is in the chat. Print that copy rather than this preview.",
+          "For printing, use the <a href=\"/handouts/general-anesthetic-case-flow.pdf\">PDF version</a> rather than this preview."
+        ]
+      ]
+    },
+    {
+      "name": "intoxicated-patient",
+      "slug": "89d57a68-d37c-493d-a7f2-29c5b26e5932",
+      "short": "J2BMBd1KbS7WPSz4xqD51b",
+      "version": "1790354530-edbe"
+    },
+    {
+      "name": "local-anesthetics",
+      "slug": "909cd729-1c04-4a98-af47-cf0c038b94a1",
+      "short": "JrjFbeEhjJosZTCkCXdpQp",
+      "version": "1793721858-7f99"
+    },
+    {
+      "name": "mac-subtypes",
+      "slug": "47c8f5e5-5371-4cfc-8e0e-511ea8afba89",
+      "short": "9s8ZqEEjh8f4FQAK3VupkG",
+      "version": "1790376654-4dc9"
+    },
+    {
+      "name": "nerve-block-additives",
+      "slug": "0ceb586b-5493-4218-8b90-8821fd6daa6f",
+      "short": "2bXhWLy1AAvwqVzCscdQNa",
+      "version": "1793720258-42b1"
+    },
+    {
+      "name": "ponv",
+      "slug": "9cc031cc-c9e8-41a5-a9b6-1be9aaf96271",
+      "short": "LMfS4QoiPdskdF5Qe9QhXE",
+      "version": "1790376756-c2cf"
+    },
+    {
+      "name": "severe-tbi",
+      "slug": "745b2fe7-78f9-4660-a010-120312ca0417",
+      "short": "FNMVMZm1uNumZ4f2BZzHwt",
+      "version": "1790353819-5f39"
+    },
+    {
+      "name": "sid-hepatic-resection",
+      "slug": "c7557fe5-d0c3-46f4-9e7c-e29534b1855d",
+      "short": "RceYnezshpJSCJ7jDTdpVi",
+      "version": "1790376973-3301"
+    },
+    {
+      "name": "stress-dose-steroids",
+      "slug": "1a8c7369-dee4-4c9d-a5e8-90323c351996",
+      "short": "4H9LEXBrs14m8dNeDwSg3X",
+      "version": "1791910772-0222"
+    },
+    {
+      "name": "strong-ion-difference",
+      "slug": "c909a45b-59f1-40bf-b11f-80c5dce639b7",
+      "short": "RprG2ZR99jxBCCbFwJJ6cW",
+      "version": "1790376873-853f"
+    },
+    {
+      "name": "trauma-anesthesia",
+      "slug": "cbc2c7f1-8bdb-4735-90ab-317b0b747d97",
+      "short": "SAMUnBNphAT6t523rbLGpW",
+      "version": "1793900030-be32"
+    }
+  ],
+  "redirects": {
+    "6YjJ42ZuPhNqPnfJ1nrC3E": "/handouts/intoxicated-patient.pdf",
+    "3cLYv1rByR71tqHPEFAJLZ": "/handouts/nerve-block-additives.pdf",
+    "8zC9x42dpWrxeipNrpdBYc": "/handouts/stress-dose-steroids.pdf",
+    "M9h6e77FWeqERTMZpYjDFm": "/handouts/ponv.pdf",
+    "T46DM7w3EVTuLBPztNNxev": "/handouts/mac-subtypes.pdf",
+    "UKbe3BggF7EEFqCzWgfkyR": "/handouts/fresh-gas-flow.pdf",
+    "Qwusi3eHsopgYMLTuV7Jqg": "/handouts/strong-ion-difference.pdf",
+    "DUKY4k6S8vHBULU83bTb6n": "/handouts/sid-hepatic-resection.pdf",
+    "RnnyZPHmyLT9GEqcgYuXQn": "/handouts/spinal-anesthesia-one-pager.pdf",
+    "P7UfBktxmFJrXdHLGBxAGR": "/talks/local-anesthetics/"
+  }
+}

@@ -1,0 +1,461 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>SID in Hepatic Resection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F5F8;--card:#FFFFFF;--ink:#151923;--ink-2:#3E4658;--ink-3:#6A7285;
+  --rule:#D6DAE3;--rule-2:#E8EBF1;--accent:#3A4FA3;--accent-soft:#E4E8F7;
+  --ok:#237A4E;--warn:#9A6200;--bad:#B3261E;--ok-bg:#E3F2EA;--warn-bg:#F7EDDA;--bad-bg:#F8E3E1;
+  --scope:#0E1220;--scope-rule:#2C3450;--scope-ink:#C7CEE0;--scope-dim:#7F89A6;
+  --s1:#FF6B6B;--s2:#5FD4E8;--s3:#F2F4FA;--s4:#F4C66A;--s5:#7EE2A8;--s6:#B89CFF;
+  --display:"Archivo",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+    --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+    --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+  --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+  --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding-inline:20px;padding-block:0 72px}
+header.mast{padding-block:34px 20px}
+.kicker{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 12px;letter-spacing:.04em;text-transform:uppercase}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,8vw,52px);line-height:1;letter-spacing:-.03em;margin:0 0 12px;text-wrap:balance}
+.thesis{font-size:19.5px;line-height:1.5;color:var(--ink-2);margin:0 0 24px;max-width:58ch}
+
+/* scope (dark instrument panel) */
+.scope{background:var(--scope);border:1px solid var(--scope-rule);border-radius:10px 10px 0 0;color:var(--scope-ink);overflow:hidden}
+.scope.solo{border-radius:10px}
+.scope-top{display:grid;grid-template-columns:repeat(var(--cols,3),1fr);gap:10px;padding:16px 18px 8px}
+.rd{border-left:1px solid var(--scope-rule);padding-left:12px;min-width:0}
+.rd:first-child{border-left:0;padding-left:0}
+.lbl{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);letter-spacing:.08em;text-transform:uppercase}
+.val{font-family:var(--mono);font-weight:700;font-size:clamp(24px,7vw,36px);line-height:1.05;font-variant-numeric:tabular-nums;color:var(--s3)}
+.val.c1{color:var(--s1)} .val.c2{color:var(--s2)} .val.c3{color:var(--s3)} .val.c4{color:var(--s4)} .val.c5{color:var(--s5)} .val.c6{color:var(--s6)}
+.val.sm{font-size:clamp(17px,4.6vw,22px);padding-top:6px}
+.sub{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);margin-top:3px}
+.plot{display:block;width:100%;height:auto;padding:0 12px 4px}
+.plot text{font-family:var(--mono);font-size:10px;fill:var(--scope-dim)}
+.verdict{margin:0;padding:11px 18px 13px;border-top:1px solid var(--scope-rule);font-size:15px;line-height:1.5}
+.verdict b{font-weight:700}
+.v-bad{color:#FF8A80} .v-ok{color:#7EE2A8} .v-warn{color:#F4C66A} .v-info{color:#7FE3F2} .v-n{color:#9AA4BF}
+.ctl{background:var(--card);border:1px solid var(--rule);border-top:0;border-radius:0 0 10px 10px;padding:14px 18px 16px;margin-top:-1px}
+.fld{margin-bottom:10px}
+.fld label{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;margin-bottom:4px;gap:10px}
+.fld .v{font-family:var(--mono);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;cursor:pointer;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);border:3px solid var(--card);margin-top:-9.5px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid var(--card)}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--warn)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px}
+.chip{appearance:none;font-family:var(--sans);font-size:15px;font-weight:600;border:1px solid var(--rule);background:var(--paper);color:var(--ink-2);border-radius:999px;padding:8px 14px;min-height:40px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.chip:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+.chip.act{border-style:dashed}
+.note{font-size:14px;color:var(--ink-3);margin:6px 0 0;line-height:1.45}
+.calc{margin:20px 0 24px}
+
+/* tabs */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--rule);margin:30px -20px 0;padding-inline:20px}
+.tabrow{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabrow::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;appearance:none;background:none;border:0;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink-3);padding:14px 12px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;min-height:46px}
+.tab:hover{color:var(--ink-2)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-4px;border-radius:3px}
+.panel{padding-top:28px}
+h2{font-family:var(--display);font-size:27px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px;line-height:1.15;text-wrap:balance}
+.lede{color:var(--ink-2);margin:0 0 22px;max-width:62ch}
+h3{font-family:var(--display);font-size:18px;font-weight:700;margin:30px 0 8px;letter-spacing:-.01em}
+p{margin:0 0 14px;max-width:66ch}
+ul{margin:0 0 16px;padding-left:0;list-style:none;max-width:66ch}
+ul li{position:relative;padding-left:19px;margin-bottom:8px}
+ul li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:1px;background:var(--accent);opacity:.55}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 18px;max-width:66ch}
+ol.steps li{counter-increment:s;position:relative;padding-left:36px;margin-bottom:14px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:25px;height:25px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:var(--mono);font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+ol.steps li b{display:block}
+strong{font-weight:700}
+.key{border-left:3px solid var(--accent);padding:3px 0 3px 16px;margin:22px 0;font-size:18.5px;line-height:1.5;max-width:60ch}
+.ask{background:var(--accent-soft);border-radius:8px;padding:12px 15px;margin:18px 0;font-size:16px;max-width:64ch}
+.ask b{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:3px}
+.flag{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:13px 15px;margin:20px 0;font-size:16px;max-width:64ch}
+.flag b.t{color:var(--bad)}
+.flag b.w{color:var(--warn)}
+.tblwrap{overflow-x:auto;margin:6px 0 20px}
+.tbl{width:100%;border-collapse:collapse;font-size:15.5px;min-width:440px}
+.tbl th{text-align:left;font-weight:700;font-size:12.5px;color:var(--ink-3);padding:0 10px 7px 0;border-bottom:1px solid var(--rule);text-transform:uppercase;letter-spacing:.05em}
+.tbl td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule-2);vertical-align:top}
+.tbl td:first-child{font-weight:700}
+.num{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.up{color:var(--bad);font-weight:700} .dn{color:var(--accent);font-weight:700} .good{color:var(--ok);font-weight:700}
+.dont{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 20px;padding:0;list-style:none}
+.dont li{background:var(--bad-bg);color:var(--bad);border-radius:5px;padding:4px 10px;font-size:14.5px;font-weight:600;margin:0}
+.dont li::before{display:none}
+.quote{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:14px 0 20px;font-style:italic;max-width:64ch;font-size:16.5px}
+figure{margin:18px 0 22px}
+figure svg{display:block;width:100%;height:auto;max-width:600px}
+figcaption{font-size:14px;color:var(--ink-3);margin-top:6px;max-width:62ch}
+.q{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:14px 16px 12px;margin:0 0 16px}
+.qmeta{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--accent);margin:0 0 6px;text-transform:uppercase}
+.qstem{font-weight:600;margin:0 0 8px}
+ol.opts{margin:0 0 10px;padding-left:26px}
+ol.opts li{margin-bottom:4px;padding-left:4px}
+.q details summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:15px;padding:6px 0;min-height:32px}
+.q details summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.q details p{margin:6px 0 4px;font-size:16px}
+.q:has(details[open]) li.ans{color:var(--ok);font-weight:700}
+footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-3)}
+footer p{max-width:68ch;margin-bottom:10px}
+@media (max-width:480px){
+  body{font-size:16.5px}
+  .wrap{padding-inline:16px}
+  nav.tabs{margin-inline:-16px;padding-inline:16px}
+  .scope-top{padding:14px 14px 6px;gap:8px}
+  .rd{padding-left:8px}
+  .plot{padding:0 6px 4px}
+  .scope-top.q4{grid-template-columns:repeat(2,1fr);row-gap:12px}
+  .scope-top.q4 .rd:nth-child(3){border-left:0;padding-left:0}
+}
+@media print{
+  nav.tabs{display:none}
+  .panel[hidden]{display:block!important}
+  .scope,.ctl{break-inside:avoid}
+}
+</style>
+<!--TITLE: SID in Hepatic Resection-->
+<div class="wrap">
+<header class="mast">
+  <p class="kicker">OR chalk talk · case-based · 10–15 minutes</p>
+  <h1>SID in hepatic resection</h1>
+  <p class="thesis">The organ being resected is the one that clears lactate and citrate. Hepatectomy damages both of the body's main acid-base repair systems at the moment you need them most.</p>
+
+  <div class="scope" aria-label="Hepatic resection phase explorer">
+    <div class="scope-top q4" style="--cols:4">
+      <div class="rd"><div class="lbl">Lactate</div><div class="val c1" id="hLac">1.2</div><div class="sub">mmol/L, arterial</div></div>
+      <div class="rd"><div class="lbl" style="text-transform:none">Na − Cl − lac</div><div class="val c5" id="hSid">38</div><div class="sub">apparent SID</div></div>
+      <div class="rd"><div class="lbl" style="text-transform:none">iCa</div><div class="val c2" id="hCa">1.15</div><div class="sub">mmol/L</div></div>
+      <div class="rd"><div class="lbl">CVP goal</div><div class="val sm c4" id="hCvp">normal</div><div class="sub" id="hPh">phase</div></div>
+    </div>
+    <svg class="plot" id="hPlot" viewBox="0 0 400 124" role="img" aria-label="Lactate across the phases of a hepatic resection"></svg>
+    <p class="verdict" id="hVerdict"></p>
+  </div>
+  <div class="ctl">
+    <div class="chips" role="group" aria-label="Phase" id="phaseChips">
+      <button class="chip" data-p="0" aria-pressed="true">Incision</button>
+      <button class="chip" data-p="1" aria-pressed="false">Low-CVP</button>
+      <button class="chip" data-p="2" aria-pressed="false">Pringle</button>
+      <button class="chip" data-p="3" aria-pressed="false">Reperfusion</button>
+      <button class="chip" data-p="4" aria-pressed="false">Closure</button>
+    </div>
+    <div class="chips" role="group" aria-label="Scenario">
+      <button class="chip act" id="hNs" aria-pressed="false">Saline instead of PlasmaLyte</button>
+      <button class="chip act" id="hBad" aria-pressed="false">Remnant struggling</button>
+    </div>
+    <p class="note">Step to Pringle and ask why the gas looks so calm. Then step to reperfusion and ask whether a lactate of 5.8 means shock. Values are a schematic trajectory built from the talk, not patient data.</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabrow" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">The one idea</button>
+    <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false">Before incision</button>
+    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false">Low-CVP &amp; Pringle</button>
+    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false">Reperfusion</button>
+    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false">Closure</button>
+    <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false">Handoff</button>
+    <button class="tab" role="tab" id="t7" aria-controls="p7" aria-selected="false">Board questions</button>
+  </div>
+</nav>
+
+<main>
+<!-- 1 -->
+<section class="panel" id="p1" role="tabpanel" aria-labelledby="t1">
+  <h2>The perfect SID storm</h2>
+  <p class="lede">The liver clears roughly half to two-thirds of systemic lactate and nearly all the citrate in blood products. During and after hepatectomy, both jobs fall to a clamped or shrunken organ.</p>
+
+  <h3>Draw this: the double impairment</h3>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Repair system</th><th>Normally</th><th>During / after hepatectomy</th></tr></thead>
+    <tbody>
+      <tr><td>Lactate clearance</td><td>Liver clears most of it</td><td>Stops during Pringle; reduced by remnant size afterward</td></tr>
+      <tr><td>Citrate metabolism</td><td>Cleared within minutes</td><td>Slowed, so hypocalcemia lasts longer than in other cases</td></tr>
+      <tr><td>Glucose</td><td>Liver holds euglycemia</td><td>Rises with ischemia; can fall late if the remnant is poor</td></tr>
+      <tr><td>Clotting factors</td><td>Liver makes nearly all</td><td>Small remnant → coagulopathy → more product → more citrate</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="key">In this case, trajectory beats any single number. A lactate of 5 that's falling is expected; a lactate of 4 that isn't is a problem.</div>
+
+  <p class="note">New to the framework? Start with the main talk, <strong>Strong Ion Difference in the OR</strong>.</p>
+</section>
+
+<!-- 2 -->
+<section class="panel" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+  <h2>Before incision</h2>
+  <p class="lede">Get a baseline gas at incision: Na − Cl, lactate, iCa, albumin. Every later gas is read against it.</p>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Variable</th><th>Typical</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td>Albumin</td><td class="num">2.0–2.5 g/dL</td><td>A<sub>tot</sub> down: hides about 4–6 mEq/L of acidosis (0.25 × (42 − alb g/L))</td></tr>
+      <tr><td>Coagulopathy</td><td class="num">INR &gt; 1.5 if cirrhotic</td><td>More product, more citrate, lower calcium</td></tr>
+      <tr><td>Renal function</td><td>Variable</td><td>Hepatorenal physiology; fluid choice affects renal perfusion</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><strong>Start PlasmaLyte now.</strong> Every liter of saline here compounds the problem at reperfusion.</li>
+    <li><strong>Why not LR?</strong> Its lactate needs a liver to become bicarbonate. Give it to a clamped liver or a small remnant and you can't tell your lactate from the patient's on the gas.</li>
+  </ul>
+  <div class="ask"><b>ASK THE LEARNER</b>Albumin is 1.8 and the baseline pH is 7.40. Is this patient's acid-base normal? <em>(Probably not: about 6 mEq/L of acidosis is being hidden by low albumin.)</em></div>
+</section>
+
+<!-- 3 -->
+<section class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+  <h2>Low-CVP dissection and the Pringle</h2>
+  <p class="lede">Deliberate hypovolemia during parenchymal transection, then a clamped liver quietly building a lactate debt.</p>
+
+  <h3>Low-CVP phase</h3>
+  <ul>
+    <li>Target <strong>CVP ≤ 5</strong> (ideally ≤ 3) to limit hepatic venous backbleeding: restricted fluids, with or without Trendelenburg.</li>
+    <li><strong>Hold MAP with norepinephrine, not boluses.</strong> A saline bolus for every MAP dip narrows SID and makes the CVP target harder to hold. If volume is needed, 5% albumin restores A<sub>tot</sub>.</li>
+    <li>Vasopressin lowers portal inflow; some surgeons like that during transection and some don't. Ask yours.</li>
+  </ul>
+
+  <h3>Pringle: the silent debt</h3>
+  <p>Portal triad clamped. The liver is ischemic, and lactate accumulates in the liver, not yet in the blood. The gas during clamping can look deceptively stable.</p>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Watch</th><th>Expect</th><th>Act</th></tr></thead>
+    <tbody>
+      <tr><td>Lactate</td><td>Slow rise; spike comes at release</td><td>Recheck every ~20 min on a long clamp</td></tr>
+      <tr><td>pH</td><td>May look stable</td><td>Don't be reassured</td></tr>
+      <tr><td>iCa</td><td>Falls if transfusing</td><td>Replace if &lt; 1.0; aim &gt; 1.1</td></tr>
+      <tr><td>Na − Cl</td><td>Stable without saline</td><td>Write it on every gas</td></tr>
+      <tr><td>Glucose</td><td>Rises (glycogenolysis)</td><td>Monitor; hyperglycemia worsens ischemic injury</td></tr>
+    </tbody>
+  </table></div>
+  <div class="flag"><b class="w">Intermittent Pringle.</b> About 15 min clamped, 5 min released, reduces the ischemic debt. Each release sends a smaller lactate bolus, so expect a sawtooth on serial gases.</div>
+</section>
+
+<!-- 4 -->
+<section class="panel" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+  <h2>Unclamping and reperfusion</h2>
+  <p class="lede">The biggest acid-base event of the case. The stored hepatic lactate floods the circulation, and a liver that may be 20–30% of its original size has to clear it.</p>
+  <div class="key">A lactate of 5–7 just after unclamping, in a patient who was stable, is hepatic washout, not shock. Protect MAP and hepatic perfusion; don't chase the number with pressors or crystalloid.</div>
+  <ul>
+    <li><strong>Hold fluids briefly</strong> and let the CVP come back up; the bleeding risk has fallen.</li>
+    <li><strong>CaCl<sub>2</sub> 1 g before release</strong> if iCa &lt; 1.1.</li>
+    <li><strong>Gas every ~15 min.</strong> If lactate is still rising 30 minutes after release, suspect ongoing ischemia.</li>
+    <li><strong>No bicarb for the spike.</strong> Give the remnant time and perfusion pressure.</li>
+  </ul>
+  <div class="ask"><b>ASK THE LEARNER</b>Lactate 5.8 ten minutes after release, MAP 70 on a little norepinephrine. What do you do? <em>(Very little: support MAP, give calcium, recheck in 15 minutes and look at the direction.)</em></div>
+</section>
+
+<!-- 5 -->
+<section class="panel" id="p5" role="tabpanel" aria-labelledby="t5" hidden>
+  <h2>Closure and small-for-size</h2>
+  <p class="lede">By closure, the gas is a readout of remnant function.</p>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Finding</th><th>Meaning</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>Lactate 4–5, falling</td><td>Clearance in progress</td><td>Reassure the ICU: trajectory beats value</td></tr>
+      <tr><td>Lactate &gt; 5, flat or rising</td><td>Remnant inadequate or ischemic</td><td>Tell the surgeon now; hepatology, imaging of inflow</td></tr>
+      <tr><td>pH 7.28, Cl 114</td><td>Chloride plus lactate</td><td>Quantify each for the ICU</td></tr>
+      <tr><td>"Normal" pH 7.36</td><td>May be masked</td><td>Check albumin before reassuring anyone</td></tr>
+      <tr><td>iCa &lt; 0.9</td><td>Citrate not being cleared</td><td>Replace aggressively; q4h in ICU</td></tr>
+      <tr><td>Glucose falling</td><td>Glycogen depleted, gluconeogenesis failing</td><td>Dextrose, and name the concern</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Small-for-size syndrome</h3>
+  <p>The feared complication when the future liver remnant is too small: roughly under 20–25% of total liver volume in a normal liver, under about 40% in cirrhosis. Non-clearing lactate, falling glucose, persistent hypocalcemia and worsening coagulopathy together are the signature. A rising lactate at closure should reach the ICU as a named concern, not as "metabolic acidosis."</p>
+</section>
+
+<!-- 6 -->
+<section class="panel" id="p6" role="tabpanel" aria-labelledby="t6" hidden>
+  <h2>The handoff</h2>
+  <p class="lede">Separate the components, give the trajectory, and name the red flags.</p>
+  <div class="quote">"pH 7.26 at closure with a lactate of 4.8. This is expected post-hepatectomy physiology, not hemorrhagic shock: lactate peaked at 6.1 after a 42-minute Pringle and has been falling. His apparent SID is about 19: a chloride component (Cl 111) on top of the residual lactate. Albumin is 1.8, which is hiding about 6 mEq/L more. iCa was 0.88 after reperfusion; he got 3 g of CaCl<sub>2</sub> and the last iCa was 1.06, so check every 4 hours because his citrate clearance will be slow. If lactate isn't falling by 2 hours, or glucose starts dropping, that's a small-for-size concern and needs hepatology."</div>
+  <div class="ask"><b>ASK THE LEARNER</b>Which single sentence in that handoff keeps the ICU from giving bicarbonate? <em>(The one that names the lactate as expected washout with a falling trend.)</em></div>
+</section>
+
+<!-- 7 -->
+<section class="panel" id="p7" role="tabpanel" aria-labelledby="t7" hidden>
+  <h2>Board questions</h2>
+  <p class="lede">Five questions from the anes qvault question bank, in the order the talk covers them. Ask the question, let them commit to an answer, then reveal.</p>
+
+  <div class="q">
+    <p class="qmeta">Q1 · Clinical · TrueLearn · GI / hepatic</p>
+    <p class="qstem">Which set of hemodynamic values is most typical of end-stage liver disease? (Cardiac output L/min, SVR dyn·s·cm⁻⁵, hepatic venous pressure gradient mmHg.)</p>
+    <ol class="opts" type="A">
+      <li>CO 4, SVR 1,200, HVPG &gt; 10</li>
+      <li class="ans">CO 8, SVR 700, HVPG &gt; 10</li>
+      <li>CO 4, SVR 1,200, HVPG &lt; 5</li>
+      <li>CO 8, SVR 700, HVPG &lt; 5</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>B.</strong> Hyperdynamic circulation (high output, low SVR from splanchnic vasodilation) plus portal hypertension (HVPG &gt; 10 is clinically significant). This is the baseline you're starting from before any low-CVP strategy. <em>Talk link: Before incision.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q2 · Basic · ANESHUB general</p>
+    <p class="qstem">A 57-year-old with hepatocellular disease is scheduled for colectomy. Albumin is 2.4 g/dL; PT is 16 s (control 12). Which is true about anesthetic management?</p>
+    <ol class="opts" type="A">
+      <li>Atracurium will have a prolonged duration of action</li>
+      <li>The risk of perioperative hyperglycemia is increased</li>
+      <li>Mivacurium will have a shortened duration of action</li>
+      <li class="ans">The unbound fraction of thiopental will be increased</li>
+      <li>Vitamin K will normalize the prothrombin time</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>D.</strong> Less albumin means more free drug for highly protein-bound agents. Same low albumin, second consequence: A<sub>tot</sub> is down, so the pH is flattering you. E is a trap: in synthetic failure, vitamin K won't fix the PT. <em>Talk link: Before incision.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q3 · Basic · ANESHUB general</p>
+    <p class="qstem">Which is most likely to increase hepatic blood flow during general anesthesia?</p>
+    <ol class="opts" type="A">
+      <li>Adding PEEP</li>
+      <li>Switching from isoflurane to enflurane</li>
+      <li class="ans">Increased PaCO<sub>2</sub></li>
+      <li>Moderate controlled hypotension</li>
+      <li>Intrathecal morphine</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>C.</strong> Hypercarbia increases hepatic (mostly portal) blood flow; hypocarbia, PEEP and hypotension reduce it. Relevant twice here: PEEP raises hepatic venous pressure during low-CVP transection, and a hypotensive remnant clears lactate worse. <em>Talk link: Low-CVP &amp; Pringle.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q4 · Clinical · PassMachine · hematologic</p>
+    <p class="qstem">During liver transplantation the IVC is injured and the patient receives 12 units of PRBCs. In the anhepatic phase, with minimal bleeding, he gradually becomes hypotensive with a narrow pulse pressure, and the QT is prolonged. The most likely mechanism?</p>
+    <ol class="opts" type="A">
+      <li>Hyperkalemia</li>
+      <li>Bacterial sepsis</li>
+      <li class="ans">Citrate toxicity</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>C.</strong> No liver, no citrate clearance: ionized calcium falls, and you get myocardial depression, vasodilation and a long QT. The anhepatic phase is the extreme version of a clamped Pringle or a small remnant. Treat with CaCl<sub>2</sub> and follow iCa. <em>Talk link: The one idea, citrate row.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q5 · Advanced · ANESHUB general</p>
+    <p class="qstem">During liver transplantation, sodium bicarbonate and calcium chloride are given just before reperfusion of the graft to counteract:</p>
+    <ol class="opts" type="A">
+      <li>coagulopathy</li>
+      <li>decreased cardiac output</li>
+      <li class="ans">hyperkalemia</li>
+      <li>hypermagnesemia</li>
+      <li>hypotension</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>C.</strong> Reperfusion washes cold, acidic, potassium-rich effluent into the heart. Calcium stabilizes the membrane; bicarbonate shifts potassium into cells. Contrast with resection: after a Pringle the washout is mostly lactate, and routine bicarbonate isn't the answer. <em>Talk link: Reperfusion.</em></p>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Companion to <strong>Strong Ion Difference in the OR</strong>. Lactate, SID and calcium values in the explorer are a schematic trajectory drawn from the talk's example case, not measured data.</p>
+  <p>Board questions from the anes qvault folder (ANESHUB, PassMachine and TrueLearn exports).</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  var P=['Incision','Low-CVP','Pringle','Reperfusion','Closure'];
+  var LAC=[1.2,1.8,2.4,5.8,3.1],LACBAD=[1.2,1.8,2.4,6.1,6.4];
+  var DEBT=[0,0,5.5,0,0];
+  var CLDROP=[0,3,5,6,7];
+  var CA=[1.15,1.12,1.02,0.88,1.06],CABAD=[1.15,1.12,1.02,0.88,0.84];
+  var CVP=['normal','≤ 5','≤ 5','let rise','normal'];
+  var cur=0;
+  function st(){return{ns:$('hNs').getAttribute('aria-pressed')==='true',bad:$('hBad').getAttribute('aria-pressed')==='true'};}
+  var L=34,R=386,T=10,B=96,YM=8;
+  function X(i){return L+i/(P.length-1)*(R-L)} function Y(v){return B-Math.min(v,YM)/YM*(B-T)}
+  function draw(s){
+    var g=$('hPlot');g.innerHTML='';
+    [0,2,4,6,8].forEach(function(v){var t=el('text',{x:L-6,y:Y(v)+3,'text-anchor':'end'});t.textContent=v;g.appendChild(t);g.appendChild(el('line',{x1:L,y1:Y(v),x2:R,y2:Y(v),stroke:'#2C3450'}));});
+    P.forEach(function(p,i){var t=el('text',{x:X(i),y:B+14,'text-anchor':i===0?'start':i===P.length-1?'end':'middle'});t.textContent=p;if(i===cur)t.style.fill='#F2F4FA';g.appendChild(t);});
+    var lac=s.bad?LACBAD:LAC,d='';
+    lac.forEach(function(v,i){d+=(i?'L':'M')+X(i).toFixed(1)+','+Y(v).toFixed(1);});
+    g.appendChild(el('path',{d:d,fill:'none',stroke:'#FF6B6B','stroke-width':2.5}));
+    g.appendChild(el('path',{d:'M'+X(1)+','+Y(1.8)+' Q'+X(2)+','+Y(6.5)+' '+X(3)+','+Y(lac[3]),fill:'none',stroke:'#F4C66A','stroke-width':1.5,'stroke-dasharray':'4 4'}));
+    var dl=el('text',{x:X(2)+6,y:Y(5.9)});dl.style.fill='#F4C66A';dl.textContent='hepatic debt';g.appendChild(dl);
+    lac.forEach(function(v,i){g.appendChild(el('circle',{cx:X(i),cy:Y(v),r:i===cur?6:3.5,fill:i===cur?'#F2F4FA':'#FF6B6B'}));});
+  }
+  function update(){
+    var s=st(),lac=(s.bad?LACBAD:LAC)[cur],ca=(s.bad?CABAD:CA)[cur];
+    var nacl=39-(s.ns?CLDROP[cur]:0),sid=nacl-lac;
+    $('hLac').textContent=lac.toFixed(1);$('hSid').textContent=Math.round(sid);$('hCa').textContent=ca.toFixed(2);$('hCvp').textContent=CVP[cur];$('hPh').textContent=P[cur];
+    draw(s);
+    var m,cls,ns=s.ns&&cur>0?' Saline has already cost you '+CLDROP[cur]+' mEq/L of SID, which the ICU will read as "acidosis."':'';
+    switch(cur){
+      case 0:cls='v-info';m='<b>Baseline gas.</b> Record Na − Cl, lactate, iCa and albumin now; every later gas is read against these. Start PlasmaLyte.';break;
+      case 1:cls='v-warn';m='<b>Deliberately dry.</b> CVP ≤ 5. Hold MAP with norepinephrine, not boluses.'+(s.ns?' Every saline bolus here narrows SID and fights your CVP target.':'');break;
+      case 2:cls='v-warn';m='<b>Deceptively calm.</b> Arterial lactate 2.4, but the clamped liver is storing lactate you can’t see. Recheck every ~20 min; keep iCa above 1.1.'+ns;break;
+      case 3:cls='v-info';m='<b>Washout, not shock.</b> Lactate '+lac.toFixed(1)+' is hepatic lactate arriving. iCa '+ca.toFixed(2)+': give CaCl₂. No bicarb; recheck in 15 min and look at the direction.'+ns;break;
+      case 4:if(s.bad){cls='v-bad';m='<b>Remnant struggling.</b> Lactate flat or rising above 6 and iCa '+ca.toFixed(2)+' not recovering. Tell the surgeon now and hand off small-for-size as a named concern.'+ns;}else{cls='v-ok';m='<b>Good trajectory.</b> Lactate falling, iCa recovering. Hand off the trend and the components, not just "metabolic acidosis."'+ns;}break;
+    }
+    $('hVerdict').className='verdict '+cls;$('hVerdict').innerHTML=m;
+    [].slice.call(document.querySelectorAll('[data-p]')).forEach(function(b){b.setAttribute('aria-pressed',+b.getAttribute('data-p')===cur?'true':'false');});
+  }
+  [].slice.call(document.querySelectorAll('[data-p]')).forEach(function(b){b.addEventListener('click',function(){cur=+b.getAttribute('data-p');update();});});
+  ['hNs','hBad'].forEach(function(id){$(id).addEventListener('click',function(){var b=$(id);b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');update();});});
+  update();
+})();
+</script>
+
+<script>
+(function(){
+  var KEY='hep-tab';
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function select(tab,focus){
+    tabs.forEach(function(t){var on=t===tab;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    tab.scrollIntoView({block:'nearest',inline:'nearest'});
+    if(focus)tab.focus();
+    try{localStorage.setItem(KEY,tab.id)}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t)});
+    t.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();select(tabs[(i+d+tabs.length)%tabs.length],true);});
+  });
+  var start=tabs[0];
+  try{var s=localStorage.getItem(KEY);if(s&&document.getElementById(s))start=document.getElementById(s);}catch(e){}
+  select(start);
+  [].slice.call(document.querySelectorAll('[data-goto]')).forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();select(document.getElementById(a.getAttribute('data-goto')),true);window.scrollTo({top:document.querySelector('nav.tabs').offsetTop-4});});});
+})();
+</script>
+
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body></html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trauma Anesthesia: A Phase-Based Approach</title>
+<style>
+:root{
+  --bg:#fbfaf7; --card:#ffffff; --ink:#1f2328; --muted:#5d6670; --line:#e3e0d8;
+  --accent:#b3261e; --accent-soft:#fbe9e7; --blue:#1d5fa8; --blue-soft:#e7f0fa;
+  --green:#2e7d4f; --green-soft:#e6f4ec; --amber:#a86400; --amber-soft:#fdf3e1;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;font-size:16px}
+header{padding:20px 18px 8px;max-width:980px;margin:0 auto}
+header h1{margin:0 0 4px;font-size:1.5rem}
+header p{margin:0;color:var(--muted);font-size:.95rem}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;max-width:980px;margin:0 auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 12px;border-radius:999px;font-size:.88rem;cursor:pointer;white-space:nowrap}
+.tabs button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+main{max-width:980px;margin:0 auto;padding:16px 14px 60px}
+section.panel{display:none}
+section.panel.active{display:block}
+h2{font-size:1.25rem;margin:8px 0 4px}
+h3{font-size:1.05rem;margin:22px 0 8px}
+.lede{color:var(--muted);margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.q{border-left:4px solid var(--blue);background:var(--blue-soft);border-radius:8px;padding:10px 14px;margin:10px 0}
+.q b{display:block;margin-bottom:2px}
+.pearl{border-left:4px solid var(--green);background:var(--green-soft);border-radius:8px;padding:10px 14px;margin:12px 0}
+.warn{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:8px;padding:10px 14px;margin:12px 0}
+.note{border-left:4px solid var(--amber);background:var(--amber-soft);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:.92rem}
+ul{padding-left:20px;margin:6px 0}
+li{margin:3px 0}
+table{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--card)}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#f3f1ec}
+.tablewrap{overflow-x:auto;margin:10px 0}
+.letter{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;background:var(--ink);color:#fff;font-weight:700;margin-right:10px;flex:0 0 auto}
+.letter.x{background:var(--accent)}
+.xrow{display:flex;align-items:flex-start;gap:4px;margin:14px 0}
+.xrow .body{flex:1}
+.xrow h4{margin:4px 0 4px;font-size:1rem}
+svg{max-width:100%;height:auto;display:block;margin:8px auto}
+.tag{display:inline-block;font-size:.75rem;padding:2px 8px;border-radius:999px;background:#eee;color:#444;margin-right:4px}
+.small{font-size:.85rem;color:var(--muted)}
+.check li{list-style:none;margin-left:-18px}
+.check li::before{content:"☐ ";color:var(--muted)}
+.script{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86rem;background:#f6f5f1;border:1px solid var(--line);border-radius:8px;padding:12px;white-space:pre-wrap}
+.pill{display:inline-block;padding:2px 8px;border-radius:6px;font-weight:600;font-size:.85rem}
+.p-red{background:var(--accent-soft);color:var(--accent)}
+.p-blue{background:var(--blue-soft);color:var(--blue)}
+.p-green{background:var(--green-soft);color:var(--green)}
+.p-amber{background:var(--amber-soft);color:var(--amber)}
+
+details{margin-top:10px;background:#f6f5f1;border-radius:8px;padding:8px 12px}
+summary{cursor:pointer;font-weight:600;color:var(--blue)}
+.bq ol{margin:8px 0}
+.handout{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:.82rem;line-height:1.35}
+.ho-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;border-bottom:3px solid var(--accent);padding-bottom:6px;margin-bottom:8px;font-size:1rem}
+.ho-head span{color:var(--muted);font-size:.85rem}
+.ho-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px}
+.ho-box{border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.ho-box h5{margin:0 0 4px;font-size:.88rem;color:var(--accent)}
+.ho-box p{margin:4px 0}
+.ho-box ol,.ho-box ul{margin:2px 0;padding-left:18px}
+.ho-box li{margin:1px 0}
+.ho-wide{grid-column:1/-1}
+.ho-box table{font-size:.8rem}
+.ho-box th,.ho-box td{padding:3px 6px}
+.ho-foot{font-size:.72rem;color:var(--muted);margin:6px 0 0}
+@media print{
+  header,nav,section.panel{display:none!important}
+  #handout{display:block!important}
+  body{background:#fff}
+  main{padding:0;max-width:none}
+  .handout{border:none;padding:0;font-size:10pt}
+  .ho-grid{grid-template-columns:1fr 1fr}
+  @page{size:letter;margin:0.4in}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Trauma Anesthesia: A Phase-Based Approach</h1>
+  <p>OR chalk talk · MS3 – CA-2 · DRAFT v0.3</p>
+</header>
+<nav><div class="tabs" id="tabs">
+  <button data-t="overview" class="active">Overview</button>
+  <button data-t="before">1 · Before the OR</button>
+  <button data-t="arrival">2 · Arrival &amp; Induction</button>
+  <button data-t="access">3 · Access</button>
+  <button data-t="post">4 · Post-Induction &amp; Early Labs</button>
+  <button data-t="mid">5 · Mid-Case &amp; TEG Resus</button>
+  <button data-t="end">6 · End of Case</button>
+  <button data-t="handout">One-Page Handout</button>
+  <button data-t="board">Board Questions</button>
+  <button data-t="refs">Sources</button>
+</div></nav>
+
+<main>
+
+<!-- OVERVIEW -->
+<section class="panel active" id="overview">
+  <h2>The big picture</h2>
+  <p class="lede">A trauma case is a resuscitation with an anesthetic layered on top of it. Hemorrhage is the leading cause of preventable trauma death, so every phase comes back to the same question: <b>is this patient bleeding, and are we winning?</b></p>
+
+  <svg viewBox="0 0 720 170" role="img" aria-label="Six phases of a trauma case">
+    <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5d6670"/></marker></defs>
+    <line x1="20" y1="70" x2="700" y2="70" stroke="#5d6670" stroke-width="2" marker-end="url(#ar)"/>
+    <g font-size="12" text-anchor="middle" fill="#1f2328">
+      <circle cx="70"  cy="70" r="22" fill="#1d5fa8"/><text x="70" y="75" fill="#fff" font-weight="700">1</text>
+      <text x="70" y="110">Before OR</text><text x="70" y="126" fill="#5d6670">Ask &amp; prepare</text>
+      <circle cx="185" cy="70" r="22" fill="#b3261e"/><text x="185" y="75" fill="#fff" font-weight="700">2</text>
+      <text x="185" y="110">Arrival &amp;</text><text x="185" y="126">induction</text><text x="185" y="142" fill="#5d6670">xABCDE</text>
+      <circle cx="300" cy="70" r="22" fill="#1f2328"/><text x="300" y="75" fill="#fff" font-weight="700">3</text>
+      <text x="300" y="110">Access</text><text x="300" y="126" fill="#5d6670">Size &amp; site</text>
+      <circle cx="415" cy="70" r="22" fill="#2e7d4f"/><text x="415" y="75" fill="#fff" font-weight="700">4</text>
+      <text x="415" y="110">Post-induction</text><text x="415" y="126" fill="#5d6670">Labs at time zero</text>
+      <circle cx="530" cy="70" r="22" fill="#a86400"/><text x="530" y="75" fill="#fff" font-weight="700">5</text>
+      <text x="530" y="110">Mid-case</text><text x="530" y="126" fill="#5d6670">TEG-guided resus</text>
+      <circle cx="645" cy="70" r="22" fill="#5d6670"/><text x="645" y="75" fill="#fff" font-weight="700">6</text>
+      <text x="645" y="110">End of case</text><text x="645" y="126" fill="#5d6670">ICU vs death</text>
+    </g>
+    <text x="360" y="28" font-size="13" text-anchor="middle" fill="#b3261e" font-weight="600">Empiric 1:1:1 → goal-directed (TEG) as data arrives</text>
+    <line x1="185" y1="38" x2="530" y2="38" stroke="#b3261e" stroke-dasharray="4 4"/>
+  </svg>
+
+  <div class="grid">
+    <div class="card"><b>Three ideas to leave with</b>
+      <ul>
+        <li><b>Prepare with questions, not a checklist you memorize.</b> Six quick questions set up the room, the team and your goals.</li>
+        <li><b>Resuscitate, then induce.</b> ATLS 11 now puts e<b>x</b>sanguination first (xABCDE) and stresses treating shock before RSI.</li>
+        <li><b>Get data early, then let it steer you.</b> Start with ratios, switch to TEG and labs as soon as you have them.</li>
+      </ul>
+    </div>
+    <div class="card"><b>The lethal diamond</b>
+      <svg viewBox="0 0 260 200" role="img" aria-label="Lethal diamond">
+        <polygon points="130,20 240,100 130,180 20,100" fill="#fbe9e7" stroke="#b3261e" stroke-width="2"/>
+        <g font-size="12" text-anchor="middle" fill="#1f2328" font-weight="600">
+          <text x="130" y="44">Coagulopathy</text>
+          <text x="196" y="104">Acidosis</text>
+          <text x="130" y="168">Hypothermia</text>
+          <text x="64" y="104">Hypocalcemia</text>
+        </g>
+        <text x="130" y="104" font-size="11" text-anchor="middle" fill="#5d6670">each feeds</text>
+        <text x="130" y="118" font-size="11" text-anchor="middle" fill="#5d6670">the others</text>
+      </svg>
+      <p class="small">The old "triad" plus calcium. Citrate in every unit of blood binds calcium, and low iCa worsens both clotting and contractility.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE OR -->
+<section class="panel" id="before">
+  <h2>Phase 1 · Before the OR</h2>
+  <p class="lede">You often get 5–15 minutes of warning. Run through these questions out loud with your team. The answers set your room, your people and your <b>initial goals</b>.</p>
+
+  <div class="q"><b>1. What's the situation?</b>Who is coming, how sick, and what has been done already? Is the airway secured? Is MTP activated? How much blood have they had, including any <b>low-titer O whole blood (LTOWB) in the ED</b>? Was TXA given, and when? Is a tourniquet or binder on? Prehospital vitals and the trend matter more than a single set.</div>
+  <div class="q"><b>2. What equipment do we need in the room?</b>Rapid infuser primed, blood warmer, MTP coolers, airway setup, line kits, TEG sample tubes. Full list below.</div>
+  <div class="q"><b>3. Who do we need, and do we need extra hands?</b>A second anesthesia provider or attending, an anesthesia tech, someone dedicated to the rapid infuser, a blood runner, and someone keeping the blood log. Call early. Sending help away is easier than finding it mid-crisis.</div>
+  <div class="q"><b>4. When are we going to the OR?</b>Straight from the ED, or CT first? An unstable patient does not go to the scanner. "Stable enough for CT" is a team decision with the trauma surgeon, and it should be re-asked if the vitals change.</div>
+  <div class="q"><b>5. Which OR or site?</b>Main trauma OR, hybrid OR or IR (embolization or REBOA), or the ED (resuscitative thoracotomy)? Every site away from home base means bringing your drugs, airway gear, infuser and monitors with you.</div>
+  <div class="q"><b>6. What's the mechanism, and how likely is bleeding?</b>Penetrating torso injury, high-energy blunt trauma, or a pelvic fracture means assume hemorrhage until proven otherwise. Estimate it with the tools below.</div>
+
+  <h3>Estimating bleeding risk</h3>
+  <div class="grid">
+    <div class="card"><b>Shock index = HR ÷ SBP</b>
+      <ul><li>&lt; 0.7: reassuring</li><li>&gt; 1.0: think significant hemorrhage</li><li>Trend it. A rising SI is worse than any single number.</li></ul>
+      <p class="small">Caveats: beta-blockers, pacemakers, elderly patients, and young patients who compensate until they suddenly don't.</p></div>
+    <div class="card"><b>ABC score</b> (1 point each)
+      <ul><li>Penetrating mechanism</li><li>SBP ≤ 90 on arrival</li><li>HR ≥ 120 on arrival</li><li>Positive FAST</li></ul>
+      <p><span class="pill p-red">≥ 2 points</span> predicts massive transfusion. Have blood in the room.</p></div>
+  </div>
+
+  <div class="tablewrap"><table>
+    <tr><th>Mechanism</th><th>Think about</th><th>Anesthesia implications</th></tr>
+    <tr><td>Penetrating torso</td><td>Major vessel or solid organ injury, tamponade, hemothorax</td><td>Fast to the OR. Prep and drape before induction. Expect massive transfusion.</td></tr>
+    <tr><td>High-energy blunt (MVC, fall)</td><td>Multiple injuries: TBI, chest, solid organ, pelvis, C-spine</td><td>TBI changes BP targets. MILS for the airway. Watch for occult bleeding.</td></tr>
+    <tr><td>Pelvic fracture</td><td>Retroperitoneal venous or arterial bleeding</td><td>Binder stays on. May need IR or preperitoneal packing. Put lines above the diaphragm.</td></tr>
+    <tr><td>Neck / face</td><td>Distorted airway, expanding hematoma</td><td>Plan for a difficult airway, double setup, and surgical airway ready</td></tr>
+    <tr><td>Burns / inhalation</td><td>Airway edema, CO/cyanide</td><td>Intubate early. Sux is OK in the first 24 h.</td></tr>
+  </table></div>
+
+  <h3>Room setup</h3>
+  <div class="grid">
+    <div class="card"><b>Resuscitation</b><ul class="check">
+      <li>Rapid infuser primed, plus fluid warmer</li><li>MTP activated; first <b>component cooler</b> (RBC : plasma : platelets) in the room or on the way</li><li>Count LTOWB units given in the ED. They go in the blood log.</li><li>TXA available, but <b>held until the TEG shows lysis</b></li><li>Calcium chloride 1 g × several</li><li>Forced-air warmer; room temperature turned up</li><li>Cell saver, if no bowel contamination is expected</li></ul></div>
+    <div class="card"><b>Airway</b><ul class="check">
+      <li>Video laryngoscope first, DL backup</li><li>Bougie, two working suctions (big bore)</li><li>SGA rescue</li><li>Cric kit open in the room</li><li>Someone assigned to MILS</li></ul></div>
+    <div class="card"><b>Drugs</b><ul class="check">
+      <li>Ketamine or etomidate (reduced dose)</li><li>Rocuronium 1.2 mg/kg (± sux)</li><li>Push-dose phenylephrine and epinephrine</li><li>Norepinephrine / vasopressin infusions ready</li><li>Small-dose fentanyl; midazolam / scopolamine for amnesia</li></ul></div>
+    <div class="card"><b>Access &amp; monitoring</b><ul class="check">
+      <li>Large-bore PIV / RIC kits</li><li>Introducer (8.5–9 Fr) kit + ultrasound</li><li>Arterial line kit + transducers zeroed</li><li>IO drill (humeral)</li><li>Pre-labeled lab tubes: ABG, CBC, BMP/iCa, coags, fibrinogen, <b>TEG</b>, type &amp; cross</li></ul></div>
+  </div>
+
+  <h3>From questions → initial goals</h3>
+  <div class="tablewrap"><table>
+    <tr><th>If the answers say…</th><th>Then the initial goal is…</th></tr>
+    <tr><td>Unstable, penetrating, ABC ≥ 2</td><td>Get to surgical control fast. Prep and drape before induction. Blood first, induce last. Accept permissive hypotension.</td></tr>
+    <tr><td>Blunt multi-system with TBI</td><td>Protect the brain: no hypotension, no hypoxia. Target SBP ≥ 110 / MAP ≥ 80. Normocapnia.</td></tr>
+    <tr><td>Stable, single injury, CT done</td><td>A more controlled induction. You have time for lines first. Still check a baseline TEG.</td></tr>
+    <tr><td>Off-site (IR / hybrid)</td><td>Bring everything with you. Agree on who runs the resuscitation and where blood is delivered.</td></tr>
+  </table></div>
+  <div class="pearl"><b>Case start huddle (30 seconds):</b> "This is our suspected injury. This is our BP goal. Blood is here or coming. I'll induce when you're prepped. Here's what happens if they arrest." Say it before the patient rolls in.</div>
+</section>
+
+<!-- ARRIVAL & INDUCTION -->
+<section class="panel" id="arrival">
+  <h2>Phase 2 · Arrival &amp; Induction: xABCDE</h2>
+  <p class="lede">Use the same primary survey language as the trauma team (ATLS 11), viewed through an anesthesia lens. You assess and treat each letter as you find it; they happen in parallel, not in strict order.</p>
+
+  <div class="xrow"><span class="letter x">x</span><div class="body"><h4>eXsanguinating hemorrhage</h4>
+    <ul><li>Tourniquets, packing and pelvic binders <b>stay on</b>. Don't let them come off during the transfer to the OR table.</li>
+    <li>Ask: "Where is the bleeding, and when can you control it?"</li>
+    <li>In the crashing patient, <b>prep and drape before induction</b>. Induction removes sympathetic tone, and PPV and relaxation can release tamponade.</li>
+    <li>Get transfusion running through the best access you have <b>before</b> you push drugs.</li></ul></div></div>
+
+  <div class="xrow"><span class="letter">A</span><div class="body"><h4>Airway + C-spine</h4>
+    <ul><li>Assume a full stomach and an unstable C-spine. Open the collar's front and use MILS.</li>
+    <li><b>Video laryngoscope first-line</b> (ATLS 11). Bougie ready.</li>
+    <li>Arrives already intubated? Confirm ETCO₂, tube depth, and that it isn't a right mainstem. Don't trust the handoff.</li>
+    <li>Airway distorted by neck or face trauma: double setup with the surgeon scrubbed for a surgical airway.</li></ul></div></div>
+
+  <div class="xrow"><span class="letter">B</span><div class="body"><h4>Breathing</h4>
+    <ul><li>Before PPV, think: is there a pneumothorax? Positive pressure can turn a simple PTX into a tension PTX.</li>
+    <li>Sudden hypotension, high peak pressures and unilateral breath sounds after intubation → tension PTX until proven otherwise. Decompress.</li>
+    <li>PPV lowers preload. Start with modest PEEP and lung-protective volumes.</li>
+    <li>Normocapnia (ETCO₂ often underestimates PaCO₂ in shock). Hyperventilate only as a bridge for active herniation.</li></ul></div></div>
+
+  <div class="xrow"><span class="letter">C</span><div class="body"><h4>Circulation: resuscitate before you induce</h4>
+    <ul><li>ATLS 11 stresses <b>treating shock before RSI</b>. Even 1–2 units before induction can prevent an induction arrest.</li>
+    <li><b>Permissive hypotension</b> until bleeding is controlled: SBP 80–90 / MAP 50–65 (no TBI).</li>
+    <li><b>TBI changes the target:</b> SBP ≥ 110 / MAP ≥ 80. One hypotensive episode worsens outcome.</li>
+    <li>Blood, not crystalloid. The ED may have bridged with whole blood. In the OR we continue with <b>empiric 1:1:1 components</b> through the rapid infuser until the first TEG is back.</li></ul></div></div>
+
+  <div class="xrow"><span class="letter">D</span><div class="body"><h4>Disability</h4>
+    <ul><li>Document <b>GCS and pupils before induction</b>. After that, the neuro exam is gone for hours.</li>
+    <li>Lateralizing signs or a blown pupil → discuss with neurosurgery and the team before induction. It may change the OR plan (e.g., craniotomy first vs. laparotomy).</li></ul></div></div>
+
+  <div class="xrow"><span class="letter">E</span><div class="body"><h4>Exposure / Environment</h4>
+    <ul><li>Fully expose to find injuries, then <b>warm aggressively</b>: room temperature up, forced air, warmed fluids, cover what isn't prepped.</li>
+    <li>Each 1 °C drop measurably impairs coagulation, and it doesn't show on standard labs run at 37 °C.</li></ul></div></div>
+
+  <h3>The induction itself</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Drug</th><th>Usual dose</th><th>In hemorrhagic shock</th><th>Why</th></tr>
+    <tr><td>Ketamine</td><td>1–2 mg/kg</td><td><b>0.5–1 mg/kg</b></td><td>Preserves sympathetic drive, but it's a direct myocardial depressant once catecholamines are depleted</td></tr>
+    <tr><td>Etomidate</td><td>0.3 mg/kg</td><td><b>0.1–0.2 mg/kg</b></td><td>Hemodynamically neutral; a single dose is reasonable</td></tr>
+    <tr><td>Propofol</td><td>1.5–2.5 mg/kg</td><td>Avoid, or tiny doses</td><td>Vasodilation + negative inotropy, in a patient whose BP depends on tone</td></tr>
+    <tr><td>Rocuronium</td><td>0.6 mg/kg</td><td><b>1.2 mg/kg</b></td><td>Low cardiac output means slow onset; the higher dose gives faster intubating conditions</td></tr>
+    <tr><td>Succinylcholine</td><td>1–1.5 mg/kg</td><td>OK acutely</td><td>Avoid with known hyperkalemia; avoid in burns / crush / denervation after ~24–48 h</td></tr>
+  </table></div>
+  <div class="pearl"><b>Teaching line:</b> "In shock, the circulation is slow and the brain gets a bigger share of cardiac output. Use <i>less</i> sedative and <i>more</i> paralytic." Have push-dose epinephrine or phenylephrine in hand before the induction drugs go in.</div>
+  <div class="warn"><b>Awareness:</b> Low-dose anesthetic in a scared, hypotensive patient is a setup for recall. Give amnestics (midazolam or scopolamine) once hemodynamics allow, and titrate volatile up as you resuscitate.</div>
+</section>
+
+<!-- ACCESS -->
+<section class="panel" id="access">
+  <h2>Phase 3 · Access: Selection &amp; Site</h2>
+  <p class="lede">Flow is about the catheter, not about "central vs. peripheral." Short and fat beats long and thin.</p>
+
+  <div class="card">
+    <b>Poiseuille in one line: Flow ∝ r⁴ ÷ length</b>
+    <svg viewBox="0 0 620 230" role="img" aria-label="Relative flow by catheter type">
+      <g font-size="12" fill="#1f2328">
+        <text x="10" y="40">Introducer 8.5–9 Fr</text><rect x="190" y="26" width="400" height="20" rx="4" fill="#2e7d4f"/>
+        <text x="10" y="80">RIC 8.5 Fr (peripheral)</text><rect x="190" y="66" width="380" height="20" rx="4" fill="#2e7d4f"/>
+        <text x="10" y="120">14 G PIV</text><rect x="190" y="106" width="230" height="20" rx="4" fill="#1d5fa8"/>
+        <text x="10" y="160">16 G PIV</text><rect x="190" y="146" width="150" height="20" rx="4" fill="#1d5fa8"/>
+        <text x="10" y="200">Triple-lumen CVC port</text><rect x="190" y="186" width="55" height="20" rx="4" fill="#b3261e"/>
+      </g>
+      <text x="590" y="220" font-size="11" text-anchor="end" fill="#5d6670">Relative flow, illustrative, not to scale</text>
+    </svg>
+    <p class="small">Classic resident trap: a 16 G triple-lumen port is long and narrow and flows <i>worse</i> than a 16 G peripheral IV. It's for pressors, not volume.</p>
+  </div>
+
+  <h3>Access hierarchy</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Step</th><th>What</th><th>Notes</th></tr>
+    <tr><td>1</td><td>Two large-bore PIVs (14–16 G)</td><td>Often what you arrive with. Check that they flush and don't infiltrate under pressure.</td></tr>
+    <tr><td>2</td><td>RIC / large-bore peripheral exchange</td><td>Exchange over a wire from an existing PIV. Introducer-level flow without a central stick.</td></tr>
+    <tr><td>3</td><td>IO (humeral preferred)</td><td>Bridge access in seconds. Humeral flows better than tibial. Painful under pressure in awake patients.</td></tr>
+    <tr><td>4</td><td>Introducer (MAC / Cordis) in IJ, subclavian or femoral</td><td>Use the side port for volume. A pressor lumen can be added through the introducer.</td></tr>
+    <tr><td>5</td><td>Arterial line</td><td>Early, for beat-to-beat BP and labs, but <b>don't delay incision</b> for it. The surgeon can place a femoral A-line from the field.</td></tr>
+  </table></div>
+
+  <h3>Site selection: put volume where it will reach the heart</h3>
+  <div class="grid">
+    <div class="card"><span class="pill p-red">Abdominal / pelvic bleeding</span><p>Put access <b>above the diaphragm</b> (arms, IJ, subclavian). Volume given through a femoral line may pour out an injured IVC or iliac vein.</p></div>
+    <div class="card"><span class="pill p-blue">Chest injury</span><p>If you go subclavian, go on the side of the chest injury or existing chest tube so you don't risk a PTX on the "good" lung. If a great-vessel or subclavian injury is suspected, infuse from the other side or below the diaphragm.</p></div>
+    <div class="card"><span class="pill p-amber">Extremity injury</span><p>Don't place access distal to a proximal vascular injury or tourniquet on the same limb.</p></div>
+    <div class="card"><span class="pill p-green">C-spine precautions</span><p>IJ is harder with a collar and MILS. Subclavian or femoral may be faster, and ultrasound still helps.</p></div>
+  </div>
+  <div class="pearl"><b>First stick = first labs.</b> Every new line is a chance to draw the baseline panel (next tab). Have pre-labeled tubes in hand before you place it.</div>
+</section>
+
+<!-- POST INDUCTION -->
+<section class="panel" id="post">
+  <h2>Phase 4 · Post-Induction &amp; Initial Goals</h2>
+  <p class="lede">The tube is in and the surgeon is cutting. Now establish <b>time zero</b>: a full lab and TEG panel so every later decision has something to compare against.</p>
+
+  <h3>The time-zero bundle (send within minutes of induction)</h3>
+  <div class="grid">
+    <div class="card"><b>Point-of-care / ABG</b><ul><li>pH, PaCO₂, base deficit</li><li><b>Lactate</b></li><li>Hgb</li><li><b>Ionized Ca²⁺</b>, K⁺, glucose</li></ul></div>
+    <div class="card"><b>Viscoelastic</b><ul><li><b>TEG 6s</b>, citrated trauma (global hemostasis) cartridge: CK-R, CRT-MA, CFF-MA, CK-LY30</li><li>Early amplitudes in ~10 min; LY30 needs ~30 min after MA</li><li>Shows <i>which</i> part of clotting is failing</li></ul></div>
+    <div class="card"><b>Send-out labs</b><ul><li>CBC (platelets)</li><li>PT/INR, PTT</li><li><b>Fibrinogen</b></li><li>Type &amp; cross (if not done)</li></ul></div>
+  </div>
+  <div class="note">Why both TEG and conventional labs? Standard coags take 30–60 min, are run on plasma at 37 °C, and don't show fibrinolysis or platelet function. TEG is whole blood, fast, and functional. Conventional labs are still useful for confirmation and trending.</div>
+
+  <h3>Initial targets</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Parameter</th><th>Goal</th><th>Action if off</th></tr>
+    <tr><td>BP (no TBI)</td><td>SBP 80–90 / MAP 50–65 until control</td><td>Blood first; pressor as a bridge only</td></tr>
+    <tr><td>BP (TBI)</td><td>SBP ≥ 110 / MAP ≥ 80</td><td>Blood + pressor; don't accept hypotension</td></tr>
+    <tr><td>Ionized Ca²⁺</td><td>&gt; 1.1–1.2 mmol/L</td><td>CaCl 1 g. Re-dose with each cooler or every few units.</td></tr>
+    <tr><td>Temp</td><td>&gt; 36 °C</td><td>Warm everything, every route</td></tr>
+    <tr><td>pH / BD / lactate</td><td>pH &gt; 7.2; lactate and BD trending down</td><td>Fix perfusion (bleeding), not the number. Bicarb rarely.</td></tr>
+    <tr><td>Hgb</td><td>~7–9 g/dL while bleeding</td><td>Lags acute loss. Don't wait for it to drop.</td></tr>
+    <tr><td>K⁺</td><td>Watch for rise with massive transfusion</td><td>Calcium, insulin/dextrose, ventilation; fresher units if possible</td></tr>
+  </table></div>
+
+  <h3>TXA: only for lysis</h3>
+  <div class="card">
+    <ul><li>Our practice: <b>give TXA only when the TEG shows lysis</b>: LY30 ≥ 3% (hyperfibrinolysis).</li>
+    <li>Why not everyone? Many trauma patients are in <b>fibrinolysis shutdown</b>, and blanket TXA may add risk without benefit.</li>
+    <li>When indicated: <b>1 g IV over 10 min, then 1 g over 8 h</b>, ideally <b>within 3 h of injury</b>. In CRASH-2, giving it after 3 h was associated with more bleeding deaths.</li>
+    <li>Always ask whether EMS or the ED already gave it, so the patient isn't dosed twice.</li></ul>
+  </div>
+  <div class="pearl"><b>Say it out loud at ~15 minutes:</b> "Time-zero labs sent at __. First TEG back at __. ED gave __ LTOWB. We've given __ RBC / __ plasma / __ platelets, Ca __ g. TXA given / held (LY30 __)." This keeps the room on the same page and starts your blood log.</div>
+</section>
+
+<!-- MID CASE -->
+<section class="panel" id="mid">
+  <h2>Phase 5 · Mid-Case &amp; Resuscitation</h2>
+  <p class="lede">Shift from <b>empiric ratios</b> (you're blind) to <b>goal-directed, TEG-based</b> replacement (you can see). Keep repeating the cycle: give, check, adjust.</p>
+
+  <h3>Reading a TEG 6s in 30 seconds</h3>
+  <p class="small">The trauma (citrated global hemostasis) cartridge runs four channels at once. You get <b>four numbers</b>, and each one points to <b>one product</b>.</p>
+  <svg viewBox="0 0 680 280" role="img" aria-label="TEG 6s tracings: CRT outer tracing and CFF inner tracing, with CK-R, CRT-MA, CFF-MA and LY30 labeled">
+    <text x="20" y="18" font-size="12" fill="#5d6670">Two tracings overlaid: CRT (whole clot) and CFF (fibrinogen only, platelets blocked)</text>
+    <path d="M30,140 L140,140 C180,140 205,105 245,75 C295,42 355,36 430,36 C500,36 560,40 650,48" fill="none" stroke="#1f2328" stroke-width="3"/>
+    <path d="M30,140 L140,140 C180,140 205,175 245,205 C295,238 355,244 430,244 C500,244 560,240 650,232" fill="none" stroke="#1f2328" stroke-width="3"/>
+    <path d="M140,140 C190,140 230,120 290,114 C350,110 400,110 650,111" fill="none" stroke="#a86400" stroke-width="3"/>
+    <path d="M140,140 C190,140 230,160 290,166 C350,170 400,170 650,169" fill="none" stroke="#a86400" stroke-width="3"/>
+    <line x1="30" y1="262" x2="140" y2="262" stroke="#1d5fa8" stroke-width="2"/><text x="85" y="257" font-size="13" text-anchor="middle" fill="#1d5fa8" font-weight="700">CK-R</text>
+    <line x1="430" y1="36" x2="430" y2="244" stroke="#b3261e" stroke-width="2"/><text x="438" y="60" font-size="13" fill="#b3261e" font-weight="700">CRT-MA</text>
+    <line x1="350" y1="110" x2="350" y2="170" stroke="#a86400" stroke-width="2"/><text x="300" y="104" font-size="13" fill="#a86400" font-weight="700">CFF-MA</text>
+    <text x="520" y="85" font-size="12" fill="#2e7d4f" font-weight="700">gap = platelets</text>
+    <line x1="560" y1="40" x2="560" y2="110" stroke="#2e7d4f" stroke-width="2" stroke-dasharray="3 3"/>
+    <line x1="650" y1="48" x2="650" y2="232" stroke="#5d6670" stroke-width="2" stroke-dasharray="3 3"/><text x="606" y="200" font-size="13" fill="#5d6670" font-weight="700">LY30</text>
+  </svg>
+
+  <div class="tablewrap"><table>
+    <tr><th>Problem</th><th>TEG 6s value</th><th>Normal</th><th>Teaching trigger</th><th>Where the number comes from</th><th>Give</th></tr>
+    <tr><td><b>Clotting factors</b></td><td><span class="pill p-blue">CK-R</span></td><td>4.6–9.1 min</td><td><b>&gt; 9.1 min</b> (above range)</td><td>6s reference range. On rapid TEG, Denver Health's MT threshold is ACT ≥ 128 s (Einersen 2017).</td><td><b>Plasma</b> (± PCC if anticoagulated)</td></tr>
+    <tr><td><b>Fibrinogen</b></td><td><span class="pill p-amber">CFF-MA</span></td><td>15–32 mm</td><td><b>&lt; 20 mm</b></td><td>iTACTIC RCT TEG 6s algorithm (2021); 19 mm in the multicenter derivation (Baksaas-Aasen 2019)</td><td><b>Cryo</b> / fibrinogen concentrate</td></tr>
+    <tr><td><b>Platelets</b></td><td><span class="pill p-red">CRT-MA</span></td><td>52–70 mm</td><td><b>≤ 55 mm</b> with a normal CFF-MA, or <b>CRT-MA − CFF-MA &lt; 45 mm</b></td><td>Einersen 2017 (Denver Health, rapid TEG MA ≤ 55); iTACTIC 6s platelet rule</td><td><b>Platelets</b></td></tr>
+    <tr><td><b>Fibrinolysis</b></td><td><span class="pill p-green">LY30</span></td><td>0–2.6%</td><td><b>≥ 3%</b> (hyperfibrinolysis)</td><td>Moore 2014 phenotypes (Denver Health); Cotton 2012: mortality roughly doubles above 3%. Published triggers range 3–10%.</td><td><b>TXA</b> (our only indication)</td></tr>
+  </table></div>
+  <p class="small">Published thresholds, compiled for teaching. Einersen's rapid-TEG cutoffs were derived on the TEG 5000; the 6s CRT channel correlates closely with it (Neal 2020). Bedside judgment and the clinical picture still win.</p>
+
+  <div class="grid">
+    <div class="card"><b>The key 6s trick: subtract</b>
+      <p><b>CRT-MA − CFF-MA ≈ the platelet contribution</b> (iTACTIC treated platelets when this was &lt; 45 mm).</p>
+      <ul><li>CRT-MA low, CFF-MA low (&lt; 20) → <b>fibrinogen</b> first (cryo), then recheck</li>
+      <li>CRT-MA low, CFF-MA normal → <b>platelets</b></li>
+      <li>Both normal but still bleeding → <b>surgical bleeding</b>, or check iCa, temp, pH</li></ul></div>
+    <div class="card"><b>The memory hook</b>
+      <p><b>R</b> = "Ready? Factors start it." <b>CFF</b> = "Fibrinogen Foundation." <b>CRT-MA</b> = "Muscle: platelets make it strong." <b>LY</b> = "Lysis: the only time we reach for TXA."</p></div>
+    <div class="card"><b>Don't wait for MA</b>
+      <p>On the 6s, early amplitudes predict a low final MA (Vigstedt 2022, iTACTIC data):</p>
+      <ul><li><b>CRT A10 &lt; 45 mm</b> → MA will be &lt; 55. Get platelets moving.</li><li><b>CFF A10 &lt; 15 mm</b> → FF-MA will be low. Get cryo moving.</li></ul>
+      <p class="small">CRT takes ~21 min to reach MA; CFF takes ~12 min. A10 lets you act ~10 minutes sooner.</p></div>
+    <div class="card"><b>Fibrinolysis phenotypes (why TXA is lysis-guided)</b>
+      <ul><li><b>Hyperfibrinolysis</b> (LY30 ≥ 3%): 18% of patients, 44% mortality, mostly from bleeding. <b>TXA helps.</b></li><li><b>Physiologic</b> (0.81–2.9%): 18% of patients, 3% mortality</li><li><b>Shutdown</b> (≤ 0.8%): the <i>most common</i> phenotype (64%), 17% mortality, mostly from organ failure. Extra TXA adds risk without benefit.</li></ul>
+      <p class="small">Moore HB et al. 2014, Denver Health: a U-shaped mortality curve. This is the rationale for lysis-guided TXA.</p></div>
+  </div>
+
+  <div class="note"><b>Order of operations when several values are off:</b> fix the <b>"systemic" problems</b> first (iCa &gt; 1.1, temp &gt; 36, pH &gt; 7.2, Hgb ~7–9) because they make every number look worse. Then treat lysis → fibrinogen → factors → platelets, and <b>recheck the TEG after each round</b>.</div>
+
+  <h3>The resus loop: every ~30 min or every cooler</h3>
+  <svg viewBox="0 0 520 210" role="img" aria-label="Resuscitation loop">
+    <defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1f2328"/></marker></defs>
+    <g font-size="13" text-anchor="middle" font-weight="600">
+      <rect x="200" y="10" width="120" height="40" rx="8" fill="#e7f0fa" stroke="#1d5fa8"/><text x="260" y="35">Give</text>
+      <rect x="380" y="85" width="120" height="40" rx="8" fill="#e6f4ec" stroke="#2e7d4f"/><text x="440" y="110">Check</text>
+      <rect x="200" y="160" width="120" height="40" rx="8" fill="#fdf3e1" stroke="#a86400"/><text x="260" y="185">Huddle</text>
+      <rect x="20" y="85" width="120" height="40" rx="8" fill="#fbe9e7" stroke="#b3261e"/><text x="80" y="110">Adjust</text>
+    </g>
+    <path d="M320,35 Q420,40 440,83" fill="none" stroke="#1f2328" stroke-width="2" marker-end="url(#ar2)"/>
+    <path d="M440,127 Q420,180 322,182" fill="none" stroke="#1f2328" stroke-width="2" marker-end="url(#ar2)"/>
+    <path d="M200,182 Q100,180 80,127" fill="none" stroke="#1f2328" stroke-width="2" marker-end="url(#ar2)"/>
+    <path d="M80,83 Q100,40 198,35" fill="none" stroke="#1f2328" stroke-width="2" marker-end="url(#ar2)"/>
+    <g font-size="11" fill="#5d6670" text-anchor="middle">
+      <text x="260" y="70">products, Ca, warmth</text>
+      <text x="440" y="145">ABG + TEG</text>
+      <text x="260" y="150">with surgeon</text>
+      <text x="80" y="145">ratio → targeted</text>
+    </g>
+  </svg>
+
+  <div class="card"><b>The anesthesia–surgery huddle (say it, don't assume it)</b>
+    <ul><li>Totals: RBC / plasma / platelets / cryo / cell saver / crystalloid</li>
+    <li>Trend: are pressor needs going up or down? Lactate?</li>
+    <li>Temp, pH, iCa, latest TEG</li>
+    <li>"How close are you to control?"</li></ul>
+  </div>
+
+  <div class="warn"><b>When to push for damage control surgery</b> (pack, temporary closure, get to the ICU):
+    <ul><li>pH &lt; 7.2 or worsening base deficit</li><li>Temp &lt; 35 °C</li><li>Coagulopathy on TEG despite targeted replacement</li><li>Ongoing massive transfusion with no surgical control</li></ul>
+    Anesthesia sees this first. Saying "I think we need to pack and go" is part of our job.</div>
+
+  <h3>Other mid-case watch-outs</h3>
+  <ul>
+    <li><b>Hypocalcemia</b> (citrate): the most commonly missed, and easy to fix</li>
+    <li><b>Hyperkalemia</b> from stored RBCs, worse with acidosis and low flow. Peaked T waves mean act now.</li>
+    <li><b>Pressors:</b> a bridge, not a replacement for volume. Vasopressin is reasonable in refractory hemorrhagic shock.</li>
+    <li><b>TACO / TRALI</b>, abdominal compartment syndrome, and missed injuries (re-check the chest if ventilation changes)</li>
+  </ul>
+</section>
+
+<!-- END OF CASE -->
+<section class="panel" id="end">
+  <h2>Phase 6 · End of Case</h2>
+  <p class="lede">Two very different endings. Both need a plan, and both deserve the same care.</p>
+
+  <h3>A. Transfer to the ICU</h3>
+  <div class="grid">
+    <div class="card"><b>Before you leave the OR</b><ul class="check">
+      <li>Final ABG / lactate / iCa / K and a last TEG (note the time)</li>
+      <li>Call the blood bank: <b>deactivate MTP</b> or keep it open, and return unused products</li>
+      <li>Most stay intubated (open abdomen, ongoing resus, TBI)</li>
+      <li>Pressors on pumps; enough blood for transport</li>
+      <li>Full monitors + ambu/vent + airway gear + push-dose pressor for transport</li></ul></div>
+    <div class="card"><b>Warm handoff</b><p class="small">Bedside, monitors on, ICU team listening, surgeon present if possible.</p></div>
+  </div>
+  <div class="script">ICU HANDOFF (trauma)
+• Who / mechanism: __ y/o, __ mechanism, arrived __
+• Injuries &amp; procedures: __ (packed? open abdomen? return to OR planned at __)
+• Airway: grade __ view, tube __ at __ cm, C-spine status __
+• Blood totals: RBC __ | plasma __ | platelets __ | cryo __ | WB __ | cell saver __ | crystalloid __
+• Drugs: TXA (time __) | CaCl __ g | pressors now __
+• Last labs (time __): pH __ BD __ lactate __ Hgb __ iCa __ K __ | TEG: R __ α __ MA __ LY30 __
+• Temp __ °C
+• Lines: __ (site, size, what's running where)
+• Concerns / to-do: tertiary survey, imaging still needed, family updated?</div>
+
+  <h3>B. Intraoperative death</h3>
+  <div class="card">
+    <b>Recognizing futility is a team decision, made with the surgeon</b>
+    <ul><li>Ongoing exsanguination with no achievable surgical control</li>
+    <li>Prolonged arrest without return of circulation despite correcting reversible causes (Hs &amp; Ts: hypovolemia, tension PTX, tamponade, hyperK, hypothermia)</li>
+    <li>Profound, unresponsive physiology (e.g., severe acidosis, refractory coagulopathy)</li></ul>
+  </div>
+  <div class="grid">
+    <div class="card"><b>In the room</b><ul class="check">
+      <li>Explicit pause: "Is everyone in agreement to stop?"</li>
+      <li>Time of death announced and recorded</li>
+      <li><b>Leave all lines, tubes and drains in place</b> (medical examiner case)</li>
+      <li>Notify the blood bank: stop MTP</li>
+      <li>Notify the organ procurement organization (required)</li></ul></div>
+    <div class="card"><b>After</b><ul class="check">
+      <li>Accurate anesthesia record, including blood totals and events</li>
+      <li>Family conversation with the surgeon; chaplain / social work</li>
+      <li><b>Team debrief</b>, even 2 minutes</li>
+      <li>Check on your residents, students and staff. Use peer support resources.</li></ul></div>
+  </div>
+  <div class="pearl">ATLS 11 added content on communicating serious news and trauma-informed care. This part of the case is a skill we can teach, too.</div>
+</section>
+
+<!-- HANDOUT -->
+<section class="panel" id="handout">
+  <div class="handout">
+  <div class="ho-head"><b>TRAUMA ANESTHESIA: POCKET CARD</b><span>xABCDE · TEG 6s · Phase-based</span></div>
+  <div class="ho-grid">
+    <div class="ho-box"><h5>1 · Before the OR: ask yourself</h5>
+      <ol><li><b>Situation:</b> airway? MTP? blood / LTOWB / TXA given?</li><li><b>Equipment:</b> infuser, warmer, coolers, VL, lines, TEG tubes</li><li><b>People:</b> extra hands, infuser person, runner, blood log</li><li><b>When:</b> straight from the ED vs. CT (unstable ≠ CT)</li><li><b>Where:</b> main OR / hybrid-IR / ED</li><li><b>Mechanism + bleeding risk:</b> SI &gt; 1, ABC ≥ 2</li></ol>
+      <p><b>Huddle:</b> injury · BP goal · blood status · "induce when prepped" · arrest plan</p></div>
+    <div class="ho-box"><h5>2 · Arrival &amp; induction: xABCDE</h5>
+      <ul><li><b>x</b> Tourniquet / binder stay on. Prep &amp; drape first.</li><li><b>A</b> RSI, MILS, VL first-line, bougie, cric kit</li><li><b>B</b> PTX before PPV? Modest PEEP. Normocapnia.</li><li><b>C</b> Resus <i>before</i> RSI. SBP 80–90 (TBI: ≥ 110 / MAP ≥ 80)</li><li><b>D</b> GCS + pupils before induction</li><li><b>E</b> Expose, then warm everything</li></ul>
+      <p><b>Drugs:</b> ketamine 0.5–1 or etomidate 0.1–0.2 mg/kg · roc 1.2 mg/kg · push-dose pressor in hand</p></div>
+    <div class="ho-box"><h5>3 · Access</h5>
+      <p><b>Flow ∝ r⁴ / L.</b> Short and fat wins. Triple-lumen = pressors, not volume.</p>
+      <p>PIV 14–16G → RIC → IO (humeral) → introducer. A-line early, but don't delay incision.</p>
+      <p><b>Abd/pelvic bleed → lines above the diaphragm.</b></p></div>
+    <div class="ho-box"><h5>4 · Time zero (post-induction)</h5>
+      <p>ABG · lactate · Hgb · <b>iCa</b> · K · <b>TEG 6s</b> · CBC · INR · fibrinogen · T&amp;C</p>
+      <p><b>Targets:</b> iCa &gt; 1.1 · T &gt; 36 °C · pH &gt; 7.2 · Hgb 7–9 · lactate ↓</p>
+      <p>Empiric <b>1:1:1 components</b> until the TEG is back. Count ED LTOWB.</p></div>
+    <div class="ho-box ho-wide"><h5>5 · Mid-case: TEG 6s → product</h5>
+      <table><tr><th>Value</th><th>Normal</th><th>Trigger*</th><th>Give</th></tr>
+      <tr><td>CK-R (factors)</td><td>4.6–9.1 min</td><td>&gt; 9.1 min</td><td>Plasma</td></tr>
+      <tr><td>CFF-MA (fibrinogen)</td><td>15–32 mm</td><td>&lt; 20 mm</td><td>Cryo</td></tr>
+      <tr><td>CRT-MA (plts + fib)</td><td>52–70 mm</td><td>≤ 55 (CFF nl) or CRT−CFF &lt; 45</td><td>Platelets</td></tr>
+      <tr><td>LY30 (lysis)</td><td>0–2.6%</td><td>≥ 3%</td><td>TXA 1 g (only for lysis)</td></tr></table>
+      <p><b>CRT-MA − CFF-MA ≈ platelets.</b> Early warning: CRT A10 &lt; 45 · CFF A10 &lt; 15. Fix Ca / temp / pH first. Recheck after each round, every ~30 min or every cooler.</p>
+      <p><b>Push for damage control:</b> pH &lt; 7.2 · T &lt; 35 · coagulopathy despite products · no surgical control</p></div>
+    <div class="ho-box"><h5>6a · ICU transfer</h5>
+      <p>Final labs + TEG · deactivate MTP · transport pressor + airway</p>
+      <p><b>Handoff:</b> mechanism · injuries / procedures · airway · <b>blood totals</b> · TXA / Ca · last labs + TEG · temp · lines · return-OR plan</p></div>
+    <div class="ho-box"><h5>6b · Intraop death</h5>
+      <p>Team decision with the surgeon · time announced · <b>leave lines / tubes in</b> (ME) · stop MTP · notify OPO · family with surgeon · <b>debrief</b> · check on the team</p></div>
+  </div>
+  <p class="ho-foot">*Published thresholds: Einersen 2017 &amp; Moore 2014 (Denver Health), iTACTIC 2021, Vigstedt 2022. Teaching aid, not orders.</p>
+  </div>
+</section>
+
+<!-- BOARD QUESTIONS -->
+<section class="panel" id="board">
+  <h2>Board-style questions</h2>
+  <p class="lede">Original practice questions in ABA style. Tap to reveal each answer.</p>
+
+  <div class="card bq"><b>Q1.</b> A 28-year-old with a GSW to the abdomen arrives in the OR with HR 135 and BP 78/50. He is awake and anxious. The surgeons are prepping. Compared with a healthy patient, which change in induction is MOST appropriate?
+    <ol type="A"><li>Increase the propofol dose because of high sympathetic tone</li><li>Reduce the hypnotic dose and increase the rocuronium dose</li><li>Avoid neuromuscular blockade to preserve spontaneous ventilation</li><li>Delay induction until the arterial line is placed</li></ol>
+    <details><summary>Answer</summary><p><b>B.</b> In hemorrhagic shock, a smaller central volume and a larger share of cardiac output going to the brain mean a lower hypnotic dose works, and a full dose causes cardiovascular collapse. Low cardiac output slows the onset of the NMB, so 1.2 mg/kg rocuronium gives faster intubating conditions. Arterial line placement should not delay a life-saving laparotomy (D).</p></details></div>
+
+  <div class="card bq"><b>Q2.</b> During a massive transfusion for a pelvic fracture, a TEG 6s shows: CK-R 8.2 min, CRT-MA 44 mm, CFF-MA 24 mm, CK-LY30 0.8%. iCa is 1.18 and temperature is 36.4 °C. Which product is MOST indicated?
+    <ol type="A"><li>Plasma</li><li>Cryoprecipitate</li><li>Platelets</li><li>Tranexamic acid</li></ol>
+    <details><summary>Answer</summary><p><b>C.</b> CRT-MA (total clot strength) is low but CFF-MA (fibrinogen only) is normal, so the deficit is platelets. CK-R is normal, so factors are adequate. LY30 is low, which suggests shutdown, so TXA is not indicated. The systemic factors (Ca, temp) are already corrected.</p></details></div>
+
+  <div class="card bq"><b>Q3.</b> Forty minutes into a massive transfusion protocol, the patient becomes more hypotensive despite ongoing product replacement. The ECG shows a prolonged QT interval. The MOST likely cause is:
+    <ol type="A"><li>Hyperkalemia from stored red cells</li><li>Citrate-induced hypocalcemia</li><li>Transfusion-related acute lung injury</li><li>Hypomagnesemia from crystalloid dilution</li></ol>
+    <details><summary>Answer</summary><p><b>B.</b> Citrate in blood products chelates ionized calcium, especially with rapid transfusion and reduced hepatic clearance in shock. Hypocalcemia causes hypotension, reduced contractility, coagulopathy and QT prolongation. Treat with calcium chloride. Hyperkalemia (A) gives peaked T waves and a wide QRS, not a long QT.</p></details></div>
+
+  <div class="card bq"><b>Q4.</b> Which change to an IV catheter will produce the LARGEST increase in gravity-driven flow?
+    <ol type="A"><li>Halving its length</li><li>Doubling its radius</li><li>Doubling the height of the fluid bag</li><li>Warming the fluid from 20 °C to 37 °C</li></ol>
+    <details><summary>Answer</summary><p><b>B.</b> By Hagen–Poiseuille, flow ∝ r⁴/(ηL). Doubling the radius increases flow 16-fold. Halving the length (A) and doubling the pressure gradient (C) each roughly double flow. Warming lowers viscosity modestly (D).</p></details></div>
+
+  <div class="card bq"><b>Q5.</b> A trauma patient is now 4 hours from injury. A TEG 6s shows CK-LY30 of 0.3%. The surgical resident asks whether to give TXA "just in case." The BEST response is:
+    <ol type="A"><li>Give 1 g TXA because it reduces mortality in all bleeding trauma patients</li><li>Give 2 g TXA because the patient is beyond the 3-hour window</li><li>Withhold TXA: there is no lysis, and late administration has been associated with increased bleeding death</li><li>Give aminocaproic acid in place of TXA</li></ol>
+    <details><summary>Answer</summary><p><b>C.</b> An LY30 this low suggests fibrinolysis shutdown, so an antifibrinolytic adds risk without benefit. In CRASH-2, TXA given after 3 hours was associated with an increased risk of death from bleeding. Antifibrinolytics are indicated for documented lysis, ideally within 3 hours of injury.</p></details></div>
+</section>
+
+<!-- SOURCES -->
+<section class="panel" id="refs">
+  <h2>Sources &amp; further reading</h2>
+  <ul>
+    <li>ACS. <a href="https://facs.org/quality-programs/trauma/education/advanced-trauma-life-support/atls-11">ATLS 11th Edition</a>: xABCDE, shock before RSI, video laryngoscopy first-line</li>
+    <li>Tobin JM et al. A checklist for trauma and emergency anesthesia. <i>Anesth Analg</i> 2013;117:1178–84. <a href="https://webarchive.library.unt.edu/web/20161018234341/http:/usaisr.amedd.army.mil/cpgs/Anesthesia_23Jun2016.pdf">JTS CPG with checklist</a></li>
+    <li>Behrens V et al. <a href="https://www.medschool.umaryland.edu/media/som/departments/anesthesiology/faculty--staff/certified-registered-nurse-anesthetists/docs/ryder-cognitive-aid-checklist.pdf">The Ryder Cognitive Aid Checklist for Trauma Anesthesia</a>. <i>Anesth Analg</i> 2016;122:1484–7</li>
+    <li>Holcomb JB et al. <a href="https://www.bumc.bu.edu/emergencymedicine/files/2015/11/Holcomb-et-al.-Massive-Transfusion-PROPPR.-JAMA-2015.pdf">PROPPR</a>. <i>JAMA</i> 2015</li>
+    <li>Rossaint R et al. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9977110/">European guideline on major bleeding and coagulopathy, 6th ed</a>. <i>Crit Care</i> 2023</li>
+    <li>Gonzalez E, Moore EE et al. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5432433/">Goal-directed hemostatic resuscitation of trauma-induced coagulopathy</a> (RCT, Denver Health). <i>Ann Surg</i> 2016;263:1051–9. TEG-guided MTP: 28-day mortality 19.6% vs. 36.4%.</li>
+    <li>Einersen PM, Moore EE et al. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5177474">Rapid thrombelastography thresholds for goal-directed resuscitation</a>. <i>J Trauma Acute Care Surg</i> 2017;82:114–9</li>
+    <li>Moore HB et al. <a href="https://pmc.ncbi.nlm.nih.gov/articles/4370273">Hyperfibrinolysis, physiologic fibrinolysis, and fibrinolysis shutdown</a>. <i>J Trauma Acute Care Surg</i> 2014;77:811–7</li>
+    <li>Baksaas-Aasen K et al. <a href="https://www.c4ts.qmul.ac.uk/downloads/baksaas-aasen2020articleviscoelastichaemostaticassayau.pdf">ITACTIC RCT</a>. <i>Intensive Care Med</i> 2021;47:49–59. VHA- vs. CCT-augmented MHP showed no overall outcome difference; useful as a counterpoint.</li>
+    <li>Vigstedt M et al. <a href="https://pubmed.ncbi.nlm.nih.gov/36073613/">TEG 6s early amplitudes predict MA in trauma</a>. <i>Scand J Clin Lab Invest</i> 2022</li>
+    <li>Neal MD et al. A comparison between the TEG 6s and TEG 5000 in trauma. <i>J Trauma Acute Care Surg</i> 2020;88:279–85</li>
+    <li>CRASH-2 Collaborators. TXA in bleeding trauma patients. <i>Lancet</i> 2010</li>
+    <li>Varon AJ, Smith CE. <i>Essentials of Trauma Anesthesia</i>, 2nd ed. Cambridge, 2017</li>
+  </ul>
+  <p class="small">Draft for teaching. Doses and thresholds are typical values to adapt to institutional protocols, not orders.</p>
+</section>
+
+</main>
+<script>
+(function(){
+  var btns=document.querySelectorAll('#tabs button'), panels=document.querySelectorAll('section.panel');
+  function show(id){
+    var found=false;
+    panels.forEach(function(p){var on=p.id===id;p.classList.toggle('active',on);if(on)found=true;});
+    if(!found){id='overview';panels[0].classList.add('active');}
+    btns.forEach(function(b){b.classList.toggle('active',b.dataset.t===id);});
+    window.scrollTo(0,0);
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    if(location.hash!=='#'+b.dataset.t){location.hash=b.dataset.t;}else{show(b.dataset.t);}
+  });});
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1));});
+  if(location.hash)show(location.hash.slice(1));
+})();
+</script>
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body>
+</html>

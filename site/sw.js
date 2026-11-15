@@ -3,7 +3,7 @@
 // fresh whenever there's a connection (so new cards show up right away) and fall back
 // to the saved copy offline. PDFs and icons are served from the saved copy and refreshed
 // in the background.
-const VERSION = "249b449b34cb";
+const VERSION = "855c8fbb8fbc";
 const CACHE = "bootcamp-" + VERSION;
 const PRECACHE = [
   "/",
@@ -18,12 +18,25 @@ const PRECACHE = [
   "/one-pagers/pages.json",
   "/papers/",
   "/papers/pages.json",
+  "/talks/fresh-gas-flow/",
+  "/talks/general-anesthetic-case-flow/",
+  "/talks/intoxicated-patient/",
+  "/talks/local-anesthetics/",
+  "/talks/mac-subtypes/",
+  "/talks/nerve-block-additives/",
+  "/talks/ponv/",
+  "/talks/severe-tbi/",
+  "/talks/sid-hepatic-resection/",
+  "/talks/stress-dose-steroids/",
+  "/talks/strong-ion-difference/",
+  "/talks/trauma-anesthesia/",
   "/assets/icons/apple-touch-icon.png",
   "/assets/icons/favicon.svg",
   "/assets/icons/icon-192.png",
   "/assets/icons/icon-512.png",
   "/assets/icons/icon-maskable-512.png",
   "/handouts/fresh-gas-flow.pdf",
+  "/handouts/general-anesthetic-case-flow.pdf",
   "/handouts/intoxicated-patient.pdf",
   "/handouts/mac-subtypes.pdf",
   "/handouts/nerve-block-additives.pdf",

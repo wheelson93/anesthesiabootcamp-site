@@ -17,10 +17,6 @@
       ],
       "links": [
         {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/SAFE"
-        },
-        {
           "label": "Full text (NEJM)",
           "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa040232"
         },
@@ -43,10 +39,6 @@
       ],
       "links": [
         {
-          "label": "Free full text",
-          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8486643/"
-        },
-        {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/34605781/"
         }
@@ -64,10 +56,6 @@
         "High versus Low Blood-Pressure Target in Patients with Septic Shock"
       ],
       "links": [
-        {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/SEPSISPAM"
-        },
         {
           "label": "Full text (NEJM)",
           "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa1312173"
@@ -91,10 +79,6 @@
       ],
       "links": [
         {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/ARDSNet"
-        },
-        {
           "label": "Full text (NEJM)",
           "url": "https://www.nejm.org/doi/full/10.1056/NEJM200005043421801"
         },
@@ -116,10 +100,6 @@
         "Prone Positioning in Severe Acute Respiratory Distress Syndrome"
       ],
       "links": [
-        {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/PROSEVA"
-        },
         {
           "label": "Full text (NEJM)",
           "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa1214103"
@@ -143,10 +123,6 @@
       ],
       "links": [
         {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/EOLIA"
-        },
-        {
           "label": "Full text (NEJM)",
           "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa1800385"
         },
@@ -168,10 +144,6 @@
         "Intensive versus Conventional Glucose Control in Critically Ill Patients"
       ],
       "links": [
-        {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/NICE-SUGAR"
-        },
         {
           "label": "Full text (NEJM)",
           "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa0810625"
@@ -195,10 +167,6 @@
       ],
       "links": [
         {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/MENDS2"
-        },
-        {
           "label": "Free full text",
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8162695/"
         },
@@ -220,10 +188,6 @@
         "Transfusion of Plasma, Platelets, and RBCs in a 1:1:1 vs 1:1:2 Ratio (PROPPR)"
       ],
       "links": [
-        {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/PROPPR"
-        },
         {
           "label": "Free full text",
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4374744/"
@@ -247,10 +211,6 @@
       ],
       "links": [
         {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/TRICC"
-        },
-        {
           "label": "Full text (NEJM)",
           "url": "https://www.nejm.org/doi/full/10.1056/NEJM199902113400601"
         },
@@ -273,10 +233,6 @@
       ],
       "links": [
         {
-          "label": "Full text (NEJM)",
-          "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2307227"
-        },
-        {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/37634145/"
         }
@@ -296,20 +252,16 @@
       ],
       "links": [
         {
-          "label": "Full text (Anesth Analg)",
-          "url": "https://doi.org/10.1213/ANE.0000000000007816"
-        },
-        {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/41237407/"
         },
         {
           "label": "Chalk talk",
-          "url": "https://claude.ai/artifact/LMfS4QoiPdskdF5Qe9QhXE"
+          "url": "/talks/ponv/"
         },
         {
           "label": "Handout PDF",
-          "url": "../handouts/ponv.pdf"
+          "url": "/handouts/ponv.pdf"
         }
       ]
     },
@@ -325,10 +277,6 @@
         "TXA"
       ],
       "links": [
-        {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/CRASH-2"
-        },
         {
           "label": "Full text (Lancet)",
           "url": "https://doi.org/10.1016/S0140-6736(10)60835-5"
@@ -352,10 +300,6 @@
       ],
       "links": [
         {
-          "label": "Full text (NEJM)",
-          "url": "https://doi.org/10.1056/NEJMoa1802345"
-        },
-        {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/30044935/"
         }
@@ -374,10 +318,6 @@
       ],
       "links": [
         {
-          "label": "Free full text",
-          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6284829/"
-        },
-        {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/30032977/"
         }
@@ -393,10 +333,6 @@
       "why": "Extended restrictive transfusion into the OR for a high-risk group, starting from induction. 7.5 is the cardiac-surgery threshold that guidelines now cite.",
       "tags": [],
       "links": [
-        {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/TRICS_III"
-        },
         {
           "label": "Full text (NEJM)",
           "url": "https://doi.org/10.1056/NEJMoa1711818"
@@ -418,10 +354,6 @@
       "tags": [],
       "links": [
         {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/TRISS"
-        },
-        {
           "label": "Full text (NEJM)",
           "url": "https://doi.org/10.1056/NEJMoa1406617"
         },
@@ -441,10 +373,6 @@
       "why": "Showed restrictive transfusion is safe even in older patients with heart disease after surgery. It is the basis for the 8 g/dL threshold in orthopedic and cardiac-risk patients.",
       "tags": [],
       "links": [
-        {
-          "label": "Wiki Journal Club",
-          "url": "https://www.wikijournalclub.org/wiki/FOCUS"
-        },
         {
           "label": "Free full text",
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3268062/"
@@ -466,10 +394,6 @@
       "tags": [],
       "links": [
         {
-          "label": "Free full text",
-          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10837004/"
-        },
-        {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/37952133/"
         }
@@ -485,10 +409,6 @@
       "why": "The first large trial to show benefit from a higher trigger in brain injury, where the brain may not tolerate anemia. Read it alongside HEMOTION.",
       "tags": [],
       "links": [
-        {
-          "label": "Free full text",
-          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11581574/"
-        },
         {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/39382241/"
@@ -506,10 +426,6 @@
       "tags": [],
       "links": [
         {
-          "label": "Full text (NEJM)",
-          "url": "https://doi.org/10.1056/NEJMoa2404360"
-        },
-        {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/38869931/"
         }
@@ -525,10 +441,6 @@
       "why": "The only randomized trial of REBOA so far, and it found no benefit and probable harm when used in the ED. A strong argument for tight selection criteria and a fast path to definitive hemorrhage control.",
       "tags": [],
       "links": [
-        {
-          "label": "Free full text",
-          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10570916/"
-        },
         {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/37824132/"
@@ -546,10 +458,6 @@
       "tags": [],
       "links": [
         {
-          "label": "Free full text",
-          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6584250/"
-        },
-        {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/30892574/"
         }
@@ -565,10 +473,6 @@
       "why": "The case series that brought REBOA into civilian trauma care and defined the zones and workflow still in use. Useful context for how the later, less favorable data came about.",
       "tags": [],
       "links": [
-        {
-          "label": "Full text (J Trauma)",
-          "url": "https://doi.org/10.1097/TA.0b013e31829e5416"
-        },
         {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/24089121/"

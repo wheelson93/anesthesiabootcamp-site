@@ -1,0 +1,485 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>PONV in the OR — 5th Consensus Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F5F8;--card:#FFFFFF;--ink:#151923;--ink-2:#3E4658;--ink-3:#6A7285;
+  --rule:#D6DAE3;--rule-2:#E8EBF1;--accent:#3A4FA3;--accent-soft:#E4E8F7;
+  --ok:#237A4E;--warn:#9A6200;--bad:#B3261E;--ok-bg:#E3F2EA;--warn-bg:#F7EDDA;--bad-bg:#F8E3E1;
+  --scope:#0E1220;--scope-rule:#2C3450;--scope-ink:#C7CEE0;--scope-dim:#7F89A6;
+  --s1:#FF6B6B;--s2:#5FD4E8;--s3:#F2F4FA;--s4:#F4C66A;--s5:#7EE2A8;--s6:#B89CFF;
+  --display:"Archivo",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+    --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+    --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+  --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+  --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding-inline:20px;padding-block:0 72px}
+header.mast{padding-block:34px 20px}
+.kicker{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 12px;letter-spacing:.04em;text-transform:uppercase}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,8vw,52px);line-height:1;letter-spacing:-.03em;margin:0 0 12px;text-wrap:balance}
+.thesis{font-size:19.5px;line-height:1.5;color:var(--ink-2);margin:0 0 24px;max-width:58ch}
+
+/* scope (dark instrument panel) */
+.scope{background:var(--scope);border:1px solid var(--scope-rule);border-radius:10px 10px 0 0;color:var(--scope-ink);overflow:hidden}
+.scope.solo{border-radius:10px}
+.scope-top{display:grid;grid-template-columns:repeat(var(--cols,3),1fr);gap:10px;padding:16px 18px 8px}
+.rd{border-left:1px solid var(--scope-rule);padding-left:12px;min-width:0}
+.rd:first-child{border-left:0;padding-left:0}
+.lbl{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);letter-spacing:.08em;text-transform:uppercase}
+.val{font-family:var(--mono);font-weight:700;font-size:clamp(24px,7vw,36px);line-height:1.05;font-variant-numeric:tabular-nums;color:var(--s3)}
+.val.c1{color:var(--s1)} .val.c2{color:var(--s2)} .val.c3{color:var(--s3)} .val.c4{color:var(--s4)} .val.c5{color:var(--s5)} .val.c6{color:var(--s6)}
+.val.sm{font-size:clamp(17px,4.6vw,22px);padding-top:6px}
+.sub{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);margin-top:3px}
+.plot{display:block;width:100%;height:auto;padding:0 12px 4px}
+.plot text{font-family:var(--mono);font-size:10px;fill:var(--scope-dim)}
+.verdict{margin:0;padding:11px 18px 13px;border-top:1px solid var(--scope-rule);font-size:15px;line-height:1.5}
+.verdict b{font-weight:700}
+.v-bad{color:#FF8A80} .v-ok{color:#7EE2A8} .v-warn{color:#F4C66A} .v-info{color:#7FE3F2} .v-n{color:#9AA4BF}
+.ctl{background:var(--card);border:1px solid var(--rule);border-top:0;border-radius:0 0 10px 10px;padding:14px 18px 16px;margin-top:-1px}
+.fld{margin-bottom:10px}
+.fld label{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;margin-bottom:4px;gap:10px}
+.fld .v{font-family:var(--mono);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;cursor:pointer;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);border:3px solid var(--card);margin-top:-9.5px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid var(--card)}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--warn)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px}
+.chip{appearance:none;font-family:var(--sans);font-size:15px;font-weight:600;border:1px solid var(--rule);background:var(--paper);color:var(--ink-2);border-radius:999px;padding:8px 14px;min-height:40px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.chip:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+.chip.act{border-style:dashed}
+.note{font-size:14px;color:var(--ink-3);margin:6px 0 0;line-height:1.45}
+.calc{margin:20px 0 24px}
+
+/* tabs */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--rule);margin:30px -20px 0;padding-inline:20px}
+.tabrow{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabrow::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;appearance:none;background:none;border:0;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink-3);padding:14px 12px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;min-height:46px}
+.tab:hover{color:var(--ink-2)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-4px;border-radius:3px}
+.panel{padding-top:28px}
+h2{font-family:var(--display);font-size:27px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px;line-height:1.15;text-wrap:balance}
+.lede{color:var(--ink-2);margin:0 0 22px;max-width:62ch}
+h3{font-family:var(--display);font-size:18px;font-weight:700;margin:30px 0 8px;letter-spacing:-.01em}
+p{margin:0 0 14px;max-width:66ch}
+ul{margin:0 0 16px;padding-left:0;list-style:none;max-width:66ch}
+ul li{position:relative;padding-left:19px;margin-bottom:8px}
+ul li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:1px;background:var(--accent);opacity:.55}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 18px;max-width:66ch}
+ol.steps li{counter-increment:s;position:relative;padding-left:36px;margin-bottom:14px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:25px;height:25px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:var(--mono);font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+ol.steps li b{display:block}
+strong{font-weight:700}
+.key{border-left:3px solid var(--accent);padding:3px 0 3px 16px;margin:22px 0;font-size:18.5px;line-height:1.5;max-width:60ch}
+.ask{background:var(--accent-soft);border-radius:8px;padding:12px 15px;margin:18px 0;font-size:16px;max-width:64ch}
+.ask b{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:3px}
+.flag{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:13px 15px;margin:20px 0;font-size:16px;max-width:64ch}
+.flag b.t{color:var(--bad)}
+.flag b.w{color:var(--warn)}
+.tblwrap{overflow-x:auto;margin:6px 0 20px}
+.tbl{width:100%;border-collapse:collapse;font-size:15.5px;min-width:440px}
+.tbl th{text-align:left;font-weight:700;font-size:12.5px;color:var(--ink-3);padding:0 10px 7px 0;border-bottom:1px solid var(--rule);text-transform:uppercase;letter-spacing:.05em}
+.tbl td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule-2);vertical-align:top}
+.tbl td:first-child{font-weight:700}
+.num{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.up{color:var(--bad);font-weight:700} .dn{color:var(--accent);font-weight:700} .good{color:var(--ok);font-weight:700}
+.dont{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 20px;padding:0;list-style:none}
+.dont li{background:var(--bad-bg);color:var(--bad);border-radius:5px;padding:4px 10px;font-size:14.5px;font-weight:600;margin:0}
+.dont li::before{display:none}
+.quote{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:14px 0 20px;font-style:italic;max-width:64ch;font-size:16.5px}
+figure{margin:18px 0 22px}
+figure svg{display:block;width:100%;height:auto;max-width:600px}
+figcaption{font-size:14px;color:var(--ink-3);margin-top:6px;max-width:62ch}
+.q{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:14px 16px 12px;margin:0 0 16px}
+.qmeta{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--accent);margin:0 0 6px;text-transform:uppercase}
+.qstem{font-weight:600;margin:0 0 8px}
+ol.opts{margin:0 0 10px;padding-left:26px}
+ol.opts li{margin-bottom:4px;padding-left:4px}
+.q details summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:15px;padding:6px 0;min-height:32px}
+.q details summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.q details p{margin:6px 0 4px;font-size:16px}
+.q:has(details[open]) li.ans{color:var(--ok);font-weight:700}
+footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-3)}
+footer p{max-width:68ch;margin-bottom:10px}
+@media (max-width:480px){
+  body{font-size:16.5px}
+  .wrap{padding-inline:16px}
+  nav.tabs{margin-inline:-16px;padding-inline:16px}
+  .scope-top{padding:14px 14px 6px;gap:8px}
+  .rd{padding-left:8px}
+  .plot{padding:0 6px 4px}
+  .scope-top.q4{grid-template-columns:repeat(2,1fr);row-gap:12px}
+  .scope-top.q4 .rd:nth-child(3){border-left:0;padding-left:0}
+}
+@media print{
+  nav.tabs{display:none}
+  .panel[hidden]{display:block!important}
+  .scope,.ctl{break-inside:avoid}
+}
+</style>
+<!--TITLE: PONV in the OR — 5th Consensus Guidelines-->
+<div class="wrap">
+<header class="mast">
+  <p class="kicker">OR chalk talk · pharmacology · 7 minutes in the induction room</p>
+  <h1>PONV: two agents for everyone</h1>
+  <p class="thesis">The 5th consensus guidelines stopped asking who deserves prophylaxis. Two agents is the floor for every adult. Your judgment now goes into what you add on top and what baseline risk you remove.</p>
+
+  <div class="scope" aria-label="Apfel score and prophylaxis explorer">
+    <div class="scope-top q4" style="--cols:4">
+      <div class="rd"><div class="lbl">Apfel</div><div class="val c3" id="aScore">2</div><div class="sub">of 4 factors</div></div>
+      <div class="rd"><div class="lbl">Baseline risk</div><div class="val c4" id="aRisk">40%</div><div class="sub">PONV, no prophylaxis</div></div>
+      <div class="rd"><div class="lbl">2020 plan</div><div class="val c2" id="aOld">2</div><div class="sub">agents</div></div>
+      <div class="rd"><div class="lbl">2025 plan</div><div class="val c5" id="aNew">2</div><div class="sub" id="aNewSub">agents, the floor</div></div>
+    </div>
+    <svg class="plot" id="stair" viewBox="0 0 400 118" role="img" aria-label="Agents by Apfel score under the 2020 staircase and the 2025 floor"></svg>
+    <p class="verdict" id="aVerdict"></p>
+  </div>
+  <div class="ctl">
+    <div class="chips" role="group" aria-label="Apfel risk factors">
+      <button class="chip" data-f aria-pressed="true">Female</button>
+      <button class="chip" data-f aria-pressed="true">Nonsmoker</button>
+      <button class="chip" data-f aria-pressed="false">Prior PONV / motion sickness</button>
+      <button class="chip" data-f aria-pressed="false">Postop opioids</button>
+    </div>
+    <p class="note">Start with the 34-year-old nonsmoking woman going home after a lap chole, then switch to a 62-year-old male smoker having a shoulder scope under a block (clear every chip). Ask what each one gets. The second answer is the hinge of the talk.</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabrow" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">The one idea</button>
+    <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false">Risk</button>
+    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false">The agents</button>
+    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false">Safety</button>
+    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false">Rescue &amp; PDNV</button>
+    <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false">Pediatrics</button>
+    <button class="tab" role="tab" id="t7" aria-controls="p7" aria-selected="false">Board questions</button>
+  </div>
+</nav>
+
+<main>
+<!-- 1 -->
+<section class="panel" id="p1" role="tabpanel" aria-labelledby="t1">
+  <h2>Prophylaxis is no longer risk-gated</h2>
+  <p class="lede">Guideline 3 now reads "administer PONV prophylaxis using 2 interventions in adults at <em>any</em> risk." The 2020 guidelines reserved two agents for moderate and high risk. Almost everything else in the update is refinement around that pivot.</p>
+
+  <h3>Draw this: the staircase and the floor</h3>
+  <ol class="steps">
+    <li><b>The old staircase.</b> Left half of the board: four steps, Apfel factors along the bottom (0, 1–2, 3, 4), agents up the side (0, 2, 3, 4). "This is what you were taught."</li>
+    <li><b>The floor.</b> A thick line straight across at "2 agents," and cross out everything below it. "Nobody gets less than two."</li>
+    <li><b>Two columns.</b> Right half: REMOVE RISK (TIVA, regional, opioid-sparing analgesia, euvolemia, no nitrous) beside ADD DRUGS (5-HT3, dexamethasone, D2 antagonist, NK-1, olanzapine). "Your judgment lives here now, and the left column is free."</li>
+    <li><b>The rescue arrow.</b> A box labeled "gave ondansetron," an arrow curving back into itself with a fat X through it, and a second arrow sideways to "different class." "This is the most common PACU error in the building."</li>
+  </ol>
+
+  <h3>Why they did it</h3>
+  <ul>
+    <li><strong>Risk stratification fails in practice.</strong> Adherence is poor, and the misses land on high-risk patients, the ones the protocol was built for.</li>
+    <li><strong>The thresholds were never real.</strong> How much opioid counts as "postop opioids"? How many cigarettes make a smoker? Prior PONV is confounded by whatever they got last time.</li>
+    <li><strong>The drugs are safe at prophylactic doses.</strong> When the cost of treating shrinks to near zero, you stop rationing.</li>
+    <li><strong>Equity.</strong> Registry data show lower-SES and Black patients get fewer antiemetics after adjustment. "Everyone gets two" removes the discretion where disparity enters.</li>
+  </ul>
+
+  <div class="key">Ondansetron 4 mg plus dexamethasone 4–8 mg is a defensible floor for essentially every general anesthetic. Stop asking whether the patient has earned prophylaxis; ask what to add.</div>
+
+  <div class="ask"><b>ASK THE LEARNER</b>Does this patient need PONV prophylaxis? <em>(It's now the wrong question. Follow with: what are you giving, and what are you removing?)</em></div>
+</section>
+
+<!-- 2 -->
+<section class="panel" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+  <h2>Risk still matters, differently</h2>
+  <p class="lede">The score no longer decides whether to treat. It decides how far past two you go, and it flags the patients in whom vomiting is a medical problem: wired jaws, raised ICP, fresh tympanoplasty, free flap.</p>
+
+  <p>A review of 8 prediction models (62 publications, 81,834 patients) ranked the <strong>simplified Apfel score first</strong>. Apfel factors: female, nonsmoker, prior PONV or motion sickness, postop opioids. With 0/1/2/3/4 factors, incidence is about 10/20/40/60/80%. Koivuranta adds surgery over 60 minutes.</p>
+
+  <h3>Newer risk factors</h3>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Factor</th><th>Direction</th><th>Grade</th></tr></thead>
+    <tbody>
+      <tr><td>Poor preop fitness</td><td>↑ risk</td><td class="num">B1</td></tr>
+      <tr><td>Low hemoglobin / Hct</td><td>↑ risk; optimal Hct &gt; 39.3%</td><td class="num">B1</td></tr>
+      <tr><td>Intraop hypotension</td><td>↑ risk; avoiding it helps</td><td class="num">B1</td></tr>
+      <tr><td>Goal-directed hemodynamics</td><td>↓ risk</td><td class="num">A1</td></tr>
+      <tr><td>Higher BMI</td><td><strong>↓ risk</strong>, contrary to the usual teaching</td><td class="num">B1</td></tr>
+      <tr><td>Bariatric surgery</td><td>↑ risk, but not because of BMI</td><td class="num">B1</td></tr>
+      <tr><td>Microvascular decompression, CSF loss</td><td>Highest-risk neurosurgery</td><td class="num">B1</td></tr>
+    </tbody>
+  </table></div>
+  <p>Bolting extra factors onto the models doesn't improve prediction, even factors with odds ratios of 2–3. That's why "but my patient also has X" rarely changes the math.</p>
+
+  <h3>PDNV is scored separately</h3>
+  <p>Female, age &lt; 50, prior PONV, opioids in PACU, nausea in PACU. With 0–5 factors, incidence is about 7/20/28/53/60/89%. Overall, <strong>37% of US outpatients</strong> have PDNV in the first 48 hours.</p>
+
+  <div class="ask"><b>ASK THE LEARNER</b>If everyone gets two, why learn Apfel at all? <em>(It tells you where to add a third agent, where to push TIVA and regional, and who can't afford to vomit.)</em></div>
+</section>
+
+<!-- 3 -->
+<section class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+  <h2>The agents</h2>
+  <p class="lede">Doses and what changed in this edition. Dexamethasone at induction, most of the rest at emergence.</p>
+  <div class="tblwrap"><table class="tbl" style="min-width:560px">
+    <thead><tr><th>Agent</th><th>Adult dose</th><th>Timing</th><th>What's new</th></tr></thead>
+    <tbody>
+      <tr><td>Ondansetron</td><td class="num">4 mg IV</td><td>End</td><td>Still the reference drug. Higher doses buy nothing. CYP2D6 ultrarapid metabolizers fail it.</td></tr>
+      <tr><td>Palonosetron</td><td class="num">0.075 mg IV</td><td>Induction</td><td>Beats one dose of ondansetron, but not if ondansetron is redosed.</td></tr>
+      <tr><td>Dexamethasone</td><td class="num">4–8 mg IV</td><td><strong>Induction</strong></td><td>8 mg for combined antiemetic and analgesic effect. PADDI settled infection.</td></tr>
+      <tr><td>Droperidol</td><td class="num">0.625 mg IV</td><td>End</td><td>QT effect and akathisia risk comparable to ondansetron.</td></tr>
+      <tr><td>Haloperidol</td><td class="num">0.5–2 mg IV</td><td>Either</td><td>Works at ≥ 0.5 mg; no QTc or EPS signal at these doses.</td></tr>
+      <tr><td>Amisulpride</td><td class="num">5 mg; 10 mg rescue</td><td>Induction</td><td>New IV D2/D3 antagonist. For rescue, 10 mg beats 5.</td></tr>
+      <tr><td>Aprepitant IV</td><td class="num">32 mg</td><td>Preinduction</td><td>The only IV NK-1 with an FDA PONV indication. 97% receptor occupancy in 5 min.</td></tr>
+      <tr><td>Olanzapine</td><td class="num">10 mg PO</td><td>Preop</td><td>Added to ondansetron + dex, cuts 24-h PONV about 50–60%. Long enough to cover the drive home.</td></tr>
+      <tr><td>Scopolamine</td><td class="num">1.5 mg patch</td><td>Night before / 2–4 h preop</td><td>New urinary retention signal (see Safety).</td></tr>
+      <tr><td>Promethazine</td><td class="num">6.25 mg IV</td><td>Rescue</td><td>No dose-response up to 25 mg; higher doses only add sedation.</td></tr>
+      <tr><td>Metoclopramide</td><td class="num">—</td><td>—</td><td><strong>Not recommended</strong> for prophylaxis.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Combinations</h3>
+  <p>Combinations that beat at least one of their components: NK-1 + 5-HT3, NK-1 + dexamethasone, 5-HT3 + dexamethasone. They aren't interchangeable: aprepitant + palonosetron outperforms dexamethasone + metoclopramide. "Pick a different class" is the floor, not the strategy.</p>
+
+  <h3>Free interventions</h3>
+  <p>TIVA (roughly equal to volatile plus one antiemetic, A1), regional, opioid-sparing analgesia, euvolemia, avoiding hypotension and nitrous. PC6 acupoint stimulation has a Cochrane review behind it (A1) and adds to drugs. Sugammadex lowers PONV versus neostigmine, but not in patients on propofol TIVA.</p>
+
+  <div class="ask"><b>ASK THE LEARNER</b>Why dexamethasone at induction and ondansetron at the end? <em>(Dex takes hours to work through gene transcription; ondansetron's 3–6 h half-life should cover emergence and PACU.)</em></div>
+</section>
+
+<!-- 4 -->
+<section class="panel" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+  <h2>Safety updates that end old arguments</h2>
+  <p class="lede">These are the objections you'll hear from surgeons, endocrinology and cautious colleagues.</p>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>They believe</th><th>Actually</th></tr></thead>
+    <tbody>
+      <tr><td>"Dex raises infection risk"</td><td>PADDI (n = 8,725): a single 8 mg dose was non-inferior to placebo for 30-day SSI, in every subgroup including diabetes.</td></tr>
+      <tr><td>"No dex for diabetics"</td><td>Transient glucose rise of about 36 mg/dL (2 mmol/L), no effect on wound healing.</td></tr>
+      <tr><td>"Ondansetron causes torsades"</td><td>32,737 patients: no TdP deaths attributable to 4 mg, including 4,331 with QTc &gt; 450 ms.</td></tr>
+      <tr><td>"Droperidol is dangerous"</td><td>At 0.625–1.25 mg, QT effect ≈ ondansetron's, and combining them doesn't stack. No VT signal at 0.625 mg.</td></tr>
+      <tr><td>"Reglan is a fine second agent"</td><td>Not recommended for prophylaxis; inferior to dex, droperidol and ondansetron.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="flag"><b class="t">The one new "don't."</b> Transdermal scopolamine is linked to postoperative urinary retention, especially after <strong>urogynecologic surgery</strong> (A3). Reach for a different agent there.</div>
+
+  <div class="ask"><b>ASK THE LEARNER</b>Your patient is diabetic. Are you giving dexamethasone? <em>(Fishing for hesitation, then PADDI and the 36 mg/dL number.)</em></div>
+</section>
+
+<!-- 5 -->
+<section class="panel" id="p5" role="tabpanel" aria-labelledby="t5" hidden>
+  <h2>Rescue and post-discharge</h2>
+  <p class="lede">The core rule is unchanged: treat breakthrough PONV with a class the patient hasn't already received. What's new is the specificity.</p>
+  <h3>After failed ondansetron</h3>
+  <ul>
+    <li>Redosing ondansetron, or switching to another 5-HT3, adds nothing.</li>
+    <li><strong>Promethazine 6.25 mg</strong> beats redosing ondansetron. Six point two five, not 12.5 or 25.</li>
+    <li>Droperidol, or amisulpride 10 mg, are other new-class options. Propofol 20–40 mg works when you need something now.</li>
+    <li>More than 6 hours out and nothing else available? A second 5-HT3 or butyrophenone dose is reasonable.</li>
+  </ul>
+  <h3>Don't redose in PACU</h3>
+  <ul class="dont"><li>Palonosetron (40-h half-life)</li><li>Aprepitant / fosaprepitant</li><li>Scopolamine patch (2–4 h onset)</li><li>Dexamethasone as rescue</li></ul>
+
+  <h3>Post-discharge</h3>
+  <p>37% of outpatients have PDNV in 48 hours, with no IV and no nurse. <strong>High-risk patients should leave with a long-acting antiemetic on board (B1)</strong>: olanzapine 10 mg PO with ondansetron and dex (about 60% less 24-h PDNV), or palonosetron.</p>
+
+  <div class="ask"><b>ASK THE LEARNER</b>She got Zofran at the end of the case and she's vomiting in PACU. What do you order? <em>(Wait for "more Zofran," then correct it: a different class.)</em></div>
+</section>
+
+<!-- 6 -->
+<section class="panel" id="p6" role="tabpanel" aria-labelledby="t6" hidden>
+  <h2>Pediatrics</h2>
+  <p class="lede">In children the outcome is POV, not PONV, because nausea can't be reliably assessed. Apfel discriminates poorly in kids.</p>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Risk factors</th><th>Prophylaxis</th></tr></thead>
+    <tbody>
+      <tr><td>0</td><td><strong>One agent</strong>: ondansetron or dexamethasone</td></tr>
+      <tr><td>1–2</td><td>Two agents: ondansetron + dexamethasone</td></tr>
+      <tr><td>3+</td><td>At least two; <strong>don't</strong> reflexively add a third. Work on baseline risk instead.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Zero-factor children still get an agent because POV rates at zero and one factor are nearly identical. The panel endorses an ad hoc additive count drawing on the VPOP and POVOC scores plus post-pubertal female, anticholinesterase use and volatile vs TIVA.</p>
+  <ul>
+    <li><strong>Ondansetron</strong> 0.05–0.1 mg/kg. <strong>Dexamethasone</strong> 0.15 mg/kg, max 4 mg.</li>
+    <li>TIVA beats volatile (A1). If full TIVA isn't feasible, a subhypnotic propofol infusion may help.</li>
+    <li>Intranasal dexmedetomidine premed beats midazolam or clonidine. IV dex 0.25–1 mcg/kg also reduces the oculocardiac reflex in strabismus surgery.</li>
+  </ul>
+</section>
+
+<!-- 7 -->
+<section class="panel" id="p7" role="tabpanel" aria-labelledby="t7" hidden>
+  <h2>Board questions</h2>
+  <p class="lede">Five questions from the anes qvault question bank, in the order the talk covers them. Ask the question, let them commit to an answer, then reveal.</p>
+
+  <div class="q">
+    <p class="qmeta">Q1 · Clinical · PassMachine · pharmacology</p>
+    <p class="qstem">A 50-year-old woman has severe nausea and vomiting after surgery for ulcerative colitis. She received TIVA, aprepitant and ondansetron. You give droperidol since nothing else has worked. Which is a potential concern with droperidol?</p>
+    <ol class="opts" type="A">
+      <li>Ventricular escape</li>
+      <li class="ans">Long QT syndrome</li>
+      <li>Bradycardia</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>B.</strong> QT prolongation is behind the 2001 black box. The talk's nuance: at 0.625–1.25 mg the QT effect is about the same as ondansetron's, and combining them doesn't stack. Also note what she already got: three classes, so droperidol is the right "new class" move. <em>Talk link: Safety, and Rescue.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q2 · Clinical · PassMachine · pharmacology</p>
+    <p class="qstem">A 45-year-old asks in preop clinic about scopolamine to reduce PONV. Which is a possible side effect?</p>
+    <ol class="opts" type="A">
+      <li class="ans">Blurred vision</li>
+      <li>Muscle weakness</li>
+      <li>QT interval prolongation</li>
+      <li>Pruritus</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>A.</strong> Anticholinergic effects: blurred vision (especially after touching the patch, then the eye), dry mouth, sedation, confusion in the elderly, and the new one in this edition, urinary retention after urogynecologic surgery. <em>Talk link: Safety, "the one new don't."</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q3 · Basic · ANESHUB pharm</p>
+    <p class="qstem">Severe nausea and vomiting in the PACU is most effectively treated with an antagonist at which receptor?</p>
+    <ol class="opts" type="A">
+      <li>Alpha-adrenergic</li>
+      <li>Beta-adrenergic</li>
+      <li class="ans">Dopamine</li>
+      <li>GABA</li>
+      <li>Glutamate</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>C</strong>, from the options given (5-HT3 isn't on the list; this is an older item). It fits the current rescue rule anyway: after 5-HT3 prophylaxis, a D2 antagonist (droperidol, amisulpride 10 mg, haloperidol) is the classic new class. <em>Talk link: Rescue.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q4 · Basic · ANESHUB pharm</p>
+    <p class="qstem">A 19-year-old woman has severe nausea and vomiting after laparoscopy. After prochlorperazine 10 mg IM, she develops spasms of the face, neck and tongue. The most appropriate management is:</p>
+    <ol class="opts" type="A">
+      <li>Baclofen</li>
+      <li class="ans">Diphenhydramine</li>
+      <li>Epinephrine</li>
+      <li>Hydrocortisone</li>
+      <li>Naloxone</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>B.</strong> Acute dystonia from D2 blockade; an anticholinergic antihistamine (or benztropine) reverses it. The same risk comes with metoclopramide, one more reason it fell off the prophylaxis list. <em>Talk link: The agents.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q5 · Basic · ANESHUB general</p>
+    <p class="qstem">100 children having strabismus surgery are randomized: 50 get a new antiemetic, 50 get placebo. 15 in the treatment group and 37 in the control group vomit. Which analysis is most appropriate for significance?</p>
+    <ol class="opts" type="A">
+      <li>Analysis of variance</li>
+      <li class="ans">Chi-square analysis</li>
+      <li>Linear regression and correlation coefficient</li>
+      <li>Student's t-test</li>
+      <li>Wilcoxon rank sum test</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>B.</strong> Two groups, a yes/no outcome: a 2 × 2 table, so chi-square. Bonus: absolute risk reduction is 74% − 30% = 44%, so the number needed to treat is about 2.3. Good moment to talk about grades: A1 means multiple RCTs with meta-analysis; A3 is a single trial, and several of the new drug recommendations sit there. <em>Talk link: Pediatrics, and the grading key below.</em></p>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Source: Gan TJ et al., Fifth Consensus Guidelines for the Management of Postoperative Nausea and Vomiting, Full Report (Appendix 1), American Society for Enhanced Recovery and Perioperative Medicine, 2025; literature through September 2024.</p>
+  <p>Grading key: A = RCT evidence (A1 multiple RCTs with meta-analysis; A2 multiple RCTs; A3 single RCT). B = observational (B1 with statistics; B2 without). C = equivocal (C1 meta-analysis found no difference; C2 qualitative). Say the grade out loud for anything you're asking someone to change their practice over.</p>
+  <p>The full handout with the beat-by-beat script lives in the PONV doc. Board questions from the anes qvault folder (ANESHUB and PassMachine exports).</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  var RISK=[10,20,40,60,80],OLD=[0,2,2,3,4];
+  var chips=[].slice.call(document.querySelectorAll('[data-f]'));
+  var L=36,R=390,T=10,B=94,MAXA=4;
+  function Y(a){return B-a/MAXA*(B-T)}
+  function draw(n){
+    var s=$('stair');s.innerHTML='';
+    var w=(R-L)/5;
+    [0,2,4].forEach(function(a){var t=el('text',{x:L-6,y:Y(a)+3,'text-anchor':'end'});t.textContent=a;s.appendChild(t);s.appendChild(el('line',{x1:L,y1:Y(a),x2:R,y2:Y(a),stroke:'#2C3450'}));});
+    for(var i=0;i<5;i++){
+      var x=L+i*w+6,bw=w-12,on=i===n;
+      var o=OLD[i],nw=Math.max(2,i>=3?3:2);
+      s.appendChild(el('rect',{x:x,y:Y(o),width:bw/2-2,height:B-Y(o)+0.01,fill:'#5FD4E8',opacity:on?0.9:0.35,rx:2}));
+      s.appendChild(el('rect',{x:x+bw/2+2,y:Y(nw),width:bw/2-2,height:B-Y(nw),fill:'#7EE2A8',opacity:on?0.95:0.35,rx:2}));
+      var t=el('text',{x:x+bw/2,y:B+14,'text-anchor':'middle'});t.textContent=i+(i===4?' factors':'');if(on){t.style.fill='#F2F4FA';}s.appendChild(t);
+    }
+    s.appendChild(el('line',{x1:L,y1:Y(2),x2:R,y2:Y(2),stroke:'#F4C66A','stroke-width':2,'stroke-dasharray':'6 4'}));
+    var f=el('text',{x:R,y:Y(2)-4,'text-anchor':'end'});f.style.fill='#F4C66A';f.textContent='2025 floor';s.appendChild(f);
+    var lg=el('text',{x:L+2,y:T+2});lg.innerHTML='<tspan fill="#5FD4E8">■ 2020</tspan>  <tspan fill="#7EE2A8">■ 2025</tspan>';s.appendChild(lg);
+  }
+  function update(){
+    var n=chips.filter(function(c){return c.getAttribute('aria-pressed')==='true'}).length;
+    $('aScore').textContent=n;$('aRisk').textContent=RISK[n]+'%';$('aOld').textContent=OLD[n];
+    $('aNew').textContent=n>=3?'2+':'2';$('aNewSub').textContent=n>=3?'agents, add a 3rd':'agents, the floor';
+    draw(n);
+    var m,cls;
+    if(n===0){cls='v-warn';m='<b>The hinge.</b> Under 2020 this patient got nothing. Now: ondansetron + dexamethasone, like everyone else. Baseline risk is still about 10%, and the drugs cost almost nothing in harm.';}
+    else if(n<=2){cls='v-ok';m='<b>Two agents.</b> Same answer as 2020, now for every adult. Ondansetron 4 mg at the end, dexamethasone 8 mg at induction. Then look at the free column: TIVA, regional, fewer opioids.';}
+    else{cls='v-info';m='<b>Two is the floor, not the plan.</b> About '+RISK[n]+'% baseline risk. Push hard on the free column (TIVA, regional, opioid-sparing), consider a third agent (aprepitant, olanzapine or haloperidol), and send her home with something long-acting.';}
+    $('aVerdict').className='verdict '+cls;$('aVerdict').innerHTML=m;
+  }
+  chips.forEach(function(c){c.addEventListener('click',function(){c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')==='true'?'false':'true');update();});});
+  update();
+})();
+</script>
+
+<script>
+(function(){
+  var KEY='ponv-tab';
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function select(tab,focus){
+    tabs.forEach(function(t){var on=t===tab;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    tab.scrollIntoView({block:'nearest',inline:'nearest'});
+    if(focus)tab.focus();
+    try{localStorage.setItem(KEY,tab.id)}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t)});
+    t.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();select(tabs[(i+d+tabs.length)%tabs.length],true);});
+  });
+  var start=tabs[0];
+  try{var s=localStorage.getItem(KEY);if(s&&document.getElementById(s))start=document.getElementById(s);}catch(e){}
+  select(start);
+  [].slice.call(document.querySelectorAll('[data-goto]')).forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();select(document.getElementById(a.getAttribute('data-goto')),true);window.scrollTo({top:document.querySelector('nav.tabs').offsetTop-4});});});
+})();
+</script>
+
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body></html>

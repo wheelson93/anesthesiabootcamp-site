@@ -1,0 +1,475 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>MAC and Its Subtypes — OR Chalk Talk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F5F8;--card:#FFFFFF;--ink:#151923;--ink-2:#3E4658;--ink-3:#6A7285;
+  --rule:#D6DAE3;--rule-2:#E8EBF1;--accent:#3A4FA3;--accent-soft:#E4E8F7;
+  --ok:#237A4E;--warn:#9A6200;--bad:#B3261E;--ok-bg:#E3F2EA;--warn-bg:#F7EDDA;--bad-bg:#F8E3E1;
+  --scope:#0E1220;--scope-rule:#2C3450;--scope-ink:#C7CEE0;--scope-dim:#7F89A6;
+  --s1:#FF6B6B;--s2:#5FD4E8;--s3:#F2F4FA;--s4:#F4C66A;--s5:#7EE2A8;--s6:#B89CFF;
+  --display:"Archivo",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+    --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+    --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+  --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+  --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding-inline:20px;padding-block:0 72px}
+header.mast{padding-block:34px 20px}
+.kicker{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 12px;letter-spacing:.04em;text-transform:uppercase}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,8vw,52px);line-height:1;letter-spacing:-.03em;margin:0 0 12px;text-wrap:balance}
+.thesis{font-size:19.5px;line-height:1.5;color:var(--ink-2);margin:0 0 24px;max-width:58ch}
+
+/* scope (dark instrument panel) */
+.scope{background:var(--scope);border:1px solid var(--scope-rule);border-radius:10px 10px 0 0;color:var(--scope-ink);overflow:hidden}
+.scope.solo{border-radius:10px}
+.scope-top{display:grid;grid-template-columns:repeat(var(--cols,3),1fr);gap:10px;padding:16px 18px 8px}
+.rd{border-left:1px solid var(--scope-rule);padding-left:12px;min-width:0}
+.rd:first-child{border-left:0;padding-left:0}
+.lbl{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);letter-spacing:.08em;text-transform:uppercase}
+.val{font-family:var(--mono);font-weight:700;font-size:clamp(24px,7vw,36px);line-height:1.05;font-variant-numeric:tabular-nums;color:var(--s3)}
+.val.c1{color:var(--s1)} .val.c2{color:var(--s2)} .val.c3{color:var(--s3)} .val.c4{color:var(--s4)} .val.c5{color:var(--s5)} .val.c6{color:var(--s6)}
+.val.sm{font-size:clamp(17px,4.6vw,22px);padding-top:6px}
+.sub{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);margin-top:3px}
+.plot{display:block;width:100%;height:auto;padding:0 12px 4px}
+.plot text{font-family:var(--mono);font-size:10px;fill:var(--scope-dim)}
+.verdict{margin:0;padding:11px 18px 13px;border-top:1px solid var(--scope-rule);font-size:15px;line-height:1.5}
+.verdict b{font-weight:700}
+.v-bad{color:#FF8A80} .v-ok{color:#7EE2A8} .v-warn{color:#F4C66A} .v-info{color:#7FE3F2} .v-n{color:#9AA4BF}
+.ctl{background:var(--card);border:1px solid var(--rule);border-top:0;border-radius:0 0 10px 10px;padding:14px 18px 16px;margin-top:-1px}
+.fld{margin-bottom:10px}
+.fld label{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;margin-bottom:4px;gap:10px}
+.fld .v{font-family:var(--mono);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;cursor:pointer;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);border:3px solid var(--card);margin-top:-9.5px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid var(--card)}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--warn)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px}
+.chip{appearance:none;font-family:var(--sans);font-size:15px;font-weight:600;border:1px solid var(--rule);background:var(--paper);color:var(--ink-2);border-radius:999px;padding:8px 14px;min-height:40px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.chip:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+.chip.act{border-style:dashed}
+.note{font-size:14px;color:var(--ink-3);margin:6px 0 0;line-height:1.45}
+.calc{margin:20px 0 24px}
+
+/* tabs */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--rule);margin:30px -20px 0;padding-inline:20px}
+.tabrow{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabrow::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;appearance:none;background:none;border:0;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink-3);padding:14px 12px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;min-height:46px}
+.tab:hover{color:var(--ink-2)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-4px;border-radius:3px}
+.panel{padding-top:28px}
+h2{font-family:var(--display);font-size:27px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px;line-height:1.15;text-wrap:balance}
+.lede{color:var(--ink-2);margin:0 0 22px;max-width:62ch}
+h3{font-family:var(--display);font-size:18px;font-weight:700;margin:30px 0 8px;letter-spacing:-.01em}
+p{margin:0 0 14px;max-width:66ch}
+ul{margin:0 0 16px;padding-left:0;list-style:none;max-width:66ch}
+ul li{position:relative;padding-left:19px;margin-bottom:8px}
+ul li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:1px;background:var(--accent);opacity:.55}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 18px;max-width:66ch}
+ol.steps li{counter-increment:s;position:relative;padding-left:36px;margin-bottom:14px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:25px;height:25px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:var(--mono);font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+ol.steps li b{display:block}
+strong{font-weight:700}
+.key{border-left:3px solid var(--accent);padding:3px 0 3px 16px;margin:22px 0;font-size:18.5px;line-height:1.5;max-width:60ch}
+.ask{background:var(--accent-soft);border-radius:8px;padding:12px 15px;margin:18px 0;font-size:16px;max-width:64ch}
+.ask b{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:3px}
+.flag{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:13px 15px;margin:20px 0;font-size:16px;max-width:64ch}
+.flag b.t{color:var(--bad)}
+.flag b.w{color:var(--warn)}
+.tblwrap{overflow-x:auto;margin:6px 0 20px}
+.tbl{width:100%;border-collapse:collapse;font-size:15.5px;min-width:440px}
+.tbl th{text-align:left;font-weight:700;font-size:12.5px;color:var(--ink-3);padding:0 10px 7px 0;border-bottom:1px solid var(--rule);text-transform:uppercase;letter-spacing:.05em}
+.tbl td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule-2);vertical-align:top}
+.tbl td:first-child{font-weight:700}
+.num{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.up{color:var(--bad);font-weight:700} .dn{color:var(--accent);font-weight:700} .good{color:var(--ok);font-weight:700}
+.dont{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 20px;padding:0;list-style:none}
+.dont li{background:var(--bad-bg);color:var(--bad);border-radius:5px;padding:4px 10px;font-size:14.5px;font-weight:600;margin:0}
+.dont li::before{display:none}
+.quote{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:14px 0 20px;font-style:italic;max-width:64ch;font-size:16.5px}
+figure{margin:18px 0 22px}
+figure svg{display:block;width:100%;height:auto;max-width:600px}
+figcaption{font-size:14px;color:var(--ink-3);margin-top:6px;max-width:62ch}
+.q{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:14px 16px 12px;margin:0 0 16px}
+.qmeta{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--accent);margin:0 0 6px;text-transform:uppercase}
+.qstem{font-weight:600;margin:0 0 8px}
+ol.opts{margin:0 0 10px;padding-left:26px}
+ol.opts li{margin-bottom:4px;padding-left:4px}
+.q details summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:15px;padding:6px 0;min-height:32px}
+.q details summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.q details p{margin:6px 0 4px;font-size:16px}
+.q:has(details[open]) li.ans{color:var(--ok);font-weight:700}
+footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-3)}
+footer p{max-width:68ch;margin-bottom:10px}
+@media (max-width:480px){
+  body{font-size:16.5px}
+  .wrap{padding-inline:16px}
+  nav.tabs{margin-inline:-16px;padding-inline:16px}
+  .scope-top{padding:14px 14px 6px;gap:8px}
+  .rd{padding-left:8px}
+  .plot{padding:0 6px 4px}
+  .scope-top.q4{grid-template-columns:repeat(2,1fr);row-gap:12px}
+  .scope-top.q4 .rd:nth-child(3){border-left:0;padding-left:0}
+}
+@media print{
+  nav.tabs{display:none}
+  .panel[hidden]{display:block!important}
+  .scope,.ctl{break-inside:avoid}
+}
+</style>
+<!--TITLE: MAC and Its Subtypes — OR Chalk Talk-->
+<div class="wrap">
+<header class="mast">
+  <p class="kicker">OR chalk talk · pharmacology · 10 minutes</p>
+  <h1>MAC and its subtypes</h1>
+  <p class="thesis">One number on the monitor, four different questions. And why 0.7 MAC with a paralytic on board is a plan, not a near miss.</p>
+
+  <div class="scope" aria-label="Population explorer for MAC-aware, MAC-awake, MAC and MAC-BAR">
+    <div class="scope-top q4" style="--cols:4">
+      <div class="rd"><div class="lbl">Amnestic</div><div class="val c6" id="oAware">—</div><div class="sub">past MAC-aware</div></div>
+      <div class="rd"><div class="lbl">Unresponsive</div><div class="val c2" id="oAwake">—</div><div class="sub">past MAC-awake</div></div>
+      <div class="rd"><div class="lbl">Still</div><div class="val c5" id="oMac">—</div><div class="sub" id="oMacSub">past MAC</div></div>
+      <div class="rd"><div class="lbl">Blunted</div><div class="val c1" id="oBar">—</div><div class="sub">past MAC-BAR</div></div>
+    </div>
+    <svg class="plot" id="bells" viewBox="0 0 400 130" role="img" aria-label="Four population curves with a cursor at the current end-tidal concentration"></svg>
+    <p class="verdict" id="macVerdict"></p>
+  </div>
+  <div class="ctl">
+    <div class="fld"><label for="et">End-tidal, multiples of MAC <span class="v"><span id="etV">0.70</span> MAC</span></label><input type="range" id="et" min="0" max="2.5" step="0.05" value="0.7"></div>
+    <div class="chips"><button class="chip" id="nmb" aria-pressed="true">Paralytic on board</button></div>
+    <p class="note">Start at 0.7 MAC with rocuronium. Ask the learner which of the four columns they actually need at 100%, and which drug is covering each one. Means are typical published values; the spread is schematic, so trust the shapes and overlaps more than the exact percentages.</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabrow" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">The one idea</button>
+    <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false">The statistics</button>
+    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false">0.7 MAC + paralytic</button>
+    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false">MAC-BAR overlap</button>
+    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false">What moves MAC</button>
+    <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false">At the board</button>
+    <button class="tab" role="tab" id="t7" aria-controls="p7" aria-selected="false">Board questions</button>
+  </div>
+</nav>
+
+<main>
+<!-- 1 -->
+<section class="panel" id="p1" role="tabpanel" aria-labelledby="t1">
+  <h2>Four endpoints, four curves</h2>
+  <p class="lede">Every patient has their own concentration for each endpoint. Plot the population and you get a bell. The published number is the peak of that bell: the dose at which you're right half the time.</p>
+
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Endpoint</th><th>Typical value</th><th>What it answers</th></tr></thead>
+    <tbody>
+      <tr><td>MAC-aware</td><td class="num">≈ 0.2–0.3</td><td>Half of patients no longer form explicit memory. Memory fails first, at the lowest dose. Some texts use "MAC-aware" to mean MAC-awake, so say which you mean.</td></tr>
+      <tr><td>MAC-awake</td><td class="num">≈ 0.3–0.5</td><td>Half still respond to a verbal command. About 0.34 MAC for iso, sevo and des; closer to 0.6 for nitrous. Governs both induction and emergence.</td></tr>
+      <tr><td>MAC</td><td class="num">1.0</td><td>End-tidal concentration, at steady state and 1 atm, that prevents movement to skin incision in 50%. An ED<sub>50</sub> for immobility, nothing more. About 1.2–1.3 MAC covers 95–99%.</td></tr>
+      <tr><td>MAC-BAR</td><td class="num">≈ 1.5–2.0</td><td>Blocks the adrenergic (heart rate, blood pressure, catecholamine) response to incision in half. Falls to about 1.3 with 60% nitrous, and much further with opioid.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Two consequences carry the rest of the talk</h3>
+  <ul>
+    <li><strong>MAC values add.</strong> 0.5 MAC of sevoflurane plus 0.5 MAC of nitrous behaves like 1 MAC.</li>
+    <li><strong>Everything interesting lives in the tails:</strong> the patient who moves at 1.4, whose pressure falls at 0.8, who remembers.</li>
+  </ul>
+
+  <div class="key">MAC is a yardstick for comparing and adding agents. It was never supposed to be the whole anesthetic.</div>
+
+  <div class="ask"><b>ASK THE LEARNER</b>If MAC is a median, what fraction of patients move at exactly 1 MAC? So why is 1 MAC ever an acceptable plan? <em>(Half. Because MAC measures immobility, and we rarely rely on the gas alone for that.)</em></div>
+</section>
+
+<!-- 2 -->
+<section class="panel" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+  <h2>The statistics, briefly</h2>
+  <p class="lede">You met this in second year and probably haven't needed it since. Three ideas let a learner read every curve on this page.</p>
+
+  <h3>The bell is a distribution of people, not doses</h3>
+  <p>Pick one endpoint. Every patient crosses it at their own concentration. Most cluster in the middle; a few sit far out. Height tells you how <em>common</em> a threshold is. <strong>Area</strong> under a stretch of the curve tells you what fraction of patients live there, and area is what matters at the machine.</p>
+
+  <h3>Sigma is the width</h3>
+  <p>About 68% of patients sit within 1σ of the mean, 95% within 2σ, 99.7% within 3σ. For MAC, σ runs about 10–12% of the mean, call it 0.12 MAC. That's where 1.2–1.3 MAC comes from: roughly two σ above the mean, where the area reaches 95% and then 99%.</p>
+
+  <h3>Why the bells differ in height</h3>
+  <p>They don't differ in area. Each curve holds the same 100% of patients, so peak height is inversely proportional to σ. The flat MAC-BAR curve doesn't represent fewer patients; its population is spread over a wider range.</p>
+
+  <h3>A z-score turns a concentration into a percentage</h3>
+  <p>z = (your concentration − mean) ÷ σ. The area to the left of z is the fraction of patients past the endpoint.</p>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>End-tidal</th><th>Curve</th><th>z</th><th>Fraction past the endpoint</th></tr></thead>
+    <tbody>
+      <tr><td class="num">0.7 MAC</td><td>MAC</td><td class="num">−2.5</td><td>0.6% immobile; about 99% would still move</td></tr>
+      <tr><td class="num">0.7 MAC</td><td>MAC-awake</td><td class="num">+3.5</td><td>~99.98% unresponsive, roughly 1 in 4,300 not</td></tr>
+      <tr><td class="num">1.2 MAC</td><td>MAC</td><td class="num">+1.7</td><td>95% immobile</td></tr>
+      <tr><td class="num">1.3 MAC</td><td>MAC</td><td class="num">+2.5</td><td>99% immobile</td></tr>
+      <tr><td class="num">1.0 MAC</td><td>MAC-BAR</td><td class="num">−2.1</td><td>~2% already blunted</td></tr>
+      <tr><td class="num">2.0 MAC</td><td>MAC-BAR</td><td class="num">+0.7</td><td>~76% blunted; a quarter still surging</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="flag"><b class="w">One honest limit.</b> Normal tails fall toward zero fast. Anesthesia practice doesn't. Vaporizers run dry, sampling lines leak, pumps sit unstarted, and in NAP5 those, not pharmacologic outliers, produced most awareness. The math describes the drug in a population. It can't tell you what your machine is doing to this patient.</div>
+</section>
+
+<!-- 3 -->
+<section class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+  <h2>0.7 MAC with a paralytic</h2>
+  <p class="lede">The question the CA-1 actually wants answered: you're running below the number that defines adequate anesthesia. Why isn't that light?</p>
+
+  <ol class="steps">
+    <li><b>MAC asks a spinal cord question.</b> Immobility to incision is mediated largely in the spinal cord; decerebrate animals have essentially unchanged MAC. Unconsciousness and memory live in cortex, thalamus and hippocampus. We measure the endpoint we can see from across the room and use it as a yardstick for an effect happening somewhere else.</li>
+    <li><b>The endpoint you care about is already covered.</b> 0.7 MAC is about twice MAC-awake and nearly three times MAC-aware, far out on the right tail of both. What it doesn't deliver is immobility (about 99% would still move), and that's the job you gave the rocuronium.</li>
+    <li><b>The real anesthetic is usually more than 0.7 MAC.</b> Nitrous, a remifentanil infusion, a propofol drip or a working block all add. Most "0.7 MAC" cases are at or above 1 MAC-equivalent. Volatile alone at 0.7 with nothing else is a thinner plan.</li>
+  </ol>
+
+  <div class="flag"><b class="t">What you gave up when you paralyzed the patient.</b> Movement was your fastest, cheapest monitor of depth, and you just deleted it. NAP5 found accidental awareness at about <strong>1 in 8,200</strong> anesthetics with neuromuscular blockade versus about 1 in 136,000 without, with two-thirds of events at induction and emergence. The paralytic didn't make patients light; it made light patients silent.</div>
+
+  <h3>Protect the paralyzed patient</h3>
+  <ul>
+    <li>Set the low end-tidal agent alarm and treat it as an alarm, not a nuisance.</li>
+    <li>Guard the thin windows: induction to incision, and emergence with reversal given before the gas is really off.</li>
+    <li>Ask whether the end-tidal number is real: empty vaporizer, sample line leak, circuit leak, a pump that isn't running, a large right-to-left shunt.</li>
+    <li>Treat unexplained tachycardia, hypertension, tearing or sweating as light until proven otherwise, knowing these signs are insensitive and absent with beta blockade.</li>
+    <li>Consider processed EEG when risk stacks up: TIVA plus paralysis, cardiac, trauma, GA for cesarean, prior awareness, heavy alcohol or stimulant use, high opioid tolerance.</li>
+  </ul>
+
+  <div class="ask"><b>ASK THE LEARNER</b>Paralyzed at 0.6 MAC sevo, no opioid, suddenly tachycardic and hypertensive. Rank your next three moves and say what each one treats. <em>(Deepen or bolus propofol for possible awareness; give opioid for the adrenergic response; check the vaporizer, sample line and pump.)</em></div>
+</section>
+
+<!-- 4 -->
+<section class="panel" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+  <h2>Where MAC and MAC-BAR overlap</h2>
+  <p class="lede">MAC-BAR is the widest bell, because the sympathetic response depends on far more than anesthetic sensitivity: volume, baseline tone, beta blockade, autonomic neuropathy, chronic opioid or stimulant exposure. A wider bell means longer tails, and the left tail crosses 1 MAC.</p>
+
+  <h3>Who lives in the overlap</h3>
+  <p>The patients who look beautifully smooth at 1 MAC while their blood pressure quietly falls: the elderly, the beta-blocked, anyone on clonidine or dexmedetomidine, long-standing diabetics with autonomic neuropathy, the hypovolemic, the cirrhotic. They get sympathetic blunting for free and pay for it in vasodilation.</p>
+
+  <h3>Who lives on the far right</h3>
+  <p>The patient still hypertensive and tachycardic at 1.8 MAC. Chasing MAC-BAR with volatile alone is a bad trade: you buy blunting with vasodilation and myocardial depression, and the hypotension is usually a bigger problem than the surge.</p>
+
+  <div class="key">Three problems, three tools. The gas buys unconsciousness and amnesia. The paralytic buys stillness. Opioid, alpha-2 agonists, beta blockade or a block buy the stress response, and shift MAC-BAR left far more efficiently than the vaporizer.</div>
+
+  <div class="ask"><b>ASK THE LEARNER</b>Why is the MAC-BAR bell fatter than the others, and what does that predict about two identical-looking patients at 1 MAC? <em>(More inputs, more variance. One will be smooth and hypotensive, the other hypertensive.)</em></div>
+</section>
+
+<!-- 5 -->
+<section class="panel" id="p5" role="tabpanel" aria-labelledby="t5" hidden>
+  <h2>What moves the curves</h2>
+  <p class="lede">Shifts apply to MAC and generally drag the other three curves with it.</p>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Raises MAC</th><th>Lowers MAC</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:400">Infancy, peaking around 6 months</td><td style="font-weight:400">Age: about 6% per decade after 40</td></tr>
+      <tr><td style="font-weight:400">Hyperthermia</td><td style="font-weight:400">Hypothermia</td></tr>
+      <tr><td style="font-weight:400">Chronic alcohol use</td><td style="font-weight:400">Acute alcohol intoxication</td></tr>
+      <tr><td style="font-weight:400">Acute cocaine or amphetamine</td><td style="font-weight:400">Opioids, benzos, propofol, nitrous, alpha-2 agonists, lidocaine</td></tr>
+      <tr><td style="font-weight:400">Hypernatremia</td><td style="font-weight:400">Pregnancy (about 30%), hyponatremia, severe anemia, hypoxemia, MAP below ~50</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Unchanged by:</strong> duration of anesthesia, sex, thyroid status, potassium, chronic hypertension, and PaCO<sub>2</sub> in the normal range.</p>
+  <p class="note">Chronic stimulant use is usually taught as lowering MAC through catecholamine depletion; see the Intoxicated Patient talk for that split.</p>
+</section>
+
+<!-- 6 -->
+<section class="panel" id="p6" role="tabpanel" aria-labelledby="t6" hidden>
+  <h2>Drawing it at the whiteboard</h2>
+  <p class="lede">Sixty seconds, four moves, no slides.</p>
+  <ol class="steps">
+    <li><b>One horizontal line.</b> Mark 0 at the left, 1 in the middle, 2 at the right. Label it "multiples of MAC."</li>
+    <li><b>Two tall, narrow bells</b> over 0.35 and 1.0. Name them: awake, and moving. Ask what sits between them.</li>
+    <li><b>A vertical line at 0.7.</b> Point at the first bell: past it. Point at the second: not there yet. Ask what covers the gap. Someone will say rocuronium.</li>
+    <li><b>A wide, flat bell</b> over 1.7, and shade where it laps over the tail of the MAC curve. That sliver is the patient who is smooth and hypotensive at 1 MAC.</li>
+  </ol>
+  <div class="ask"><b>ASK THE LEARNER</b>Most monitors display age-adjusted MAC. For an 80-year-old, roughly what sevoflurane percentage does "1.0" mean? <em>(About 1.6% rather than about 2%: MAC falls roughly 6% per decade after 40, so the whole set of bells slides left.)</em></div>
+</section>
+
+<!-- 7 -->
+<section class="panel" id="p7" role="tabpanel" aria-labelledby="t7" hidden>
+  <h2>Board questions</h2>
+  <p class="lede">Five questions from the anes qvault question bank, in the order the talk covers them. Ask the question, let them commit to an answer, then reveal.</p>
+
+  <div class="q">
+    <p class="qmeta">Q1 · Basic · ANESHUB pharm</p>
+    <p class="qstem">A newly developed volatile anesthetic has a MAC of 10% in oxygen for adults. Which statement is true?</p>
+    <ol class="opts" type="A">
+      <li>Its expected MAC combined with 60% nitrous oxide is 7.5%</li>
+      <li>Less is required to anesthetize a patient with acute amphetamine intoxication</li>
+      <li class="ans">Its potency is 25% of a drug with a MAC of 2.5%</li>
+      <li>The dose needed to suppress the hormonal response to incision is less than MAC</li>
+      <li>Its MAC is decreased by metabolic alkalosis</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>C.</strong> Potency is the inverse of MAC. Work A out loud: 60% nitrous is about 0.58 MAC, so you need about 0.42 × 10% ≈ 4.2%, not 7.5%. B is backwards (acute stimulants raise MAC), and D is MAC-BAR, which sits above MAC. <em>Talk link: The one idea, "MAC values add."</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q2 · Basic · ANESHUB general</p>
+    <p class="qstem">Which statement about awareness (recall) during opioid-based anesthesia is true?</p>
+    <ol class="opts" type="A">
+      <li class="ans">It is usually not associated with pain</li>
+      <li>It correlates well with intact auditory evoked responses</li>
+      <li>It is prevented if the opioid dose blocks the hemodynamic response to stimuli</li>
+      <li>It is prevented if the opioid dose prevents movement without relaxants</li>
+      <li>It is predicted by a specific EEG pattern</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>A.</strong> Opioids blunt pain and the stress response without reliably producing unconsciousness. C is the teaching point: a patient can sit past MAC-BAR on opioid and still be on the wrong side of MAC-awake. Hemodynamic calm is not proof of amnesia. <em>Talk link: 0.7 MAC + paralytic, and the MAC-BAR overlap.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q3 · Advanced · ANESHUB pharm</p>
+    <p class="qstem">Each of the following is an effect of acute preoperative oral clonidine EXCEPT:</p>
+    <ol class="opts" type="A">
+      <li>sedation</li>
+      <li class="ans">respiratory depression</li>
+      <li>decreased intraoperative plasma catecholamine concentrations</li>
+      <li>decreased MAC of inhalational anesthetics</li>
+      <li>decreased perioperative opioid requirement</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>B.</strong> Alpha-2 agonists sedate, lower MAC and blunt the catecholamine surge without meaningful respiratory depression. In curve terms, clonidine drags MAC-BAR left, which is why these patients land in the overlap and get hypotensive at "normal" doses. <em>Talk link: MAC-BAR overlap.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q4 · Basic · ANESHUB general</p>
+    <p class="qstem">Each of the following is expected with deliberate hypothermia EXCEPT:</p>
+    <ol class="opts" type="A">
+      <li>decreased unloading of oxygen from hemoglobin</li>
+      <li>a 5% decrease in MAC for each 1°C decrease in temperature</li>
+      <li>increased arterial oxygen and carbon dioxide contents</li>
+      <li>a 50% decrease in cerebral metabolic rate at 28°C</li>
+      <li class="ans">spike-and-dome EEG activity below 30°C</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>E.</strong> Cooling slows and then flattens the EEG; it doesn't produce spike-and-dome activity. B is the MAC fact to keep: roughly 5% less anesthetic per degree, which matters for the cold trauma patient. <em>Talk link: What moves MAC.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q5 · Advanced · ANESHUB general</p>
+    <p class="qstem">Which is most likely in a 30-year-old with untreated hypothyroidism?</p>
+    <ol class="opts" type="A">
+      <li>Cardiac arrhythmias with ketamine</li>
+      <li class="ans">Decreased ventilatory response to hypoxia</li>
+      <li>Hypoglycemia</li>
+      <li>Increased MAC of inhalational anesthetics</li>
+      <li>Peripheral vasodilatation</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>B.</strong> Hypothyroid patients have blunted hypoxic and hypercarbic drive. D is the classic trap: thyroid status doesn't change MAC. They seem "sensitive" to anesthetics because of low cardiac output, hypothermia and slow drug clearance, not a lower MAC. <em>Talk link: What moves MAC, "unchanged by."</em></p>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Curves use typical published means (MAC-aware ≈ 0.25, MAC-awake ≈ 0.35, MAC = 1.0, MAC-BAR ≈ 1.75) with spreads chosen to make the teaching geometry legible. Treat the shapes and overlaps as real and the exact percentages as illustrative.</p>
+  <p>Awareness incidence from the 5th National Audit Project (Pandit et al., <em>Br J Anaesth</em> 2014). Built for med students, interns and CA-1s.</p>
+  <p>Board questions from the anes qvault folder (ANESHUB exports).</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function erf(x){var s=x<0?-1:1;x=Math.abs(x);var t=1/(1+0.3275911*x);var y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return s*y;}
+  function cdf(x,m,s){return 0.5*(1+erf((x-m)/(s*Math.SQRT2)));}
+  var C=[{k:'aware',m:0.25,s:0.09,c:'#B89CFF'},{k:'awake',m:0.35,s:0.10,c:'#5FD4E8'},{k:'mac',m:1.0,s:0.12,c:'#7EE2A8'},{k:'bar',m:1.75,s:0.36,c:'#FF6B6B'}];
+  var L=10,R=390,T=8,B=108,XM=2.5;
+  function X(v){return L+v/XM*(R-L)}
+  function pdf(x,m,s){return Math.exp(-0.5*Math.pow((x-m)/s,2))/s;}
+  var peak=pdf(0.25,0.25,0.09);
+  var svg=$('bells');
+  function drawBase(){
+    svg.innerHTML='';
+    svg.appendChild(el('line',{x1:L,y1:B,x2:R,y2:B,stroke:'#2C3450'}));
+    [0,0.5,1,1.5,2,2.5].forEach(function(v){var t=el('text',{x:X(v),y:B+14,'text-anchor':v===0?'start':v===2.5?'end':'middle'});t.textContent=v+(v===2.5?' MAC':'');svg.appendChild(t);});
+    C.forEach(function(c){var d='';for(var i=0;i<=200;i++){var x=i/200*XM;var y=B-(pdf(x,c.m,c.s)/peak)*(B-T);d+=(i?'L':'M')+X(x).toFixed(1)+','+y.toFixed(1);}svg.appendChild(el('path',{d:d,fill:'none',stroke:c.c,'stroke-width':2}));});
+  }
+  drawBase();
+  var cur=null,shade=null;
+  function pct(p){p*=100;if(p>=99.95)return '>99.9%';if(p<0.1)return '<0.1%';if(p>=99)return p.toFixed(1)+'%';return Math.round(p)+'%';}
+  function update(){
+    var v=+$('et').value,nmb=$('nmb').getAttribute('aria-pressed')==='true';
+    $('etV').textContent=v.toFixed(2);
+    var P={};C.forEach(function(c){P[c.k]=cdf(v,c.m,c.s);});
+    $('oAware').textContent=pct(P.aware);$('oAwake').textContent=pct(P.awake);$('oBar').textContent=pct(P.bar);
+    if(nmb){$('oMac').textContent='NMB';$('oMacSub').textContent='rocuronium covers';}else{$('oMac').textContent=pct(P.mac);$('oMacSub').textContent='past MAC';}
+    if(cur)svg.removeChild(cur);
+    cur=el('g',{});var x=X(v);
+    cur.appendChild(el('line',{x1:x,y1:T-2,x2:x,y2:B,stroke:'#F2F4FA','stroke-width':2,opacity:.85}));
+    svg.appendChild(cur);
+    var m,cls;
+    if(P.awake<0.95){cls='v-bad';m='<b>Risk of awareness.</b> Only '+pct(P.awake)+' of patients would be unresponsive at '+v.toFixed(2)+' MAC. '+(nmb?'A paralyzed patient here could be awake and unable to tell you.':'Expect movement and response to voice.');}
+    else if(!nmb&&P.mac<0.95){cls='v-warn';m='<b>Asleep, not still.</b> Almost everyone is unconscious, but '+pct(1-P.mac)+' would move to incision. Either paralyze, add opioid or block, or go deeper.';}
+    else if(nmb&&v<1.0){cls='v-ok';m='<b>A plan, not a near miss.</b> '+pct(P.awake)+' unresponsive and '+pct(P.aware)+' amnestic. Immobility is the paralytic’s job. The stress response is still unblunted in '+pct(1-P.bar)+': cover it with opioid, not more gas.';}
+    else if(P.bar<0.5){cls='v-info';m='<b>Still and asleep.</b> The adrenergic response is blunted in only '+pct(P.bar)+'. Opioid, an alpha-2 agonist or a block moves MAC-BAR far more efficiently than the vaporizer.';}
+    else{cls='v-warn';m='<b>Chasing MAC-BAR with gas.</b> '+pct(P.bar)+' blunted, but at the cost of vasodilation and myocardial depression. Hypotension is usually the bigger problem here.';}
+    $('macVerdict').className='verdict '+cls;$('macVerdict').innerHTML=m;
+  }
+  $('et').addEventListener('input',update);
+  $('nmb').addEventListener('click',function(){var b=$('nmb');b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');update();});
+  update();
+})();
+</script>
+
+<script>
+(function(){
+  var KEY='mac-tab';
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function select(tab,focus){
+    tabs.forEach(function(t){var on=t===tab;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    tab.scrollIntoView({block:'nearest',inline:'nearest'});
+    if(focus)tab.focus();
+    try{localStorage.setItem(KEY,tab.id)}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t)});
+    t.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();select(tabs[(i+d+tabs.length)%tabs.length],true);});
+  });
+  var start=tabs[0];
+  try{var s=localStorage.getItem(KEY);if(s&&document.getElementById(s))start=document.getElementById(s);}catch(e){}
+  select(start);
+  [].slice.call(document.querySelectorAll('[data-goto]')).forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();select(document.getElementById(a.getAttribute('data-goto')),true);window.scrollTo({top:document.querySelector('nav.tabs').offsetTop-4});});});
+})();
+</script>
+
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body></html>

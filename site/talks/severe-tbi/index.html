@@ -1,0 +1,606 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Severe TBI in the OR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F5F8;
+  --card:#FFFFFF;
+  --ink:#151923;
+  --ink-2:#3E4658;
+  --ink-3:#6A7285;
+  --rule:#D6DAE3;
+  --rule-2:#E8EBF1;
+  --accent:#3A4FA3;
+  --accent-soft:#E4E8F7;
+  --ok:#237A4E;
+  --warn:#9A6200;
+  --bad:#B3261E;
+  --ok-bg:#E3F2EA;
+  --warn-bg:#F7EDDA;
+  --bad-bg:#F8E3E1;
+  --scope:#0E1220;
+  --scope-2:#1A2033;
+  --scope-rule:#2C3450;
+  --scope-ink:#C7CEE0;
+  --scope-dim:#7F89A6;
+  --art:#FF6B6B;
+  --icp:#5FD4E8;
+  --cpp:#F2F4FA;
+  --display:"Archivo",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+    --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+    --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;
+    --ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+  --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+  --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;
+  --ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding-inline:20px;padding-block:0 72px}
+header.mast{padding-block:34px 20px}
+.kicker{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 12px;letter-spacing:.04em;text-transform:uppercase}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,8vw,52px);line-height:1;letter-spacing:-.03em;margin:0 0 12px;text-wrap:balance}
+.thesis{font-size:19.5px;line-height:1.5;color:var(--ink-2);margin:0 0 24px;max-width:58ch}
+
+/* scope hero */
+.scope{background:var(--scope);border:1px solid var(--scope-rule);border-radius:10px;color:var(--scope-ink);overflow:hidden}
+.scope-top{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 18px 6px}
+.rd{border-left:1px solid var(--scope-rule);padding-left:12px}
+.rd:first-child{border-left:0;padding-left:0}
+.lbl{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);letter-spacing:.08em}
+.val{font-family:var(--mono);font-weight:700;font-size:clamp(26px,7.5vw,38px);line-height:1.05;font-variant-numeric:tabular-nums}
+.val.a{color:var(--art)} .val.i{color:var(--icp)} .val.c{color:var(--cpp)}
+.sub{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);margin-top:3px}
+#wave{display:block;width:100%;height:70px}
+.verdict{margin:0;padding:11px 18px 13px;border-top:1px solid var(--scope-rule);font-size:15px;line-height:1.45}
+.verdict b{font-weight:700}
+.v-bad{color:#FF8A80} .v-ok{color:#7EE2A8} .v-warn{color:#F4C66A}
+.ctl{background:var(--card);border:1px solid var(--rule);border-top:0;border-radius:0 0 10px 10px;padding:14px 18px 16px;margin-top:-1px}
+.scope{border-radius:10px 10px 0 0}
+.fld{margin-bottom:12px}
+.fld:last-of-type{margin-bottom:6px}
+.fld label{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;margin-bottom:4px;gap:10px}
+.fld .v{font-family:var(--mono);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;cursor:pointer;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);border:3px solid var(--card);margin-top:-9.5px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid var(--card)}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--warn)}
+.note{font-size:14px;color:var(--ink-3);margin:6px 0 0;line-height:1.45}
+
+/* tabs */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--rule);margin:30px -20px 0;padding-inline:20px}
+.tabrow{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabrow::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;appearance:none;background:none;border:0;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink-3);padding:14px 12px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;min-height:46px}
+.tab:hover{color:var(--ink-2)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-4px;border-radius:3px}
+
+.panel{padding-top:28px}
+h2{font-family:var(--display);font-size:27px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px;line-height:1.15;text-wrap:balance}
+.lede{color:var(--ink-2);margin:0 0 22px;max-width:62ch}
+h3{font-family:var(--display);font-size:18px;font-weight:700;margin:30px 0 8px;letter-spacing:-.01em}
+p{margin:0 0 14px;max-width:66ch}
+ul{margin:0 0 16px;padding-left:0;list-style:none;max-width:66ch}
+ul li{position:relative;padding-left:19px;margin-bottom:8px}
+ul li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:1px;background:var(--accent);opacity:.55}
+strong{font-weight:700}
+.key{border-left:3px solid var(--accent);padding:3px 0 3px 16px;margin:22px 0;font-size:18.5px;line-height:1.5;max-width:60ch}
+.ask{background:var(--accent-soft);border-radius:8px;padding:12px 15px;margin:18px 0;font-size:16px;max-width:64ch}
+.ask b{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:3px}
+.flag{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:13px 15px;margin:20px 0;font-size:16px;max-width:64ch}
+.flag b.t{color:var(--bad)}
+.tblwrap{overflow-x:auto;margin:6px 0 20px}
+.tbl{width:100%;border-collapse:collapse;font-size:15.5px;min-width:420px}
+.tbl th{text-align:left;font-weight:700;font-size:12.5px;color:var(--ink-3);padding:0 10px 7px 0;border-bottom:1px solid var(--rule);text-transform:uppercase;letter-spacing:.05em}
+.tbl td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule-2);vertical-align:top}
+.tbl td:first-child{font-weight:700}
+.num{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+figure{margin:18px 0 22px}
+figure svg{display:block;width:100%;height:auto;max-width:560px}
+figcaption{font-size:14px;color:var(--ink-3);margin-top:6px;max-width:62ch}
+svg .ax{stroke:var(--ink-3);stroke-width:1.5;fill:none}
+svg .curve{stroke:var(--accent);stroke-width:3;fill:none}
+svg .t{fill:var(--ink-2);font-family:var(--sans);font-size:13px}
+svg .ts{fill:var(--ink-3);font-family:var(--sans);font-size:12px}
+svg .dotok{fill:var(--ok)} svg .dotbad{fill:var(--bad)}
+svg .box{fill:none;stroke:var(--ink-2);stroke-width:2}
+
+/* tier ladder */
+.ladder{display:grid;gap:10px;margin:14px 0 22px}
+.tier{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:12px 15px 6px;position:relative}
+.tier .tn{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;font-weight:700;margin-bottom:3px}
+.tier.t0 .tn{color:var(--ok)} .tier.t1 .tn{color:var(--accent)} .tier.t2 .tn{color:var(--warn)} .tier.t3 .tn{color:var(--bad)}
+.tier.t0{border-left:4px solid var(--ok)} .tier.t1{border-left:4px solid var(--accent)} .tier.t2{border-left:4px solid var(--warn)} .tier.t3{border-left:4px solid var(--bad)}
+.tier ul{margin-bottom:8px}
+.dont{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 20px;padding:0;list-style:none}
+.dont li{background:var(--bad-bg);color:var(--bad);border-radius:5px;padding:4px 10px;font-size:14.5px;font-weight:600;margin:0}
+.dont li::before{display:none}
+.q{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:14px 16px 12px;margin:0 0 16px}
+.qmeta{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--accent);margin:0 0 6px;text-transform:uppercase}
+.qstem{font-weight:600;margin:0 0 8px}
+ol.opts{margin:0 0 10px;padding-left:26px}
+ol.opts li{margin-bottom:4px;padding-left:4px}
+.q details summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:15px;padding:6px 0;min-height:32px}
+.q details summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.q details p{margin:6px 0 4px;font-size:16px}
+.q details[open] ~ ol li.ans, .q:has(details[open]) li.ans{color:var(--ok);font-weight:700}
+
+footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-3)}
+footer p{max-width:68ch;margin-bottom:10px}
+@media (max-width:480px){
+  body{font-size:16.5px}
+  .wrap{padding-inline:16px}
+  nav.tabs{margin-inline:-16px;padding-inline:16px}
+  .rd{padding-left:9px}
+  .scope-top{padding:14px 14px 4px}
+}
+@media (prefers-reduced-motion:reduce){#wave{display:none}}
+</style>
+
+<div class="wrap">
+<header class="mast">
+  <p class="kicker">OR chalk talk · trauma · 10–15 minutes</p>
+  <h1>Severe TBI in the OR</h1>
+  <p class="thesis">The neurosurgeon fixes the primary injury. Our job is to prevent the second one: hypotension and hypoxia do more damage to an injured brain than almost anything else we control.</p>
+
+  <div class="scope" aria-label="Cerebral perfusion pressure calculator">
+    <div class="scope-top">
+      <div class="rd"><div class="lbl">ART · MAP</div><div class="val a" id="mapOut">80</div><div class="sub">mmHg</div></div>
+      <div class="rd"><div class="lbl">ICP</div><div class="val i" id="icpOut">25</div><div class="sub">mmHg</div></div>
+      <div class="rd"><div class="lbl">CPP = MAP − ICP</div><div class="val c" id="cppOut">55</div><div class="sub">mmHg</div></div>
+    </div>
+    <canvas id="wave" aria-hidden="true"></canvas>
+    <p class="verdict" id="verdict"></p>
+  </div>
+  <div class="ctl">
+    <div class="fld"><label for="map">Mean arterial pressure <span class="v"><span id="mapV">80</span> mmHg</span></label><input type="range" id="map" min="40" max="130" step="1" value="80"></div>
+    <div class="fld"><label for="icp">Intracranial pressure <span class="v"><span id="icpV">25</span> mmHg</span></label><input type="range" id="icp" min="0" max="60" step="1" value="25"></div>
+    <p class="note">Start here with the learner: a "normal-looking" MAP of 80 with an ICP of 25 leaves CPP at 55, below the floor. Ask what they'd fix first.</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabrow" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">The one idea</button>
+    <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false">Before you start</button>
+    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false">Airway &amp; induction</button>
+    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false">Maintenance</button>
+    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false">ICP crisis</button>
+    <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false">Blood &amp; clotting</button>
+    <button class="tab" role="tab" id="t7" aria-controls="p7" aria-selected="false">Emergence</button>
+    <button class="tab" role="tab" id="t8" aria-controls="p8" aria-selected="false">Board questions</button>
+  </div>
+</nav>
+
+<main>
+<!-- 1 -->
+<section class="panel" id="p1" role="tabpanel" aria-labelledby="t1">
+  <h2>Primary injury is done. Secondary injury is ours.</h2>
+  <p class="lede">By the time the patient reaches the OR, the impact has already happened. What's left to decide is whether the swollen, bruised brain around it gets enough oxygen over the next few hours.</p>
+
+  <h3>Draw this: the skull is a closed box</h3>
+  <figure>
+    <svg viewBox="0 0 560 250" role="img" aria-label="Monro-Kellie box and intracranial pressure-volume curve">
+      <rect class="box" x="16" y="30" width="190" height="170" rx="18"/>
+      <rect x="26" y="40" width="110" height="150" rx="10" fill="var(--accent-soft)"/>
+      <text class="t" x="81" y="120" text-anchor="middle">Brain ~80%</text>
+      <rect x="140" y="40" width="30" height="150" rx="4" fill="var(--bad-bg)"/>
+      <text class="ts" x="155" y="215" text-anchor="middle">Blood</text>
+      <rect x="174" y="40" width="22" height="150" rx="4" fill="var(--ok-bg)"/>
+      <text class="ts" x="190" y="232" text-anchor="middle">CSF</text>
+      <text class="t" x="111" y="20" text-anchor="middle" font-weight="700">Fixed volume</text>
+      <line class="ax" x1="280" y1="200" x2="540" y2="200"/>
+      <line class="ax" x1="280" y1="200" x2="280" y2="24"/>
+      <text class="ts" x="540" y="222" text-anchor="end">Added volume (blood, edema, clot)</text>
+      <text class="ts" x="286" y="20">ICP</text>
+      <path class="curve" d="M282 186 C 380 184, 430 176, 462 150 C 492 124, 508 80, 520 32"/>
+      <circle class="dotok" cx="400" cy="182" r="6"/>
+      <circle class="dotbad" cx="498" cy="104" r="6"/>
+      <text class="ts" x="382" y="170" text-anchor="middle">Compensated</text>
+      <text class="ts" x="480" y="96" text-anchor="end">Small change,</text>
+      <text class="ts" x="480" y="111" text-anchor="end">big ICP jump</text>
+    </svg>
+    <figcaption>Monro–Kellie: brain + blood + CSF share a fixed space. Early on, CSF and venous blood shift out and ICP barely moves. Once that reserve is used up, a little extra volume (a bit of CO<sub>2</sub>, a cough, a bigger clot) sends ICP straight up. Severe TBI patients arrive on the steep part.</figcaption>
+  </figure>
+
+  <h3>CPP is the number that matters</h3>
+  <p><strong>CPP = MAP − ICP.</strong> Normally the brain holds its own blood flow steady across a wide range of blood pressures (autoregulation). After TBI that reflex is blunted or gone, sometimes for weeks, and it's worse in the sicker patients (lower GCS, higher ICP). So brain blood flow now follows your arterial line: if MAP falls, the brain gets less, full stop.</p>
+
+  <div class="key">Every decision in this case comes back to two things: keep oxygen delivery up (no hypotension, no hypoxia) and keep the box from getting fuller (no hypercarbia, no coughing, no venous obstruction).</div>
+
+  <h3>The big three secondary insults</h3>
+  <ul>
+    <li><strong>Hypotension.</strong> Even one episode is associated with worse survival and disability. Longer duration, worse outcome.</li>
+    <li><strong>Hypoxia.</strong> Especially around intubation.</li>
+    <li><strong>Hyper- or hypocarbia.</strong> CO<sub>2</sub> is the fastest lever on cerebral blood volume, in both directions.</li>
+  </ul>
+  <p>Also on the list: fever, hypo- or hyperglycemia, low sodium, seizures, and coagulopathy.</p>
+
+  <div class="ask"><b>ASK THE LEARNER</b>Why is "just give more propofol" risky here, even though propofol lowers ICP? <em>(Answer: it lowers MAP more, and CPP is MAP minus ICP.)</em></div>
+</section>
+
+<!-- 2 -->
+<section class="panel" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+  <h2>Before you start: how fast is this?</h2>
+  <p class="lede">First question: is the brain herniating right now, or do you have time? The answer changes how much resuscitation happens before incision.</p>
+
+  <h3>Emergent (blown pupil, expanding clot)</h3>
+  <ul>
+    <li>Get the hematoma out. An arterial line is ideal but <strong>never delays evacuation</strong>. Put it in after induction if needed.</li>
+    <li>Start hyperosmolar therapy while you set up if there are herniation signs: fixed or asymmetric pupils, extensor posturing, Cushing response.</li>
+  </ul>
+
+  <h3>Non-emergent: resuscitate first</h3>
+  <ul>
+    <li>A hypovolemic, anemic trauma patient will drop their pressure hard on induction. Fix volume and blood before you give drugs.</li>
+    <li>Look for the other injuries (chest, abdomen, pelvis, long bones). <strong>Stop extracranial bleeding before the craniotomy.</strong></li>
+    <li>If there's time, an ICP monitor before surgery gives you a real CPP to steer by.</li>
+  </ul>
+
+  <h3>Who gets an ICP monitor?</h3>
+  <p>The EVD is the gold standard because it measures and drains CSF. An intraparenchymal bolt measures only.</p>
+  <ul>
+    <li>GCS ≤ 8 with structural injury on CT</li>
+    <li>Worsening CT or clinical exam</li>
+    <li>Needs urgent surgery elsewhere (ortho, belly) and you won't be able to examine them for hours</li>
+    <li>Consider with GCS &gt; 8 when the number would change management: timing of other surgery, proning for ARDS, weaning sedation</li>
+  </ul>
+  <p>ICP monitoring is associated with lower in-hospital and 6-month mortality.</p>
+
+  <div class="key">No ICP monitor? Assume ICP is up and aim for <strong>SBP ≥ 110 / MAP &gt; 80</strong>.</div>
+</section>
+
+<!-- 3 -->
+<section class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+  <h2>Airway and induction</h2>
+  <p class="lede">This is where most secondary injury happens in the OR: one hypotensive, hypoxic intubation.</p>
+
+  <h3>What makes this airway hard</h3>
+  <ul>
+    <li>Facial swelling, blood or vomit, obtunded or combative, full stomach.</li>
+    <li><strong>C-collar in place.</strong> About 6% of severe TBI patients also have a C-spine injury, many unstable. Use manual in-line stabilization.</li>
+    <li><strong>Video laryngoscope first</strong>, DL as backup. VL still does better even in soiled airways (DEVICE trial first-pass success ~75% vs 60%). Known unstable spine: hyperangulated VL or flexible scope.</li>
+  </ul>
+
+  <h3>Oxygenate like it matters, because it does</h3>
+  <p>Preoxygenation is often poor in an agitated, uncooperative patient. <strong>Delayed sequence induction</strong> is a good option: a dissociative dose of ketamine (0.5–1 mg/kg), then preoxygenate and position properly, then paralyze and intubate. It gives higher first-pass success and less hypoxia.</p>
+
+  <h3>Induction agents</h3>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Drug</th><th>Why</th><th>Watch for</th></tr></thead>
+    <tbody>
+      <tr><td>Ketamine</td><td>Holds BP and CPP, analgesic, keeps airway reflexes and breathing if needed. Good for DSI, RSI, and sedation.</td><td>Older ICP worry is not borne out, especially when combined with other agents</td></tr>
+      <tr><td>Etomidate</td><td>Most hemodynamically stable; good choice if hypotensive</td><td>No analgesia; no role in maintenance</td></tr>
+      <tr><td>Propofol</td><td>Lowers ICP and CMRO<sub>2</sub></td><td>Drops MAP. Avoid in RSI unless hypertensive, and use a much lower dose</td></tr>
+      <tr><td>Ketofol</td><td>Offsets each drug's weak spot</td><td>An option, not a requirement</td></tr>
+    </tbody>
+  </table></div>
+  <p>Fentanyl blunts the laryngoscopy spike, but it contributes to post-induction hypotension. Ketamine's sympathetic effect helps offset it.</p>
+
+  <h3>Paralytic</h3>
+  <ul>
+    <li><strong>Rocuronium 1.2 mg/kg</strong> or <strong>succinylcholine</strong> both work. In ventilated TBI patients, sux has not raised ICP or lowered CPP.</li>
+    <li>If using sux, a small defasciculating dose of roc (2–5 mg) first is reasonable.</li>
+    <li>Make sure they're deep before you put in the blade. A laryngoscopy-driven MAP spike raises ICP.</li>
+  </ul>
+
+  <div class="flag"><b class="t">Plan for the drop.</b> Have a pressor running or drawn up before you push induction drugs. The goal is no hypotension, not treating it once you see it.</div>
+</section>
+
+<!-- 4 -->
+<section class="panel" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+  <h2>Maintenance: hold the numbers</h2>
+  <p class="lede">Assume that the ICU's neurotrauma protocol also applies in the OR. Your job is steady physiology.</p>
+
+  <h3>Targets</h3>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Parameter</th><th>Target</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>SBP / MAP</td><td class="num">SBP ≥ 110, MAP &gt; 80</td><td>No ICP number. Mortality rises with every 10 mmHg of SBP below ~120</td></tr>
+      <tr><td>CPP</td><td class="num">60–70</td><td>Keep time below 60 as short as possible. Don't push above 90</td></tr>
+      <tr><td>ICP</td><td class="num">&lt; 22</td><td>Treat &gt; 22 sustained &gt; 5 min, not a cough blip</td></tr>
+      <tr><td>PaO<sub>2</sub></td><td class="num">80–120</td><td>Lung-protective ventilation; PEEP up to ~15 barely touches ICP</td></tr>
+      <tr><td>PaCO<sub>2</sub></td><td class="num">35–45</td><td>Normocarbia. Check with an ABG; EtCO<sub>2</sub> underestimates in trauma</td></tr>
+      <tr><td>Sodium</td><td class="num">135–145</td><td>Don't let it fall</td></tr>
+      <tr><td>Glucose</td><td class="num">80–140</td><td>Avoid both highs and lows</td></tr>
+      <tr><td>Temp</td><td class="num">Normothermia</td><td>Treat fever. Actively warm hypothermic arrivals</td></tr>
+      <tr><td>Hgb</td><td class="num">&gt; 7</td><td>A liberal trigger (&gt; 9) did worse</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Pressure: raise MAP or lower ICP?</h3>
+  <p>Both raise CPP, and a pressor is quicker. But with autoregulation broken, pushing MAP hard can drive more fluid into leaky brain and worsen edema. <strong>Treat the ICP, and use pressors to prevent hypotension.</strong> Phenylephrine and norepinephrine are both reasonable; neither has been shown to be better.</p>
+
+  <h3>TIVA or volatile?</h3>
+  <ul>
+    <li>Neurologic outcomes are similar. A meta-analysis of 14 craniotomy studies (~1,800 patients) found ICP ~5 mmHg lower and CPP ~16 mmHg higher with TIVA, but no difference in operating conditions, recovery, complications, or outcome.</li>
+    <li>TIVA with propofol and opioid tends to lower BP.</li>
+    <li>If using a volatile: <strong>sevoflurane, under 1 MAC</strong> (best profile for cerebral metabolism and blood flow).</li>
+    <li>Ketofol TIVA vs propofol: higher MAPs, less pressor, same brain relaxation. Adding dex to propofol reduces propofol and fentanyl needs with no change in ICP or CPP.</li>
+    <li>N<sub>2</sub>O: avoid for weeks after a recent craniotomy (trapped intracranial air can expand).</li>
+  </ul>
+
+  <h3>Fluids</h3>
+  <ul>
+    <li><strong>No hypotonic fluid.</strong> LR is mildly hypotonic, so falling sodium means more brain water.</li>
+    <li>Avoid large volumes of NS (hyperchloremic acidosis). PlasmaLyte, or alternating LR and NS, is reasonable.</li>
+    <li><strong>No albumin.</strong> SAFE-TBI found higher mortality with 4% albumin.</li>
+    <li>No glucose-containing fluids. Match urine output, especially after mannitol.</li>
+  </ul>
+</section>
+
+<!-- 5 -->
+<section class="panel" id="p5" role="tabpanel" aria-labelledby="t5" hidden>
+  <h2>ICP crisis: climb the ladder</h2>
+  <p class="lede">The brain is bulging into the field, or the EVD reads 35. Work from the bottom rung up (SIBICC 2019 tiers), and at every step ask why it's happening.</p>
+
+  <h3>First, rule out the fixable stuff</h3>
+  <p>Before you escalate therapy, check for causes: a bad tube or kinked circuit, hypoxemia, hypercarbia, hypotension, light anesthesia or bucking, a tight collar or ETT tie, head turned, fever, seizure, or a clot that is re-expanding.</p>
+
+  <div class="ladder">
+    <div class="tier t0"><div class="tn">TIER 0 · ALWAYS</div>
+      <ul><li>Head up 30°, neck neutral, nothing compressing the jugulars</li><li>Adequate sedation and analgesia; no dyssynchrony</li><li>Normocarbia, normoxia, normothermia, Na and glucose in range</li></ul></div>
+    <div class="tier t1"><div class="tn">TIER 1</div>
+      <ul><li>Deepen sedation and analgesia</li><li><strong>Hyperosmolar bolus:</strong> 3% saline 2–5 mL/kg, or 23.4% 30 mL over ~5 min (central line), or mannitol 0.5–1 g/kg</li><li>Drain CSF if an EVD is in</li></ul></div>
+    <div class="tier t2"><div class="tn">TIER 2</div>
+      <ul><li>Brief hyperventilation to PaCO<sub>2</sub> 30–35, <em>only as a bridge</em>, confirmed on ABG</li><li>Continuous 3% infusion if needed</li><li>Paralysis for refractory ICP (with adequate sedation)</li></ul></div>
+    <div class="tier t3"><div class="tn">TIER 3</div>
+      <ul><li>Decompressive craniectomy (neurosurgery decides)</li><li>Barbiturate coma, only if it actually lowers ICP and you can avoid hypotension</li></ul></div>
+  </div>
+
+  <h3>Hypertonic saline or mannitol?</h3>
+  <p>Both lower ICP and raise CPP. A meta-analysis of 12 RCTs (464 patients) showed no difference in mortality or neurologic outcome.</p>
+  <ul>
+    <li><strong>Hypertonic saline</strong> is used more often. It supports volume and doesn't cause diuresis.</li>
+    <li><strong>Mannitol</strong> causes diuresis and can cause hypotension. Theoretically it can worsen bleeding in an EDH/SDH. Watch urine output and replace losses.</li>
+    <li>Don't give more once sodium or osmolality is already high. The source deck uses Na &gt; 165 / osm &gt; 330; many units stop at Na ~155–160 / osm ~320. Follow your local protocol.</li>
+    <li>Caution with heart failure/pulmonary edema, and with chronic hyponatremia (&lt; 120), where a fast rise risks osmotic demyelination.</li>
+  </ul>
+
+  <h3>What not to do</h3>
+  <ul class="dont">
+    <li>Steroids</li><li>Continuous mannitol infusion</li><li>Furosemide for ICP</li><li>Scheduled HTS (q4–6h)</li><li>Therapeutic hypothermia</li><li>PaCO₂ &lt; 30</li><li>CPP &gt; 90</li><li>High-dose propofol burst suppression</li>
+  </ul>
+  <div class="key">Hyperventilation lowers ICP by starving the brain of blood flow. It buys minutes to get to a definitive fix; it doesn't treat anything.</div>
+</section>
+
+<!-- 6 -->
+<section class="panel" id="p6" role="tabpanel" aria-labelledby="t6" hidden>
+  <h2>Blood and clotting</h2>
+  <p class="lede">Injured brain releases tissue factor. The result is a short hypercoagulable phase, then hyperfibrinolysis and bleeding. TBI coagulopathy is common and closely tied to bad outcomes.</p>
+
+  <h3>Targets</h3>
+  <ul>
+    <li><strong>Hgb &gt; 7.</strong> A liberal &gt; 9 trigger gave worse neurologic outcomes. Age of stored blood doesn't matter.</li>
+    <li><strong>INR &lt; 1.4.</strong> Check coags early.</li>
+    <li><strong>Platelets:</strong> avoid thrombocytopenia (many neurosurgeons want &gt; 100k for a crani). Early low platelets and platelet dysfunction are independent predictors of mortality.</li>
+    <li><strong>Viscoelastic (TEG/ROTEM)–guided resuscitation</strong> when available.</li>
+  </ul>
+
+  <h3>Anticoagulated and antiplatelet patients</h3>
+  <ul>
+    <li>Pre-injury anticoagulants and antiplatelets both mean more ICH and higher mortality. Many TBI patients are older and on them.</li>
+    <li>Warfarin with life-threatening bleeding: correct the INR. <strong>PCC over FFP</strong>; it's faster and less volume.</li>
+    <li>DOACs: use the specific reversal agent or PCC per your institution's protocol.</li>
+    <li>Antiplatelets: <strong>routine platelet transfusion is not recommended.</strong> It may limit hematoma growth but hasn't improved mortality or neuro outcome. Test platelet function if you can and consider platelets or desmopressin selectively, especially before surgery.</li>
+  </ul>
+
+  <h3>TXA</h3>
+  <p>Still debated. CRASH-3 (TXA within 3 hours) reduced head-injury deaths in mild–moderate TBI but not in severe TBI. The study didn't report CT findings and couldn't show less intracranial bleeding. Later meta-analyses, mostly CRASH-3 data, found no effect on overall mortality or neuro recovery, and some data suggest harm in isolated severe TBI. For the polytrauma patient already on your trauma TXA protocol, give it early. Don't start it late.</p>
+</section>
+
+<!-- 7 -->
+<section class="panel" id="p7" role="tabpanel" aria-labelledby="t7" hidden>
+  <h2>Emergence, and what happens next</h2>
+  <p class="lede">A smooth wake-up lets neurosurgery examine the patient early. But waking up is itself an ICP stress test.</p>
+
+  <h3>Extubate, or go to the ICU intubated?</h3>
+  <p>TBI patients fail extubation more often than other ICU patients and are reintubated more often. Coughing, straining, vomiting and hypertension raise ICP and can re-bleed. Hypoventilation raises CO<sub>2</sub> and therefore ICP.</p>
+  <p><strong>Extubate only if:</strong> ICP is controlled, CT shows no evolving lesion, and airway reflexes and cough are intact. If you're unsure, go to the ICU intubated and wean there, with less time pressure.</p>
+
+  <h3>Emergence hypertension</h3>
+  <p>Very common. Treat quickly to protect the fresh surgical bed and the areas where the blood-brain barrier is broken, while avoiding cerebral hypoperfusion.</p>
+  <ul>
+    <li><strong>Labetalol</strong> 10 mg IV, doubling every 3–5 min as needed up to 80 mg per dose. It lasts long enough to cover transport.</li>
+    <li><strong>Nicardipine</strong> infusion if labetalol is contraindicated or not working.</li>
+  </ul>
+
+  <h3>Transport and handoff</h3>
+  <ul>
+    <li>Watch ICP closely during transport. Decide with neurosurgery whether to clamp the EVD for the trip.</li>
+    <li>Hand off your MAP/CPP targets, the last ABG, sodium, osmotherapy given, and blood products given.</li>
+  </ul>
+
+  <h3>Other things to cover before leaving</h3>
+  <ul>
+    <li>Seizure prophylaxis: levetiracetam or phenytoin, with similar efficacy (Keppra has fewer side effects).</li>
+    <li>No high-dose steroids.</li>
+    <li>VTE prophylaxis usually starts 24–48 h after injury if the ICH is stable on CT.</li>
+  </ul>
+
+  <h3>Timing other surgery</h3>
+  <ul>
+    <li>Extracranial surgery in the acute phase is linked to lower GCS and worse cognition at 60 days and 6 months. <strong>Postpone anything non-urgent.</strong></li>
+    <li>Urgent surgery: schedule for when ICP is well controlled, ideally within 48 h. Damage-control ortho (ex-fix) first.</li>
+    <li>Avoid laparoscopy (pneumoperitoneum and CO<sub>2</sub> absorption both raise ICP). Facial fractures rarely need emergent repair.</li>
+  </ul>
+
+  <h3>Penetrating TBI: what's different</h3>
+  <ul>
+    <li><strong>Vascular injury is common.</strong> Plan proximal control (neck exposure?), a wide craniectomy, and products in the room (PRBC/FFP/platelets). The team may go to angiography or the endovascular suite first.</li>
+    <li>Circulatory pause may be needed: <strong>have adenosine in the room</strong> and warn pharmacy early, since a case can use up to ~100 mg.</li>
+    <li>Protruding object: removal happens in the OR, in a controlled setting. Expect CSF leak and dural repair.</li>
+    <li>Skull base involvement: CSF leak. Traumatic aneurysm: likely endovascular.</li>
+  </ul>
+</section>
+
+<!-- 8 -->
+<section class="panel" id="p8" role="tabpanel" aria-labelledby="t8" hidden>
+  <h2>Board questions</h2>
+  <p class="lede">Five questions from the anes qvault question bank, in the order the talk covers them. Ask the question, let them commit to an answer, then reveal.</p>
+
+  <div class="q">
+    <p class="qmeta">Q1 · Basic · ANESHUB neuro</p>
+    <p class="qstem">In patients with blunt head trauma, cerebral perfusion pressure is determined by the gradient between:</p>
+    <ol class="opts" type="A">
+      <li>diastolic pressure and central venous pressure</li>
+      <li>intracranial pressure and central venous pressure</li>
+      <li>mean arterial pressure and central venous pressure</li>
+      <li class="ans">mean arterial pressure and intracranial pressure</li>
+      <li>systolic pressure and intracranial pressure</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>D.</strong> CPP = MAP − ICP. Normally the downstream pressure is ICP or CVP, whichever is higher. After TBI, ICP is almost always the higher one, so it's the number to subtract. <em>Talk link: the hero calculator.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q2 · Clinical · PassMachine · trauma</p>
+    <p class="qstem">A 36-year-old unrestrained driver in a high-speed MVC arrives intubated. BP 147/75, HR 57, GCS 8/15. CT brain shows traumatic injury. She is moved to the ICU. What is the next step in management?</p>
+    <ol class="opts" type="A">
+      <li class="ans">External ventricular drain with continuous pressure monitoring</li>
+      <li>Cerebral angiography</li>
+      <li>Burr hole craniotomy</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>A.</strong> GCS ≤ 8 with an abnormal CT is the classic indication for ICP monitoring, and an EVD both measures and drains. Ask what else the vitals suggest: rising BP with a low heart rate is the start of a Cushing response. <em>Talk link: Before you start. (The original question showed a CT image, which wasn't in the source file.)</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q3 · Advanced · ANESHUB neuro</p>
+    <p class="qstem">Intravenous administration of mannitol during a craniotomy:</p>
+    <ol class="opts" type="A">
+      <li>decreases intracranial pressure relative to dosage</li>
+      <li>hastens excretion of pancuronium</li>
+      <li>induces metabolic alkalosis</li>
+      <li>produces a sustained increase in intravascular volume</li>
+      <li class="ans">requires an intact blood-brain barrier to decrease brain water</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>E.</strong> Mannitol pulls water out of brain only where the blood-brain barrier holds it back. Where the barrier is broken (contusion, around a clot), mannitol can leak into tissue and, over time or with repeated doses, draw water in. It briefly expands plasma volume, then diuresis takes over; there's no sustained volume increase. <em>Talk link: ICP crisis, and why continuous mannitol infusions are on the "don't" list.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q4 · Basic · ANESHUB neuro</p>
+    <p class="qstem">Which best explains the decreased effect of hyperventilation on cerebral blood flow when PaCO<sub>2</sub> decreases below 20 mmHg?</p>
+    <ol class="opts" type="A">
+      <li class="ans">Maximal constriction of cerebral vessels</li>
+      <li>Decreased cerebral perfusion pressure</li>
+      <li>Decreased cerebral metabolic rate for oxygen</li>
+      <li>Increased cardiac output</li>
+      <li>Increased cerebrospinal fluid pressure</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>A.</strong> CBF changes about 1–2 mL/100 g/min for each mmHg of PaCO<sub>2</sub> between roughly 20 and 80 mmHg. Below ~20, the vessels are already fully constricted, and tissue hypoxia starts pushing them to dilate. Take-home for TBI: aggressive hyperventilation adds ischemia, not ICP control. <em>Talk link: Tier 2 and "PaCO<sub>2</sub> &lt; 30" on the don't list.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q5 · Advanced · ANESHUB neuro</p>
+    <p class="qstem">In patients with head trauma, which factor returns arterial pH toward normal after two days of mechanical hyperventilation?</p>
+    <ol class="opts" type="A">
+      <li>Decreased renal absorption of hydrogen ions</li>
+      <li>Decreased renal blood flow</li>
+      <li>Increased PaCO<sub>2</sub> with constant minute ventilation</li>
+      <li class="ans">Increased renal excretion of bicarbonate ions</li>
+      <li>Normalized cerebrospinal fluid pH</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>D.</strong> The kidneys compensate for respiratory alkalosis by dumping bicarbonate. The trap is E: CSF pH also normalizes, within about 6–24 h, as CSF bicarbonate falls. That's <em>why</em> hyperventilation stops lowering ICP after about a day, and why stopping it abruptly can cause rebound vasodilation and a spike in ICP. <em>Talk link: "Hyperventilation buys minutes."</em></p>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Adapted for OR teaching from Bethany Benish MD, "Update: Anesthesia for Traumatic Brain Injury," 2026 CRASH Trauma Anesthesia Panel. Confirm doses and thresholds against your institution's neurotrauma protocol.</p>
+  <p>Key sources: Brain Trauma Foundation Guidelines for the Management of Severe TBI, 4th ed.; SIBICC severe TBI algorithm (2019); CRASH-3 (Lancet 2019) and Lawati et al., Intensive Care Med 2021;47:14–27; SAFE-TBI, N Engl J Med 2007;357:874–884; Baksaas-Aasen et al. (ITACTIC), Intensive Care Med 2021;47:49–59; Brogi et al., World Neurosurg 2020;141:455–466; Fang et al., Neurocrit Care 2022;36:248–258.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function select(tab){
+    tabs.forEach(function(t){var on=t===tab;t.setAttribute('aria-selected',on?'true':'false');document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    tab.scrollIntoView({block:'nearest',inline:'nearest'});
+    try{localStorage.setItem('tbi-tab',tab.id)}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t)});
+    t.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();var n=tabs[(i+d+tabs.length)%tabs.length];n.focus();select(n);});
+  });
+  try{var s=localStorage.getItem('tbi-tab');if(s&&document.getElementById(s))select(document.getElementById(s));}catch(e){}
+
+  var $=function(id){return document.getElementById(id)};
+  var MAP=80,ICP=25;
+  function update(){
+    MAP=+$('map').value;ICP=+$('icp').value;var cpp=MAP-ICP;
+    $('mapV').textContent=MAP;$('icpV').textContent=ICP;
+    $('mapOut').textContent=MAP;$('icpOut').textContent=ICP;$('cppOut').textContent=cpp;
+    var v=$('verdict'),msg,cls;
+    if(cpp<50){cls='v-bad';msg='<b>CPP '+cpp+': ischemic range.</b> ';}
+    else if(cpp<60){cls='v-bad';msg='<b>CPP '+cpp+': below the 60 floor.</b> ';}
+    else if(cpp<=70){cls='v-ok';msg='<b>CPP '+cpp+': on target (60–70).</b> ';}
+    else if(cpp<=90){cls='v-warn';msg='<b>CPP '+cpp+': adequate.</b> No need to push higher. ';}
+    else{cls='v-warn';msg='<b>CPP '+cpp+': above 90.</b> Not recommended; risks more edema. ';}
+    if(ICP>22)msg+='ICP '+ICP+' is over the 22 treatment threshold. Lower ICP first (Tier 0–1) rather than chasing MAP.';
+    else if(cpp<60)msg+='ICP is fine, so this is a pressure problem. Volume, blood, pressor, lighten anesthesia.';
+    else msg+='ICP under 22. Keep it there.';
+    v.className='verdict '+cls;v.innerHTML=msg;
+  }
+  $('map').addEventListener('input',update);$('icp').addEventListener('input',update);update();
+
+  /* scope trace */
+  var c=$('wave'),ctx=c.getContext('2d'),reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){var r=c.getBoundingClientRect(),d=window.devicePixelRatio||1;c.width=Math.max(1,r.width*d);c.height=70*d;ctx.setTransform(d,0,0,d,0,0);}
+  size();window.addEventListener('resize',size);
+  var t0=performance.now();
+  function art(p){p=p%1;if(p<.12)return Math.sin(p/.12*Math.PI/2);if(p<.2)return 1-(p-.12)/.08*.35;if(p<.24)return .65+.08*Math.sin((p-.2)/.04*Math.PI);return .65*Math.exp(-(p-.24)*3.2);}
+  function icpw(p){p=p%1;return .6*Math.exp(-Math.pow((p-.1)/.05,2))+.45*Math.exp(-Math.pow((p-.25)/.06,2))+.3*Math.exp(-Math.pow((p-.42)/.07,2));}
+  function draw(now){
+    var w=c.clientWidth,h=70,sec=(now-t0)/1000;ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle='#2C3450';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,h-.5);ctx.lineTo(w,h-.5);ctx.stroke();
+    var scale=(h-8)/165;
+    function trace(fn,base,amp,col){ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();for(var x=0;x<=w;x+=2){var p=(x/w)*3-sec*1.1;var y=h-4-(base+fn(((p%1)+1)%1)*amp)*scale;x?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();}
+    trace(art,MAP-15,40,'#FF6B6B');
+    trace(icpw,ICP,Math.max(3,ICP*.35),'#5FD4E8');
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body></html>

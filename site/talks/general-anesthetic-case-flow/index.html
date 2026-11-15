@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>General Anesthetic Case Flow</title>
+<style>
+:root{--ink:#1b1f24;--mute:#5b6470;--line:#d8dce2;--soft:#f4f5f7;--acc:#2f5d8a;--acc-soft:#e8f0f8;--warn:#9a4b12;--warn-soft:#fbf1e8}
+@media (prefers-color-scheme: dark){:root{--ink:#e8eaed;--mute:#a3abb6;--line:#3a4048;--soft:#23272d;--acc:#8db8e3;--acc-soft:#1f2c3a;--warn:#f0b07a;--warn-soft:#33261b} body{background:#16191d}}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.5;font-size:16px}
+.wrap{max-width:900px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:26px;margin:0 0 4px;letter-spacing:-.3px}
+.lede{color:var(--mute);margin:0 0 16px}
+nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:20px;scrollbar-width:thin}
+nav button{flex:none;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:6px 12px;font-size:14px;cursor:pointer;font-family:inherit}
+nav button[aria-selected=true]{background:var(--ink);color:var(--soft);border-color:var(--ink)}
+section{display:none}section.on{display:block}
+h2{font-size:21px;margin:0 0 4px}
+h3{font-size:15px;text-transform:uppercase;letter-spacing:.5px;color:var(--mute);margin:22px 0 8px}
+.when{color:var(--mute);margin:0 0 14px}
+.steps{list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.steps li::before{content:counter(s);width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--soft);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.steps li > div > b{display:block}
+.why{color:var(--mute);font-size:14.5px}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0;background:var(--soft)}
+.say{border-left:4px solid var(--acc);background:var(--acc-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0;font-style:italic}
+.miss{border-left:4px solid var(--warn);background:var(--warn-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0}
+.miss b{color:var(--warn)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:620px){.two{grid-template-columns:1fr}}
+.two .card{margin:0}
+.two ul{margin:4px 0 0;padding-left:18px}
+figure{margin:14px 0;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--soft)}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:13.5px;color:var(--mute);margin-top:6px}
+svg text{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:var(--ink)}
+.sk{stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sk-acc{stroke:var(--acc);fill:none;stroke-width:2.5;stroke-linecap:round}
+.dot{fill:var(--acc)} .dot-t{fill:#fff;font-weight:700;font-size:13px}
+.seq{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
+.seq span{border:1.5px solid var(--ink);border-radius:6px;padding:3px 9px;font-weight:600;font-size:14.5px}
+.seq i{color:var(--mute);font-style:normal}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+td,th{border-top:1px solid var(--line);padding:7px 6px;text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.4px}
+.op-frame{width:100%;height:1150px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.note{font-size:13.5px;color:var(--mute)}
+</style>
+</head>
+<body><div class="wrap">
+<h1>General Anesthetic Case Flow</h1>
+<p class="lede">A framework for residents rotating through the OR for the first time: what to do, in what order, and where to look, from the time the patient rolls in until wake-up.</p>
+
+<nav role="tablist" id="tabs">
+  <button data-t="overview">Overview</button>
+  <button data-t="phase-1">1 · In room</button>
+  <button data-t="phase-2">2 · Induction</button>
+  <button data-t="phase-3">3 · Pre-incision</button>
+  <button data-t="phase-4">4 · Maintenance</button>
+  <button data-t="phase-5">5 · Prep</button>
+  <button data-t="phase-6">6 · Wake up</button>
+  <button data-t="one-pager">One-pager</button>
+</nav>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <h2>The big idea: sweep, don't search</h2>
+  <p>New residents miss things because they jump around: eyes on the monitor, then the IV, then the chart, then back to the vent. The fix is to <b>scan the same physical path every time</b>, so every step has a place where you look for it. The room becomes your checklist.</p>
+
+  <figure>
+    <svg viewBox="0 0 640 260" role="img" aria-label="Head of bed layout: IV pole on the left, patient in the middle, monitor and anesthesia machine on the right, with a sweep arrow from IV to machine">
+      <line class="sk" x1="95" y1="20" x2="95" y2="190"/>
+      <path class="sk" d="M72 32 h46 v34 a23 23 0 0 1 -46 0z"/>
+      <text x="95" y="58" text-anchor="middle" font-size="12">IVF</text>
+      <rect class="sk" x="70" y="110" width="50" height="34" rx="4"/>
+      <text x="95" y="131" text-anchor="middle" font-size="11">pump</text>
+      <text x="95" y="215" text-anchor="middle" font-size="16" font-weight="700">IV &amp; Pumps</text>
+      <ellipse class="sk" cx="320" cy="95" rx="42" ry="48"/>
+      <path class="sk" d="M262 190 Q320 150 378 190"/>
+      <path class="sk" d="M320 125 v-30"/><circle class="sk" cx="320" cy="90" r="5"/>
+      <text x="320" y="215" text-anchor="middle" font-size="16" font-weight="700">Airway / Patient</text>
+      <text x="320" y="234" text-anchor="middle" font-size="12">tube · cuff · tape · eyes</text>
+      <rect class="sk" x="480" y="40" width="130" height="150" rx="8"/>
+      <rect class="sk" x="498" y="60" width="94" height="44" rx="4"/>
+      <text x="545" y="87" text-anchor="middle" font-size="13">monitor</text>
+      <circle class="sk" cx="520" cy="135" r="12"/><circle class="sk" cx="570" cy="135" r="12"/>
+      <text x="545" y="175" text-anchor="middle" font-size="12">vent · flows · vaporizer</text>
+      <text x="545" y="215" text-anchor="middle" font-size="16" font-weight="700">Monitor &amp; Machine</text>
+      <path class="sk-acc" d="M80 248 Q320 272 570 248" stroke-dasharray="7 6"/>
+      <path class="sk-acc" d="M558 240 l14 8 l-14 8"/>
+      <text x="320" y="254" text-anchor="middle" font-size="13" style="fill:var(--acc)" font-weight="700">the sweep</text>
+    </svg>
+    <figcaption>Draw this first. Standing at the head of the bed: IV pole on the left, patient in the middle, monitor and anesthesia machine on the right. Sweep left to right, starting at the IV and ending at the machine. If your room is set up differently, keep the habit and just follow the path.</figcaption>
+  </figure>
+
+  <h3>The six phases</h3>
+  <table>
+    <tr><th>#</th><th>Phase</th><th>Your one-line job</th></tr>
+    <tr><td>1</td><td>Patient in room → induction</td><td>Monitors on, IV running, preoxygenated, ready to go</td></tr>
+    <tr><td>2</td><td>Induction + intubation</td><td>Secure the airway, then cuff → vent → flows → gas → tape → fluids</td></tr>
+    <tr><td>3</td><td>Post-intubation → pre-incision</td><td>5 A's + 4 T's, then sweep → time out → clean up → chart → sweep</td></tr>
+    <tr><td>4</td><td>Maintenance</td><td>Sweep every 15 min; I's &amp; O's every hour (every 30 min if sick)</td></tr>
+    <tr><td>5</td><td>Prep</td><td>Set up the end of this case and the start of the next one</td></tr>
+    <tr><td>6</td><td>Closing → wake up</td><td>Gas off and flows down, then flows up and a safe extubation</td></tr>
+  </table>
+  <div class="say">"Every transition gets a sweep. If you're ever lost, start at the IV pole and walk your eyes across the patient to the machine."</div>
+</section>
+
+<!-- PHASE 1 -->
+<section id="phase-1">
+  <h2>1 · Patient in room → induction</h2>
+  <p class="when">From the doors opening to the attending saying "go ahead."</p>
+  <ol class="steps">
+    <li><div><b>Before they roll in: log in to the computer + Pyxis, grab the IV bag</b><span class="why">Spike and prime the bag now. Fumbling with logins while the patient lies there staring at you is how the room gets away from you.</span></div></li>
+    <li><div><b>Patient moves over → scan ID</b><span class="why">Scan the band once they're on the table and you can see it.</span></div></li>
+    <li><div><b>Connect the IV</b><span class="why">Make sure the line actually runs before you push anything through it.</span></div></li>
+    <li><div><b>Monitors: SpO₂ → BP → ECG</b><span class="why">The pulse ox gives you a sat and a heart rate in seconds. Start the BP next so it's cycling. The ECG leads take the longest, so they go last.</span></div></li>
+    <li><div><b>Give the premed</b><span class="why">Per the plan (e.g., midazolam). It goes in after the monitors are on, so you're watching the sat and BP when the sedation hits.</span></div></li>
+    <li><div><b>Oxygen mask: strap it, hold it, or ask the RN</b><span class="why">Pick one on purpose. If you're holding it, you can't draw up drugs, so plan for that.</span></div></li>
+    <li><div><b>Preoxygenate: goal EtO₂ &gt; 80% on FiO₂ 100%</b><span class="why">You're washing nitrogen out of the lungs (denitrogenation) so the FRC becomes an oxygen tank. That tank is your apnea time.</span></div></li>
+    <li><div><b>Time out → induce</b></div></li>
+  </ol>
+
+  <figure>
+    <svg viewBox="0 0 640 220" role="img" aria-label="End-tidal oxygen rising over about three minutes with a tight seal and plateauing low with a leaky seal">
+      <line class="sk" x1="60" y1="180" x2="610" y2="180"/><line class="sk" x1="60" y1="180" x2="60" y2="20"/>
+      <text x="335" y="210" text-anchor="middle" font-size="13">time with mask on (min)</text>
+      <text x="22" y="100" font-size="13" transform="rotate(-90 22 100)" text-anchor="middle">EtO₂ %</text>
+      <line x1="60" y1="56" x2="610" y2="56" stroke="var(--acc)" stroke-dasharray="6 5" stroke-width="1.5"/>
+      <text x="606" y="50" text-anchor="end" font-size="12" style="fill:var(--acc)" font-weight="700">goal &gt; 80%</text>
+      <path class="sk" d="M60 165 C150 80 240 50 600 38"/>
+      <text x="420" y="34" font-size="12.5">tight seal</text>
+      <path d="M60 165 C150 140 250 128 600 124" fill="none" stroke="var(--warn)" stroke-width="2.2" stroke-dasharray="5 4"/>
+      <text x="420" y="145" font-size="12.5" style="fill:var(--warn)">leak: room air keeps getting in</text>
+      <text x="60" y="196" font-size="11" text-anchor="middle">0</text><text x="243" y="196" font-size="11" text-anchor="middle">1</text><text x="427" y="196" font-size="11" text-anchor="middle">2</text><text x="610" y="196" font-size="11" text-anchor="middle">3</text>
+    </svg>
+    <figcaption>Sketch two curves. If the number plateaus low, the problem is almost always the mask seal, not the patient.</figcaption>
+  </figure>
+  <div class="miss"><b>Common miss:</b> pushing induction drugs because "it's been 3 minutes" when the EtO₂ is still 60%. Look at the number, not the clock.</div>
+</section>
+
+<!-- PHASE 2 -->
+<section id="phase-2">
+  <h2>2 · Induction + intubation</h2>
+  <p class="when">From induction to a secured tube with the vent breathing and anesthetic running.</p>
+  <ol class="steps">
+    <li><div><b>Optimize bed height + intubating conditions</b><span class="why">Raise the bed so the patient's face is at about your lower sternum. Line up ear to sternal notch, and ramp if the patient is obese. Fixing your position before induction is free; fixing it once they're apneic costs you seconds.</span></div></li>
+    <li><div><b>Induce</b></div></li>
+    <li><div><b>Mask ventilate, unless it's an RSI</b><span class="why">Masking confirms you can ventilate before the paralytic takes over. In an RSI you skip routine masking to limit gastric insufflation (follow your attending's practice on gentle low-pressure breaths).</span></div></li>
+    <li><div><b>Wait for the paralytic to circulate</b>
+      <span class="why">Rocuronium at intubating dose: <b>~3 min</b> · RSI-dose rocuronium: <b>~45–60 s</b> · Succinylcholine at RSI dose: <b>~30–60 s</b>. Going in early gets you a patient who bites and bucks.</span></div></li>
+    <li><div><b>Intubate → confirm</b><span class="why">Sustained EtCO₂ waveform plus bilateral breath sounds and chest rise. No CO₂ means no tube.</span></div></li>
+  </ol>
+
+  <h3>Then the safety sequence</h3>
+  <div class="seq"><span>1 Cuff up</span><i>→</i><span>2 Vent on</span><i>→</i><span>3 Flows down</span><i>→</i><span>4 Gas on / TIVA</span><i>→</i><span>5 Tape</span><i>→</i><span>6 Slow fluids</span></div>
+  <figure>
+    <svg viewBox="0 0 640 230" role="img" aria-label="Numbered steps on the room layout: IV on the left, airway in the middle, machine on the right. 1 at the airway, 2 3 and 4 at the machine, 5 back at the airway, 6 at the IV">
+      <line class="sk" x1="95" y1="25" x2="95" y2="180"/>
+      <path class="sk" d="M72 35 h46 v34 a23 23 0 0 1 -46 0z"/>
+      <text x="95" y="205" text-anchor="middle" font-size="15" font-weight="700">IV</text>
+      <ellipse class="sk" cx="320" cy="100" rx="44" ry="50"/>
+      <text x="320" y="205" text-anchor="middle" font-size="15" font-weight="700">Airway</text>
+      <rect class="sk" x="470" y="30" width="140" height="150" rx="8"/>
+      <text x="540" y="205" text-anchor="middle" font-size="15" font-weight="700">Machine</text>
+      <path class="sk-acc" d="M340 70 C410 40 470 60 510 70" stroke-dasharray="5 5"/>
+      <path class="sk-acc" d="M540 160 C470 200 390 180 340 135" stroke-dasharray="5 5"/>
+      <path class="sk-acc" d="M295 135 C220 175 160 150 115 110" stroke-dasharray="5 5"/>
+      <circle class="dot" cx="320" cy="62" r="14"/><text class="dot-t" x="320" y="67" text-anchor="middle">1</text>
+      <circle class="dot" cx="570" cy="70" r="14"/><text class="dot-t" x="570" y="75" text-anchor="middle">2</text>
+      <circle class="dot" cx="540" cy="110" r="14"/><text class="dot-t" x="540" y="115" text-anchor="middle">3</text>
+      <circle class="dot" cx="510" cy="150" r="14"/><text class="dot-t" x="510" y="155" text-anchor="middle">4</text>
+      <circle class="dot" cx="320" cy="135" r="14"/><text class="dot-t" x="320" y="140" text-anchor="middle">5</text>
+      <circle class="dot" cx="95" cy="110" r="14"/><text class="dot-t" x="95" y="115" text-anchor="middle">6</text>
+    </svg>
+    <figcaption>Hand on the tube (1), over to the machine (2–4), back to the tube (5), then out to the IV pole (6). This sequence goes in safety order, not sweep order, but every number still has a place you look.</figcaption>
+  </figure>
+  <table>
+    <tr><th>Step</th><th>Why it's in this spot</th></tr>
+    <tr><td><b>1 Cuff up</b></td><td>No seal means no reliable ventilation, a leak, and no aspiration protection. Everything else depends on it.</td></tr>
+    <tr><td><b>2 Vent on</b></td><td>The patient is apneic. Hand the breathing to the machine so your hands are free.</td></tr>
+    <tr><td><b>3 Flows down</b></td><td>High flows were for preoxygenation. Turning them down saves agent and keeps the gas warm and humid (see the Fresh Gas Flow talk).</td></tr>
+    <tr><td><b>4 Gas on / TIVA running</b></td><td>The induction bolus wears off within minutes, and that's an awareness risk. Watch the ETAA climb. With low flows, the dial may need to start higher than your target.</td></tr>
+    <tr><td><b>5 Tape</b></td><td>Now secure it. Note the depth (cm at the teeth or lip) and tape the eyes.</td></tr>
+    <tr><td><b>6 Slow / stop fluids</b></td><td>The bag ran wide open to carry the drugs in. Left alone, a liter is gone before incision.</td></tr>
+  </table>
+  <div class="miss"><b>Common miss:</b> taping first while the patient is apneic and the gas is off. Tape can wait 20 seconds; oxygen and anesthetic can't.</div>
+</section>
+
+<!-- PHASE 3 -->
+<section id="phase-3">
+  <h2>3 · Post-intubation → pre-incision</h2>
+  <p class="when">The window while the team positions, preps, and drapes. It feels like downtime, but it isn't.</p>
+  <div class="two">
+    <div class="card"><b>5 A's</b>
+      <ul>
+        <li><b>Anesthesia</b> on: ETAA climbing, or TIVA running into a line that runs</li>
+        <li><b>Abx</b>: within 60 min before incision (vanc/FQ within 120)</li>
+        <li><b>Antithrombotics</b>: SCDs on and pumping ± SQ heparin</li>
+        <li><b>Antiemetics</b>: risk-stratify, and give dex early</li>
+        <li><b>Analgesia</b>: the opioid/multimodal plan, and the block if there is one</li>
+      </ul></div>
+    <div class="card"><b>4 T's</b>
+      <ul>
+        <li><b>Temp</b> monitor: the probe is in and reading</li>
+        <li><b>Temp</b> modulator: the warmer is on (warm early, because induction drops the core temp)</li>
+        <li><b>Twitch</b> monitor: placed, with a baseline</li>
+        <li><b>Tube</b>: OG vs NG, to decompress a stomach full of mask air</li>
+      </ul></div>
+  </div>
+  <h3>Then</h3>
+  <div class="seq"><span>Sweep</span><i>→</i><span>Time out</span><i>→</i><span>Clean up</span><i>→</i><span>Chart</span><i>→</i><span>Sweep</span></div>
+  <p>Sweep before the time out so you can actually answer its questions ("antibiotics given?" "blood available?").</p>
+  <div class="card"><b>Clean up the workstation</b>
+    <ul style="margin:4px 0 0;padding-left:18px">
+      <li>Clear the induction mess: wrappers, used syringes, laryngoscope</li>
+      <li>Organize your drugs so emergency drugs are labeled and within reach</li>
+      <li>Get cables and lines off the floor</li>
+    </ul>
+    <p class="why" style="margin:8px 0 0">A clean workstation lets you respond to an emergency fast: you can find the epinephrine and get to the patient without tripping on a cable. It also lets someone else step in. If an attending, a colleague giving you a break, or the next provider takes over, they should be able to read your setup in seconds.</p>
+  </div>
+  <p>Chart the induction events while they're fresh. Then sweep again, because positioning is when lines get pulled and tubes get kinked.</p>
+  <div class="say">"Five A's, four T's. Say them out loud until they're automatic."</div>
+  <div class="miss"><b>Common miss:</b> the antibiotic. It's the item the time out checks, and it's the easiest one to forget while the room is busy.</div>
+</section>
+
+<!-- PHASE 4 -->
+<section id="phase-4">
+  <h2>4 · Maintenance</h2>
+  <p class="when">The middle of the case. Quiet is when things drift.</p>
+  <h3>Sweep every 15 minutes</h3>
+  <p class="note">This lines up with when the computer asks for an interval assessment. Let the prompt cue your sweep, not just your charting. The list follows the sweep: IV pole → patient → monitor &amp; machine.</p>
+  <ol class="steps">
+    <li><div><b>Fluids &amp; drips</b><span class="why">Is the IV dripping? <i>Do I want it to be?</i> Are the pumps running at the right rate and still connected?</span></div></li>
+    <li><div><b>Trace the tube and every line back to the patient</b><span class="why">Follow them with your eyes or your hand. Disconnections hide under drapes.</span></div></li>
+    <li><div><b>Twitches</b><span class="why">Check the TOF and re-dose the paralytic if the case needs it.</span></div></li>
+    <li><div><b>All vitals → optimize what you can</b><span class="why">BP, HR, SpO₂, EtCO₂, temp, ETAA. Ask "why" about anything that has moved.</span></div></li>
+    <li><div><b>Vent settings</b><span class="why">Adjust to the EtCO₂, peak/plateau pressures, tidal volume (by IBW), and PEEP.</span></div></li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 640 200" role="img" aria-label="Clock face with sweeps every 15 minutes and an I and O check at the hour">
+      <circle class="sk" cx="120" cy="100" r="80"/>
+      <line class="sk" x1="120" y1="100" x2="120" y2="40"/><line class="sk" x1="120" y1="100" x2="160" y2="100"/>
+      <circle class="dot" cx="120" cy="20" r="11"/><text class="dot-t" x="120" y="24" text-anchor="middle" font-size="10">I/O</text>
+      <circle class="dot" cx="200" cy="100" r="8"/><circle class="dot" cx="120" cy="180" r="8"/><circle class="dot" cx="40" cy="100" r="8"/>
+      <text x="260" y="62" font-size="15"><tspan font-weight="700">● every 15 min:</tspan> sweep (fluids · lines · twitch · vitals · vent)</text>
+      <text x="260" y="100" font-size="15"><tspan font-weight="700">● every hour:</tspan> I's &amp; O's (IVF · EBL · UOP)</text>
+      <text x="260" y="122" font-size="13.5" style="fill:var(--mute)">every 30 min if the patient is sick or the case is active</text>
+      <text x="260" y="158" font-size="15"><tspan font-weight="700">● labs / ABG:</tspan> on the interval set with your attending</text>
+    </svg>
+  </figure>
+  <div class="miss"><b>Common miss:</b> charting the interval assessment without looking up. The prompt is a cue to <i>sweep</i>, not just to click.</div>
+</section>
+
+<!-- PHASE 5 -->
+<section id="phase-5">
+  <h2>5 · Prep: the end of this case and the start of the next</h2>
+  <p class="when">Done during the case, in the quiet stretch before closing, not after drop-off.</p>
+  <div class="two">
+    <div class="card"><b>End-of-case prep (this patient)</b>
+      <ul>
+        <li><b>Bite block</b> in, before they can bite the tube</li>
+        <li><b>Zofran</b> given</li>
+        <li><b>Reversal</b> drawn up, chosen by the twitch count</li>
+        <li><b>Suction</b> on and within reach</li>
+      </ul></div>
+    <div class="card"><b>Next case (do it now)</b>
+      <ul>
+        <li><b>Drugs:</b> pull, draw up, and label the next induction</li>
+        <li><b>Airway:</b> laryngoscope, tube, stylet, oral airway, backup device</li>
+        <li><b>Goal:</b> when you get back from drop-off, there should be almost nothing left to do</li>
+      </ul></div>
+  </div>
+  <div class="say">"Turnover time is won during the case before. Every syringe you draw now is one less thing to do with the next patient in the doorway."</div>
+  <div class="miss"><b>Common miss:</b> waiting until the surgeon says "closing" to start any of this. By then you're busy with wake-up.</div>
+</section>
+
+<!-- PHASE 6 -->
+<section id="phase-6">
+  <h2>6 · Closing → wake up</h2>
+  <p class="when">From "we're closing" to a safe extubation.</p>
+  <div class="two">
+    <div class="card"><b>Closing</b>
+      <ul>
+        <li><b>Gas off + flows down</b>: the agent stays in the circuit and drifts down slowly</li>
+        <li>Re-check the <b>bite block</b></li>
+        <li>Check <b>tetany</b>, then take the twitch monitor off (tetany hurts, so test it while they're still asleep)</li>
+        <li><b>Eye tape</b> off, gently</li>
+      </ul></div>
+    <div class="card"><b>Wake up</b>
+      <ul>
+        <li><b>Flows up</b>, O₂ 100%, to wash the agent out</li>
+        <li>Confirm <b>gas off</b></li>
+        <li><b>Propofol</b> ready (laryngospasm, bucking)</li>
+        <li><b>Mask, syringe, suction</b> in reach (the syringe deflates the cuff)</li>
+        <li><b>Trash</b> at the head of the bed for the tape and tube</li>
+      </ul></div>
+  </div>
+  <figure>
+    <svg viewBox="0 0 640 220" role="img" aria-label="End-tidal agent stays flat during maintenance, falls slowly after gas off with low flows during closing, then drops quickly after flows are turned up">
+      <line class="sk" x1="60" y1="180" x2="610" y2="180"/><line class="sk" x1="60" y1="180" x2="60" y2="20"/>
+      <text x="22" y="100" font-size="13" transform="rotate(-90 22 100)" text-anchor="middle">ETAA</text>
+      <path class="sk" d="M60 50 H230 C300 60 360 80 420 92 C460 120 490 160 600 172"/>
+      <line x1="230" y1="20" x2="230" y2="180" stroke="var(--mute)" stroke-dasharray="4 4"/>
+      <line x1="420" y1="20" x2="420" y2="180" stroke="var(--mute)" stroke-dasharray="4 4"/>
+      <text x="145" y="40" text-anchor="middle" font-size="12.5">maintenance</text>
+      <text x="325" y="40" text-anchor="middle" font-size="12.5" font-weight="700">closing</text>
+      <text x="325" y="56" text-anchor="middle" font-size="11.5" style="fill:var(--mute)">gas off · flows down</text>
+      <text x="515" y="40" text-anchor="middle" font-size="12.5" font-weight="700">wake up</text>
+      <text x="515" y="56" text-anchor="middle" font-size="11.5" style="fill:var(--mute)">flows up · O₂ 100%</text>
+      <text x="335" y="205" text-anchor="middle" font-size="13">time →</text>
+    </svg>
+    <figcaption>Low flows act like a brake: the agent drifts down while the surgeons close. Turning the flows up is the accelerator that washes it out.</figcaption>
+  </figure>
+  <h3>Ready to extubate?</h3>
+  <table>
+    <tr><td><b>Reversed</b></td><td>TOF ratio ≥ 0.9 (quantitative), or sustained tetany</td></tr>
+    <tr><td><b>Awake</b></td><td>Follows commands (opens eyes, squeezes a hand, lifts the head)</td></tr>
+    <tr><td><b>Breathing</b></td><td>Regular spontaneous breaths with adequate tidal volumes</td></tr>
+    <tr><td><b>Washed out</b></td><td>ETAA low</td></tr>
+    <tr><td><b>Stable</b></td><td>Hemodynamically stable, oxygenating, warm</td></tr>
+  </table>
+  <div class="miss"><b>Common miss:</b> pulling the tube on a patient who is "moving" but not following commands. Bucking isn't awake. That in-between stage is where laryngospasm happens.</div>
+</section>
+
+<!-- ONE PAGER -->
+<section id="one-pager">
+  <h2>One-pager</h2>
+  <p class="note">For printing, use the <a href="/handouts/general-anesthetic-case-flow.pdf">PDF version</a> rather than this preview.</p>
+  <iframe class="op-frame" id="opf" title="One-page handout"></iframe>
+</section>
+
+</div>
+<script id="op-src" type="text/plain">PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj48aGVhZD48bWV0YSBjaGFyc2V0PSJ1dGYtOCI+PHRpdGxlPkdlbmVyYWwgQW5lc3RoZXRpYyBDYXNlIEZsb3cg4oCUIE9uZS1QYWdlcjwvdGl0bGU+CjxzdHlsZT4KQHBhZ2UgeyBzaXplOiBsZXR0ZXI7IG1hcmdpbjogMC40aW47IH0KKiB7IGJveC1zaXppbmc6IGJvcmRlci1ib3g7IH0KYm9keSB7IGZvbnQtZmFtaWx5OiAtYXBwbGUtc3lzdGVtLCAiU2Vnb2UgVUkiLCBIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmOyBjb2xvcjojMWIxZjI0OyBtYXJnaW46MDsgZm9udC1zaXplOjExLjZweDsgbGluZS1oZWlnaHQ6MS40OyB9Ci5zaGVldCB7IHdpZHRoOiA3LjdpbjsgbWFyZ2luOiAwIGF1dG87IH0KaGVhZGVyIHsgZGlzcGxheTpmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6c3BhY2UtYmV0d2VlbjsgYWxpZ24taXRlbXM6ZmxleC1lbmQ7IGJvcmRlci1ib3R0b206MnB4IHNvbGlkICMxYjFmMjQ7IHBhZGRpbmctYm90dG9tOjRweDsgbWFyZ2luLWJvdHRvbTo2cHg7IH0KaDEgeyBmb250LXNpemU6MjFweDsgbWFyZ2luOjA7IGxldHRlci1zcGFjaW5nOi0uMnB4OyB9CmhlYWRlciAuc3ViIHsgZm9udC1zaXplOjlweDsgY29sb3I6IzU1NTsgdGV4dC1hbGlnbjpyaWdodDsgfQouZ3JpZCB7IGRpc3BsYXk6Z3JpZDsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiAxZnIgMWZyOyBnYXA6OHB4OyB9Ci5ib3ggeyBib3JkZXI6MS4ycHggc29saWQgIzFiMWYyNDsgYm9yZGVyLXJhZGl1czo1cHg7IHBhZGRpbmc6N3B4IDlweDsgYnJlYWstaW5zaWRlOmF2b2lkOyB9Ci5ib3ggaDIgeyBmb250LXNpemU6MTMuNXB4OyBtYXJnaW46MCAwIDNweDsgZGlzcGxheTpmbGV4OyBhbGlnbi1pdGVtczpjZW50ZXI7IGdhcDo1cHg7IH0KLm51bSB7IGRpc3BsYXk6aW5saW5lLWZsZXg7IHdpZHRoOjIwcHg7IGhlaWdodDoyMHB4OyBib3JkZXItcmFkaXVzOjUwJTsgYmFja2dyb3VuZDojMWIxZjI0OyBjb2xvcjojZmZmOyBmb250LXNpemU6MTFweDsgYWxpZ24taXRlbXM6Y2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6Y2VudGVyOyBmbGV4Om5vbmU7IH0KLndoZW4geyBmb250LXdlaWdodDo0MDA7IGNvbG9yOiM1NTU7IGZvbnQtc2l6ZTo5cHg7IG1hcmdpbi1sZWZ0OmF1dG87IH0Kb2wsIHVsIHsgbWFyZ2luOjA7IHBhZGRpbmctbGVmdDoxNXB4OyB9CmxpIHsgbWFyZ2luOjAgMCAxcHg7IH0KLndoeSB7IGNvbG9yOiM1NTU7IH0KLnRhZyB7IGZvbnQtd2VpZ2h0OjcwMDsgZm9udC1zaXplOjEwcHg7IHRleHQtdHJhbnNmb3JtOnVwcGVyY2FzZTsgbGV0dGVyLXNwYWNpbmc6LjRweDsgY29sb3I6IzQ0NDsgbWFyZ2luOjRweCAwIDFweDsgfQouc2VxIHsgZGlzcGxheTpmbGV4OyBmbGV4LXdyYXA6d3JhcDsgZ2FwOjNweDsgYWxpZ24taXRlbXM6Y2VudGVyOyBtYXJnaW46MnB4IDAgM3B4OyB9Ci5zZXEgc3Bhbi5zIHsgYm9yZGVyOjFweCBzb2xpZCAjMWIxZjI0OyBib3JkZXItcmFkaXVzOjNweDsgcGFkZGluZzoxcHggNHB4OyBmb250LXdlaWdodDo2MDA7IGJhY2tncm91bmQ6I2YzZjRmNjsgfQouc2VxIHNwYW4uYSB7IGNvbG9yOiM2NjY7IH0KLmNvbHMgeyBkaXNwbGF5OmdyaWQ7IGdyaWQtdGVtcGxhdGUtY29sdW1uczoxZnIgMWZyOyBnYXA6OHB4OyB9Ci5wZWFybCB7IGJhY2tncm91bmQ6I2YzZjRmNjsgYm9yZGVyLWxlZnQ6M3B4IHNvbGlkICMxYjFmMjQ7IHBhZGRpbmc6MnB4IDVweDsgbWFyZ2luLXRvcDozcHg7IGZvbnQtc2l6ZToxMC42cHg7IH0KLnN3ZWVwYmFyIHsgYm9yZGVyOjEuMnB4IHNvbGlkICMxYjFmMjQ7IGJvcmRlci1yYWRpdXM6NXB4OyBwYWRkaW5nOjRweCA3cHg7IG1hcmdpbi1ib3R0b206NnB4OyBkaXNwbGF5OmZsZXg7IGdhcDoxMHB4OyBhbGlnbi1pdGVtczpjZW50ZXI7IH0KLnN3ZWVwYmFyIGIgeyBmb250LXNpemU6MTJweDsgfQpmb290ZXIgeyBtYXJnaW4tdG9wOjVweDsgZm9udC1zaXplOjguNHB4OyBjb2xvcjojNjY2OyBkaXNwbGF5OmZsZXg7IGp1c3RpZnktY29udGVudDpzcGFjZS1iZXR3ZWVuOyB9Cjwvc3R5bGU+PC9oZWFkPgo8Ym9keT48ZGl2IGNsYXNzPSJzaGVldCI+CjxoZWFkZXI+CiAgPGRpdj48aDE+R2VuZXJhbCBBbmVzdGhldGljIENhc2UgRmxvdzwvaDE+PC9kaXY+CiAgPGRpdiBjbGFzcz0ic3ViIj5PUiBUZWFjaGluZyDCtyBmb3IgTVMzcywgaW50ZXJucyAmYW1wOyBDQS0xcyBvbiB0aGVpciBmaXJzdCByb3RhdGlvbjxicj5EZWZlciB0byB5b3VyIGF0dGVuZGluZydzIHBsYW4gYW5kIHlvdXIgaW5zdGl0dXRpb24ncyBwcm90b2NvbHM8L2Rpdj4KPC9oZWFkZXI+Cgo8ZGl2IGNsYXNzPSJzd2VlcGJhciI+CiAgPHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjU5IiB2aWV3Qm94PSIwIDAgMTUwIDQ0IiBhcmlhLWhpZGRlbj0idHJ1ZSI+CiAgICA8bGluZSB4MT0iMTgiIHkxPSI0IiB4Mj0iMTgiIHkyPSI0MCIgc3Ryb2tlPSIjMWIxZjI0IiBzdHJva2Utd2lkdGg9IjEuNCIvPgogICAgPHBhdGggZD0iTTEwIDggaDE2IHYxMiBhOCA4IDAgMCAxIC0xNiAweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWIxZjI0IiBzdHJva2Utd2lkdGg9IjEuNCIvPgogICAgPHRleHQgeD0iMTgiIHk9IjE3IiBmb250LXNpemU9IjciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCI+SVY8L3RleHQ+CiAgICA8ZWxsaXBzZSBjeD0iNzUiIGN5PSIyMiIgcng9IjE2IiByeT0iMTMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFiMWYyNCIgc3Ryb2tlLXdpZHRoPSIxLjQiLz4KICAgIDx0ZXh0IHg9Ijc1IiB5PSIyNSIgZm9udC1zaXplPSI4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiPlB0PC90ZXh0PgogICAgPHJlY3QgeD0iMTE0IiB5PSI2IiB3aWR0aD0iMzQiIGhlaWdodD0iMzIiIHJ4PSIzIiBmaWxsPSJub25lIiBzdHJva2U9IiMxYjFmMjQiIHN0cm9rZS13aWR0aD0iMS40Ii8+CiAgICA8dGV4dCB4PSIxMzEiIHk9IjI1IiBmb250LXNpemU9IjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCI+TWFjaGluZTwvdGV4dD4KICAgIDxwYXRoIGQ9Ik04IDQyIFE3NSA1MiAxNDAgNDIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFiMWYyNCIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtZGFzaGFycmF5PSIzIDIiLz4KICAgIDxwYXRoIGQ9Ik0xMzUgMzkgbDUgMyBsLTUgMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWIxZjI0IiBzdHJva2Utd2lkdGg9IjEiLz4KICA8L3N2Zz4KICA8ZGl2PjxiPlRoZSBTd2VlcDo8L2I+IHNjYW4gdGhlIHNhbWUgcGF0aCBldmVyeSB0aW1lOiA8Yj5JViBwb2xlIOKGkiBwYXRpZW50L2FpcndheSDihpIgbW9uaXRvciAmYW1wOyBtYWNoaW5lPC9iPi4gRXZlcnkgc3RlcCBoYXMgYSBwbGFjZSB5b3UgbG9vaywgc28gbm90aGluZyBnZXRzIHNraXBwZWQuIFN3ZWVwIGF0IGV2ZXJ5IHRyYW5zaXRpb24sIGFuZCBldmVyeSAxNSBtaW51dGVzIGR1cmluZyBtYWludGVuYW5jZS48L2Rpdj4KPC9kaXY+Cgo8ZGl2IGNsYXNzPSJncmlkIj4KCjxkaXYgY2xhc3M9ImJveCI+CiAgPGgyPjxzcGFuIGNsYXNzPSJudW0iPjE8L3NwYW4+UGF0aWVudCBpbiByb29tIOKGkiBJbmR1Y3Rpb248L2gyPgogIDx1bD4KICAgIDxsaT48Yj5CZWZvcmU6PC9iPiBsb2cgaW4gdG8gY29tcHV0ZXIgKyBQeXhpcywgZ3JhYiBhbmQgc3Bpa2UgdGhlIElWIGJhZzwvbGk+CiAgICA8bGk+UGF0aWVudCBtb3ZlcyBvdmVyIOKGkiA8Yj5zY2FuIElEPC9iPjwvbGk+CiAgICA8bGk+PGI+Q29ubmVjdCB0aGUgSVY8L2I+PC9saT4KICAgIDxsaT48Yj5Nb25pdG9yczogU3BP4oKCIOKGkiBCUCDihpIgRUNHPC9iPiA8c3BhbiBjbGFzcz0id2h5Ij4oc2F0ICsgSFIgZmlyc3QsIHRoZW4gc3RhcnQgQlAgY3ljbGluZyk8L3NwYW4+PC9saT4KICAgIDxsaT48Yj5HaXZlIHByZW1lZDwvYj4gKHBlciBwbGFuKSA8c3BhbiBjbGFzcz0id2h5Ij5vbmNlIHlvdSdyZSBtb25pdG9yZWQ8L3NwYW4+PC9saT4KICAgIDxsaT48Yj5P4oKCIG1hc2s6PC9iPiBzdHJhcCBpdCB2cyBob2xkIGl0IHZzIGFzayB0aGUgUk48L2xpPgogICAgPGxpPjxiPlByZW94eWdlbmF0ZTo8L2I+IGdvYWwgPGI+RXRP4oKCICZndDsgODAlPC9iPiBvbiBGaU/igoIgMTAwJTwvbGk+CiAgICA8bGk+VGltZSBvdXQg4oaSIGluZHVjZTwvbGk+CiAgPC91bD4KICA8ZGl2IGNsYXNzPSJwZWFybCI+RXRP4oKCIGlzIHN0dWNrIGxvdz8gWW91IGhhdmUgYSBtYXNrIGxlYWsuIEZpeCB0aGUgc2VhbCBiZWZvcmUgeW91IHB1c2ggZHJ1Z3MuPC9kaXY+CjwvZGl2PgoKPGRpdiBjbGFzcz0iYm94Ij4KICA8aDI+PHNwYW4gY2xhc3M9Im51bSI+Mjwvc3Bhbj5JbmR1Y3Rpb24gKyBJbnR1YmF0aW9uPC9oMj4KICA8dWw+CiAgICA8bGk+T3B0aW1pemUgPGI+YmVkIGhlaWdodCArIHBvc2l0aW9uPC9iPiAoZWFyIHRvIHN0ZXJuYWwgbm90Y2gsIHJhbXAgaWYgbmVlZGVkKTwvbGk+CiAgICA8bGk+SW5kdWNlIOKGkiA8Yj5tYXNrIHZlbnRpbGF0ZSB1bmxlc3MgUlNJPC9iPjwvbGk+CiAgICA8bGk+V2FpdCBmb3IgdGhlIHBhcmFseXRpYzogcm9jIGludHViYXRpbmcgZG9zZSA8Yj5+MyBtaW48L2I+IMK3IFJTSS1kb3NlIHJvYyA8Yj5+NDXigJM2MCBzPC9iPiDCtyBzdXggPGI+fjMw4oCTNjAgczwvYj48L2xpPgogICAgPGxpPkludHViYXRlIOKGkiA8Yj5jb25maXJtIHN1c3RhaW5lZCBFdENP4oKCPC9iPiArIGJpbGF0ZXJhbCBicmVhdGggc291bmRzPC9saT4KICA8L3VsPgogIDxkaXYgY2xhc3M9InRhZyI+VGhlbiwgaW4gc2FmZXR5IG9yZGVyPC9kaXY+CiAgPGRpdiBjbGFzcz0ic2VxIj48c3BhbiBjbGFzcz0icyI+MSBDdWZmIHVwPC9zcGFuPjxzcGFuIGNsYXNzPSJhIj7ihpI8L3NwYW4+PHNwYW4gY2xhc3M9InMiPjIgVmVudCBvbjwvc3Bhbj48c3BhbiBjbGFzcz0iYSI+4oaSPC9zcGFuPjxzcGFuIGNsYXNzPSJzIj4zIEZsb3dzIGRvd248L3NwYW4+PHNwYW4gY2xhc3M9ImEiPuKGkjwvc3Bhbj48c3BhbiBjbGFzcz0icyI+NCBHYXMgb24gLyBUSVZBPC9zcGFuPjxzcGFuIGNsYXNzPSJhIj7ihpI8L3NwYW4+PHNwYW4gY2xhc3M9InMiPjUgVGFwZTwvc3Bhbj48c3BhbiBjbGFzcz0iYSI+4oaSPC9zcGFuPjxzcGFuIGNsYXNzPSJzIj42IFNsb3cgZmx1aWRzPC9zcGFuPjwvZGl2PgogIDxkaXYgY2xhc3M9IndoeSI+U2VhbCDihpIgYnJlYXRoZSDihpIgc2F2ZSBhZ2VudCDihpIga2VlcCB0aGVtIGFzbGVlcCDihpIgc2VjdXJlIGl0IChub3RlIGNtIGF0IHRlZXRoKSDihpIgZG9uJ3QgZHVtcCB0aGUgYmFnLjwvZGl2Pgo8L2Rpdj4KCjxkaXYgY2xhc3M9ImJveCI+CiAgPGgyPjxzcGFuIGNsYXNzPSJudW0iPjM8L3NwYW4+UG9zdC1pbnR1YmF0aW9uIOKGkiBQcmUtaW5jaXNpb248L2gyPgogIDxkaXYgY2xhc3M9ImNvbHMiPgogICAgPGRpdj48ZGl2IGNsYXNzPSJ0YWciPjUgQSdzPC9kaXY+CiAgICAgIDx1bD48bGk+PGI+QW5lc3RoZXNpYTwvYj4gb24gKEVUQUEgY2xpbWJpbmcpPC9saT48bGk+PGI+QWJ4PC9iPiAo4omkNjAgbWluIGJlZm9yZSBpbmNpc2lvbik8L2xpPjxsaT48Yj5BbnRpdGhyb21ib3RpY3M8L2I+IChTQ0RzIMKxIFNRIGhlcGFyaW4pPC9saT48bGk+PGI+QW50aWVtZXRpY3M8L2I+PC9saT48bGk+PGI+QW5hbGdlc2lhPC9iPjwvbGk+PC91bD48L2Rpdj4KICAgIDxkaXY+PGRpdiBjbGFzcz0idGFnIj40IFQnczwvZGl2PgogICAgICA8dWw+PGxpPjxiPlRlbXA8L2I+IG1vbml0b3IgKHByb2JlKTwvbGk+PGxpPjxiPlRlbXA8L2I+IG1vZHVsYXRvciAod2FybWVyKTwvbGk+PGxpPjxiPlR3aXRjaDwvYj4gbW9uaXRvcjwvbGk+PGxpPjxiPlR1YmU8L2I+OiBPRyB2cyBORzwvbGk+PC91bD48L2Rpdj4KICA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJzZXEiIHN0eWxlPSJtYXJnaW4tdG9wOjRweCI+PHNwYW4gY2xhc3M9InMiPlN3ZWVwPC9zcGFuPjxzcGFuIGNsYXNzPSJhIj7ihpI8L3NwYW4+PHNwYW4gY2xhc3M9InMiPlRpbWUgb3V0PC9zcGFuPjxzcGFuIGNsYXNzPSJhIj7ihpI8L3NwYW4+PHNwYW4gY2xhc3M9InMiPkNsZWFuIHVwPC9zcGFuPjxzcGFuIGNsYXNzPSJhIj7ihpI8L3NwYW4+PHNwYW4gY2xhc3M9InMiPkNoYXJ0PC9zcGFuPjxzcGFuIGNsYXNzPSJhIj7ihpI8L3NwYW4+PHNwYW4gY2xhc3M9InMiPlN3ZWVwPC9zcGFuPjwvZGl2PgogIDxkaXYgY2xhc3M9IndoeSI+PGI+Q2xlYW4gdXA6PC9iPiBjbGVhciB0aGUgdHJhc2gsIG9yZ2FuaXplIHRoZSBkcnVncywgZ2V0IGNhYmxlcyBvZmYgdGhlIGZsb29yLiBJdCBzcGVlZHMgdXAgYW4gZW1lcmdlbmN5IHJlc3BvbnNlIGFuZCBhIGhhbmRvZmYuPC9kaXY+CjwvZGl2PgoKPGRpdiBjbGFzcz0iYm94Ij4KICA8aDI+PHNwYW4gY2xhc3M9Im51bSI+NDwvc3Bhbj5NYWludGVuYW5jZTwvaDI+CiAgPGRpdiBjbGFzcz0idGFnIj5Td2VlcCBldmVyeSAxNSBtaW4gKG1hdGNoZXMgdGhlIGludGVydmFsIGFzc2Vzc21lbnQpPC9kaXY+CiAgPHVsPgogICAgPGxpPjxiPkZsdWlkcyAmYW1wOyBkcmlwczo8L2I+IGlzIHRoZSBJViBkcmlwcGluZz8gPGk+RG8gSSB3YW50IGl0IHRvIGJlPzwvaT4gQXJlIHRoZSBwdW1wcyBydW5uaW5nPzwvbGk+CiAgICA8bGk+PGI+VHJhY2UgdGhlIHR1YmUgYW5kIGV2ZXJ5IGxpbmU8L2I+IGJhY2sgdG8gdGhlIHBhdGllbnQ8L2xpPgogICAgPGxpPjxiPlR3aXRjaGVzPC9iPiDihpIgcmUtZG9zZSBwYXJhbHl0aWMgaWYgaW5kaWNhdGVkPC9saT4KICAgIDxsaT48Yj5BbGwgdml0YWxzPC9iPiDihpIgb3B0aW1pemUgd2hhdCB5b3UgY2FuPC9saT4KICAgIDxsaT48Yj5WZW50OjwvYj4gYWRqdXN0IHNldHRpbmdzIChFdENP4oKCLCBwcmVzc3VyZXMsIFRWLCBQRUVQKTwvbGk+CiAgPC91bD4KICA8ZGl2IGNsYXNzPSJ0YWciPkkncyAmYW1wOyBPJ3M6IGV2ZXJ5IGhvdXIgKHN0YWJsZSkgwrcgZXZlcnkgMzAgbWluIChzaWNrL2FjdGl2ZSk8L2Rpdj4KICA8ZGl2PklWIGZsdWlkcyDCtyBibG9vZCBsb3NzIMK3IHVyaW5lLiA8Yj5MYWJzL0FCRzwvYj4gb24gdGhlIGludGVydmFsIHNldCB3aXRoIHlvdXIgYXR0ZW5kaW5nLjwvZGl2Pgo8L2Rpdj4KCjxkaXYgY2xhc3M9ImJveCI+CiAgPGgyPjxzcGFuIGNsYXNzPSJudW0iPjU8L3NwYW4+UHJlcDogZW5kIG9mIHRoaXMgY2FzZSArIHRoZSBuZXh0IG9uZTwvaDI+CiAgPGRpdiBjbGFzcz0iY29scyI+CiAgICA8ZGl2PjxkaXYgY2xhc3M9InRhZyI+RW5kLW9mLWNhc2UgcHJlcDwvZGl2PgogICAgICA8dWw+PGxpPjxiPkJpdGUgYmxvY2s8L2I+IGluPC9saT48bGk+PGI+Wm9mcmFuPC9iPiBnaXZlbjwvbGk+PGxpPjxiPlJldmVyc2FsPC9iPiBkcmF3biB1cDwvbGk+PGxpPjxiPlN1Y3Rpb248L2I+IHJlYWR5PC9saT48L3VsPjwvZGl2PgogICAgPGRpdj48ZGl2IGNsYXNzPSJ0YWciPk5leHQgY2FzZSAoZG8gaXQgbm93KTwvZGl2PgogICAgICA8dWw+PGxpPjxiPkRydWdzPC9iPiBwdWxsZWQgKyBkcmF3biArIGxhYmVsZWQ8L2xpPjxsaT48Yj5BaXJ3YXk8L2I+IHNldCB1cDwvbGk+PGxpPkxlYXZlIGFzIGxpdHRsZSBhcyBwb3NzaWJsZSBmb3IgYWZ0ZXIgZHJvcC1vZmY8L2xpPjwvdWw+PC9kaXY+CiAgPC9kaXY+CjwvZGl2PgoKPGRpdiBjbGFzcz0iYm94Ij4KICA8aDI+PHNwYW4gY2xhc3M9Im51bSI+Njwvc3Bhbj5DbG9zaW5nIOKGkiBXYWtlIHVwPC9oMj4KICA8ZGl2IGNsYXNzPSJjb2xzIj4KICAgIDxkaXY+PGRpdiBjbGFzcz0idGFnIj5DbG9zaW5nPC9kaXY+CiAgICAgIDx1bD48bGk+PGI+R2FzIG9mZiArIGZsb3dzIGRvd248L2I+IDxzcGFuIGNsYXNzPSJ3aHkiPihhZ2VudCBkcmlmdHMgZG93bik8L3NwYW4+PC9saT48bGk+UmUtY2hlY2sgdGhlIDxiPmJpdGUgYmxvY2s8L2I+PC9saT48bGk+Q2hlY2sgPGI+dGV0YW55PC9iPiDihpIgdHdpdGNoIG1vbml0b3Igb2ZmPC9saT48bGk+PGI+RXllIHRhcGU8L2I+IG9mZjwvbGk+PC91bD48L2Rpdj4KICAgIDxkaXY+PGRpdiBjbGFzcz0idGFnIj5XYWtlIHVwPC9kaXY+CiAgICAgIDx1bD48bGk+PGI+Rmxvd3MgdXA8L2I+LCBP4oKCIDEwMCU8L2xpPjxsaT5Db25maXJtIDxiPmdhcyBvZmY8L2I+PC9saT48bGk+PGI+UHJvcG9mb2w8L2I+IHJlYWR5PC9saT48bGk+PGI+TWFzaywgc3lyaW5nZSwgc3VjdGlvbjwvYj48L2xpPjxsaT48Yj5UcmFzaDwvYj4gYXQgdGhlIGhlYWQgb2YgdGhlIGJlZDwvbGk+PC91bD48L2Rpdj4KICA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJ0YWciPlJlYWR5IHRvIGV4dHViYXRlPzwvZGl2PgogIDxkaXY+VE9GIHJhdGlvIOKJpSAwLjkgLyBzdXN0YWluZWQgdGV0YW55IMK3IGZvbGxvd3MgY29tbWFuZHMgwrcgcmVndWxhciBicmVhdGhpbmcgd2l0aCBhZGVxdWF0ZSBUViDCtyBsb3cgRVRBQSDCtyBzdGFibGUgaGVtb2R5bmFtaWNzPC9kaXY+CjwvZGl2PgoKPC9kaXY+Cjxmb290ZXI+PHNwYW4+R2VuZXJhbCBBbmVzdGhldGljIENhc2UgRmxvdyDCtyBXLiBDb2hlbiwgTUQ8L3NwYW4+PHNwYW4+QmVkc2lkZSByZWZlcmVuY2UuIFlvdXIgYXR0ZW5kaW5nJ3MgcGxhbiBhbHdheXMgd2lucy48L3NwYW4+PC9mb290ZXI+CjwvZGl2PjwvYm9keT48L2h0bWw+Cg==</script>
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('#tabs button'));
+  var ids=tabs.map(function(b){return b.dataset.t});
+  var loaded=false;
+  function show(id){
+    if(ids.indexOf(id)<0) id='overview';
+    tabs.forEach(function(b){b.setAttribute('aria-selected', b.dataset.t===id)});
+    ids.forEach(function(x){document.getElementById(x).classList.toggle('on', x===id)});
+    if(id==='one-pager' && !loaded){
+      var raw=document.getElementById('op-src').textContent;
+      document.getElementById('opf').srcdoc=decodeURIComponent(escape(atob(raw)));
+      loaded=true;
+    }
+  }
+  tabs.forEach(function(b){b.addEventListener('click',function(){location.hash=b.dataset.t; show(b.dataset.t); window.scrollTo(0,0);})});
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1))});
+  show(location.hash.slice(1));
+})();
+</script>
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body></html>

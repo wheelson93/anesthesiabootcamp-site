@@ -1,0 +1,479 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Strong Ion Difference in the OR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F5F8;--card:#FFFFFF;--ink:#151923;--ink-2:#3E4658;--ink-3:#6A7285;
+  --rule:#D6DAE3;--rule-2:#E8EBF1;--accent:#3A4FA3;--accent-soft:#E4E8F7;
+  --ok:#237A4E;--warn:#9A6200;--bad:#B3261E;--ok-bg:#E3F2EA;--warn-bg:#F7EDDA;--bad-bg:#F8E3E1;
+  --scope:#0E1220;--scope-rule:#2C3450;--scope-ink:#C7CEE0;--scope-dim:#7F89A6;
+  --s1:#FF6B6B;--s2:#5FD4E8;--s3:#F2F4FA;--s4:#F4C66A;--s5:#7EE2A8;--s6:#B89CFF;
+  --display:"Archivo",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+    --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+    --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#10131B;--card:#181C27;--ink:#E8EBF3;--ink-2:#B4BBCC;--ink-3:#8790A6;
+  --rule:#2E3446;--rule-2:#232837;--accent:#8FA2F0;--accent-soft:#232B4A;
+  --ok:#5FCB92;--warn:#E6B54F;--bad:#FF8479;--ok-bg:#16301F;--warn-bg:#35290F;--bad-bg:#3A1A18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding-inline:20px;padding-block:0 72px}
+header.mast{padding-block:34px 20px}
+.kicker{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 12px;letter-spacing:.04em;text-transform:uppercase}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,8vw,52px);line-height:1;letter-spacing:-.03em;margin:0 0 12px;text-wrap:balance}
+.thesis{font-size:19.5px;line-height:1.5;color:var(--ink-2);margin:0 0 24px;max-width:58ch}
+
+/* scope (dark instrument panel) */
+.scope{background:var(--scope);border:1px solid var(--scope-rule);border-radius:10px 10px 0 0;color:var(--scope-ink);overflow:hidden}
+.scope.solo{border-radius:10px}
+.scope-top{display:grid;grid-template-columns:repeat(var(--cols,3),1fr);gap:10px;padding:16px 18px 8px}
+.rd{border-left:1px solid var(--scope-rule);padding-left:12px;min-width:0}
+.rd:first-child{border-left:0;padding-left:0}
+.lbl{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);letter-spacing:.08em;text-transform:uppercase}
+.val{font-family:var(--mono);font-weight:700;font-size:clamp(24px,7vw,36px);line-height:1.05;font-variant-numeric:tabular-nums;color:var(--s3)}
+.val.c1{color:var(--s1)} .val.c2{color:var(--s2)} .val.c3{color:var(--s3)} .val.c4{color:var(--s4)} .val.c5{color:var(--s5)} .val.c6{color:var(--s6)}
+.val.sm{font-size:clamp(17px,4.6vw,22px);padding-top:6px}
+.sub{font-family:var(--mono);font-size:10.5px;color:var(--scope-dim);margin-top:3px}
+.plot{display:block;width:100%;height:auto;padding:0 12px 4px}
+.plot text{font-family:var(--mono);font-size:10px;fill:var(--scope-dim)}
+.verdict{margin:0;padding:11px 18px 13px;border-top:1px solid var(--scope-rule);font-size:15px;line-height:1.5}
+.verdict b{font-weight:700}
+.v-bad{color:#FF8A80} .v-ok{color:#7EE2A8} .v-warn{color:#F4C66A} .v-info{color:#7FE3F2} .v-n{color:#9AA4BF}
+.ctl{background:var(--card);border:1px solid var(--rule);border-top:0;border-radius:0 0 10px 10px;padding:14px 18px 16px;margin-top:-1px}
+.fld{margin-bottom:10px}
+.fld label{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;margin-bottom:4px;gap:10px}
+.fld .v{font-family:var(--mono);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:transparent;cursor:pointer;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:5px;border-radius:3px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);border:3px solid var(--card);margin-top:-9.5px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid var(--card)}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--warn)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px}
+.chip{appearance:none;font-family:var(--sans);font-size:15px;font-weight:600;border:1px solid var(--rule);background:var(--paper);color:var(--ink-2);border-radius:999px;padding:8px 14px;min-height:40px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.chip:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+.chip.act{border-style:dashed}
+.note{font-size:14px;color:var(--ink-3);margin:6px 0 0;line-height:1.45}
+.calc{margin:20px 0 24px}
+
+/* tabs */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--rule);margin:30px -20px 0;padding-inline:20px}
+.tabrow{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabrow::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;appearance:none;background:none;border:0;font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink-3);padding:14px 12px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;min-height:46px}
+.tab:hover{color:var(--ink-2)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-4px;border-radius:3px}
+.panel{padding-top:28px}
+h2{font-family:var(--display);font-size:27px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px;line-height:1.15;text-wrap:balance}
+.lede{color:var(--ink-2);margin:0 0 22px;max-width:62ch}
+h3{font-family:var(--display);font-size:18px;font-weight:700;margin:30px 0 8px;letter-spacing:-.01em}
+p{margin:0 0 14px;max-width:66ch}
+ul{margin:0 0 16px;padding-left:0;list-style:none;max-width:66ch}
+ul li{position:relative;padding-left:19px;margin-bottom:8px}
+ul li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:1px;background:var(--accent);opacity:.55}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 18px;max-width:66ch}
+ol.steps li{counter-increment:s;position:relative;padding-left:36px;margin-bottom:14px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:25px;height:25px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:var(--mono);font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+ol.steps li b{display:block}
+strong{font-weight:700}
+.key{border-left:3px solid var(--accent);padding:3px 0 3px 16px;margin:22px 0;font-size:18.5px;line-height:1.5;max-width:60ch}
+.ask{background:var(--accent-soft);border-radius:8px;padding:12px 15px;margin:18px 0;font-size:16px;max-width:64ch}
+.ask b{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:3px}
+.flag{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:13px 15px;margin:20px 0;font-size:16px;max-width:64ch}
+.flag b.t{color:var(--bad)}
+.flag b.w{color:var(--warn)}
+.tblwrap{overflow-x:auto;margin:6px 0 20px}
+.tbl{width:100%;border-collapse:collapse;font-size:15.5px;min-width:440px}
+.tbl th{text-align:left;font-weight:700;font-size:12.5px;color:var(--ink-3);padding:0 10px 7px 0;border-bottom:1px solid var(--rule);text-transform:uppercase;letter-spacing:.05em}
+.tbl td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule-2);vertical-align:top}
+.tbl td:first-child{font-weight:700}
+.num{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.up{color:var(--bad);font-weight:700} .dn{color:var(--accent);font-weight:700} .good{color:var(--ok);font-weight:700}
+.dont{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 20px;padding:0;list-style:none}
+.dont li{background:var(--bad-bg);color:var(--bad);border-radius:5px;padding:4px 10px;font-size:14.5px;font-weight:600;margin:0}
+.dont li::before{display:none}
+.quote{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:14px 0 20px;font-style:italic;max-width:64ch;font-size:16.5px}
+figure{margin:18px 0 22px}
+figure svg{display:block;width:100%;height:auto;max-width:600px}
+figcaption{font-size:14px;color:var(--ink-3);margin-top:6px;max-width:62ch}
+.q{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:14px 16px 12px;margin:0 0 16px}
+.qmeta{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--accent);margin:0 0 6px;text-transform:uppercase}
+.qstem{font-weight:600;margin:0 0 8px}
+ol.opts{margin:0 0 10px;padding-left:26px}
+ol.opts li{margin-bottom:4px;padding-left:4px}
+.q details summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:15px;padding:6px 0;min-height:32px}
+.q details summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.q details p{margin:6px 0 4px;font-size:16px}
+.q:has(details[open]) li.ans{color:var(--ok);font-weight:700}
+footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-3)}
+footer p{max-width:68ch;margin-bottom:10px}
+@media (max-width:480px){
+  body{font-size:16.5px}
+  .wrap{padding-inline:16px}
+  nav.tabs{margin-inline:-16px;padding-inline:16px}
+  .scope-top{padding:14px 14px 6px;gap:8px}
+  .rd{padding-left:8px}
+  .plot{padding:0 6px 4px}
+  .scope-top.q4{grid-template-columns:repeat(2,1fr);row-gap:12px}
+  .scope-top.q4 .rd:nth-child(3){border-left:0;padding-left:0}
+}
+@media print{
+  nav.tabs{display:none}
+  .panel[hidden]{display:block!important}
+  .scope,.ctl{break-inside:avoid}
+}
+</style>
+<!--TITLE: Strong Ion Difference in the OR-->
+<div class="wrap">
+<header class="mast">
+  <p class="kicker">OR chalk talk · physiology · 10–15 minutes</p>
+  <h1>Strong ion difference in the OR</h1>
+  <p class="thesis">Bicarbonate is a result, not a cause. The acid-base variable you control most in the OR is the sodium-to-chloride gap in whatever you're hanging.</p>
+
+  <div class="scope" aria-label="Fluid and strong ion difference simulator">
+    <div class="scope-top q4" style="--cols:4">
+      <div class="rd"><div class="lbl">SID</div><div class="val c5" id="sSid">38</div><div class="sub">Na − Cl − lactate</div></div>
+      <div class="rd"><div class="lbl">Chloride</div><div class="val c2" id="sCl">102</div><div class="sub">mEq/L · Na <span id="sNa">140</span></div></div>
+      <div class="rd"><div class="lbl">Albumin mask</div><div class="val c6" id="sAlb">+1.5</div><div class="sub">mEq/L base excess</div></div>
+      <div class="rd"><div class="lbl">Given</div><div class="val c3" id="sL">0 L</div><div class="sub" id="sMix">crystalloid</div></div>
+    </div>
+    <svg class="plot" id="sidPlot" viewBox="0 0 400 118" role="img" aria-label="Apparent SID after each liter given"></svg>
+    <p class="verdict" id="sVerdict"></p>
+  </div>
+  <div class="ctl">
+    <div class="chips" role="group" aria-label="Give one liter">
+      <button class="chip act" data-fluid="ns">+1 L saline</button>
+      <button class="chip act" data-fluid="pl">+1 L PlasmaLyte</button>
+      <button class="chip act" data-fluid="lr">+1 L LR</button>
+      <button class="chip" id="sReset">Reset</button>
+    </div>
+    <div class="fld"><label for="lac">Lactate <span class="v"><span id="lacV">1.0</span> mmol/L</span></label><input type="range" id="lac" min="0.5" max="10" step="0.5" value="1"></div>
+    <div class="fld"><label for="alb">Albumin <span class="v"><span id="albV">3.6</span> g/dL</span></label><input type="range" id="alb" min="1.2" max="4.5" step="0.1" value="3.6"></div>
+    <p class="note">Give four liters of saline and watch chloride climb toward 113 and SID fall toward 30, with no change in perfusion at all. Then reset and do it with PlasmaLyte. The model mixes each liter into about 15 L of extracellular fluid (a 70 kg adult), assumes a working liver clears the lactate in LR and the acetate/gluconate in PlasmaLyte, and ignores K, Ca, Mg and urine. It shows direction and rough size, not a lab value.</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabrow" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">The one idea</button>
+    <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false">Fluids</button>
+    <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false">Trauma &amp; MTP</button>
+    <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false">Long ex-lap</button>
+    <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false">ICU handoff</button>
+    <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false">Board questions</button>
+  </div>
+</nav>
+
+<main>
+<!-- 1 -->
+<section class="panel" id="p1" role="tabpanel" aria-labelledby="t1">
+  <h2>Three independent variables</h2>
+  <p class="lede">Stewart's approach says pH and bicarbonate are dependent: they move only when one of three independent variables moves.</p>
+
+  <h3>Draw this: the three dials</h3>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Variable</th><th>What sets it</th><th>Direction</th></tr></thead>
+    <tbody>
+      <tr><td>PCO<sub>2</sub></td><td>Ventilation</td><td><span class="up">↑ acidosis</span></td></tr>
+      <tr><td>A<sub>tot</sub></td><td>Weak acids: albumin, phosphate</td><td>Low albumin is <span class="dn">alkalinizing</span> and hides acidosis</td></tr>
+      <tr><td>SID</td><td>Strong cations minus strong anions</td><td>Low SID = <span class="up">acidosis</span>; high SID = <span class="dn">alkalosis</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <p><strong>SID = (Na⁺ + K⁺ + Ca²⁺ + Mg²⁺) − (Cl⁻ + lactate⁻ + other strong anions).</strong> At the bedside, when K, Ca and Mg are being replaced and ketones aren't the issue, <strong>Na − Cl</strong> is close enough. Normal is about <strong>+38 to +40</strong>.</p>
+
+  <div class="key">Every liter you hang has its own SID. Anything with a SID below plasma bicarbonate (about 24) pushes the patient toward acidosis; anything above pushes toward alkalosis. Saline's SID is zero.</div>
+
+  <h3>Why low albumin matters</h3>
+  <p>Albumin is a weak acid. Losing it is alkalinizing, so a hypoalbuminemic patient's pH looks better than their acid load. Rough size: base excess shifts by about <strong>0.25 × (42 − albumin in g/L)</strong> mEq/L. Albumin 1.8 g/dL (18 g/L) hides about <strong>6 mEq/L</strong> of acidosis. For the anion gap, add 2.5 for every 1 g/dL albumin is below 4.</p>
+
+  <div class="ask"><b>ASK THE LEARNER</b>pH 7.30 after a 6-hour ex-lap, bicarb 18, lactate 1.5. Do you give bicarb? <em>(No. Look at Na − Cl first. If it's 28, you gave them this acidosis with saline, and bicarb treats the dependent variable.)</em></div>
+</section>
+
+<!-- 2 -->
+<section class="panel" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+  <h2>Every bag has a SID</h2>
+  <p class="lede">"Effective" SID counts organic anions (lactate, acetate, gluconate) as gone once a working liver or muscle metabolizes them.</p>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Fluid</th><th>Na⁺</th><th>Cl⁻</th><th>Effective SID</th><th>Effect</th></tr></thead>
+    <tbody>
+      <tr><td>0.9% saline</td><td class="num">154</td><td class="num">154</td><td class="num">0</td><td><span class="up">Acidifying</span></td></tr>
+      <tr><td>Lactated Ringer's</td><td class="num">130</td><td class="num">109</td><td class="num">~28</td><td>Near neutral, if the liver clears lactate</td></tr>
+      <tr><td>PlasmaLyte 148</td><td class="num">140</td><td class="num">98</td><td class="num">~50</td><td>Near neutral to slightly alkalinizing</td></tr>
+      <tr><td>Plasma / FFP</td><td class="num">~140</td><td class="num">~100</td><td class="num">~40</td><td>Physiologic (citrate adds its own story)</td></tr>
+      <tr><td>5% albumin</td><td class="num">130–160</td><td class="num">varies</td><td class="num">product-specific</td><td>Adds A<sub>tot</sub> back; chloride content varies by manufacturer</td></tr>
+      <tr><td>8.4% NaHCO<sub>3</sub></td><td class="num">1000</td><td class="num">0</td><td class="num">+1000</td><td>Raises SID, but generates CO<sub>2</sub></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="flag"><b class="w">LR in liver failure.</b> LR's 28 mmol/L of lactate becomes bicarbonate only if the liver can metabolize it. In a failing liver or small remnant you may be adding lactate you can't clear, and you can't tell it apart from ischemic lactate on the gas. PlasmaLyte's acetate is cleared peripherally.</div>
+
+  <h3>Fluid by case</h3>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Case</th><th>Prefer</th><th>Avoid</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Trauma / MTP</td><td>Blood products, balanced crystalloid</td><td>Large-volume saline</td><td>Chloride load plus citrate</td></tr>
+      <tr><td>Long ex-lap / Whipple</td><td>Balanced crystalloid, goal-directed</td><td>Saline as maintenance</td><td>Chloride accumulates over hours</td></tr>
+      <tr><td>Liver resection</td><td>PlasmaLyte, albumin</td><td>Saline; LR if the liver is poor</td><td>Lactate clearance impaired</td></tr>
+      <tr><td>Renal transplant</td><td>Balanced crystalloid</td><td>Saline</td><td>Hyperchloremia, hyperkalemia risk</td></tr>
+      <tr><td>Craniotomy / TBI</td><td>Saline or PlasmaLyte</td><td>LR, anything hypotonic</td><td>Here tonicity beats SID</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 3 -->
+<section class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+  <h2>Trauma and massive transfusion</h2>
+  <p class="lede">The hemorrhaging patient takes several SID hits at the same time.</p>
+  <ol class="steps">
+    <li><b>Lactate (strong anion up).</b> Hypoperfusion. Every mmol/L of lactate narrows SID by about 1. Fix: perfusion and source control.</li>
+    <li><b>Chloride (iatrogenic).</b> Saline is 154:154; plasma is about 140:100. Two to four liters in the field and chloride sits at 112–116, SID in the low 20s to 30. Fix: stop the saline.</li>
+    <li><b>Calcium (strong cation down).</b> Citrate in every unit binds ionized calcium, and a shocked, cold liver can't clear it. Low iCa lowers SID and also depresses the heart and clotting. Fix: CaCl<sub>2</sub> 1 g every ~4 units or when iCa &lt; 1.1.</li>
+    <li><b>Albumin (A<sub>tot</sub> down, masking).</b> Dilution and loss lower albumin, which hides part of the acidosis. pH 7.25 with albumin 1.8 is worse than it looks.</li>
+  </ol>
+
+  <h3>The lethal triad is a Stewart spiral</h3>
+  <p>Cold slows citrate clearance, which drops calcium and SID. Acidosis impairs clotting factors, so more bleeding, more lactate, more product, more citrate.</p>
+
+  <h3>Action map</h3>
+  <ul>
+    <li>CaCl<sub>2</sub> early and often; check iCa on every gas.</li>
+    <li>Balanced resuscitation with blood products; no saline boluses.</li>
+    <li>Warm actively: it restores citrate metabolism.</li>
+    <li>Avoid bicarbonate drips: they treat the dependent variable.</li>
+    <li>Permissive hypotension until the source is controlled.</li>
+  </ul>
+</section>
+
+<!-- 4 -->
+<section class="panel" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+  <h2>Whipple and the long ex-lap</h2>
+  <p class="lede">No single insult; just eight hours of small ones.</p>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>Source</th><th>Mechanism</th><th>Size</th></tr></thead>
+    <tbody>
+      <tr><td>Saline maintenance</td><td>Chloride load, SID down</td><td>Cumulative over hours</td></tr>
+      <tr><td>Reflex boluses</td><td>Volume deficit → crystalloid → chloride</td><td>Cumulative</td></tr>
+      <tr><td>Bowel manipulation</td><td>Mild mesenteric lactate</td><td>Lactate +1–2</td></tr>
+      <tr><td>Low albumin</td><td>A<sub>tot</sub> down, masks acidosis</td><td>~0.25 × (42 − alb g/L) mEq/L</td></tr>
+      <tr><td>Biliary drainage</td><td>Baseline bicarbonate-rich losses</td><td>May start hyperchloremic</td></tr>
+      <tr><td>Vascular clamping</td><td>Lactate release on unclamping</td><td>Lactate +3–5, transient</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Strategy</h3>
+  <ul>
+    <li>Balanced crystalloid as maintenance, goal-directed boluses.</li>
+    <li>Serial gases every ~2 hours; write Na − Cl next to every one.</li>
+    <li>5% albumin for volume in protein-depleted patients restores A<sub>tot</sub>.</li>
+    <li>Expect a transient lactate bump after unclamping; don't reflexively bolus it.</li>
+  </ul>
+  <p>Liver resection deserves its own talk: the organ being resected is the one that clears lactate and citrate. See <strong>SID in Hepatic Resection</strong>.</p>
+</section>
+
+<!-- 5 -->
+<section class="panel" id="p5" role="tabpanel" aria-labelledby="t5" hidden>
+  <h2>The ICU handoff</h2>
+  <p class="lede">Name each component of the acidosis separately, so the ICU doesn't reach for bicarbonate or a sepsis workup.</p>
+  <div class="quote">"His pH is 7.28, base excess −10. Na minus Cl is about 25: he started hyperchloremic from chronic biliary drainage and got 7 liters of PlasmaLyte. His albumin is 1.9, which is alkalinizing him, so the true acid load is worse than the pH suggests. Lactate is 2.4 and falling since reperfusion. Calcium was 0.94 after the anastomosis; he got 2 g of CaCl<sub>2</sub> and the last iCa was 1.12. This is a mixed acidosis: a chloride component plus residual lactate. He doesn't need bicarb. He needs perfusion pressure, calcium every 4 hours, and no saline."</div>
+
+  <h3>Common ICU misreads</h3>
+  <div class="tblwrap"><table class="tbl">
+    <thead><tr><th>ICU sees</th><th>Default</th><th>Stewart reframe</th></tr></thead>
+    <tbody>
+      <tr><td>Non-gap acidosis</td><td>RTA, diarrhea</td><td>Check Na − Cl. OR saline is the most common cause.</td></tr>
+      <tr><td>Normal pH</td><td>Compensated</td><td>Check albumin; it may be hiding acidosis.</td></tr>
+      <tr><td>Lactate clearing, still acidotic</td><td>Sepsis</td><td>Persistent low SID from chloride or low calcium.</td></tr>
+      <tr><td>Bicarb 18</td><td>Give bicarb</td><td>What's the SID? Treat the driver.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 6 -->
+<section class="panel" id="p6" role="tabpanel" aria-labelledby="t6" hidden>
+  <h2>Board questions</h2>
+  <p class="lede">Five questions from the anes qvault question bank, in the order the talk covers them. Ask the question, let them commit to an answer, then reveal.</p>
+
+  <div class="q">
+    <p class="qmeta">Q1 · Clinical · PassMachine · renal &amp; electrolytes</p>
+    <p class="qstem">A 50-year-old woman has a right hemicolectomy. Postop she is oliguric, presumed hypovolemic, and is getting IV crystalloid. Which statement best describes 0.9% NaCl?</p>
+    <ol class="opts" type="A">
+      <li>It is a balanced crystalloid</li>
+      <li class="ans">Isotonic saline infusion may cause hyperchloremic metabolic acidosis</li>
+      <li>Excess water is excreted faster with 0.9% NaCl than with LR</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>B.</strong> Saline's SID is zero, so every liter drags plasma SID toward zero. That's the chart at the top. C is backwards: saline loads are excreted more slowly. <em>Talk link: the hero simulator and Fluids.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q2 · Basic · ANESHUB pharm</p>
+    <p class="qstem">Preop labs: Na 140, Cl 90, PaCO<sub>2</sub> 46, pH 7.50. These findings most suggest prior treatment with:</p>
+    <ol class="opts" type="A">
+      <li>acetazolamide</li>
+      <li>enalapril</li>
+      <li class="ans">furosemide</li>
+      <li>mannitol</li>
+      <li>spironolactone</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>C.</strong> Na − Cl = 50: a high SID, so alkalosis, with a little respiratory compensation. Loop diuretics waste more chloride than sodium. Acetazolamide does the opposite (bicarbonate wasting, hyperchloremic acidosis). <em>Talk link: The one idea, "high SID means alkalosis."</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q3 · Advanced · ANESHUB respiratory &amp; critical care</p>
+    <p class="qstem">A 20-kg 5-year-old with a cerebral contusion, on day 5, NG tube draining to gravity, dexamethasone, D5 ½NS and D5LR. ABG: PaO<sub>2</sub> 120, PaCO<sub>2</sub> 44, pH 7.48, BE +6. Na 140, K 3.2, Cl 91. Urine output 15 mL/h. This patient most likely requires:</p>
+    <ol class="opts" type="A">
+      <li>additional IV fluids</li>
+      <li>furosemide diuresis</li>
+      <li>ammonium chloride</li>
+      <li>reinstitution of mechanical ventilation</li>
+      <li class="ans">potassium chloride</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>E.</strong> The NG tube is draining HCl. Chloride loss raises SID (140 − 91 = 49), producing a chloride-responsive alkalosis, and the kidney trades potassium to hold sodium. The fix is to give back the strong anion: KCl replaces both. Ammonium chloride also supplies chloride, but it's an outdated and riskier way to do it. <em>Talk link: The one idea.</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q4 · Basic · ANESHUB respiratory &amp; critical care</p>
+    <p class="qstem">During cardiac arrest with effective compressions and positive-pressure ventilation, 50 mEq of sodium bicarbonate is given. The most likely result is:</p>
+    <ol class="opts" type="A">
+      <li>decreased mixed venous pH</li>
+      <li>decreased SpO<sub>2</sub></li>
+      <li class="ans">increased PetCO<sub>2</sub></li>
+      <li>increased plasma lactate</li>
+      <li>increased serum potassium</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>C.</strong> Bicarbonate buffers acid into CO<sub>2</sub> and water, and that CO<sub>2</sub> shows up in exhaled gas. Stewart framing: bicarb does raise SID (it adds sodium without chloride), but if ventilation can't clear the CO<sub>2</sub>, you've traded a metabolic acidosis for a respiratory one, including inside cells. <em>Talk link: Trauma &amp; MTP, "avoid bicarbonate drips."</em></p>
+    </details>
+  </div>
+
+  <div class="q">
+    <p class="qmeta">Q5 · Advanced · ANESHUB general</p>
+    <p class="qstem">A 20-year-old with poorly controlled diabetes needs urgent drainage of an abdominal abscess. After 10 units of regular insulin and 5 units/h for 5 hours: Na 128, K 5.4, Cl 80, glucose 750. The most appropriate perioperative management is:</p>
+    <ol class="opts" type="A">
+      <li>add subcutaneous NPH insulin</li>
+      <li>sodium bicarbonate to correct metabolic acidosis</li>
+      <li class="ans">normal saline to correct the presumed hypovolemia</li>
+      <li>furosemide to correct hyponatremia</li>
+      <li>D5 0.2% saline to prevent hypoglycemia</li>
+    </ol>
+    <details><summary>Reveal answer</summary>
+      <p><strong>C.</strong> The deficit is volume, and the sodium is low partly from glucose pulling water out of cells. Stewart twist: Na − Cl is 48, which looks alkalotic, but ketoacids are unmeasured strong anions that close the gap, which is why bicarbonate isn't the answer. Newer DKA data increasingly favor balanced crystalloid over saline, but of these options, volume is the right call. <em>Talk link: The one idea, "other strong anions."</em></p>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Framework: Stewart PA, <em>Can J Physiol Pharmacol</em> 1983;61:1444–61; albumin correction after Figge and Fencl. Fluid compositions are typical US values; check your institution's products, especially albumin.</p>
+  <p>Companion talk: SID in Hepatic Resection. Board questions from the anes qvault folder (ANESHUB and PassMachine exports).</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  var F={ns:{na:154,cl:154,lab:'NS',c:'#FF6B6B'},pl:{na:140,cl:98,lab:'PL',c:'#7EE2A8'},lr:{na:130,cl:109,lab:'LR',c:'#5FD4E8'}};
+  var st;
+  function reset(){st={na:140,cl:102,v:15,hist:[{sid:38,f:null}]};$('alb').value=3.6;}
+  reset();
+  var L=30,R=390,T=8,B=94,YMIN=15,YMAX=50,NMAX=8;
+  function X(i){return L+i/NMAX*(R-L)} function Y(s){return B-(Math.max(YMIN,Math.min(YMAX,s))-YMIN)/(YMAX-YMIN)*(B-T)}
+  function draw(){
+    var s=$('sidPlot');s.innerHTML='';
+    s.appendChild(el('rect',{x:L,y:Y(42),width:R-L,height:Y(36)-Y(42),fill:'#7EE2A8',opacity:.12}));
+    [20,30,40,50].forEach(function(v){var t=el('text',{x:L-5,y:Y(v)+3,'text-anchor':'end'});t.textContent=v;s.appendChild(t);s.appendChild(el('line',{x1:L,y1:Y(v),x2:R,y2:Y(v),stroke:'#2C3450'}));});
+    for(var i=0;i<=NMAX;i++){var t=el('text',{x:X(i),y:B+14,'text-anchor':i===NMAX?'end':'middle'});t.textContent=i===NMAX?i+' L':i;s.appendChild(t);}
+    var h=st.hist.slice(-(NMAX+1)),off=st.hist.length-h.length;
+    var d='';h.forEach(function(p,i){d+=(i?'L':'M')+X(i).toFixed(1)+','+Y(p.sid).toFixed(1);});
+    s.appendChild(el('path',{d:d,fill:'none',stroke:'#F2F4FA','stroke-width':1.5,opacity:.6}));
+    h.forEach(function(p,i){s.appendChild(el('circle',{cx:X(i),cy:Y(p.sid),r:4.5,fill:p.f?F[p.f].c:'#F2F4FA'}));});
+    var lb=el('text',{x:R,y:T+2,'text-anchor':'end'});lb.innerHTML='<tspan fill="#FF6B6B">● saline</tspan>  <tspan fill="#7EE2A8">● PlasmaLyte</tspan>  <tspan fill="#5FD4E8">● LR</tspan>';s.appendChild(lb);
+  }
+  function update(){
+    var lac=+$('lac').value,alb=+$('alb').value;
+    $('lacV').textContent=lac.toFixed(1);$('albV').textContent=alb.toFixed(1);
+    var sid=st.na-st.cl-lac;
+    st.hist[st.hist.length-1].sid=sid;
+    $('sSid').textContent=Math.round(sid);$('sCl').textContent=Math.round(st.cl);$('sNa').textContent=Math.round(st.na);
+    var mask=0.25*(42-alb*10);$('sAlb').textContent=(mask>=0?'+':'')+mask.toFixed(1);
+    var n=st.hist.length-1;$('sL').textContent=n+' L';
+    var cnt={ns:0,pl:0,lr:0};st.hist.forEach(function(p){if(p.f)cnt[p.f]++;});
+    var parts=[];if(cnt.ns)parts.push(cnt.ns+' NS');if(cnt.pl)parts.push(cnt.pl+' PL');if(cnt.lr)parts.push(cnt.lr+' LR');$('sMix').textContent=parts.length?parts.join(' · '):'crystalloid';
+    draw();
+    var m,cls,hidden=mask>3?' Albumin '+alb.toFixed(1)+' is hiding about '+Math.round(mask)+' mEq/L of that on the pH.':'';
+    if(sid>=36){cls='v-ok';m='<b>SID '+Math.round(sid)+': near normal.</b> No strong-ion acidosis.'+(mask>3?' But albumin '+alb.toFixed(1)+' is adding about '+Math.round(mask)+' mEq/L of alkalinizing effect, so check the whole picture.':'');}
+    else if(lac>=4&&(st.cl<=106)){cls='v-bad';m='<b>SID '+Math.round(sid)+': lactate-driven.</b> Chloride is fine; this is perfusion. Fix flow, not the number.'+hidden;}
+    else if(st.cl>106&&lac<4){cls='v-warn';m='<b>SID '+Math.round(sid)+': hyperchloremic.</b> Chloride '+Math.round(st.cl)+'. You made this acidosis. Switch to a balanced fluid; bicarb treats the dependent variable.'+hidden;}
+    else if(st.cl>106){cls='v-bad';m='<b>SID '+Math.round(sid)+': mixed.</b> Chloride '+Math.round(st.cl)+' plus lactate '+lac.toFixed(1)+'. Name both components separately at handoff.'+hidden;}
+    else{cls='v-warn';m='<b>SID '+Math.round(sid)+': mildly low.</b> Keep writing Na − Cl next to every gas.'+hidden;}
+    $('sVerdict').className='verdict '+cls;$('sVerdict').innerHTML=m;
+  }
+  [].slice.call(document.querySelectorAll('[data-fluid]')).forEach(function(b){b.addEventListener('click',function(){
+    var f=F[b.getAttribute('data-fluid')];
+    st.na=(st.na*st.v+f.na)/(st.v+1);st.cl=(st.cl*st.v+f.cl)/(st.v+1);
+    var a=+$('alb').value;$('alb').value=Math.max(1.2,a*st.v/(st.v+1)).toFixed(1);
+    st.v+=1;st.hist.push({sid:0,f:b.getAttribute('data-fluid')});update();
+  });});
+  $('sReset').addEventListener('click',function(){reset();update();});
+  $('lac').addEventListener('input',update);$('alb').addEventListener('input',update);
+  update();
+})();
+</script>
+
+<script>
+(function(){
+  var KEY='sid-tab';
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function select(tab,focus){
+    tabs.forEach(function(t){var on=t===tab;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    tab.scrollIntoView({block:'nearest',inline:'nearest'});
+    if(focus)tab.focus();
+    try{localStorage.setItem(KEY,tab.id)}catch(e){}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t)});
+    t.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();select(tabs[(i+d+tabs.length)%tabs.length],true);});
+  });
+  var start=tabs[0];
+  try{var s=localStorage.getItem(KEY);if(s&&document.getElementById(s))start=document.getElementById(s);}catch(e){}
+  select(start);
+  [].slice.call(document.querySelectorAll('[data-goto]')).forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();select(document.getElementById(a.getAttribute('data-goto')),true);window.scrollTo({top:document.querySelector('nav.tabs').offsetTop-4});});});
+})();
+</script>
+
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body></html>

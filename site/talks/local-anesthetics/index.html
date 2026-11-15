@@ -1,0 +1,620 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Local Anesthetics: Selection and Dosing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>[hidden]{display:none!important}
+:root{
+  --bg:#f5f7f8; --panel:#ffffff; --ink:#17232b; --muted:#566872; --line:#d3dde2;
+  --accent:#0e6e7a; --accent-soft:#dcefef; --warn:#b4531a; --warn-soft:#fbe9dc; --bad:#a3293b; --bad-soft:#f7e1e4; --good:#2f7a3f; --good-soft:#e2f1e4;
+  --chalk:#eef3f4;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f171b; --panel:#162228; --ink:#e3ecef; --muted:#93a7b0; --line:#2b3b43;
+  --accent:#5cc3cc; --accent-soft:#16363b; --warn:#f0a066; --warn-soft:#3a2617; --bad:#f08a98; --bad-soft:#3b1d23; --good:#7fcf8c; --good-soft:#1b3322; --chalk:#1b2a31; color-scheme:dark}}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:20px 64px}
+header.top{display:grid;gap:6px;padding-block:8px 14px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--f-display);font-weight:750;font-size:clamp(28px,6vw,42px);line-height:1.05;margin:0;text-wrap:balance}
+.lede{color:var(--muted);max-width:64ch;margin:0}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:thin}
+nav.tabs button{font:600 14px var(--f-body);background:none;border:1px solid transparent;color:var(--muted);padding:7px 11px;border-radius:999px;white-space:nowrap;cursor:pointer}
+nav.tabs button:hover{color:var(--ink);border-color:var(--line)}
+nav.tabs button[aria-selected="true"]{background:var(--accent);color:var(--panel)}
+nav.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section.tab{padding-top:22px;display:grid;gap:18px}
+h2{font-family:var(--f-display);font-weight:750;font-size:26px;line-height:1.15;margin:0;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:600;font-size:19px;margin:6px 0 0;text-wrap:balance}
+p{margin:0;max-width:68ch}
+ul,ol{margin:0;padding-left:1.25em;display:grid;gap:5px;max-width:70ch}
+.board{background:var(--chalk);border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;margin:0}
+.board svg{display:block;width:100%;height:auto;min-width:540px}
+.board figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+.say{border-left:3px solid var(--accent);padding:4px 0 4px 14px;font-size:17px;max-width:66ch}
+.say b{color:var(--accent)}
+.note{background:var(--warn-soft);border-radius:8px;padding:12px 14px;max-width:74ch}
+.note.bad{background:var(--bad-soft)}
+.note.good{background:var(--good-soft)}
+.note.acc{background:var(--accent-soft)}
+.note strong:first-child{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:600px}
+th,td{text-align:left;vertical-align:top;padding:9px 11px;border-bottom:1px solid var(--line)}
+th{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--chalk)}
+tr:last-child td{border-bottom:none}
+td.num,.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:13.5px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:8px;align-content:start;min-width:0}
+.card h3{margin:0}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--accent-soft);color:var(--accent);width:max-content}
+.tag.w{background:var(--warn-soft);color:var(--warn)}.tag.b{background:var(--bad-soft);color:var(--bad)}.tag.g{background:var(--good-soft);color:var(--good)}
+details.q{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+details.q summary{cursor:pointer;font-weight:700;list-style:none}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:" Show answer";font:600 12px var(--f-mono);color:var(--accent);letter-spacing:.04em}
+details.q[open] summary::after{content:" Hide"}
+details.q .opts{margin:8px 0;display:grid;gap:3px}
+details.q .ans{border-top:1px dashed var(--line);padding-top:8px;margin-top:6px;display:grid;gap:6px}
+.src li{font-size:14px}
+a{color:var(--accent)}
+.svg-ink{stroke:var(--ink);fill:none}
+.svg-txt{fill:var(--ink);font-family:var(--f-body);font-size:13px}
+.svg-mut{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
+.svg-acc{stroke:var(--accent);fill:none}
+.svg-warn{stroke:var(--warn);fill:none}
+.svg-bad{stroke:var(--bad);fill:none}
+.svg-good{stroke:var(--good);fill:none}
+.calc{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:12px}
+.calc .row{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.calc label{display:grid;gap:3px;font-size:13px;color:var(--muted);font-weight:700}
+.calc input,.calc select{font:15px var(--f-body);padding:7px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);min-width:0}
+.calc input[type=number]{width:90px}
+.calc button{font:600 14px var(--f-body);padding:7px 12px;border-radius:6px;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);cursor:pointer}
+.calc button.x{border-color:var(--line);background:none;color:var(--muted);padding:6px 9px}
+.out{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:14px;background:var(--chalk);border-radius:8px;padding:10px 12px;display:grid;gap:4px}
+.out b{font-size:16px}
+.meter{height:14px;border-radius:7px;background:var(--line);overflow:hidden}
+.meter span{display:block;height:100%;background:var(--good);transition:width .2s}
+.meter span.w{background:var(--warn)}.meter span.b{background:var(--bad)}
+.handlink{display:inline-block;font:600 14px var(--f-body);padding:6px 12px;border-radius:999px;border:1px solid var(--accent);text-decoration:none;width:max-content}
+@media (prefers-reduced-motion:no-preference){section.tab{animation:in .18s ease-out}@keyframes in{from{opacity:.4;transform:translateY(3px)}to{opacity:1;transform:none}}}
+</style></head><body>
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">OR chalk talk · Anesthesia &amp; Pharmacology · MS3 → CA-2</div>
+  <h1>Local anesthetics: selection and dosing</h1>
+  <p class="lede">Three physical properties explain almost everything about these drugs. Learn those, learn one formula for max dose, and know what LAST looks like. Additives get their own talk (<a href="/talks/nerve-block-additives/">Part 2: block additives</a>).</p>
+  <a class="handlink" href="/talks/local-anesthetics/">Printable one-page handout →</a>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Talk sections">
+  <button role="tab" id="t-mech" aria-controls="mech" aria-selected="true">1 · How they work</button>
+  <button role="tab" id="t-drugs" aria-controls="drugs" aria-selected="false">2 · The drugs</button>
+  <button role="tab" id="t-dose" aria-controls="dose" aria-selected="false">3 · Max dose &amp; calculator</button>
+  <button role="tab" id="t-last" aria-controls="last" aria-selected="false">4 · LAST &amp; other toxicity</button>
+  <button role="tab" id="t-pick" aria-controls="pick" aria-selected="false">5 · Choosing one</button>
+  <button role="tab" id="t-draw" aria-controls="draw" aria-selected="false">Whiteboard</button>
+  <button role="tab" id="t-board" aria-controls="board" aria-selected="false">Board questions</button>
+  <button role="tab" id="t-src" aria-controls="src" aria-selected="false">Sources</button>
+</nav>
+
+<!-- ============ 1 MECHANISM ============ -->
+<section class="tab" id="mech" role="tabpanel" aria-labelledby="t-mech">
+  <h2>One target, three knobs</h2>
+  <p class="say">"Every local anesthetic does the same thing: it plugs the sodium channel <b>from the inside</b>. The differences between them come down to three numbers: <b>pKa, lipid solubility, protein binding</b>."</p>
+
+  <figure class="board">
+    <svg viewBox="0 0 660 300" role="img" aria-label="Local anesthetic crossing the nerve membrane in un-ionized form and blocking the sodium channel from inside in ionized form">
+      <rect x="40" y="120" width="580" height="60" fill="var(--accent-soft)" stroke="var(--line)"/>
+      <text x="50" y="138" class="svg-mut">axon membrane (lipid)</text>
+      <text x="50" y="40" class="svg-txt" font-weight="700">OUTSIDE (pH 7.4, or ~6.5 if infected)</text>
+      <text x="50" y="280" class="svg-txt" font-weight="700">INSIDE the axon (pH ~7.1)</text>
+      <!-- outside equilibrium -->
+      <text x="120" y="85" class="svg-txt" font-size="18" font-weight="700">BH⁺</text>
+      <text x="165" y="85" class="svg-txt" font-size="18">⇌</text>
+      <text x="195" y="85" class="svg-txt" font-size="18" font-weight="700" fill="var(--good)">B</text>
+      <text x="215" y="85" class="svg-txt" font-size="18">+ H⁺</text>
+      <text x="85" y="106" class="svg-mut">ionized: stuck outside</text>
+      <!-- crossing arrow -->
+      <path d="M200 95 L200 205" class="svg-good" stroke-width="2.5" marker-end="url(#mg)"/>
+      <text x="212" y="160" class="svg-txt" fill="var(--good)" font-weight="700">B crosses</text>
+      <!-- inside equilibrium -->
+      <text x="185" y="235" class="svg-txt" font-size="18" font-weight="700" fill="var(--good)">B</text>
+      <text x="205" y="235" class="svg-txt" font-size="18">+ H⁺ ⇌</text>
+      <text x="275" y="235" class="svg-txt" font-size="18" font-weight="700" fill="var(--bad)">BH⁺</text>
+      <path d="M318 228 C 360 228, 390 215, 418 192" class="svg-bad" stroke-width="2.5" marker-end="url(#mb)"/>
+      <text x="300" y="258" class="svg-mut">ionized form binds the receptor</text>
+      <!-- Na channel -->
+      <rect x="420" y="105" width="34" height="90" rx="6" fill="var(--panel)" stroke="var(--ink)" stroke-width="1.6"/>
+      <rect x="486" y="105" width="34" height="90" rx="6" fill="var(--panel)" stroke="var(--ink)" stroke-width="1.6"/>
+      <circle cx="470" cy="185" r="11" fill="var(--bad)"/>
+      <text x="470" y="189" text-anchor="middle" font-size="10" fill="#fff" font-family="var(--f-mono)">LA</text>
+      <text x="470" y="72" text-anchor="middle" class="svg-txt" font-weight="700">Na⁺</text>
+      <path d="M470 78 L470 120" class="svg-ink" stroke-width="1.6" marker-end="url(#mk)"/>
+      <line x1="452" y1="122" x2="490" y2="160" stroke="var(--bad)" stroke-width="3"/>
+      <line x1="490" y1="122" x2="452" y2="160" stroke="var(--bad)" stroke-width="3"/>
+      <text x="535" y="100" class="svg-mut">voltage-gated Na⁺</text>
+      <text x="535" y="114" class="svg-mut">channel (Nav)</text>
+      <text x="535" y="214" class="svg-mut">binds open and</text>
+      <text x="535" y="228" class="svg-mut">inactivated states</text>
+      <defs>
+        <marker id="mg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--good)"/></marker>
+        <marker id="mb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--bad)"/></marker>
+        <marker id="mk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker>
+      </defs>
+    </svg>
+    <figcaption>Drawing 1. Local anesthetics are weak bases. The neutral form (B) gets through the membrane; the charged form (BH⁺) does the blocking from inside. Anything that shifts that balance outside changes onset.</figcaption>
+  </figure>
+
+  <h3>The three knobs</h3>
+  <div class="tbl"><table>
+    <tr><th>Property</th><th>Controls</th><th>Why</th><th>Example</th></tr>
+    <tr><td><b>pKa</b></td><td>Onset</td><td>LAs have pKa above 7.4, so most of the drug is ionized at body pH. The closer the pKa is to 7.4, the more neutral (B) form is available to cross the membrane.</td><td>Lidocaine (7.8) is faster than bupivacaine (8.1).</td></tr>
+    <tr><td><b>Lipid solubility</b></td><td>Potency (and toxicity)</td><td>More lipid-soluble drugs get into the membrane and to the receptor more easily, so you need fewer molecules.</td><td>Bupivacaine is ~4× as potent as lidocaine: 0.5% bupi ≈ 2% lido.</td></tr>
+    <tr><td><b>Protein binding</b></td><td>Duration</td><td>Highly protein-bound drugs stick to the Na⁺ channel protein longer and leave the site more slowly. (Also binds α1-acid glycoprotein in plasma.)</td><td>Bupivacaine ~95% bound, lasts much longer than lidocaine ~65%.</td></tr>
+  </table></div>
+
+  <h3>pKa: how it actually works</h3>
+  <p class="say">"pKa is the pH at which a drug is <b>half ionized, half not</b>. Local anesthetics are weak bases with pKa above 7.4, so at body pH <b>most of the drug is the charged form</b>, the one that can't get in."</p>
+  <p>For a weak base, Henderson–Hasselbalch says:</p>
+  <p class="mono" style="font-size:15px">pKa − pH = log ( [BH⁺] / [B] )</p>
+  <ul>
+    <li>Every 1 unit the pKa sits above the pH means <b>10× more ionized than neutral</b> drug.</li>
+    <li>Only the neutral form (B) diffuses through the nerve sheath and membrane. So the fraction that's neutral at tissue pH sets how fast the block comes on.</li>
+    <li>Once inside the axon (slightly more acidic, ~7.1), some B picks up a proton and becomes BH⁺, which is the form that binds the Na⁺ channel. You need both forms: one to get in, one to work.</li>
+  </ul>
+  <div class="tbl"><table>
+    <tr><th>Drug</th><th>pKa</th><th>Neutral (B) at pH 7.4</th><th>At pH 6.5 (infected tissue)</th></tr>
+    <tr><td>Mepivacaine</td><td class="num">7.6</td><td class="num">~39%</td><td class="num">~7%</td></tr>
+    <tr><td>Lidocaine</td><td class="num">7.8</td><td class="num">~28%</td><td class="num">~5%</td></tr>
+    <tr><td>Bupivacaine / ropivacaine</td><td class="num">8.1</td><td class="num">~17%</td><td class="num">~2.5%</td></tr>
+    <tr><td>Chloroprocaine</td><td class="num">9.0</td><td class="num">~2.5%</td><td class="num">~0.3%</td></tr>
+  </table></div>
+
+  <div class="calc" id="pka">
+    <div class="row">
+      <label>Drug<select id="pk-d">
+        <option value="7.6">Mepivacaine (7.6)</option>
+        <option value="7.8" selected>Lidocaine (7.8)</option>
+        <option value="8.1">Bupivacaine / ropivacaine (8.1)</option>
+        <option value="9.0">Chloroprocaine (9.0)</option>
+      </select></label>
+      <label>Tissue pH: <span id="pk-pv" class="mono">7.40</span><input type="range" id="pk-ph" min="6.0" max="8.0" step="0.05" value="7.4" style="width:220px"></label>
+    </div>
+    <div class="meter" style="height:22px"><span id="pk-bar" style="width:28%"></span></div>
+    <div class="out" id="pk-out"></div>
+    <p style="font-size:13px;color:var(--muted)">Slide down to 6.5 to see the abscess problem; slide up to see what bicarbonate does.</p>
+  </div>
+
+  <h3>Where pKa shows up in the OR</h3>
+  <ul>
+    <li><b>Infected tissue</b> (pH ~6.5): lidocaine drops from ~28% neutral to ~5%. That's why the I&amp;D still hurts.</li>
+    <li><b>Bicarbonate</b> nudges pH up toward the pKa, so more drug is neutral: faster onset, less sting. Push it too far with bupivacaine or ropivacaine and the neutral form, which is poorly water-soluble, precipitates.</li>
+    <li><b>Ion trapping in the fetus:</b> neutral drug crosses the placenta, and an acidotic fetus (pH ~7.1) protonates it and traps it. A distressed fetus accumulates more lidocaine or bupivacaine. Chloroprocaine avoids this because maternal plasma breaks it down within seconds.</li>
+    <li><b>pKa is not the whole story:</b> concentration matters. 3% chloroprocaine floods the site with so many molecules that even 2.5% neutral is plenty (next box).</li>
+  </ul>
+
+  <div class="note acc"><strong>The chloroprocaine exception</strong>Chloroprocaine has the highest pKa (~9) but the fastest onset. That's because we give it as a 3% solution: sheer number of molecules (mass action) beats pKa. Good board trap.</div>
+
+  <h3>What changes onset in real life</h3>
+  <ul>
+    <li><b>Acidic tissue</b> (abscess, infection): more drug stays ionized outside the nerve. The dental-abscess block that "won't take."</li>
+    <li><b>Adding bicarbonate</b> raises pH and speeds onset of lidocaine, mepivacaine and chloroprocaine (1 mL 8.4% per 10 mL lidocaine). Bupivacaine and ropivacaine precipitate if you alkalinize them much.</li>
+    <li><b>Commercial epinephrine-containing solutions</b> are packaged at pH ~4–5 to keep epi stable, so they have slower onset than plain solution with fresh epi added.</li>
+    <li><b>Dose and volume</b> beat everything: more molecules at the nerve means faster, denser, longer block.</li>
+  </ul>
+
+  <h3>Differential block: why they lose temperature before motor</h3>
+  <p>Small fibers and myelinated fibers block first, because only a few nodes of Ranvier need to be covered to stop conduction. The usual order:</p>
+  <div class="tbl"><table>
+    <tr><th>Fiber</th><th>Myelin</th><th>Job</th><th>Blocks</th></tr>
+    <tr><td>B</td><td>Yes (thin)</td><td>Preganglionic sympathetic</td><td class="num">First → hypotension, warm foot</td></tr>
+    <tr><td>C</td><td>No</td><td>Slow pain, temperature</td><td class="num">Early → ice test lost</td></tr>
+    <tr><td>Aδ</td><td>Yes (thin)</td><td>Fast pain, cold</td><td class="num">Early</td></tr>
+    <tr><td>Aβ</td><td>Yes</td><td>Touch, pressure</td><td class="num">Later</td></tr>
+    <tr><td>Aα</td><td>Yes (thick)</td><td>Motor, proprioception</td><td class="num">Last → why patients can still move after an analgesic epidural</td></tr>
+  </table></div>
+  <p class="mono">Clinical version: sympathetic block runs ~2 dermatomes above sensory, which runs ~2 above motor in a spinal.</p>
+  <p><b>Use-dependent (frequency-dependent) block:</b> LAs bind best to open and inactivated channels, so nerves that are firing a lot get blocked more. That's also why lidocaine works as a class Ib antiarrhythmic in fast, ischemic tissue.</p>
+</section>
+
+<!-- ============ 2 DRUGS ============ -->
+<section class="tab" id="drugs" role="tabpanel" aria-labelledby="t-drugs" hidden>
+  <h2>Esters vs amides, then the drugs you'll actually draw up</h2>
+  <p class="say">"If the name has <b>two i's</b>, it's an amide: l<b>i</b>doca<b>i</b>ne, bup<b>i</b>vaca<b>i</b>ne. One i, it's an ester: chloroproca<b>i</b>ne, tetraca<b>i</b>ne, coca<b>i</b>ne."</p>
+
+  <div class="two">
+    <div class="card">
+      <span class="tag">Esters</span>
+      <h3>Chloroprocaine, tetracaine, cocaine, benzocaine, procaine</h3>
+      <ul>
+        <li>Broken down by <b>plasma pseudocholinesterase</b>: fast, short t½ (chloroprocaine ~20–40 s in adult plasma).</li>
+        <li>Metabolite is <b>PABA</b>, which is behind the (rare) true LA allergies.</li>
+        <li>Prolonged in pseudocholinesterase deficiency; minimal placental transfer of chloroprocaine because it's broken down in maternal blood.</li>
+        <li>Cocaine is the odd one: liver metabolism, blocks catecholamine reuptake, the only LA that vasoconstricts strongly.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">Amides</span>
+      <h3>Lidocaine, mepivacaine, ropivacaine, bupivacaine, prilocaine</h3>
+      <ul>
+        <li>Metabolized by the <b>liver</b> (CYP1A2, 3A4). Clearance falls with liver disease, heart failure (low hepatic flow), and in neonates.</li>
+        <li>Bound to α1-acid glycoprotein in plasma. Neonates and pregnant patients have less AAG, so more free drug.</li>
+        <li>True allergy is very rare. Most "lidocaine allergy" is epinephrine tachycardia, a vasovagal episode, or the preservative (methylparaben).</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>The working table</h3>
+  <div class="tbl"><table style="min-width:780px">
+    <tr><th>Drug</th><th>pKa</th><th>Onset</th><th>Duration (PNB)</th><th>Max plain</th><th>Max w/ epi</th><th>Know it for</th></tr>
+    <tr><td><b>Chloroprocaine</b> 2–3%<br><span class="tag">ester</span></td><td class="num">8.7–9.0</td><td>Fast</td><td class="num">30–90 min</td><td class="num">11 mg/kg<br>(800 mg)</td><td class="num">14 mg/kg<br>(1000 mg)</td><td>Urgent epidural top-up for C-section; short ambulatory spinal (1%, 30–50 mg; preservative-free only)</td></tr>
+    <tr><td><b>Lidocaine</b> 0.5–2%, 4% topical<br><span class="tag">amide</span></td><td class="num">7.7–7.8</td><td>Fast</td><td class="num">1–2 h<br>2–4 h w/ epi</td><td class="num">4.5 mg/kg<br>(300 mg)</td><td class="num">7 mg/kg<br>(500 mg)</td><td>Infiltration, IV starts, airway topicalization, IV infusion, Bier block. Spinal → TNS</td></tr>
+    <tr><td><b>Mepivacaine</b> 1–2%<br><span class="tag">amide</span></td><td class="num">7.6</td><td>Fast</td><td class="num">2–3 h<br>3–5 h w/ epi</td><td class="num">5 mg/kg<br>(400 mg)</td><td class="num">7 mg/kg<br>(550 mg)</td><td>Intermediate-length blocks; 1.5% spinal for joint replacement with quick motor recovery. Avoid in OB (neonate can't clear it)</td></tr>
+    <tr><td><b>Ropivacaine</b> 0.2–0.75%<br><span class="tag">amide</span></td><td class="num">8.1</td><td>Medium</td><td class="num">6–12 h<br>(up to ~18)</td><td class="num">3 mg/kg<br>(~200–250 mg)</td><td class="num">epi adds little</td><td>Pure S-enantiomer. Less cardiotoxic than bupi, a bit less potent, more sensory–motor separation at low concentrations. Mild intrinsic vasoconstriction</td></tr>
+    <tr><td><b>Bupivacaine</b> 0.0625–0.75%<br><span class="tag">amide</span></td><td class="num">8.1</td><td>Slow</td><td class="num">8–16 h<br>(up to ~24)</td><td class="num">2.5 mg/kg<br>(175 mg)</td><td class="num">3 mg/kg<br>(225 mg)</td><td>Longest plain LA. Most cardiotoxic. 0.75% is not used for OB epidurals (cardiac arrests in the 1980s). Hyperbaric 0.75% spinal is the workhorse</td></tr>
+    <tr><td><b>Liposomal bupivacaine</b> (Exparel) 1.3%</td><td class="num">—</td><td>Slow</td><td class="num">Label: up to 72–96 h</td><td colspan="2" class="num">266 mg infiltration; 133 mg perineural (interscalene, popliteal sciatic, adductor canal)</td><td>Not interchangeable with bupi mg-for-mg. Can be mixed only with plain bupi HCl (≤1:2 ratio); wait ≥20 min after other LAs. Real-world benefit over plain bupi + adjuncts is debated</td></tr>
+    <tr><td><b>Tetracaine</b><br><span class="tag">ester</span></td><td class="num">8.5</td><td>Slow</td><td class="num">Spinal 2–3 h (longer w/ epi)</td><td colspan="2" class="num">Spinal ~5–15 mg; topical</td><td>Mostly historical spinal; still in some topical airway/eye preps</td></tr>
+    <tr><td><b>Benzocaine / prilocaine</b></td><td class="num">—</td><td>—</td><td class="num">—</td><td colspan="2" class="num">Prilocaine 6 mg/kg (8 w/ epi). Benzocaine spray: avoid</td><td><b>Methemoglobinemia.</b> Prilocaine is half of EMLA</td></tr>
+    <tr><td><b>Cocaine</b> 4% topical<br><span class="tag">ester</span></td><td class="num">8.6</td><td>Fast</td><td class="num">30–60 min</td><td colspan="2" class="num">~1.5–3 mg/kg topical (≈200 mg)</td><td>Nasal surgery; vasoconstrictor. Hypertension, arrhythmia, coronary spasm</td></tr>
+  </table></div>
+  <p style="font-size:14px;color:var(--muted)">Durations are rough single-shot peripheral nerve block ranges; neuraxial and infiltration durations are shorter. They vary with dose, site, and additives. Max doses are the classic package-insert style numbers; see the next tab for why they're starting points, not laws.</p>
+
+  <div class="note bad"><strong>Bupivacaine cardiotoxicity: "fast in, slow out"</strong>Bupivacaine binds cardiac Na⁺ channels quickly and lets go slowly, so block accumulates beat after beat (worse with tachycardia). It also depresses contractility and mitochondrial energy production. The R-enantiomer is the main offender, which is why ropivacaine (S) and levobupivacaine (S, not sold in the US) were developed. Lidocaine is "fast in, fast out."</div>
+
+  <h3>Absorption depends on where you inject it</h3>
+  <figure class="board">
+    <svg viewBox="0 0 660 190" role="img" aria-label="Ranking of systemic absorption by injection site, highest to lowest">
+      <defs><linearGradient id="ga" x1="0" x2="1"><stop offset="0" stop-color="var(--bad)"/><stop offset=".55" stop-color="var(--warn)"/><stop offset="1" stop-color="var(--good)"/></linearGradient></defs>
+      <rect x="30" y="70" width="600" height="20" rx="10" fill="url(#ga)" opacity=".85"/>
+      <text x="30" y="55" class="svg-mut">highest peak plasma level</text>
+      <text x="630" y="55" text-anchor="end" class="svg-mut">lowest</text>
+      <g class="svg-txt" text-anchor="middle" font-weight="700">
+        <text x="55" y="118">IV</text><text x="135" y="118">Intercostal</text><text x="235" y="118">Caudal</text><text x="325" y="118">Epidural</text><text x="425" y="118">Brachial plexus</text><text x="540" y="118">Sciatic/femoral</text><text x="612" y="118">SubQ</text>
+      </g>
+      <text x="135" y="140" text-anchor="middle" class="svg-mut">also: TAP, ESP,</text>
+      <text x="135" y="154" text-anchor="middle" class="svg-mut">paravertebral, airway</text>
+      <text x="330" y="180" text-anchor="middle" class="svg-mut">"I Can't Ever Be Sure, Sorry"  ·  more blood supply = more uptake = less room</text>
+    </svg>
+    <figcaption>Drawing 2. Same mg, very different plasma levels. Big-volume fascial plane blocks (TAP, ESP, rectus sheath) behave more like intercostal blocks than like a femoral block, and they peak later (often 30–60 min).</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 3 DOSE ============ -->
+<section class="tab" id="dose" role="tabpanel" aria-labelledby="t-dose" hidden>
+  <h2>Max dose: the math, and why it's a soft ceiling</h2>
+  <p class="say">"Move the decimal one place right: <b>1% = 10 mg/mL</b>. That's the whole conversion. Everyone who's ever overdosed a patient on local knew the mg/kg; they forgot the decimal."</p>
+
+  <div class="two">
+    <div class="card">
+      <span class="tag">Step 1</span>
+      <h3>Concentration → mg/mL</h3>
+      <p class="mono">% × 10 = mg/mL<br>2% lido = 20 mg/mL<br>0.5% bupi = 5 mg/mL<br>0.25% bupi = 2.5 mg/mL</p>
+      <p class="mono">Epi 1:200,000 = 5 mcg/mL<br>1:100,000 = 10 mcg/mL<br>(1:1,000 = 1 mg/mL; count zeros)</p>
+    </div>
+    <div class="card">
+      <span class="tag">Step 2</span>
+      <h3>Max mg = mg/kg × weight</h3>
+      <p class="mono">70 kg, bupi plain:<br>2.5 × 70 = 175 mg</p>
+      <p>Use <b>lean or ideal body weight</b> in obesity. Fat doesn't take up much drug or raise your safety margin. Don't exceed the absolute cap even in big people.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Step 3</span>
+      <h3>mg → mL</h3>
+      <p class="mono">175 mg ÷ 5 mg/mL = 35 mL<br>of 0.5% bupivacaine</p>
+      <p>Then ask whether the block you planned actually fits under that number, before you start injecting.</p>
+    </div>
+  </div>
+
+  <h3>Mixing two drugs: they add</h3>
+  <p>Toxicity of different local anesthetics is assumed to be <b>additive</b>. Express each one as a fraction of its own max, and keep the sum under 100%.</p>
+  <p class="mono">70 kg. Surgeon wants 20 mL 0.5% bupi in the wound (100 mg = 100/175 = 57%).<br>Remaining 43% of lidocaine-with-epi max (490 mg) = 210 mg = 10.5 mL of 2% lido w/ epi.</p>
+  <p>Mixing 1:1 doesn't give you "half the toxicity of each." It gives you a solution with half the concentration of each, and the fractions still add up the same way.</p>
+
+  <h3>Why the numbers are soft</h3>
+  <ul>
+    <li>Package-insert max doses were mostly set from small, old studies and don't account for <b>site</b>. 300 mg of lidocaine is very different in an intercostal block than subcutaneously (Rosenberg 2004).</li>
+    <li>Inadvertent <b>intravascular</b> injection can cause toxicity at a tiny fraction of the max: 1–2 mL of bupivacaine into a vertebral artery during an interscalene can seize a patient. Max dose protects you from absorption, not from a needle in a vessel.</li>
+    <li>Tumescent lidocaine (very dilute, with epi, in fat) is given at 35–55 mg/kg because absorption is slow. It's the exception that proves the site rule; it's not a license elsewhere.</li>
+    <li>Airway topicalization for awake intubation: lidocaine up to ~9 mg/kg lean body weight (DAS 2020) because a lot of it is swallowed or never absorbed.</li>
+  </ul>
+
+  <h3>Who gets less</h3>
+  <div class="tbl"><table>
+    <tr><th>Patient</th><th>Why</th><th>Practical move</th></tr>
+    <tr><td>Elderly, frail, low muscle mass (&lt;40 kg)</td><td>Less muscle (main LA reservoir), lower clearance</td><td>Trim the dose (roughly 10–30%), dose to lean weight</td></tr>
+    <tr><td>Heart failure, low EF</td><td>Lower hepatic flow (amide clearance ↓), more sensitive myocardium</td><td>Lower dose, especially for repeat doses and infusions</td></tr>
+    <tr><td>Severe liver disease</td><td>Amide clearance ↓</td><td>Single shots usually OK; be careful with infusions and repeat doses</td></tr>
+    <tr><td>Pregnancy</td><td>Less AAG binding, progesterone ↑ nerve sensitivity, epidural veins engorged</td><td>Less drug for the same block; aspirate and fractionate</td></tr>
+    <tr><td>Infants (&lt;6 months)</td><td>Low AAG, immature CYP, can't tell you about tinnitus</td><td>Reduce bolus doses and infusion rates (often by ~15–30%)</td></tr>
+    <tr><td>Already on lidocaine infusion or had a prior block</td><td>It all adds</td><td>Count everything: the surgeon's syringe, the IV infusion, the patch</td></tr>
+  </table></div>
+
+  <h3>Calculator</h3>
+  <div class="calc" id="calc">
+    <div class="row">
+      <label>Weight (kg)<input type="number" id="wt" value="80" min="1" max="300" step="1"></label>
+      <label>Height (cm)<input type="number" id="ht" value="175" min="50" max="230" step="1"></label>
+      <label>Sex (for IBW)<select id="sex"><option value="m">Male</option><option value="f">Female</option></select></label>
+      <label>Dose to<select id="wmode"><option value="lbw">Lesser of actual / IBW</option><option value="act">Actual weight</option></select></label>
+      <label>Trim for risk<select id="trim"><option value="0">None</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select></label>
+    </div>
+    <div class="out" id="wout"></div>
+    <div id="rows" style="display:grid;gap:8px"></div>
+    <div class="row"><button id="add" type="button">+ Add a drug</button></div>
+    <div class="meter"><span id="bar" style="width:0%"></span></div>
+    <div class="out" id="tot"></div>
+    <p style="font-size:13px;color:var(--muted)">Teaching tool using the classic mg/kg limits in the table on tab 2. It doesn't account for injection site or intravascular injection. Check your own institution's limits before you draw anything up.</p>
+  </div>
+</section>
+
+<!-- ============ 4 LAST ============ -->
+<section class="tab" id="last" role="tabpanel" aria-labelledby="t-last" hidden>
+  <h2>Local anesthetic systemic toxicity (LAST)</h2>
+  <p class="say">"Brain first, then heart. Except with bupivacaine, where the heart may not wait for the brain. And except when the patient is asleep, where you'll only see the heart."</p>
+
+  <figure class="board">
+    <svg viewBox="0 0 760 290" role="img" aria-label="Plasma lidocaine concentration and the symptoms that appear at each level">
+      <line x1="70" y1="250" x2="740" y2="250" class="svg-ink" stroke-width="1.4"/>
+      <line x1="70" y1="250" x2="70" y2="20" class="svg-ink" stroke-width="1.4"/>
+      <text x="22" y="140" class="svg-mut" transform="rotate(-90 22 140)" text-anchor="middle">plasma lidocaine (mcg/mL)</text>
+      <g class="svg-mut" text-anchor="end"><text x="64" y="228">2</text><text x="64" y="188">5</text><text x="64" y="138">10</text><text x="64" y="98">15</text><text x="64" y="48">25</text></g>
+      <path d="M70 250 L170 250 L170 224 L290 224 L290 184 L410 184 L410 134 L530 134 L530 94 L650 94 L650 44 L740 44" class="svg-acc" stroke-width="2.6"/>
+      <text x="176" y="242" class="svg-txt" font-size="12">antiarrhythmic</text>
+      <text x="296" y="202" class="svg-txt" font-size="12" fill="var(--warn)">perioral numbness,</text>
+      <text x="296" y="217" class="svg-txt" font-size="12" fill="var(--warn)">metallic taste,</text>
+      <text x="296" y="232" class="svg-txt" font-size="12" fill="var(--warn)">tinnitus, dizzy</text>
+      <text x="416" y="152" class="svg-txt" font-size="12" fill="var(--warn)">twitching,</text>
+      <text x="416" y="167" class="svg-txt" font-size="12" fill="var(--warn)">agitation</text>
+      <text x="416" y="184" class="svg-txt" font-size="12" fill="var(--bad)" font-weight="700">→ seizure</text>
+      <text x="536" y="112" class="svg-txt" font-size="12" fill="var(--bad)">coma, apnea</text>
+      <text x="656" y="62" class="svg-txt" font-size="12" fill="var(--bad)" font-weight="700">CV collapse</text>
+      <text x="400" y="278" text-anchor="middle" class="svg-mut">CNS excitation → CNS depression → CV depression</text>
+    </svg>
+    <figcaption>Drawing 3. The classic lidocaine ladder. The ratio of the dose that causes CV collapse to the dose that seizes (CC/CNS) is ~7 for lidocaine and ~3–4 for bupivacaine, with ropivacaine in between. Less warning with bupivacaine.</figcaption>
+  </figure>
+
+  <div class="two">
+    <div class="card">
+      <span class="tag w">Recognize</span>
+      <h3>What it really looks like</h3>
+      <ul>
+        <li>Only about half of cases look like the textbook. Many skip the prodrome and go straight to seizure or arrhythmia.</li>
+        <li>CV signs: early hypertension and tachycardia, then bradycardia, wide QRS, ventricular arrhythmias, asystole.</li>
+        <li>Timing: most within 5 minutes of injection, but fascial plane blocks and infusions can present up to an hour or more later.</li>
+        <li>Under GA or sedation the CNS phase is hidden. New arrhythmia or hypotension after a block = think LAST.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag b">Treat (ASRA 2020)</span>
+      <h3>Lipid first, then everything else</h3>
+      <ol>
+        <li><b>Stop injecting. Call for help and the LAST kit.</b></li>
+        <li><b>Airway</b>: 100% O₂, ventilate. Hypoxia and acidosis make LAST much worse.</li>
+        <li><b>Seizures</b>: benzodiazepine. Small-dose propofol only if hemodynamically stable.</li>
+        <li><b>Lipid emulsion 20%</b>, at the first sign of serious toxicity:
+          <span class="mono" style="display:block">&gt;70 kg: 100 mL over 2–3 min, then ~200–250 mL over 15–20 min<br>≤70 kg: 1.5 mL/kg bolus, then 0.25 mL/kg/min<br>Still unstable: repeat bolus 1–2×, double the infusion<br>Upper limit ~12 mL/kg</span></li>
+        <li><b>ACLS with changes</b>: epinephrine ≤1 mcg/kg doses; <b>avoid</b> vasopressin, calcium channel blockers, β-blockers, and more local anesthetic (no lidocaine for the VT). Amiodarone is fine.</li>
+        <li>Call for <b>CPB/ECMO</b> early if not responding. Prolonged CPR is reasonable.</li>
+        <li>Monitor ≥4–6 h after a CV event, ≥2 h after a CNS-only event.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="note good"><strong>Prevention beats lipid</strong>Lowest effective dose and volume · Ultrasound (cuts LAST risk by roughly 60–65% in registry data) · Aspirate and inject in 3–5 mL increments, waiting a circulation time between · Epinephrine as an intravascular marker (HR ↑ ≥10 or SBP ↑ ≥15 within ~1 min of 10–15 mcg) · Standard monitors and someone watching the patient, not just the screen.</div>
+
+  <h3>The other toxicities</h3>
+  <div class="tbl"><table>
+    <tr><th>Problem</th><th>Culprit</th><th>What to know</th></tr>
+    <tr><td><b>Methemoglobinemia</b></td><td>Benzocaine spray, prilocaine (o-toluidine), occasionally lidocaine</td><td>SpO₂ drifts to ~85% and won't budge with O₂; chocolate-brown blood. Co-oximetry confirms. Methylene blue 1–2 mg/kg (avoid in G6PD deficiency and serotonergic drugs; ascorbic acid instead)</td></tr>
+    <tr><td><b>Transient neurologic symptoms</b></td><td>Lidocaine spinal (also mepivacaine)</td><td>Buttock/leg pain 12–24 h after a spinal, resolves in days. Higher with lithotomy and outpatient surgery. No neuro deficit</td></tr>
+    <tr><td><b>Cauda equina syndrome</b></td><td>Concentrated LA pooling (5% lido via spinal microcatheters, repeat spinal doses)</td><td>Why we don't redo a failed spinal with a full second dose of the same drug without thinking</td></tr>
+    <tr><td><b>Myotoxicity</b></td><td>Bupivacaine &gt; others</td><td>Usually subclinical; seen with retrobulbar blocks (diplopia) and long infusions</td></tr>
+    <tr><td><b>Chondrolysis</b></td><td>Intra-articular infusions (bupi especially)</td><td>The reason shoulder pain pumps went away</td></tr>
+    <tr><td><b>Allergy</b></td><td>Esters (PABA), preservatives (methylparaben)</td><td>True amide allergy is very rare. If worried, use a preservative-free amide</td></tr>
+  </table></div>
+</section>
+
+<!-- ============ 5 CHOOSING ============ -->
+<section class="tab" id="pick" role="tabpanel" aria-labelledby="t-pick" hidden>
+  <h2>Choosing one: three questions</h2>
+  <p class="say">"Ask: <b>How fast</b> do I need it? <b>How long</b> should it last? <b>Do they need to move</b> afterward? Then check the dose budget."</p>
+
+  <figure class="board">
+    <svg viewBox="0 0 660 260" role="img" aria-label="Approximate peripheral nerve block duration by local anesthetic">
+      <line x1="150" y1="225" x2="630" y2="225" class="svg-ink" stroke-width="1.4"/>
+      <g class="svg-mut" text-anchor="middle"><text x="150" y="243">0</text><text x="230" y="243">4 h</text><text x="310" y="243">8 h</text><text x="390" y="243">12 h</text><text x="470" y="243">16 h</text><text x="550" y="243">20 h</text><text x="630" y="243">24 h</text></g>
+      <g stroke="var(--line)"><line x1="230" y1="20" x2="230" y2="225"/><line x1="310" y1="20" x2="310" y2="225"/><line x1="390" y1="20" x2="390" y2="225"/><line x1="470" y1="20" x2="470" y2="225"/><line x1="550" y1="20" x2="550" y2="225"/></g>
+      <!-- 20 px per hour -->
+      <g class="svg-txt" text-anchor="end" font-weight="700"><text x="140" y="44">Chloroprocaine</text><text x="140" y="84">Lidocaine</text><text x="140" y="124">Mepivacaine</text><text x="140" y="164">Ropivacaine</text><text x="140" y="204">Bupivacaine</text></g>
+      <rect x="160" y="32" width="20" height="16" rx="3" fill="var(--warn)"/>
+      <rect x="170" y="72" width="20" height="16" rx="3" fill="var(--warn)"/><rect x="190" y="72" width="40" height="16" rx="3" fill="var(--warn)" opacity=".45"/>
+      <rect x="190" y="112" width="20" height="16" rx="3" fill="var(--accent)"/><rect x="210" y="112" width="40" height="16" rx="3" fill="var(--accent)" opacity=".45"/>
+      <rect x="270" y="152" width="120" height="16" rx="3" fill="var(--accent)"/><rect x="390" y="152" width="120" height="16" rx="3" fill="var(--accent)" opacity=".45"/>
+      <rect x="310" y="192" width="160" height="16" rx="3" fill="var(--good)"/><rect x="470" y="192" width="160" height="16" rx="3" fill="var(--good)" opacity=".45"/>
+      <text x="240" y="84" class="svg-mut">+ epi</text><text x="260" y="124" class="svg-mut">+ epi</text>
+      <text x="520" y="164" class="svg-mut">some blocks</text>
+    </svg>
+    <figcaption>Drawing 4. Rough single-shot PNB analgesia. Solid = typical plain solution. Faded = what epinephrine adds (lido, mepi) or the long tail some blocks get (ropi, bupi). Lower-extremity blocks (sciatic) tend to run longest.</figcaption>
+  </figure>
+
+  <div class="tbl"><table style="min-width:700px">
+    <tr><th>Situation</th><th>Reasonable pick</th><th>Why</th></tr>
+    <tr><td>Skin infiltration, IV/arterial line, lac repair</td><td>Lidocaine 1% (± bicarb, ± epi)</td><td>Instant, cheap, bicarb takes the sting out</td></tr>
+    <tr><td>Awake intubation topicalization</td><td>Lidocaine 4% + 2% jelly/atomizer</td><td>Fast, wide margin topically (count total mg)</td></tr>
+    <tr><td>Hand/forearm surgery, home today, wants to use the arm tonight</td><td>Mepivacaine 1.5% or lidocaine 2% w/ epi (or chloroprocaine 3% for &lt;1 h)</td><td>Surgical block that wears off by evening</td></tr>
+    <tr><td>Shoulder arthroscopy, ankle ORIF: long post-op analgesia</td><td>Ropivacaine 0.5% or bupivacaine 0.5% (± adjunct, or a catheter)</td><td>6–18 h; plan oral analgesia before it wears off (rebound pain)</td></tr>
+    <tr><td>Motor-sparing: adductor canal, labor epidural, ESP, catheters</td><td>Ropivacaine 0.1–0.2%, bupivacaine 0.0625–0.125%</td><td>Low concentration favors sensory over motor block</td></tr>
+    <tr><td>Short outpatient spinal (knee scope, perianal)</td><td>Chloroprocaine 1% 40–50 mg, or mepivacaine 1.5%</td><td>~60–120 min, quick discharge, low TNS risk vs lidocaine</td></tr>
+    <tr><td>Longer spinal (TKA, CS)</td><td>Hyperbaric bupivacaine 0.75% (or isobaric 0.5%)</td><td>2–3 h of dense block</td></tr>
+    <tr><td>Stat C-section through a labor epidural</td><td>3% chloroprocaine, or 2% lidocaine + epi + bicarb (± fentanyl)</td><td>Fastest surgical block; chloroprocaine has minimal fetal transfer</td></tr>
+    <tr><td>Big volume needed (bilateral TAP/ESP, wound infiltration)</td><td>Dilute ropivacaine; count mg against the budget</td><td>Least cardiotoxic long-acting; volume is what covers planes</td></tr>
+    <tr><td>Patient with significant cardiac disease or conduction disease</td><td>Ropivacaine over bupivacaine for large doses</td><td>More margin before CV toxicity</td></tr>
+  </table></div>
+
+  <div class="note"><strong>Rebound pain</strong>A great long-acting block can produce a miserable 2 AM when it wears off, especially after bony surgery. Tell the patient when it'll wear off, and have them start oral analgesics before it does. This is one reason additives and catheters exist (<a href="/talks/nerve-block-additives/">Part 2</a>).</div>
+</section>
+
+<!-- ============ WHITEBOARD ============ -->
+<section class="tab" id="draw" role="tabpanel" aria-labelledby="t-draw" hidden>
+  <h2>Drawing it in 5 minutes</h2>
+  <ol>
+    <li><b>The membrane.</b> Two lines for the axon membrane. BH⁺ ⇌ B outside, B crosses, BH⁺ blocks the Na⁺ channel inside. Say: "neutral to get in, charged to work."</li>
+    <li><b>Three knobs.</b> Write pKa → onset, lipid → potency, protein binding → duration. Put lido and bupi under each.</li>
+    <li><b>The decimal.</b> Write "1% = 10 mg/mL" big. Do one problem with the learner's own weight.</li>
+    <li><b>The site ladder.</b> IV → intercostal → caudal → epidural → brachial → sciatic → subQ. Arrow down labeled "less absorption."</li>
+    <li><b>The ladder of toxicity.</b> Staircase going up: tinnitus, seizure, coma, heart. Then cross it out for bupi and write "heart can come first."</li>
+    <li><b>Lipid.</b> "100 mL, then 250 over 20." That's the number to remember for a 70+ kg adult.</li>
+  </ol>
+  <h3>Questions that make it stick</h3>
+  <ul>
+    <li>Why does an abscess drain hurt even after you've infiltrated half a syringe of lidocaine?</li>
+    <li>You have 0.5% bupi and 2% lido with epi for an 85 kg (IBW 70 kg) patient getting a TAP block plus surgeon infiltration. Run the budget out loud.</li>
+    <li>Why is 3% chloroprocaine the fastest epidural top-up when its pKa is the worst of the bunch?</li>
+    <li>Patient under GA, five minutes after an interscalene: wide-complex tachycardia. What do you grab first?</li>
+    <li>Why can an epidural run of 0.1% ropivacaine leave a laboring patient walking-numb but not weak?</li>
+  </ul>
+</section>
+
+<!-- ============ BOARD QUESTIONS ============ -->
+<section class="tab" id="board" role="tabpanel" aria-labelledby="t-board" hidden>
+  <h2>Board-style questions</h2>
+  <p style="color:var(--muted)">Written for this talk in ABA/ITE style.</p>
+
+  <details class="q"><summary>1. Which property of a local anesthetic best predicts its duration of action?</summary>
+    <div class="opts"><span>A. pKa</span><span>B. Lipid solubility</span><span>C. Protein binding</span><span>D. Molecular weight</span></div>
+    <div class="ans"><p><b>C.</b> Protein binding tracks duration (bupivacaine ~95%). pKa tracks onset; lipid solubility tracks potency.</p></div>
+  </details>
+
+  <details class="q"><summary>2. A 60 kg patient will receive 0.5% bupivacaine (no epi) for a block. Surgeon then wants to infiltrate with 1% lidocaine (no epi). After 15 mL of bupivacaine, what's the most lidocaine that keeps total dose within classic limits?</summary>
+    <div class="opts"><span>A. 7 mL</span><span>B. 13 mL</span><span>C. 20 mL</span><span>D. 27 mL</span></div>
+    <div class="ans"><p><b>B.</b> Bupi max = 2.5 × 60 = 150 mg; 15 mL × 5 mg/mL = 75 mg = 50%. Lido max = 4.5 × 60 = 270 mg; 50% = 135 mg = 13.5 mL of 1%.</p></div>
+  </details>
+
+  <details class="q"><summary>3. The same dose of lidocaine will produce the highest peak plasma concentration after which block?</summary>
+    <div class="opts"><span>A. Epidural</span><span>B. Intercostal</span><span>C. Femoral</span><span>D. Interscalene</span></div>
+    <div class="ans"><p><b>B.</b> Intercostal &gt; caudal &gt; epidural &gt; brachial plexus &gt; sciatic/femoral &gt; subcutaneous.</p></div>
+  </details>
+
+  <details class="q"><summary>4. An 80 kg patient becomes hypotensive with a wide QRS 3 minutes after a 30 mL interscalene block with 0.5% bupivacaine. Besides airway and calling for help, the most appropriate next step is:</summary>
+    <div class="opts"><span>A. Lidocaine 100 mg IV</span><span>B. Vasopressin 40 units IV</span><span>C. 20% lipid emulsion 100 mL IV over 2–3 min</span><span>D. Epinephrine 1 mg IV</span></div>
+    <div class="ans"><p><b>C.</b> Lipid early. Avoid vasopressin and more local anesthetic; if epinephrine is needed, keep doses ≤1 mcg/kg.</p></div>
+  </details>
+
+  <details class="q"><summary>5. During awake fiberoptic intubation with benzocaine spray, SpO₂ falls to 86% and doesn't improve with 100% O₂. ABG PaO₂ is 380 mmHg. Best treatment:</summary>
+    <div class="opts"><span>A. Methylene blue 1–2 mg/kg IV</span><span>B. Hydroxocobalamin 5 g IV</span><span>C. Lipid emulsion 1.5 mL/kg</span><span>D. Sodium nitrite</span></div>
+    <div class="ans"><p><b>A.</b> Methemoglobinemia: the pulse ox reads near 85% regardless of true saturation (saturation gap). Confirm with co-oximetry. Avoid methylene blue in G6PD deficiency.</p></div>
+  </details>
+
+  <details class="q"><summary>6. Bupivacaine is more cardiotoxic than lidocaine mainly because it:</summary>
+    <div class="opts"><span>A. Has a lower pKa</span><span>B. Dissociates slowly from cardiac Na⁺ channels</span><span>C. Is metabolized by pseudocholinesterase</span><span>D. Causes coronary vasoconstriction</span></div>
+    <div class="ans"><p><b>B.</b> "Fast in, slow out" leads to cumulative block, worsened by tachycardia. The R-enantiomer is the main culprit.</p></div>
+  </details>
+  <details class="q"><summary>7. Lidocaine (pKa 7.8) is injected into inflamed tissue with a pH of 6.8. What is the approximate ratio of ionized to non-ionized drug?</summary>
+    <div class="opts"><span>A. 1:10</span><span>B. 1:1</span><span>C. 10:1</span><span>D. 100:1</span></div>
+    <div class="ans"><p><b>C.</b> For a weak base, pKa − pH = log([BH⁺]/[B]) = 7.8 − 6.8 = 1, so 10:1. Only ~9% can cross the membrane, so onset is slow and the block may fail.</p></div>
+  </details>
+</section>
+
+<!-- ============ SOURCES ============ -->
+<section class="tab" id="src" role="tabpanel" aria-labelledby="t-src" hidden>
+  <h2>Sources and further reading</h2>
+  <ul class="src">
+    <li>Neal JM, Neal EJ, Weinberg GL. ASRA Local Anesthetic Systemic Toxicity checklist: 2020 version. <i>Reg Anesth Pain Med</i> 2021;46:81–82. <a href="https://rapm.bmj.com/content/46/1/81">rapm.bmj.com</a> (ASRA says an update is expected in early 2027.)</li>
+    <li>Neal JM, Barrington MJ, Fettiplace MR, et al. The third ASRA practice advisory on local anesthetic systemic toxicity. <i>Reg Anesth Pain Med</i> 2018;43:113–123.</li>
+    <li>Rosenberg PH, Veering BT, Urmey WF. Maximum recommended doses of local anesthetics: a multifactorial concept. <i>Reg Anesth Pain Med</i> 2004;29:564–575.</li>
+    <li>Barrington MJ, Kluger R. Ultrasound guidance reduces the risk of local anesthetic systemic toxicity following peripheral nerve blockade. <i>Reg Anesth Pain Med</i> 2013;38:289–297.</li>
+    <li>Ahmad I, et al. Difficult Airway Society guidelines for awake tracheal intubation in adults. <i>Anaesthesia</i> 2020;75:509–528.</li>
+    <li>EXPAREL (bupivacaine liposome) prescribing information, updated 11/2023 (adductor canal and popliteal sciatic indications).</li>
+    <li>Miller's Anesthesia, 10th ed., and Barash Clinical Anesthesia, 9th ed.: local anesthetic chapters.</li>
+  </ul>
+</section>
+</div>
+
+<script>(function(){
+  const tabs=[...document.querySelectorAll('nav.tabs [role=tab]')];
+  function show(id,push){
+    tabs.forEach(t=>{const on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    if(push){try{history.replaceState(null,'','#'+id)}catch(e){location.hash=id}}
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>{show(t.getAttribute('aria-controls'),true);window.scrollTo({top:document.querySelector('nav.tabs').offsetTop-4})}));
+  function fromHash(){const h=location.hash.slice(1);if(h&&tabs.some(t=>t.getAttribute('aria-controls')===h))show(h,false);}
+  window.addEventListener('hashchange',fromHash);fromHash();
+})();
+</script><script>(function(){
+  const D={
+    chloro:{n:'Chloroprocaine',c:[2,3],p:[11,800],e:[14,1000]},
+    lido:{n:'Lidocaine',c:[0.5,1,1.5,2,4],p:[4.5,300],e:[7,500]},
+    mepi:{n:'Mepivacaine',c:[1,1.5,2],p:[5,400],e:[7,550]},
+    ropi:{n:'Ropivacaine',c:[0.1,0.2,0.375,0.5,0.75],p:[3,225],e:[3,225]},
+    bupi:{n:'Bupivacaine',c:[0.0625,0.125,0.25,0.5,0.75],p:[2.5,175],e:[3,225]}
+  };
+  const $=id=>document.getElementById(id);
+  const rows=$('rows');
+  function doseWt(){
+    const w=+$('wt').value||0,h=+$('ht').value||0,s=$('sex').value;
+    const inch=h/2.54, ibw=Math.max(0,(s==='m'?50:45.5)+2.3*(inch-60));
+    const use=$('wmode').value==='act'?w:Math.min(w,ibw||w);
+    return {w,ibw,use};
+  }
+  function addRow(drug,conc,epi,ml){
+    const r=document.createElement('div');r.className='row';
+    r.innerHTML='<label>Drug<select class="d">'+Object.keys(D).map(k=>'<option value="'+k+'">'+D[k].n+'</option>').join('')+'</select></label>'+
+      '<label>Conc (%)<select class="c"></select></label>'+
+      '<label>Epi?<select class="e"><option value="0">Plain</option><option value="1">With epi</option></select></label>'+
+      '<label>Volume (mL)<input type="number" class="v" min="0" step="0.5"></label>'+
+      '<span class="mono r" style="padding-bottom:8px;min-width:200px"></span>'+
+      '<button type="button" class="x" aria-label="Remove">✕</button>';
+    rows.appendChild(r);
+    const ds=r.querySelector('.d'),cs=r.querySelector('.c');
+    function fillC(sel){cs.innerHTML=D[ds.value].c.map(x=>'<option value="'+x+'">'+x+'</option>').join('');if(sel!=null)cs.value=sel;}
+    ds.value=drug;fillC(conc);r.querySelector('.e').value=epi;r.querySelector('.v').value=ml;
+    ds.addEventListener('change',()=>{fillC(null);calc()});
+    r.querySelectorAll('select,input').forEach(el=>el.addEventListener('input',calc));
+    r.querySelector('.x').addEventListener('click',()=>{r.remove();calc()});
+  }
+  function maxFor(k,epi,wt,trim){const lim=epi?D[k].e:D[k].p;return Math.min(lim[0]*wt,lim[1])*(1-trim/100);}
+  function calc(){
+    const {w,ibw,use}=doseWt(),trim=+$('trim').value;
+    $('wout').innerHTML='Actual '+w.toFixed(0)+' kg · IBW '+ibw.toFixed(0)+' kg · <b>dosing weight '+use.toFixed(0)+' kg</b>'+(trim?' · trimmed '+trim+'%':'');
+    let frac=0,last=null;
+    [...rows.children].forEach(r=>{
+      const k=r.querySelector('.d').value,c=+r.querySelector('.c').value,e=+r.querySelector('.e').value,v=+r.querySelector('.v').value||0;
+      const mg=c*10*v,mx=maxFor(k,e,use,trim),f=mx?mg/mx:0;frac+=f;last={k,c,e};
+      r.querySelector('.r').textContent=mg.toFixed(0)+' mg of '+mx.toFixed(0)+' mg max ('+(f*100).toFixed(0)+'%)';
+    });
+    const pct=frac*100,bar=$('bar');bar.style.width=Math.min(pct,100)+'%';bar.className=pct>100?'b':pct>80?'w':'';
+    let s='<b>Total: '+pct.toFixed(0)+'% of the combined budget</b>';
+    if(pct>100)s+='<span style="color:var(--bad)">Over the classic limit. Reduce volume or concentration.</span>';
+    if(last){const rem=Math.max(0,1-frac),mx=maxFor(last.k,last.e,use,trim);
+      s+='<span>Room left for more '+D[last.k].n+' '+last.c+'%'+(last.e?' w/ epi':'')+': '+(rem*mx).toFixed(0)+' mg = '+(rem*mx/(last.c*10)).toFixed(1)+' mL</span>';}
+    $('tot').innerHTML=s;
+  }
+  ['wt','ht','sex','wmode','trim'].forEach(id=>$(id).addEventListener('input',calc));
+  $('add').addEventListener('click',()=>{addRow('lido',1,0,0);calc()});
+  addRow('bupi',0.5,0,20);addRow('lido',2,1,0);calc();
+})();
+</script><script>(function(){const d=document.getElementById('pk-d'),ph=document.getElementById('pk-ph');if(!d)return;
+function f(){const pka=+d.value,p=+ph.value,ratio=Math.pow(10,pka-p),b=100/(1+ratio);
+document.getElementById('pk-pv').textContent=p.toFixed(2);
+const bar=document.getElementById('pk-bar');bar.style.width=b.toFixed(1)+'%';bar.className=b<5?'b':b<15?'w':'';
+document.getElementById('pk-out').innerHTML='<b>'+b.toFixed(1)+'% neutral (B)</b><span>'+(100-b).toFixed(1)+'% ionized (BH⁺) · ratio BH⁺:B = '+(ratio<10?ratio.toFixed(1):ratio.toFixed(0))+' : 1</span>';}
+d.addEventListener('input',f);ph.addEventListener('input',f);f();})();
+</script>
+<!-- bootcamp-mirror -->
+<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<style>
+.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
+bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
+padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
+font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
+box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
+.bootcamp-back:hover{opacity:1}
+@media print{.bootcamp-back{display:none}}
+</style>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+</body></html>
