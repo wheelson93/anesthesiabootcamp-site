@@ -172,6 +172,23 @@
   footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
   .disclaimer { max-width: 62ch; }
 
+/* ---------- "Get it on your phone" ---------- */
+.install { padding: 8px 0 40px; }
+.install-card {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px;
+}
+.install-card img { flex: none; border-radius: 13px; }
+.install h2 { margin: 2px 0 6px; font: 600 1.3rem/1.2 var(--serif); }
+.install p { margin: 0 0 12px; color: var(--muted); font-size: .95rem; text-wrap: pretty; }
+.install-steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: .95rem; }
+.install-btn {
+  margin: 0 0 12px; height: 40px; padding: 0 18px; border-radius: 999px; border: 0;
+  background: var(--ink); color: var(--paper); font: 600 14px var(--sans); cursor: pointer;
+}
+@media (max-width: 480px) { .install-card { flex-direction: column; } }
+
 /* ---------- Installed app (home screen) ---------- */
 html { -webkit-tap-highlight-color: transparent; }
 header.site { padding-top: max(28px, env(safe-area-inset-top)); }

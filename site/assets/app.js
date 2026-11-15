@@ -120,6 +120,32 @@
       $("#content").innerHTML = '<div class="empty">Couldn\'t load this page. If you\'re offline, open it once while connected and it will be saved for next time.</div>';
     });
 
+  // "Get it on your phone" box: home page only, hidden once installed.
+  const installed = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  if (here === "/" && !installed) {
+    const box = $("#install");
+    const ua = navigator.userAgent;
+    const os = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? "ios"
+      : /Android/.test(ua) ? "android" : "desktop";
+    // Put the reader's own device first.
+    const steps = box.querySelector(".install-steps");
+    steps.prepend(steps.querySelector(`[data-os="${os}"]`));
+    box.hidden = false;
+    // Chrome/Edge/Android can install with one tap.
+    let deferred;
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault(); deferred = e;
+      $("#install-btn").hidden = false;
+    });
+    $("#install-btn").addEventListener("click", async () => {
+      if (!deferred) return;
+      deferred.prompt();
+      await deferred.userChoice.catch(() => {});
+      deferred = null; $("#install-btn").hidden = true;
+    });
+    window.addEventListener("appinstalled", () => { box.hidden = true; });
+  }
+
   // Offline support + home-screen install.
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
