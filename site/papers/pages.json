@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Practice-defining papers.",
-    "lead": "Landmark critical care papers rounded up by Kenji Tanabe. Each card has the takeaway, why it matters, the Wiki Journal Club summary where there is one, and a link to the full paper.",
+    "lead": "Landmark critical care and perioperative papers, rounded up by Kenji Tanabe. Each card has the takeaway, why it matters, the Wiki Journal Club summary where there is one, and a link to the full paper.",
     "links": [
       {
         "label": "Back to OR talks",
@@ -296,6 +296,37 @@
         {
           "label": "PubMed",
           "url": "https://pubmed.ncbi.nlm.nih.gov/37634145/"
+        }
+      ]
+    },
+    {
+      "title": "PONV: 5th Consensus Guidelines",
+      "url": "https://doi.org/10.1213/ANE.0000000000007816",
+      "emoji": "🤢",
+      "category": "Perioperative",
+      "source": "Anesth Analg 2025",
+      "blurb": "The international consensus on preventing and treating postoperative nausea and vomiting. Every adult at any risk gets at least two prophylactic agents, the risk score decides how far past two to go, and rescue uses a different drug class than prophylaxis.",
+      "why": "Replaces risk-scaled prophylaxis, which was poorly followed and kept missing high-risk patients, with a simpler default that is easier to apply on every case.",
+      "tags": [
+        "Fifth Consensus Guidelines for the Management of Postoperative Nausea and Vomiting",
+        "guideline"
+      ],
+      "links": [
+        {
+          "label": "Full text (Anesth Analg)",
+          "url": "https://doi.org/10.1213/ANE.0000000000007816"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41237407/"
+        },
+        {
+          "label": "Chalk talk",
+          "url": "https://claude.ai/artifact/LMfS4QoiPdskdF5Qe9QhXE"
+        },
+        {
+          "label": "Handout PDF",
+          "url": "../handouts/ponv.pdf"
         }
       ]
     }
