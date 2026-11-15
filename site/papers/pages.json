@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Practice-defining papers.",
-    "lead": "Landmark critical care and perioperative papers, rounded up by Kenji Tanabe. Each card has the takeaway, why it matters, the Wiki Journal Club summary where there is one, and a link to the full paper.",
+    "lead": "Landmark critical care, trauma and perioperative papers, rounded up by Kenji Tanabe. Each card has the takeaway, why it matters, the Wiki Journal Club summary where there is one, and a link to the full paper.",
     "links": [
       {
         "label": "Back to OR talks",
@@ -229,7 +229,7 @@
       "title": "PROPPR: 1:1:1 vs 1:1:2",
       "url": "https://www.wikijournalclub.org/wiki/PROPPR",
       "emoji": "🧪",
-      "category": "Resuscitation",
+      "category": "Trauma",
       "source": "JAMA 2015",
       "blurb": "680 severely injured trauma patients predicted to need massive transfusion got plasma, platelets and red cells at 1:1:1 or 1:1:2. Overall 24-hour and 30-day mortality did not differ, but 1:1:1 achieved hemostasis more often and had fewer early deaths from exsanguination.",
       "why": "The basis for balanced, ratio-driven massive transfusion protocols, and a reason to have plasma and platelets ready early rather than catching up later.",
@@ -255,7 +255,7 @@
       "title": "TRICC: Transfuse at Hb 7 vs 10",
       "url": "https://www.wikijournalclub.org/wiki/TRICC",
       "emoji": "🩸",
-      "category": "Resuscitation",
+      "category": "Transfusion Thresholds",
       "source": "NEJM 1999",
       "blurb": "838 euvolemic ICU patients were transfused at hemoglobin below 7 or below 10 g/dL. The restrictive strategy was at least as safe (30-day mortality 18.7% vs 23.3%) and did better in younger, less sick patients.",
       "why": "Made a hemoglobin trigger of 7 the ICU default and halved transfusions. The exception it flagged, acute coronary syndromes, is still debated.",
@@ -327,6 +327,268 @@
         {
           "label": "Handout PDF",
           "url": "../handouts/ponv.pdf"
+        }
+      ]
+    },
+    {
+      "title": "CRASH-2: Tranexamic Acid in Trauma",
+      "url": "https://www.wikijournalclub.org/wiki/CRASH-2",
+      "emoji": "💉",
+      "category": "Trauma",
+      "source": "Lancet 2010",
+      "blurb": "20,211 bleeding or at-risk trauma patients in 40 countries got TXA (1 g load, then 1 g over 8 h) or placebo within 8 hours of injury. TXA lowered all-cause death (14.5% vs 16.0%) and death from bleeding, without more clots.",
+      "why": "The reason early TXA is part of every major trauma protocol. Later analyses showed the benefit depends on giving it early, within about 3 hours of injury.",
+      "tags": [
+        "TXA"
+      ],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/CRASH-2"
+        },
+        {
+          "label": "Full text (Lancet)",
+          "url": "https://doi.org/10.1016/S0140-6736(10)60835-5"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20554319/"
+        }
+      ]
+    },
+    {
+      "title": "PAMPer: Prehospital Plasma by Air",
+      "url": "https://doi.org/10.1056/NEJMoa1802345",
+      "emoji": "🚁",
+      "category": "Trauma",
+      "source": "NEJM 2018",
+      "blurb": "501 trauma patients at risk of hemorrhagic shock got thawed plasma or standard care during air medical transport. 30-day mortality fell from 33.0% to 23.2%, with no rise in lung injury or transfusion reactions.",
+      "why": "The strongest evidence that starting plasma before arrival saves lives when transport is long. Read it alongside COMBAT.",
+      "tags": [
+        "prehospital"
+      ],
+      "links": [
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://doi.org/10.1056/NEJMoa1802345"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30044935/"
+        }
+      ]
+    },
+    {
+      "title": "COMBAT: Prehospital Plasma by Ground",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6284829/",
+      "emoji": "🚑",
+      "category": "Trauma",
+      "source": "Lancet 2018",
+      "blurb": "Run by Denver Health paramedics: 144 patients in hemorrhagic shock got 2 units of plasma or saline during short urban ground transport (median 16–19 minutes). No survival benefit (28-day mortality 15% vs 10%), and the trial stopped for futility.",
+      "why": "Our own city's trial. With PAMPer it shows context matters: prehospital plasma helps on long transports but adds little when a level 1 center is minutes away.",
+      "tags": [
+        "prehospital"
+      ],
+      "links": [
+        {
+          "label": "Free full text",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6284829/"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30032977/"
+        }
+      ]
+    },
+    {
+      "title": "TRICS-III: Transfusion in Cardiac Surgery",
+      "url": "https://www.wikijournalclub.org/wiki/TRICS_III",
+      "emoji": "🫀",
+      "category": "Transfusion Thresholds",
+      "source": "NEJM 2017",
+      "blurb": "5,243 moderate- to high-risk cardiac surgery patients were transfused below a hemoglobin of 7.5 or a liberal threshold (below 9.5 in the OR and ICU). The restrictive strategy was noninferior for death, MI, stroke or dialysis-requiring renal failure, and fewer patients were transfused (52% vs 73%).",
+      "why": "Extended restrictive transfusion into the OR for a high-risk group, starting from induction. 7.5 is the cardiac-surgery threshold that guidelines now cite.",
+      "tags": [],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/TRICS_III"
+        },
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://doi.org/10.1056/NEJMoa1711818"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29130845/"
+        }
+      ]
+    },
+    {
+      "title": "TRISS: Transfusion in Septic Shock",
+      "url": "https://www.wikijournalclub.org/wiki/TRISS",
+      "emoji": "🦠",
+      "category": "Transfusion Thresholds",
+      "source": "NEJM 2014",
+      "blurb": "998 ICU patients with septic shock were transfused at a hemoglobin of 7 or 9. 90-day mortality was the same (43% vs 45%), and the lower threshold used about half the blood.",
+      "why": "Settled that septic shock does not need a higher trigger, overturning the old early goal-directed habit of transfusing toward a hematocrit of 30.",
+      "tags": [],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/TRISS"
+        },
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://doi.org/10.1056/NEJMoa1406617"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25270275/"
+        }
+      ]
+    },
+    {
+      "title": "FOCUS: Transfusion After Hip Fracture",
+      "url": "https://www.wikijournalclub.org/wiki/FOCUS",
+      "emoji": "🦴",
+      "category": "Transfusion Thresholds",
+      "source": "NEJM 2011",
+      "blurb": "2,016 hip-fracture patients aged 50 or older with cardiovascular disease or risk factors were transfused at a hemoglobin of 10 or for symptoms (or below 8). Death or inability to walk at 60 days was the same, as were in-hospital coronary events.",
+      "why": "Showed restrictive transfusion is safe even in older patients with heart disease after surgery. It is the basis for the 8 g/dL threshold in orthopedic and cardiac-risk patients.",
+      "tags": [],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/FOCUS"
+        },
+        {
+          "label": "Free full text",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3268062/"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22168590/"
+        }
+      ]
+    },
+    {
+      "title": "MINT: Transfusion in Acute MI",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10837004/",
+      "emoji": "❤️",
+      "category": "Transfusion Thresholds",
+      "source": "NEJM 2023",
+      "blurb": "3,504 patients with acute MI and hemoglobin below 10 were transfused at 7–8 or below 10. MI or death at 30 days was 16.9% restrictive vs 14.5% liberal (P=0.07): not significant, but leaning toward liberal.",
+      "why": "The exception to transfusing at 7. Harm from a restrictive strategy in acute MI could not be excluded, so many clinicians now aim for about 10 in active coronary ischemia.",
+      "tags": [],
+      "links": [
+        {
+          "label": "Free full text",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10837004/"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37952133/"
+        }
+      ]
+    },
+    {
+      "title": "TRAIN: Transfusion in Acute Brain Injury",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11581574/",
+      "emoji": "🧠",
+      "category": "Transfusion Thresholds",
+      "source": "JAMA 2024",
+      "blurb": "850 patients with TBI, subarachnoid or intracerebral hemorrhage and hemoglobin below 9 were transfused below 9 or below 7. Liberal transfusion lowered unfavorable neurologic outcome at 6 months (62.6% vs 72.6%) and cerebral ischemic events.",
+      "why": "The first large trial to show benefit from a higher trigger in brain injury, where the brain may not tolerate anemia. Read it alongside HEMOTION.",
+      "tags": [],
+      "links": [
+        {
+          "label": "Free full text",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11581574/"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39382241/"
+        }
+      ]
+    },
+    {
+      "title": "HEMOTION: Transfusion in TBI",
+      "url": "https://doi.org/10.1056/NEJMoa2404360",
+      "emoji": "🧠",
+      "category": "Transfusion Thresholds",
+      "source": "NEJM 2024",
+      "blurb": "742 patients with moderate or severe TBI and anemia were transfused at 10 or 7. Unfavorable 6-month outcome was 68.4% liberal vs 73.5% restrictive, a difference that was not statistically significant; survivors did better on some function and quality-of-life scales.",
+      "why": "With TRAIN, it points the same direction: in brain injury a liberal trigger is reasonable and possibly better, even though HEMOTION alone was not conclusive.",
+      "tags": [],
+      "links": [
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://doi.org/10.1056/NEJMoa2404360"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38869931/"
+        }
+      ]
+    },
+    {
+      "title": "UK-REBOA: The Randomized Trial",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10570916/",
+      "emoji": "🎈",
+      "category": "REBOA",
+      "source": "JAMA 2023",
+      "blurb": "90 patients with exsanguinating hemorrhage at 16 UK major trauma centers got ED REBOA plus standard care or standard care alone. 90-day mortality was 54% with REBOA vs 42% without (86.9% probability of harm), with more early deaths from bleeding.",
+      "why": "The only randomized trial of REBOA so far, and it found no benefit and probable harm when used in the ED. A strong argument for tight selection criteria and a fast path to definitive hemorrhage control.",
+      "tags": [],
+      "links": [
+        {
+          "label": "Free full text",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10570916/"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37824132/"
+        }
+      ]
+    },
+    {
+      "title": "REBOA in US Civilian Trauma (TQIP)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6584250/",
+      "emoji": "📊",
+      "category": "REBOA",
+      "source": "JAMA Surg 2019",
+      "blurb": "A propensity-matched national registry study: 140 REBOA patients vs 280 similar patients without. Mortality was higher with REBOA (35.7% vs 18.9%), as were acute kidney injury and lower-limb amputation, with no difference in blood use.",
+      "why": "Observational, so open to confounding, but it was the first large US warning sign and it lines up with UK-REBOA. Know the complications before the balloon goes up.",
+      "tags": [],
+      "links": [
+        {
+          "label": "Free full text",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6584250/"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30892574/"
+        }
+      ]
+    },
+    {
+      "title": "REBOA: The First Civilian Series",
+      "url": "https://doi.org/10.1097/TA.0b013e31829e5416",
+      "emoji": "🎈",
+      "category": "REBOA",
+      "source": "J Trauma Acute Care Surg 2013",
+      "blurb": "Six trauma patients in end-stage hemorrhagic shock at two US centers had REBOA placed by trauma surgeons (Zone I or III), raising systolic pressure by a mean of 55 mm Hg with no REBOA-related complications.",
+      "why": "The case series that brought REBOA into civilian trauma care and defined the zones and workflow still in use. Useful context for how the later, less favorable data came about.",
+      "tags": [],
+      "links": [
+        {
+          "label": "Full text (J Trauma)",
+          "url": "https://doi.org/10.1097/TA.0b013e31829e5416"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24089121/"
         }
       ]
     }
