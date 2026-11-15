@@ -3,16 +3,17 @@
 // fresh whenever there's a connection (so new cards show up right away) and fall back
 // to the saved copy offline. PDFs and icons are served from the saved copy and refreshed
 // in the background.
-const VERSION = "edfe8ab18b50";
+const VERSION = "efd941162927";
 const CACHE = "bootcamp-" + VERSION;
 const PRECACHE = [
   "/",
   "/sections.json",
   "/manifest.webmanifest",
-  "/assets/theme.css?v=007d2ea0a9",
-  "/assets/theme.js?v=007d2ea0a9",
-  "/assets/app.css?v=007d2ea0a9",
-  "/assets/app.js?v=007d2ea0a9",
+  "/assets/theme.css?v=84b13fc6f8",
+  "/assets/theme.js?v=84b13fc6f8",
+  "/assets/app.css?v=84b13fc6f8",
+  "/assets/app.js?v=84b13fc6f8",
+  "/assets/quiz.js?v=84b13fc6f8",
   "/pages.json",
   "/icu/",
   "/icu/pages.json",

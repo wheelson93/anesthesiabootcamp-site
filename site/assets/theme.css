@@ -155,6 +155,46 @@
 /* General Anesthetic Case Flow: numbers on accent-colored dots */
 .talk-general-anesthetic-case-flow .dot-t { fill: var(--bc-paper) !important; }
 
+/* Board questions made interactive by assets/quiz.js */
+.bcq-score {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+  margin: 4px 0 14px; padding: 10px 14px; border-radius: 12px;
+  background: var(--bc-accent-soft); color: var(--bc-ink); font: 500 14px/1.3 var(--bc-sans);
+}
+.bcq-score b { color: var(--bc-accent); }
+.bcq-reset, .bcq-show, .bcq-again {
+  border: 1px solid var(--bc-line); background: var(--bc-card); color: var(--bc-ink);
+  border-radius: 999px; padding: 6px 12px; font: 500 13px/1 var(--bc-sans); cursor: pointer;
+}
+.bcq-reset:hover, .bcq-show:hover, .bcq-again:hover { border-color: var(--bc-accent); }
+.bcq-opts { display: grid; gap: 6px; margin: 10px 0 8px; padding: 0; }
+.bcq-opt {
+  display: flex; align-items: flex-start; gap: 10px; width: 100%; text-align: left; cursor: pointer;
+  padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--bc-line);
+  background: var(--bc-card); color: var(--bc-ink); font: 400 15px/1.4 var(--bc-sans);
+  transition: border-color .12s, background .12s;
+}
+.bcq-opt:not(:disabled):hover { border-color: var(--bc-accent); }
+.bcq-opt:focus-visible { outline: 2px solid var(--bc-accent); outline-offset: 2px; }
+.bcq-opt:disabled { cursor: default; opacity: .7; }
+.bcq-l {
+  flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+  font: 600 12px/1 var(--bc-mono); background: var(--bc-soft); color: var(--bc-ink-2);
+}
+.bcq-t > p { margin: 0; }
+.bcq-opt.is-right { border-color: var(--bc-ok); background: var(--bc-ok-soft); opacity: 1; }
+.bcq-opt.is-right .bcq-l { background: var(--bc-ok); color: var(--bc-paper); }
+.bcq-opt.is-wrong { border-color: var(--bc-bad); background: var(--bc-bad-soft); opacity: 1; }
+.bcq-opt.is-wrong .bcq-l { background: var(--bc-bad); color: var(--bc-paper); }
+.bcq-tools { display: flex; gap: 8px; margin: 2px 0 6px; }
+.bcq-out { border-top: 1px dashed var(--bc-line); margin-top: 8px; padding-top: 10px; }
+.bcq-verdict { margin: 0 0 6px; font: 500 15px/1.4 var(--bc-sans); }
+.bcq-verdict.ok b:first-child { color: var(--bc-ok); }
+.bcq-verdict.bad b:first-child { color: var(--bc-bad); }
+.bcq:not(.card) + .bcq:not(.card) { border-top: 1px solid var(--bc-line); padding-top: 16px; margin-top: 18px; }
+.bcq-expl > :first-child { margin-top: 0; }
+.bcq-expl > :last-child { margin-bottom: 0; }
+
 /* Back button + theme switch floating on every talk */
 .bc-float {
   position: fixed; z-index: 2147483000; display: flex; gap: 8px; align-items: center;

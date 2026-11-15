@@ -87,10 +87,10 @@ for i, s in enumerate(sections):
 
 # ---------- each section's cards ----------
 # Version stamp for the shared CSS/JS so browsers never pair a new page with an old script.
-SHARED = ("theme.css", "theme.js", "app.css", "app.js")
+SHARED = ("theme.css", "theme.js", "app.css", "app.js", "quiz.js")
 asset_v = hashlib.sha256(b"".join((SITE / "assets" / f).read_bytes() for f in SHARED)).hexdigest()[:10]
 def stamp(text):
-    return re.sub(r'(["\'])/assets/(theme\.css|theme\.js|app\.css|app\.js)(?:\?v=[0-9a-f]+)?\1',
+    return re.sub(r'(["\'])/assets/(theme\.css|theme\.js|app\.css|app\.js|quiz\.js)(?:\?v=[0-9a-f]+)?\1',
                   lambda m: f"{m.group(1)}/assets/{m.group(2)}?v={asset_v}{m.group(1)}", text)
 template = stamp((TOOLS / "page-template.html").read_text(encoding="utf-8"))
 # The copied chalk talks load theme.css/theme.js too (added by tools/mirror.py).

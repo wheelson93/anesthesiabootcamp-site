@@ -17,6 +17,7 @@ What it does to the copy:
   * adds a small "← Bootcamp" button (installed apps on iPhone have no back button)
     and the light/dark switch
   * puts the talk on the site's shared colors and fonts (site/assets/theme.css)
+  * makes the board questions interactive (site/assets/quiz.js)
   * registers the site's offline cache, so the talk works offline once opened
 Then run tools/build.py as usual.
 """
@@ -44,6 +45,7 @@ HEAD_INJECT = HEAD_MARK + f"""
 <link href="{FONTS}" rel="stylesheet">
 <script src="/assets/theme.js"></script>
 <link rel="stylesheet" href="/assets/theme.css">
+<script src="/assets/quiz.js" defer></script>
 """ + HEAD_END + "\n"
 
 # Goes at the end of <body>: back button, theme switch, offline cache.

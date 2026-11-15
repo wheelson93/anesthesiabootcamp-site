@@ -118,6 +118,10 @@ pastel panel colors used so far are mapped to the soft theme colors, and in dark
 near-white shape becomes a dark panel. If a new talk draws with a light color theme.css doesn't
 know, the build prints a "light diagram colors" warning naming the talk and the color.
 
+Board questions in the talks are made interactive by `site/assets/quiz.js` (tap a choice → right or
+wrong, explanation, running score). It reads the talks' existing question layouts, so new talks
+written the same way need nothing extra.
+
 ## Your chalk talks
 
 Talks live as copies in `site/talks/`, so they open on the site and in the app, and work offline.
