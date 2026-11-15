@@ -168,6 +168,8 @@
   .card .badge { color: var(--accent); }
   .card h3 { margin: 4px 0 0; font: 600 1.28rem/1.2 var(--serif); letter-spacing: -.005em; text-wrap: balance; }
   .card p { margin: 0; color: var(--muted); font-size: .95rem; text-wrap: pretty; }
+  .card p.why { color: var(--ink); font-size: .92rem; }
+  .card p.why b { display: block; font: 500 11px/1.6 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
   .card .foot { margin-top: auto; padding-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
   .tag { font: 500 11.5px/1 var(--sans); padding: 5px 8px; border-radius: 6px; background: var(--paper); color: var(--muted); border: 1px solid var(--line); }
 
@@ -238,7 +240,7 @@
   const fmtDate = (d) => d ? new Date(d + "T12:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) : "";
 
   function card(p) {
-    const meta = isNew(p) ? `<span class="badge">New</span> · ${esc(fmtDate(p.updated))}` : esc(fmtDate(p.updated));
+    const meta = p.source ? esc(p.source) : (isNew(p) ? `<span class="badge">New</span> · ${esc(fmtDate(p.updated))}` : esc(fmtDate(p.updated)));
     const tags = (p.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join("");
     const links = (p.links || []).filter((l) => !l.private).map((l) =>
       `<a class="extra" href="${esc(l.url)}">${esc(l.label)} <span aria-hidden="true">↗</span></a>`).join("");
@@ -246,6 +248,7 @@
       <div class="top"><span class="icon" aria-hidden="true">${esc(p.emoji || "📄")}</span><span class="meta">${meta}</span></div>
       <h3><a class="main" href="${esc(p.url)}">${esc(p.title)}</a></h3>
       ${p.blurb ? `<p>${esc(p.blurb)}</p>` : ""}
+      ${p.why ? `<p class="why"><b>Why it matters</b> ${esc(p.why)}</p>` : ""}
       <div class="foot">${links}<span class="tag">${esc(p.category || "Other")}</span>${tags}</div>
     </article>`;
   }
@@ -253,7 +256,7 @@
   function matches(p) {
     if (cat !== "All" && (p.category || "Other") !== cat) return false;
     if (!query) return true;
-    const hay = [p.title, p.blurb, p.category, ...(p.tags || [])].join(" ").toLowerCase();
+    const hay = [p.title, p.blurb, p.why, p.source, p.category, ...(p.tags || [])].join(" ").toLowerCase();
     return query.split(/\s+/).every((w) => hay.includes(w));
   }
 

@@ -1,0 +1,303 @@
+{
+  "site": {
+    "title": "Practice-defining papers.",
+    "lead": "Landmark critical care papers rounded up by Kenji Tanabe. Each card has the takeaway, why it matters, the Wiki Journal Club summary where there is one, and a link to the full paper.",
+    "links": [
+      {
+        "label": "Back to OR talks",
+        "kicker": "Anesthesia Bootcamp",
+        "url": "../"
+      },
+      {
+        "label": "ICU talks by Elijah",
+        "kicker": "Also",
+        "url": "../icu/"
+      },
+      {
+        "label": "One Pagers by Kenji Tanabe",
+        "kicker": "Also",
+        "url": "../one-pagers/"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "title": "SAFE: Albumin vs Saline",
+      "url": "https://www.wikijournalclub.org/wiki/SAFE",
+      "emoji": "💧",
+      "category": "Sepsis",
+      "source": "NEJM 2004",
+      "blurb": "6,997 ICU patients got 4% albumin or normal saline for resuscitation. 28-day mortality was the same (RR 0.99), as were organ failure, ICU days and ventilator days.",
+      "why": "Showed colloid and crystalloid are roughly equivalent for the general ICU patient, so albumin became a cost and context decision. Its subgroups (a harm signal in traumatic brain injury, a possible benefit in severe sepsis) launched the next generation of trials.",
+      "tags": [
+        "A Comparison of Albumin and Saline for Fluid Resuscitation in the ICU"
+      ],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/SAFE"
+        },
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa040232"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15163774/"
+        }
+      ]
+    },
+    {
+      "title": "Surviving Sepsis Campaign 2021",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8486643/",
+      "emoji": "📋",
+      "category": "Sepsis",
+      "source": "Crit Care Med / Intensive Care Med 2021",
+      "blurb": "The international sepsis guideline: antibiotics within an hour for probable septic shock, balanced crystalloids, norepinephrine first with a MAP target of 65, vasopressin as a second agent, hydrocortisone for ongoing vasopressor need, and no qSOFA alone for screening.",
+      "why": "It is the reference most hospital sepsis bundles, order sets and quality metrics are built on, so it frames what everyone else in the room expects you to do.",
+      "tags": [
+        "Surviving Sepsis Campaign: International Guidelines 2021"
+      ],
+      "links": [
+        {
+          "label": "Free full text",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8486643/"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34605781/"
+        }
+      ]
+    },
+    {
+      "title": "SEPSISPAM: MAP 80–85 vs 65–70",
+      "url": "https://www.wikijournalclub.org/wiki/SEPSISPAM",
+      "emoji": "🩸",
+      "category": "Sepsis",
+      "source": "NEJM 2014",
+      "blurb": "776 patients in septic shock were resuscitated to a MAP of 80–85 or 65–70. Mortality at 28 and 90 days was no different, and the high target caused more new atrial fibrillation.",
+      "why": "The evidence behind MAP 65 as the default target. A chronic-hypertension subgroup needed less dialysis at the higher target, which keeps individualized targets in the conversation.",
+      "tags": [
+        "High versus Low Blood-Pressure Target in Patients with Septic Shock"
+      ],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/SEPSISPAM"
+        },
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa1312173"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24635770/"
+        }
+      ]
+    },
+    {
+      "title": "ARDSNet (ARMA): 6 vs 12 mL/kg",
+      "url": "https://www.wikijournalclub.org/wiki/ARDSNet",
+      "emoji": "🫁",
+      "category": "ARDS",
+      "source": "NEJM 2000",
+      "blurb": "861 patients with ALI/ARDS were ventilated at 6 mL/kg predicted body weight with plateau pressure ≤30, or 12 mL/kg. Low tidal volumes cut mortality from 39.8% to 31.0% and added ventilator-free days.",
+      "why": "The foundation of lung-protective ventilation: tidal volume by predicted body weight and a plateau-pressure ceiling, in the ICU and increasingly in the OR.",
+      "tags": [
+        "Ventilation with Lower Tidal Volumes as Compared with Traditional Tidal Volumes for ALI and ARDS"
+      ],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/ARDSNet"
+        },
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://www.nejm.org/doi/full/10.1056/NEJM200005043421801"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/10793162/"
+        }
+      ]
+    },
+    {
+      "title": "PROSEVA: Prone Positioning",
+      "url": "https://www.wikijournalclub.org/wiki/PROSEVA",
+      "emoji": "🛏️",
+      "category": "ARDS",
+      "source": "NEJM 2013",
+      "blurb": "466 patients with severe ARDS (P/F <150 on FiO₂ ≥0.6) had prone sessions of at least 16 hours or stayed supine. 28-day mortality fell from 32.8% to 16.0%.",
+      "why": "Made early, prolonged proning standard care for moderate to severe ARDS. The details matter: started early, long sessions, in centers experienced at turning.",
+      "tags": [
+        "Prone Positioning in Severe Acute Respiratory Distress Syndrome"
+      ],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/PROSEVA"
+        },
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa1214103"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23688302/"
+        }
+      ]
+    },
+    {
+      "title": "EOLIA: Early VV-ECMO",
+      "url": "https://www.wikijournalclub.org/wiki/EOLIA",
+      "emoji": "🔄",
+      "category": "ARDS",
+      "source": "NEJM 2018",
+      "blurb": "249 patients with very severe ARDS got immediate venovenous ECMO or conventional care with rescue ECMO allowed. 60-day mortality was 35% vs 46% (P=0.09); 28% of controls crossed over to ECMO.",
+      "why": "Technically negative, but the crossover and later reanalyses point toward benefit. It positioned VV-ECMO as rescue for very severe ARDS in experienced centers rather than routine early therapy.",
+      "tags": [
+        "Extracorporeal Membrane Oxygenation for Severe ARDS"
+      ],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/EOLIA"
+        },
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa1800385"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29791822/"
+        }
+      ]
+    },
+    {
+      "title": "NICE-SUGAR: Glucose Targets",
+      "url": "https://www.wikijournalclub.org/wiki/NICE-SUGAR",
+      "emoji": "🍬",
+      "category": "Glucose Control",
+      "source": "NEJM 2009",
+      "blurb": "6,104 ICU adults were targeted to glucose 81–108 mg/dL or ≤180 mg/dL. Intensive control increased 90-day mortality and caused far more severe hypoglycemia.",
+      "why": "Ended the era of tight glucose control in the ICU. A target of roughly 140–180 mg/dL is the standard it set.",
+      "tags": [
+        "Intensive versus Conventional Glucose Control in Critically Ill Patients"
+      ],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/NICE-SUGAR"
+        },
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa0810625"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/19318384/"
+        }
+      ]
+    },
+    {
+      "title": "MENDS2: Dexmedetomidine vs Propofol",
+      "url": "https://www.wikijournalclub.org/wiki/MENDS2",
+      "emoji": "😴",
+      "category": "Sedation",
+      "source": "NEJM 2021",
+      "blurb": "422 ventilated adults with sepsis under light sedation got dexmedetomidine or propofol. Days alive without delirium or coma, ventilator-free days, 90-day mortality and 6-month cognition were all the same.",
+      "why": "Either drug is reasonable for light sedation; choose on hemodynamics, cost and the patient in front of you. The bigger lever is keeping sedation light, not which agent you use.",
+      "tags": [
+        "Dexmedetomidine or Propofol for Sedation in Mechanically Ventilated Adults with Sepsis"
+      ],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/MENDS2"
+        },
+        {
+          "label": "Free full text",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8162695/"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33528922/"
+        }
+      ]
+    },
+    {
+      "title": "PROPPR: 1:1:1 vs 1:1:2",
+      "url": "https://www.wikijournalclub.org/wiki/PROPPR",
+      "emoji": "🧪",
+      "category": "Resuscitation",
+      "source": "JAMA 2015",
+      "blurb": "680 severely injured trauma patients predicted to need massive transfusion got plasma, platelets and red cells at 1:1:1 or 1:1:2. Overall 24-hour and 30-day mortality did not differ, but 1:1:1 achieved hemostasis more often and had fewer early deaths from exsanguination.",
+      "why": "The basis for balanced, ratio-driven massive transfusion protocols, and a reason to have plasma and platelets ready early rather than catching up later.",
+      "tags": [
+        "Transfusion of Plasma, Platelets, and RBCs in a 1:1:1 vs 1:1:2 Ratio (PROPPR)"
+      ],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/PROPPR"
+        },
+        {
+          "label": "Free full text",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4374744/"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25647203/"
+        }
+      ]
+    },
+    {
+      "title": "TRICC: Transfuse at Hb 7 vs 10",
+      "url": "https://www.wikijournalclub.org/wiki/TRICC",
+      "emoji": "🩸",
+      "category": "Resuscitation",
+      "source": "NEJM 1999",
+      "blurb": "838 euvolemic ICU patients were transfused at hemoglobin below 7 or below 10 g/dL. The restrictive strategy was at least as safe (30-day mortality 18.7% vs 23.3%) and did better in younger, less sick patients.",
+      "why": "Made a hemoglobin trigger of 7 the ICU default and halved transfusions. The exception it flagged, acute coronary syndromes, is still debated.",
+      "tags": [
+        "A Multicenter, Randomized, Controlled Trial of Transfusion Requirements in Critical Care"
+      ],
+      "links": [
+        {
+          "label": "Wiki Journal Club",
+          "url": "https://www.wikijournalclub.org/wiki/TRICC"
+        },
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://www.nejm.org/doi/full/10.1056/NEJM199902113400601"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/9971864/"
+        }
+      ]
+    },
+    {
+      "title": "ECLS-SHOCK: VA-ECMO in AMI Shock",
+      "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2307227",
+      "emoji": "❤️",
+      "category": "Cardiogenic Shock",
+      "source": "NEJM 2023",
+      "blurb": "420 patients with infarct-related cardiogenic shock and planned early revascularization got early VA-ECMO or medical therapy alone. 30-day mortality was no lower with ECMO, and bleeding and vascular complications were higher.",
+      "why": "Routine early VA-ECMO for AMI shock doesn't save lives. Mechanical support needs careful patient selection, not reflex escalation.",
+      "tags": [
+        "Extracorporeal Life Support in Infarct-Related Cardiogenic Shock"
+      ],
+      "links": [
+        {
+          "label": "Full text (NEJM)",
+          "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2307227"
+        },
+        {
+          "label": "PubMed",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37634145/"
+        }
+      ]
+    }
+  ]
+}
