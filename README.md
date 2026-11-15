@@ -90,6 +90,13 @@ It's saved for offline use automatically.
 3. Commit. The build creates the page, links it from every other section, adds the app tab
    and caches it offline.
 
+## Colors, fonts, light/dark
+
+Every page, including the copied talks, uses one palette: `site/assets/theme.css`.
+Change a `--bc-*` color there (it has a light and a dark value) and it changes everywhere.
+The switch in the header (and beside "← Bootcamp" on talks) cycles Auto → Light/Dark;
+Auto follows the phone or computer setting. The choice is saved on that device.
+
 ## Your chalk talks
 
 Talks live as copies in `site/talks/`, so they open on the site and in the app, and work offline.

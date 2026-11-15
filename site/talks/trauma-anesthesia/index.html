@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bc-talk talk-trauma-anesthesia">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -82,6 +82,13 @@ summary{cursor:pointer;font-weight:600;color:var(--blue)}
   @page{size:letter;margin:0.4in}
 }
 </style>
+<!-- bootcamp-theme -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="/assets/theme.js?v=64084d628c"></script>
+<link rel="stylesheet" href="/assets/theme.css?v=64084d628c">
+<!-- /bootcamp-theme -->
 </head>
 <body>
 <header>
@@ -575,16 +582,11 @@ summary{cursor:pointer;font-weight:600;color:var(--blue)}
 })();
 </script>
 <!-- bootcamp-mirror -->
-<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
-<style>
-.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
-bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
-padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
-font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
-box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
-.bootcamp-back:hover{opacity:1}
-@media print{.bootcamp-back{display:none}}
-</style>
+<div class="bc-float">
+<a href="/" class="bc-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<button type="button" class="bc-theme-btn" data-theme-toggle aria-label="Theme"></button>
+</div>
 <script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+<!-- /bootcamp-mirror -->
 </body>
 </html>

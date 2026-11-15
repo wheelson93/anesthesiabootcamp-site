@@ -1,29 +1,4 @@
-:root {
-    --paper: #f5f3ee;
-    --card: #fffefb;
-    --ink: #14201d;
-    --muted: #5d6764;
-    --line: #dcd8cf;
-    --accent: #0e6b5c;
-    --accent-soft: #e2efe9;
-    --trace: #c99a12;
-    --serif: "Newsreader", Georgia, serif;
-    --sans: "IBM Plex Sans", system-ui, sans-serif;
-    --mono: "IBM Plex Mono", ui-monospace, monospace;
-    --radius: 14px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper: #0f1514;
-      --card: #161e1c;
-      --ink: #e7ece9;
-      --muted: #97a39f;
-      --line: #27322f;
-      --accent: #5cc3a8;
-      --accent-soft: #1b2d28;
-      --trace: #e8c547;
-    }
-  }
+  /* Colors and fonts come from theme.css (shared with the chalk talks). */
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
@@ -43,6 +18,7 @@
     color: var(--muted); text-decoration: none;
   }
   .brand svg { width: 26px; height: 26px; flex: none; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 
   .hero { padding: 56px 0 28px; }
   .hero h1 {

@@ -1,0 +1,154 @@
+/* =====================================================================
+   Anesthesia Bootcamp — one palette for the whole site.
+
+   Every page (section pages and the copied chalk talks) loads this file.
+   To change a color everywhere, change it here: the --bc-* values below,
+   once for light and once for dark.
+
+   assets/theme.js sets <html data-theme="light|dark"> from the reader's
+   choice (Auto / Light / Dark, saved on their device). Auto follows the
+   phone's or computer's own setting.
+   ===================================================================== */
+
+:root {
+  --bc-paper: #f5f3ee;       /* page background */
+  --bc-card: #fffefb;        /* cards, panels, tables */
+  --bc-soft: #eeebe4;        /* subtle tinted panels (whiteboards, details) */
+  --bc-ink: #14201d;         /* main text */
+  --bc-ink-2: #36423f;       /* secondary text */
+  --bc-muted: #5d6764;       /* captions, labels */
+  --bc-line: #dcd8cf;        /* borders */
+  --bc-line-soft: #e9e6df;
+  --bc-accent: #0e6b5c;      /* links, highlights, selected tabs */
+  --bc-accent-soft: #e2efe9;
+  --bc-trace: #c99a12;       /* the gold ECG trace in the logo */
+  --bc-ok: #2f7a3f;   --bc-ok-soft: #e3f1e5;
+  --bc-warn: #9a5a00; --bc-warn-soft: #f7eddb;
+  --bc-bad: #a8322d;  --bc-bad-soft: #f7e3e1;
+  --bc-info: #1d5fa8; --bc-info-soft: #e5eef8;
+
+  --bc-serif: "Newsreader", Georgia, serif;
+  --bc-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bc-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+
+/* Dark values (twice: once for Auto when scripts haven't run, once for the saved choice) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bc-paper: #0f1514; --bc-card: #161e1c; --bc-soft: #1b2422;
+    --bc-ink: #e7ece9; --bc-ink-2: #c3ccc8; --bc-muted: #97a39f;
+    --bc-line: #27322f; --bc-line-soft: #1f2926;
+    --bc-accent: #5cc3a8; --bc-accent-soft: #1b2d28; --bc-trace: #e8c547;
+    --bc-ok: #7fcf8c;   --bc-ok-soft: #1b3322;
+    --bc-warn: #e6b54f; --bc-warn-soft: #35290f;
+    --bc-bad: #f08a80;  --bc-bad-soft: #3a1c1a;
+    --bc-info: #8ab4ef; --bc-info-soft: #1a2a3d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bc-paper: #0f1514; --bc-card: #161e1c; --bc-soft: #1b2422;
+  --bc-ink: #e7ece9; --bc-ink-2: #c3ccc8; --bc-muted: #97a39f;
+  --bc-line: #27322f; --bc-line-soft: #1f2926;
+  --bc-accent: #5cc3a8; --bc-accent-soft: #1b2d28; --bc-trace: #e8c547;
+  --bc-ok: #7fcf8c;   --bc-ok-soft: #1b3322;
+  --bc-warn: #e6b54f; --bc-warn-soft: #35290f;
+  --bc-bad: #f08a80;  --bc-bad-soft: #3a1c1a;
+  --bc-info: #8ab4ef; --bc-info-soft: #1a2a3d;
+  color-scheme: dark;
+}
+
+/* Names used by the section pages (app.css) */
+:root {
+  --paper: var(--bc-paper); --card: var(--bc-card); --ink: var(--bc-ink);
+  --muted: var(--bc-muted); --line: var(--bc-line);
+  --accent: var(--bc-accent); --accent-soft: var(--bc-accent-soft); --trace: var(--bc-trace);
+  --serif: var(--bc-serif); --sans: var(--bc-sans); --mono: var(--bc-mono);
+}
+
+/* Theme switch (section pages put it in the header; talks float it beside "← Bootcamp") */
+.bc-theme-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; padding: 0; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--bc-line); background: var(--bc-card); color: var(--bc-ink);
+}
+.bc-theme-btn svg { width: 18px; height: 18px; }
+.bc-theme-btn:hover { border-color: var(--bc-accent); }
+.bc-theme-btn:focus-visible { outline: 2px solid var(--bc-accent); outline-offset: 2px; }
+
+/* =====================================================================
+   Chalk talks (pages under /talks/, <html class="bc-talk">)
+   Each talk was written with its own color and font names; they are all
+   pointed at the shared palette here. !important because the talks'
+   own styles come later in the page.
+   ===================================================================== */
+:root.bc-talk {
+  /* backgrounds */
+  --paper: var(--bc-paper) !important; --bg: var(--bc-paper) !important;
+  --card: var(--bc-card) !important;   --panel: var(--bc-card) !important;
+  --soft: var(--bc-soft) !important;   --chalk: var(--bc-soft) !important;
+  /* text */
+  --ink: var(--bc-ink) !important; --ink-2: var(--bc-ink-2) !important;
+  --ink-3: var(--bc-muted) !important; --muted: var(--bc-muted) !important; --mute: var(--bc-muted) !important;
+  /* lines */
+  --line: var(--bc-line) !important; --rule: var(--bc-line) !important; --rule-2: var(--bc-line-soft) !important;
+  /* accent */
+  --accent: var(--bc-accent) !important; --accent-soft: var(--bc-accent-soft) !important;
+  --acc: var(--bc-accent) !important;    --acc-soft: var(--bc-accent-soft) !important;
+  /* status colors */
+  --ok: var(--bc-ok) !important;     --good: var(--bc-ok) !important;   --green: var(--bc-ok) !important;
+  --ok-bg: var(--bc-ok-soft) !important; --good-soft: var(--bc-ok-soft) !important; --green-soft: var(--bc-ok-soft) !important;
+  --warn: var(--bc-warn) !important; --amber: var(--bc-warn) !important;
+  --warn-bg: var(--bc-warn-soft) !important; --warn-soft: var(--bc-warn-soft) !important; --amber-soft: var(--bc-warn-soft) !important;
+  --bad: var(--bc-bad) !important;   --bad-bg: var(--bc-bad-soft) !important; --bad-soft: var(--bc-bad-soft) !important;
+  --blue: var(--bc-info) !important; --blue-soft: var(--bc-info-soft) !important;
+  /* fonts */
+  --display: var(--bc-serif) !important; --f-display: var(--bc-serif) !important;
+  --sans: var(--bc-sans) !important;     --f-body: var(--bc-sans) !important;
+  --mono: var(--bc-mono) !important;     --f-mono: var(--bc-mono) !important;
+}
+:root.bc-talk[data-theme="light"] { color-scheme: light !important; }
+:root.bc-talk[data-theme="dark"]  { color-scheme: dark !important; }
+.bc-talk body { background: var(--bc-paper) !important; color: var(--bc-ink) !important; font-family: var(--bc-sans); }
+.bc-talk :is(h1, h2) { font-family: var(--bc-serif); }
+
+/* Trauma Anesthesia: colors written straight into its styles and diagrams */
+.talk-trauma-anesthesia .tabs button.active,
+.talk-trauma-anesthesia .letter { color: var(--bc-paper) !important; }
+.talk-trauma-anesthesia th,
+.talk-trauma-anesthesia .script,
+.talk-trauma-anesthesia details { background: var(--bc-soft) !important; }
+.talk-trauma-anesthesia .handout { background: var(--bc-card) !important; }
+.talk-trauma-anesthesia .tag { background: var(--bc-soft) !important; color: var(--bc-ink-2) !important; }
+.talk-trauma-anesthesia .script { font-family: var(--bc-mono) !important; }
+.bc-talk svg [fill="#1f2328"] { fill: var(--bc-ink); }
+.bc-talk svg [fill="#5d6670"] { fill: var(--bc-muted); }
+.bc-talk svg [fill="#b3261e"] { fill: var(--bc-bad); }
+.bc-talk svg [fill="#1d5fa8"] { fill: var(--bc-info); }
+.bc-talk svg [fill="#2e7d4f"] { fill: var(--bc-ok); }
+.bc-talk svg [fill="#a86400"] { fill: var(--bc-warn); }
+.talk-trauma-anesthesia svg [fill="#fff"] { fill: var(--bc-paper); }
+.bc-talk svg [stroke="#1f2328"] { stroke: var(--bc-ink); }
+.bc-talk svg [stroke="#5d6670"] { stroke: var(--bc-muted); }
+.bc-talk svg [stroke="#b3261e"] { stroke: var(--bc-bad); }
+.bc-talk svg [stroke="#1d5fa8"] { stroke: var(--bc-info); }
+.bc-talk svg [stroke="#2e7d4f"] { stroke: var(--bc-ok); }
+.bc-talk svg [stroke="#a86400"] { stroke: var(--bc-warn); }
+
+/* General Anesthetic Case Flow: numbers on accent-colored dots */
+.talk-general-anesthetic-case-flow .dot-t { fill: var(--bc-paper) !important; }
+
+/* Back button + theme switch floating on every talk */
+.bc-float {
+  position: fixed; z-index: 2147483000; display: flex; gap: 8px; align-items: center;
+  left: max(12px, env(safe-area-inset-left)); bottom: max(12px, env(safe-area-inset-bottom));
+}
+.bc-float .bc-back {
+  display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; border-radius: 999px;
+  background: var(--bc-ink); color: var(--bc-paper) !important; text-decoration: none !important;
+  font: 600 14px/1 var(--bc-sans); box-shadow: 0 4px 14px rgba(0, 0, 0, .25); opacity: .94;
+}
+.bc-float .bc-back:hover { opacity: 1; }
+.bc-float .bc-theme-btn { box-shadow: 0 4px 14px rgba(0, 0, 0, .2); }
+@media print { .bc-float { display: none; } }

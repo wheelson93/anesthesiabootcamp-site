@@ -83,10 +83,18 @@ for i, s in enumerate(sections):
 
 # ---------- each section's cards ----------
 # Version stamp for the shared CSS/JS so browsers never pair a new page with an old script.
-asset_v = hashlib.sha256(b"".join((SITE / "assets" / f).read_bytes() for f in ("app.css", "app.js"))).hexdigest()[:10]
-template = (TOOLS / "page-template.html").read_text(encoding="utf-8")
-template = (template.replace('href="/assets/app.css"', f'href="/assets/app.css?v={asset_v}"')
-                    .replace('src="/assets/app.js"', f'src="/assets/app.js?v={asset_v}"'))
+SHARED = ("theme.css", "theme.js", "app.css", "app.js")
+asset_v = hashlib.sha256(b"".join((SITE / "assets" / f).read_bytes() for f in SHARED)).hexdigest()[:10]
+def stamp(text):
+    return re.sub(r'(["\'])/assets/(theme\.css|theme\.js|app\.css|app\.js)(?:\?v=[0-9a-f]+)?\1',
+                  lambda m: f"{m.group(1)}/assets/{m.group(2)}?v={asset_v}{m.group(1)}", text)
+template = stamp((TOOLS / "page-template.html").read_text(encoding="utf-8"))
+# The copied chalk talks load theme.css/theme.js too (added by tools/mirror.py).
+for talk in sorted((SITE / "talks").glob("*/index.html")):
+    old = talk.read_text(encoding="utf-8")
+    new = stamp(old)
+    if new != old:
+        talk.write_text(new, encoding="utf-8")
 for s in sections:
     url = s.get("url", "")
     folder = SITE / url.strip("/")
@@ -143,7 +151,7 @@ for s in sections:
 
 # ---------- offline list + service worker ----------
 if not errors:
-    keep = ["/", "/sections.json", "/manifest.webmanifest", f"/assets/app.css?v={asset_v}", f"/assets/app.js?v={asset_v}"]
+    keep = ["/", "/sections.json", "/manifest.webmanifest"] + [f"/assets/{f}?v={asset_v}" for f in SHARED]
     for s in sections:
         u = s["url"]
         keep += [u, u + "pages.json"]

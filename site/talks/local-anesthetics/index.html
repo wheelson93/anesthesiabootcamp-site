@@ -1,7 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!DOCTYPE html><html lang="en" class="bc-talk talk-local-anesthetics"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Local Anesthetics: Selection and Dosing</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>[hidden]{display:none!important}
 :root{
   --bg:#f5f7f8; --panel:#ffffff; --ink:#17232b; --muted:#566872; --line:#d3dde2;
@@ -82,7 +80,14 @@ a{color:var(--accent)}
 .meter span.w{background:var(--warn)}.meter span.b{background:var(--bad)}
 .handlink{display:inline-block;font:600 14px var(--f-body);padding:6px 12px;border-radius:999px;border:1px solid var(--accent);text-decoration:none;width:max-content}
 @media (prefers-reduced-motion:no-preference){section.tab{animation:in .18s ease-out}@keyframes in{from{opacity:.4;transform:translateY(3px)}to{opacity:1;transform:none}}}
-</style></head><body>
+</style><!-- bootcamp-theme -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="/assets/theme.js?v=64084d628c"></script>
+<link rel="stylesheet" href="/assets/theme.css?v=64084d628c">
+<!-- /bootcamp-theme -->
+</head><body>
 <div class="wrap">
 <header class="top">
   <div class="eyebrow">OR chalk talk · Anesthesia &amp; Pharmacology · MS3 → CA-2</div>
@@ -606,15 +611,10 @@ document.getElementById('pk-out').innerHTML='<b>'+b.toFixed(1)+'% neutral (B)</b
 d.addEventListener('input',f);ph.addEventListener('input',f);f();})();
 </script>
 <!-- bootcamp-mirror -->
-<a href="/" class="bootcamp-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
-<style>
-.bootcamp-back{position:fixed;z-index:2147483000;left:max(12px,env(safe-area-inset-left));
-bottom:max(12px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:6px;
-padding:9px 14px;border-radius:999px;background:#14201d;color:#f5f3ee !important;
-font:600 14px/1 -apple-system,system-ui,sans-serif;text-decoration:none !important;
-box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:.92}
-.bootcamp-back:hover{opacity:1}
-@media print{.bootcamp-back{display:none}}
-</style>
+<div class="bc-float">
+<a href="/" class="bc-back" aria-label="Back to Anesthesia Bootcamp">&larr; Bootcamp</a>
+<button type="button" class="bc-theme-btn" data-theme-toggle aria-label="Theme"></button>
+</div>
 <script>if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(function(){});</script>
+<!-- /bootcamp-mirror -->
 </body></html>
