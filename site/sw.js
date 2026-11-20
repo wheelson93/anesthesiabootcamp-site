@@ -3,7 +3,7 @@
 // fresh whenever there's a connection (so new cards show up right away) and fall back
 // to the saved copy offline. PDFs and icons are served from the saved copy and refreshed
 // in the background.
-const VERSION = "efd941162927";
+const VERSION = "66bab19e7f0e";
 const CACHE = "bootcamp-" + VERSION;
 const PRECACHE = [
   "/",
@@ -15,6 +15,8 @@ const PRECACHE = [
   "/assets/app.js?v=84b13fc6f8",
   "/assets/quiz.js?v=84b13fc6f8",
   "/pages.json",
+  "/cardiac/",
+  "/cardiac/pages.json",
   "/icu/",
   "/icu/pages.json",
   "/one-pagers/",
@@ -26,6 +28,7 @@ const PRECACHE = [
   "/talks/fresh-gas-flow/",
   "/talks/general-anesthetic-case-flow/",
   "/talks/intoxicated-patient/",
+  "/talks/intro-ct-rotation/",
   "/talks/local-anesthetics/",
   "/talks/mac-subtypes/",
   "/talks/nerve-block-additives/",

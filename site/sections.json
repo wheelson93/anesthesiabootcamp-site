@@ -1,9 +1,41 @@
 {
   "sections": [
-    { "url": "/", "label": "OR talks", "short": "OR talks", "emoji": "🩺" },
-    { "url": "/icu/", "label": "ICU talks by Elijah", "short": "ICU", "emoji": "🫁" },
-    { "url": "/one-pagers/", "label": "One Pagers by Kenji Tanabe", "short": "One Pagers", "emoji": "📄" },
-    { "url": "/papers/", "label": "Important papers", "short": "Papers", "emoji": "📚" },
-    { "url": "/skills/", "label": "Skills tracker (beta)", "short": "Skills", "emoji": "✅", "custom": true }
+    {
+      "url": "/",
+      "label": "OR talks",
+      "short": "OR talks",
+      "emoji": "🩺"
+    },
+    {
+      "url": "/cardiac/",
+      "label": "Cardiac Rotation",
+      "short": "Cardiac",
+      "emoji": "🫀"
+    },
+    {
+      "url": "/icu/",
+      "label": "ICU talks by Elijah",
+      "short": "ICU",
+      "emoji": "🫁"
+    },
+    {
+      "url": "/one-pagers/",
+      "label": "One Pagers by Kenji Tanabe",
+      "short": "One Pagers",
+      "emoji": "📄"
+    },
+    {
+      "url": "/papers/",
+      "label": "Important papers",
+      "short": "Papers",
+      "emoji": "📚"
+    },
+    {
+      "url": "/skills/",
+      "label": "Skills tracker (beta)",
+      "short": "Skills",
+      "emoji": "✅",
+      "custom": true
+    }
   ]
 }

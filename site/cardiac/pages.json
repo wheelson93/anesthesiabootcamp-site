@@ -1,0 +1,115 @@
+{
+  "site": {
+    "title": "Teaching pages for the cardiac rotation.",
+    "lead": "Start with the intro to the CT month, then work through Jim Goodman's cardiothoracic modules: bypass, circulatory arrest, ECMO, transplant and aortic surgery.",
+    "links": [
+      {
+        "label": "Cardiothoracic teaching library",
+        "kicker": "Jim Goodman, MD",
+        "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "title": "Intro to the CT Rotation",
+      "url": "/talks/intro-ct-rotation/",
+      "emoji": "🫀",
+      "category": "Orientation",
+      "blurb": "How the month works, how to set up, and how a bypass case flows from pre-op to the CTICU, with a printable one-pager.",
+      "source": "Will Cohen, MD",
+      "tags": [
+        "CA-1",
+        "setup",
+        "bypass",
+        "one-pager"
+      ],
+      "updated": "2026-11-19",
+      "featured": true
+    },
+    {
+      "title": "1. Running cardiopulmonary bypass",
+      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#bypass",
+      "emoji": "🔁",
+      "category": "Cardiothoracic modules",
+      "blurb": "The circuit, heparin and protamine, physiology on pump, the run from heparin to separation, and crisis management.",
+      "source": "Jim Goodman, MD",
+      "tags": [
+        "bypass",
+        "interactive circuit",
+        "DO₂i calculator",
+        "quiz"
+      ]
+    },
+    {
+      "title": "2. Neuroprotection during circulatory arrest",
+      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#arch",
+      "emoji": "🧠",
+      "category": "Cardiothoracic modules",
+      "blurb": "Hypothermia, antegrade and retrograde cerebral perfusion, monitoring, and drug adjuncts for arch surgery.",
+      "source": "Jim Goodman, MD",
+      "tags": [
+        "aortic arch",
+        "temperature slider",
+        "case walkthrough",
+        "quiz"
+      ]
+    },
+    {
+      "title": "3. ECMO configurations: VV, VA & V-AV",
+      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#ecmo",
+      "emoji": "🫀",
+      "category": "Cardiothoracic modules",
+      "blurb": "Central and peripheral cannulation, the mixing zone and differential hypoxia, TEE-guided cannulation, and troubleshooting.",
+      "source": "Jim Goodman, MD",
+      "tags": [
+        "ecmo",
+        "configuration diagram",
+        "TEE",
+        "quiz"
+      ]
+    },
+    {
+      "title": "4. ECMO-assisted lung transplantation",
+      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#lung-transplant",
+      "emoji": "🫁",
+      "category": "Cardiothoracic modules",
+      "blurb": "Sequential bilateral transplant without CPB: PA clamp test, VA ECMO, controlled reperfusion, and PGD.",
+      "source": "Jim Goodman, MD",
+      "tags": [
+        "transplant",
+        "phase diagram",
+        "ECMO vs CPB",
+        "quiz"
+      ]
+    },
+    {
+      "title": "5. Heart transplantation",
+      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#heart-transplant",
+      "emoji": "❤️",
+      "category": "Cardiothoracic modules",
+      "blurb": "Bicaval implantation step by step, the denervated heart, PVR and the donor RV, PGD grading, and RV failure.",
+      "source": "Jim Goodman, MD",
+      "tags": [
+        "transplant",
+        "implantation diagram",
+        "PVR calculator",
+        "quiz"
+      ]
+    },
+    {
+      "title": "6. Aortic surgery: root to descending",
+      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#aorta",
+      "emoji": "🩻",
+      "category": "Cardiothoracic modules",
+      "blurb": "AVR, Wheat, Bentall, David, hemiarch, total arch, FET, open DTA and TEVAR, plus spinal cord protection.",
+      "source": "Jim Goodman, MD",
+      "tags": [
+        "aortic surgery",
+        "procedure explorer",
+        "TEE by procedure",
+        "quiz"
+      ]
+    }
+  ]
+}
