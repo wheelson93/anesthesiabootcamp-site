@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 TOOLS = ROOT / "tools"
 CARD_KEYS = {"title", "url", "category", "emoji", "blurb", "why", "source", "tags",
-             "updated", "featured", "hidden", "links"}
+             "updated", "featured", "hidden", "links", "soon"}
 LINK_KEYS = {"label", "url", "private"}
 
 errors, warnings = [], []

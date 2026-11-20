@@ -62,6 +62,7 @@ Watch the commas: every card is followed by a comma except the last one.
 | `featured` | `true` → "Start here" row at the top |
 | `links`    | Extra buttons: `{"label": "…", "url": "…"}`. Add `"private": true` to hide one |
 | `hidden`   | `true` = hidden by you (the sync never changes it); `"private"` = hidden until the artifact is shared publicly |
+| `soon`     | `true` → greyed out with a "Coming soon" badge and no link; delete the line when it is ready |
 
 ## Add a handout PDF
 

@@ -29,7 +29,7 @@
     },
     {
       "title": "1. Running cardiopulmonary bypass",
-      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#bypass",
+      "url": "https://claude.ai/artifact/GUnAXqe6KZoimdJbcd3s7Z",
       "emoji": "🔁",
       "category": "Cardiothoracic modules",
       "blurb": "The circuit, heparin and protamine, physiology on pump, the run from heparin to separation, and crisis management.",
@@ -43,7 +43,7 @@
     },
     {
       "title": "2. Neuroprotection during circulatory arrest",
-      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#arch",
+      "url": "https://claude.ai/artifact/TfUjeCJseW7P9KiWL2hP1k",
       "emoji": "🧠",
       "category": "Cardiothoracic modules",
       "blurb": "Hypothermia, antegrade and retrograde cerebral perfusion, monitoring, and drug adjuncts for arch surgery.",
@@ -57,7 +57,7 @@
     },
     {
       "title": "3. ECMO configurations: VV, VA & V-AV",
-      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#ecmo",
+      "url": "https://claude.ai/artifact/VaFa1WX2AGGR1nPdwAmuYo",
       "emoji": "🫀",
       "category": "Cardiothoracic modules",
       "blurb": "Central and peripheral cannulation, the mixing zone and differential hypoxia, TEE-guided cannulation, and troubleshooting.",
@@ -71,7 +71,7 @@
     },
     {
       "title": "4. ECMO-assisted lung transplantation",
-      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#lung-transplant",
+      "url": "https://claude.ai/artifact/2ZpDfSLMLysWtiBF22cBsz",
       "emoji": "🫁",
       "category": "Cardiothoracic modules",
       "blurb": "Sequential bilateral transplant without CPB: PA clamp test, VA ECMO, controlled reperfusion, and PGD.",
@@ -81,11 +81,12 @@
         "phase diagram",
         "ECMO vs CPB",
         "quiz"
-      ]
+      ],
+      "soon": true
     },
     {
       "title": "5. Heart transplantation",
-      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#heart-transplant",
+      "url": "https://claude.ai/artifact/ACia4GZDUoEqj2R1wUurmW",
       "emoji": "❤️",
       "category": "Cardiothoracic modules",
       "blurb": "Bicaval implantation step by step, the denervated heart, PVR and the donor RV, PGD grading, and RV failure.",
@@ -95,11 +96,12 @@
         "implantation diagram",
         "PVR calculator",
         "quiz"
-      ]
+      ],
+      "soon": true
     },
     {
       "title": "6. Aortic surgery: root to descending",
-      "url": "https://claude.ai/artifact/49VYWhk1MmsUTxzKAY81iL#aorta",
+      "url": "https://claude.ai/artifact/6a32cpPdfy9vjfePW6SxYo",
       "emoji": "🩻",
       "category": "Cardiothoracic modules",
       "blurb": "AVR, Wheat, Bentall, David, hemiarch, total arch, FET, open DTA and TEVAR, plus spinal cord protection.",
@@ -109,7 +111,8 @@
         "procedure explorer",
         "TEE by procedure",
         "quiz"
-      ]
+      ],
+      "soon": true
     }
   ]
 }

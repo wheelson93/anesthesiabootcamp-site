@@ -114,6 +114,9 @@
   .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 10px 24px -18px rgba(0,0,0,.45); }
   .card:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
   .card a.main { text-decoration: none; }
+  .card.soon { opacity: .62; border-style: dashed; }
+  .card.soon:hover { transform: none; box-shadow: none; border-color: var(--line); }
+  .badge.soon { background: var(--accent-soft); color: var(--accent); }
   .card a.main:focus { outline: none; }
   .card a.main::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
   .card a.extra {

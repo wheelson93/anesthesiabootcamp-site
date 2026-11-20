@@ -16,13 +16,14 @@
   const fmtDate = (d) => d ? new Date(d + "T12:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) : "";
 
   function card(p) {
-    const meta = p.source ? esc(p.source) : (isNew(p) ? `<span class="badge">New</span> · ${esc(fmtDate(p.updated))}` : esc(fmtDate(p.updated)));
+    const soon = !!p.soon;
+    const meta = soon ? `<span class="badge soon">Coming soon</span>${p.source ? " · " + esc(p.source) : ""}` : p.source ? esc(p.source) : (isNew(p) ? `<span class="badge">New</span> · ${esc(fmtDate(p.updated))}` : esc(fmtDate(p.updated)));
     const tags = (p.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join("");
     const links = (p.links || []).filter((l) => !l.private).map((l) =>
       `<a class="extra" href="${esc(l.url)}">${esc(l.label)} <span aria-hidden="true">↗</span></a>`).join("");
-    return `<article class="card">
+    return `<article class="card${soon ? " soon" : ""}"${soon ? ' aria-disabled="true"' : ""}>
       <div class="top"><span class="icon" aria-hidden="true">${esc(p.emoji || "📄")}</span><span class="meta">${meta}</span></div>
-      <h3><a class="main" href="${esc(p.url)}">${esc(p.title)}</a></h3>
+      <h3>${soon ? esc(p.title) : `<a class="main" href="${esc(p.url)}">${esc(p.title)}</a>`}</h3>
       ${p.blurb ? `<p>${esc(p.blurb)}</p>` : ""}
       ${p.why ? `<p class="why"><b>Why it matters</b> ${esc(p.why)}</p>` : ""}
       <div class="foot">${links}<span class="tag">${esc(p.category || "Other")}</span>${tags}</div>
