@@ -17,13 +17,15 @@ A Claude artifact appears on the site only when **it is shared publicly** and is
 ## Steps
 
 1. Read `site/pages.json` and `site/talks/talks.json`. Known artifacts are every `short` id in
-   talks.json, every key in its `redirects`, every claude.ai URL still on a card, and every
-   `ignore[].url` in pages.json.
+   talks.json, every key in its `redirects`, every claude.ai URL still on a card (in
+   `site/pages.json` and `site/cardiac/pages.json`), and every `ignore[].url` in pages.json.
 2. List the owner's artifacts (claude-artifacts `list_artifacts`).
 3. **Refresh copies:** for each talk in talks.json, `get_artifact` its `slug`. If the version differs
    from the recorded `version`, download it (`read_file` with `paths: ["index.html"]`, which saves it
    to disk) and run `python3 tools/mirror.py NAME SAVED_FILE --version NEW_VERSION`.
-4. **Visibility pass:** a card whose artifact is no longer `public` gets `"hidden": "private"`; a card
+4. **Visibility pass** (only cards for the owner's own artifacts, i.e. ones that appear in
+   `list_artifacts`; collaborators' cards such as Jim Goodman's in `site/cardiac/` are maintained by
+   hand and never touched, even though `get_artifact` can't see them): a card whose artifact is no longer `public` gets `"hidden": "private"`; a card
    with `"hidden": "private"` whose artifact is public again has `hidden` removed. Never touch
    `"hidden": true` (hidden on purpose).
 5. **New artifacts:** for each artifact that is not known:
@@ -42,6 +44,10 @@ A Claude artifact appears on the site only when **it is shared publicly** and is
      talks.json `redirects` if it is a PDF on the site.
    - A newer copy of an artifact already on a card (same title) → mirror the new one under the same
      NAME and add the old short id to `redirects`.
+   - Which page it goes on: cardiac-rotation material (cardiac surgery, bypass, CTICU, cardiac ECMO,
+     heart/lung transplant, TEE) → add the card to `site/cardiac/pages.json`, after the
+     "Intro to the CT Rotation" card and before Jim's numbered modules. Everything else →
+     `site/pages.json` (OR talks).
    - Otherwise the card gets: `title` (drop suffixes like "— OR Chalk Talk"), `url`, one fitting
      `emoji`, `category` (reuse an existing one when it fits), a one-sentence `blurb` from the
      artifact's own description or opening text (never invent clinical content), `tags`, and
@@ -54,7 +60,8 @@ A Claude artifact appears on the site only when **it is shared publicly** and is
    that may be hard to read in dark mode, and a rule needs adding to `site/assets/theme.css`
    (which this task does not edit).
 
-Only edit `site/pages.json`, `site/talks/`, and `site/handouts/`. Do not edit `site/sections.json`,
+Only edit `site/pages.json`, `site/cardiac/pages.json` (add cards only; never change Jim Goodman's
+cards or their `soon` flags), `site/talks/`, and `site/handouts/`. Do not edit `site/sections.json`,
 generated files (section `index.html` files, `sw.js`), or the other section folders (`icu/`,
 `one-pagers/`, `papers/`; maintained by hand). Do not remove cards or change an existing blurb,
 category or tags.
