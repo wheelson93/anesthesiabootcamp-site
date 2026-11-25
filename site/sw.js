@@ -3,7 +3,7 @@
 // fresh whenever there's a connection (so new cards show up right away) and fall back
 // to the saved copy offline. PDFs and icons are served from the saved copy and refreshed
 // in the background.
-const VERSION = "ea9d5f650db0";
+const VERSION = "f511cf24978a";
 const CACHE = "bootcamp-" + VERSION;
 const PRECACHE = [
   "/",
