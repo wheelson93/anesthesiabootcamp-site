@@ -14,6 +14,14 @@ A daily scheduled task follows these steps. A person can run them by hand too.
 A Claude artifact appears on the site only when **it is shared publicly** and is
 **anesthesia or medical teaching material**. Making an artifact public is the way to publish it.
 
+Will also runs a separate site, **wheelclimbs.com**, for his climbing projects. Those artifacts are
+public because they belong there, not here. Anything about climbing, Wheel Climbs, Mountain Project,
+ticks, or training/fitness plans belongs to that site: skip it silently (do not add it to `ignore`,
+do not touch it). This task never edits anything for wheelclimbs.com.
+
+When unsure which site a public artifact belongs to (or whether it is teaching material), leave it
+off the site, don't add it to `ignore`, and name it in the summary so Will can decide.
+
 ## Steps
 
 1. Read `site/pages.json` and `site/talks/talks.json`. Known artifacts are every `short` id in
@@ -30,7 +38,9 @@ A Claude artifact appears on the site only when **it is shared publicly** and is
    `"hidden": true` (hidden on purpose).
 5. **New artifacts:** for each artifact that is not known:
    - Not `public` yet → skip it for now.
-   - Public but not teaching material (personal, wedding, climbing, finances, test pages) → add it
+   - Climbing / wheelclimbs.com material → skip silently (see Rule above).
+   - Unsure where it belongs → skip, and list it in the summary as needing Will's call.
+   - Public but clearly not teaching material (personal, wedding, finances, test pages) → add it
      to `ignore` in pages.json with a short `why`.
    - A plain HTML artifact (not `made_from_type`) → copy it onto the site:
      download as in step 3, then
